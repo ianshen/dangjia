@@ -1,17 +1,15 @@
 <?php
-class IndexController extends Cola_Controller {
+class IndexController extends BaseController {
     public function indexAction() {
-        //$this->response->lastModified(1252376412);
-        //$this->response->etag('foobar');
-        //$this->response->expires(100);
-        //echo $_SERVER['HTTP_USER_AGENT'], '<br />';
-        echo 'Index@', time ();
         $r = UserData::getById ( 3 );
-        print_r ( $r );
         $this->display ();
     }
     
     public function testAction() {
+        //$this->response->lastModified(1252376412);
+        //$this->response->etag('foobar');
+        //$this->response->expires(100);
+        //echo $_SERVER['HTTP_USER_AGENT'], '<br />';
         $this->response->alert ( 'Te"st' );
         echo 'Test@', time ();
     }
