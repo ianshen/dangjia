@@ -8,10 +8,9 @@ $config = array (
                 1 => 'id' 
             ), 
             'defaults' => array (
-                'id' => 9527 
+                'id' => 0729 
             ) 
         ), 
-        
         '/^v-?(\d+)?$/' => array (
             'controller' => 'IndexController', 
             'action' => 'viewAction', 
@@ -19,22 +18,40 @@ $config = array (
                 1 => 'id' 
             ), 
             'defaults' => array (
-                'id' => 9527 
+                'id' => 0729 
+            ) 
+        ), 
+        '/^g\/?(\d+)?$/' => array (
+            'controller' => 'GroupController', 
+            'action' => 'indexAction', 
+            'maps' => array (
+                1 => 'gid' 
+            ), 
+            'defaults' => array (
+                'gid' => 1 
+            ) 
+        ), 
+        '/^s\/?(\d+)?$/' => array (
+            'controller' => 'StoreController', 
+            'action' => 'indexAction', 
+            'maps' => array (
+                1 => 'sid' 
+            ), 
+            'defaults' => array (
+                'sid' => 1 
             ) 
         ) 
     ), 
     
     '_db' => array (
-        'adapter' => 'Mysqli', 
-        'params' => array (
-            'host' => '127.0.0.1', 
-            'port' => 3306, 
-            'user' => 'test', 
-            'password' => 'test', 
-            'database' => 'test', 
-            'charset' => 'utf8', 
-            'persitent' => true 
-        ) 
+        'adapter' => 'Pdo_Mysql', 
+        'host' => 'localhost', 
+        'port' => 3306, 
+        'user' => 'root', 
+        'password' => '', 
+        'database' => 'xiaodangjia', 
+        'charset' => 'utf8', 
+        'persitent' => true 
     ), 
     
     '_modelsHome' => 'model', 

@@ -1,11 +1,11 @@
 <?php
-class GroupModel extends Cola_Model {
+class GroupStoreModel extends Cola_Model {
     
-    protected $_table = 'group';
+    protected $_table = 'group_store';
     
-    public function getById($id) {
+    public function getsByGid($gid) {
         try {
-            $result = $this->find ( "id='{$id}'" );
+            $result = $this->find ( "group_id='{$gid}'" );
             return $result;
         } catch ( Exception $e ) {
             echo $e;

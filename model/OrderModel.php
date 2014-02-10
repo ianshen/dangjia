@@ -5,7 +5,7 @@ class OrderModel extends Cola_Model {
     
     public function getById($id) {
         try {
-            $result = $this->find ( "id={$id}" );
+            $result = $this->find ( "id='{$id}'" );
             return $result;
         } catch ( Exception $e ) {
             echo $e;
@@ -20,7 +20,7 @@ class OrderModel extends Cola_Model {
     
     }
     
-    public function update() {
+    public function modify() {
     
     }
 }
