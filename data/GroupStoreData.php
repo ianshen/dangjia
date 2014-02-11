@@ -1,5 +1,5 @@
 <?php
-class GroupStoreData {
+class GroupStoreData extends BaseData {
     
     static function getStoreIdsByGid($gid) {
         if (! $gid) {

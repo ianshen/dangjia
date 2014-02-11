@@ -1,5 +1,5 @@
 <?php
-class GroupModel extends Cola_Model {
+class GroupModel extends BaseModel {
     
     protected $_table = 'group';
     
@@ -10,17 +10,5 @@ class GroupModel extends Cola_Model {
         } catch ( Exception $e ) {
             echo $e;
         }
-    }
-    
-    public function del() {
-    
-    }
-    
-    public function add() {
-    
-    }
-    
-    public function modify() {
-    
     }
 }

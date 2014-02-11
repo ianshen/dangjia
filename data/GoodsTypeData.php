@@ -1,12 +1,12 @@
 <?php
-class StoreData extends BaseData {
+class GoodsTypeData extends BaseData {
     
-    static function getsByIds($ids) {
-        if (! $ids) {
+    static function getsBySid($sid) {
+        if (! $sid) {
             return false;
         }
-        $model = new StoreModel ();
-        $result = $model->getsByIds ( $ids );
+        $model = new GoodsTypeModel ();
+        $result = $model->getsBySid ( $sid );
         return $result;
     }
     

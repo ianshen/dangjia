@@ -1,5 +1,5 @@
 <?php
-class UserData {
+class UserData extends BaseData {
     
     static function getById($id) {
         if (! $id) {
