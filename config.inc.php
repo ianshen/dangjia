@@ -8,7 +8,7 @@ $config = array (
                 1 => 'id' 
             ), 
             'defaults' => array (
-                'id' => 0729 
+                'id' => 729 
             ) 
         ), 
         '/^v-?(\d+)?$/' => array (
@@ -18,7 +18,7 @@ $config = array (
                 1 => 'id' 
             ), 
             'defaults' => array (
-                'id' => 0729 
+                'id' => 729 
             ) 
         ), 
         '/^g\/?(\d+)?$/' => array (
@@ -28,7 +28,7 @@ $config = array (
                 1 => 'gid' 
             ), 
             'defaults' => array (
-                'gid' => 1 
+                'gid' => 729 
             ) 
         ), 
         '/^s\/?(\d+)?$/' => array (
@@ -38,7 +38,7 @@ $config = array (
                 1 => 'sid' 
             ), 
             'defaults' => array (
-                'sid' => 1 
+                'sid' => 729 
             ) 
         ) 
     ), 
