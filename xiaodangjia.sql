@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 02 月 11 日 10:16
+-- 生成日期: 2014 年 03 月 11 日 10:22
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -23,19 +23,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- 表的结构 `goods`
+-- 表的结构 `category`
 --
 
-CREATE TABLE IF NOT EXISTS `goods` (
+CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(32) NOT NULL DEFAULT '' COMMENT '商品名',
-  `store_id` int(11) NOT NULL DEFAULT '0' COMMENT '所属店铺',
-  `price` int(11) NOT NULL DEFAULT '0' COMMENT '价格',
-  `good_type` int(11) NOT NULL DEFAULT '0' COMMENT '商品分类（默认无为0）',
-  `desc` varchar(128) NOT NULL DEFAULT '' COMMENT '商品描述',
+  `group_id` int(11) NOT NULL DEFAULT '0' COMMENT '群组',
+  `store_id` int(11) NOT NULL DEFAULT '0',
+  `level` tinyint(1) NOT NULL DEFAULT '1' COMMENT '分类层级，默认1级',
+  `pid` int(11) NOT NULL DEFAULT '0' COMMENT '父级id，level1的pid为0',
+  `name` varchar(32) NOT NULL DEFAULT '' COMMENT '分类名称',
   `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `create_date` date NOT NULL DEFAULT '0000-00-00',
-  `order` int(11) NOT NULL DEFAULT '1' COMMENT '商品顺序',
+  `update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `time_limit` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否定时',
+  `start_time` time NOT NULL DEFAULT '00:00:00' COMMENT '开始时间，time_limit为1时设置此值',
+  `end_time` time NOT NULL DEFAULT '00:00:00' COMMENT '结束时间，time_limit为1时设置此值',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -43,16 +45,18 @@ CREATE TABLE IF NOT EXISTS `goods` (
 -- --------------------------------------------------------
 
 --
--- 表的结构 `goods_type`
+-- 表的结构 `goods`
 --
 
-CREATE TABLE IF NOT EXISTS `goods_type` (
+CREATE TABLE IF NOT EXISTS `goods` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(32) NOT NULL DEFAULT '' COMMENT '类型名',
-  `store_id` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(32) NOT NULL DEFAULT '' COMMENT '商品名',
+  `category_id` int(11) NOT NULL DEFAULT '0' COMMENT '所属分类',
+  `price` int(11) NOT NULL DEFAULT '0' COMMENT '价格',
+  `desc` varchar(128) NOT NULL DEFAULT '' COMMENT '商品描述',
   `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `create_date` date NOT NULL DEFAULT '0000-00-00',
-  `order` int(11) NOT NULL DEFAULT '1' COMMENT '分类的排序',
+  `order` int(11) NOT NULL DEFAULT '1' COMMENT '商品顺序',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -81,27 +85,6 @@ CREATE TABLE IF NOT EXISTS `group` (
 
 INSERT INTO `group` (`id`, `name`, `ename`, `create_time`, `create_date`, `status`) VALUES
 (1, '北辰泰岳大厦', 'beichentaiyue', '0000-00-00 00:00:00', '0000-00-00', 0);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `group_store`
---
-
-CREATE TABLE IF NOT EXISTS `group_store` (
-  `group_id` int(11) NOT NULL DEFAULT '0',
-  `store_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`group_id`,`store_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `group_store`
---
-
-INSERT INTO `group_store` (`group_id`, `store_id`) VALUES
-(1, 1),
-(1, 2),
-(1, 3);
 
 -- --------------------------------------------------------
 
@@ -146,10 +129,13 @@ CREATE TABLE IF NOT EXISTS `order_detail` (
 
 CREATE TABLE IF NOT EXISTS `store` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(32) NOT NULL DEFAULT '',
-  `ename` varchar(32) NOT NULL DEFAULT '',
-  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `create_date` date NOT NULL DEFAULT '0000-00-00',
+  `name` varchar(32) NOT NULL DEFAULT '' COMMENT '店铺名',
+  `ename` varchar(32) NOT NULL DEFAULT '' COMMENT '店铺名称拼音',
+  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '入驻时间',
+  `create_date` date NOT NULL DEFAULT '0000-00-00' COMMENT '入驻日期',
+  `contact` varchar(16) DEFAULT '' COMMENT '联系人',
+  `tel` varchar(32) DEFAULT '' COMMENT '联系电话',
+  `addr` varchar(64) NOT NULL DEFAULT '' COMMENT '店铺地址',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
@@ -158,10 +144,10 @@ CREATE TABLE IF NOT EXISTS `store` (
 -- 转存表中的数据 `store`
 --
 
-INSERT INTO `store` (`id`, `name`, `ename`, `create_time`, `create_date`, `status`) VALUES
-(1, 'aaa', 'bbb', '0000-00-00 00:00:00', '0000-00-00', 1),
-(2, 'ccc', 'ddd', '0000-00-00 00:00:00', '0000-00-00', 1),
-(3, 'eee', 'fff', '0000-00-00 00:00:00', '0000-00-00', 0);
+INSERT INTO `store` (`id`, `name`, `ename`, `create_time`, `create_date`, `contact`, `tel`, `addr`, `status`) VALUES
+(1, 'aaa', 'bbb', '0000-00-00 00:00:00', '0000-00-00', NULL, NULL, '', 1),
+(2, 'ccc', 'ddd', '0000-00-00 00:00:00', '0000-00-00', NULL, NULL, '', 1),
+(3, 'eee', 'fff', '0000-00-00 00:00:00', '0000-00-00', NULL, NULL, '', 0);
 
 -- --------------------------------------------------------
 
@@ -192,6 +178,44 @@ INSERT INTO `user` (`id`, `name`, `passwd`, `tel`, `email`, `create_time`, `upda
 (6, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
 (7, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
 (8, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `x_goods_type`
+--
+
+CREATE TABLE IF NOT EXISTS `x_goods_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL DEFAULT '' COMMENT '类型名',
+  `store_id` int(11) NOT NULL DEFAULT '0',
+  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `create_date` date NOT NULL DEFAULT '0000-00-00',
+  `order` int(11) NOT NULL DEFAULT '1' COMMENT '分类的排序',
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `x_group_store`
+--
+
+CREATE TABLE IF NOT EXISTS `x_group_store` (
+  `group_id` int(11) NOT NULL DEFAULT '0',
+  `store_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`group_id`,`store_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `x_group_store`
+--
+
+INSERT INTO `x_group_store` (`group_id`, `store_id`) VALUES
+(1, 1),
+(1, 2),
+(1, 3);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

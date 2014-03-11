@@ -1,7 +1,7 @@
 <?php
 class GoodsModel extends BaseModel {
     
-    protected $_table = 'goods';
+    protected $_table = '`goods`';
     
     public function getsBySid($sid) {
         try {

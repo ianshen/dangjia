@@ -1,7 +1,7 @@
 <?php
 class UserModel extends BaseModel {
     
-    protected $_table = 'user';
+    protected $_table = '`user`';
     
     public function getById($id) {
         try {

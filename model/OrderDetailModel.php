@@ -1,7 +1,7 @@
 <?php
 class OrderDetailModel extends BaseModel {
     
-    protected $_table = 'order_detail';
+    protected $_table = '`order_detail`';
     
     public function getById($id) {
         try {

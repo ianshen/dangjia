@@ -16,15 +16,20 @@ class ComTool {
         return $serialNumber;
     }
     
-    static function del() {
-    
+    static function isAjax() {
+        return Cola_Request::isAjax ();
     }
     
-    static function add() {
-    
+    static function ajaxRender($status = 100000, $info = 'success', $data = 'success') {
+        $json ['status'] = $status;
+        $json ['info'] = $info;
+        $json ['data'] = $data;
+        header ( 'Content-Type:text/html; charset=utf-8' );
+        echo json_encode ( $json );
+        exit ();
     }
     
-    static function modify() {
-    
+    static function currentUrl() {
+        return Cola_Request::currentUrl ();
     }
 }
