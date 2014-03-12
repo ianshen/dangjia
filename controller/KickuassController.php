@@ -12,9 +12,11 @@ class KickuassController extends BaseController {
         //print_r($_SERVER);
         //$url = ComTool::url ( 'kickuass/cate', array () );
         //print_r ( $url );
+        //print_r($_SESSION);
         if (ComTool::isAjax ()) {
-            $b=ComTool::checkToken ();
-            var_dump($b);exit;
+            if(!ComTool::checkToken ()){
+            	ComTool::ajax ( 100001, '重复提交' );
+            }
             $name = trim ( $this->post ( 'name' ) );
             ComTool::checkEmpty ( $name, '群组名不能为空' );
             $ename = trim ( $this->post ( 'ename' ) );

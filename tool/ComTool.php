@@ -69,13 +69,18 @@ class ComTool {
     
     static function checkToken() {
         $tokenName = 'token';
-        $token = trim ( $_POST [$tokenName] );
-        $tokens = explode ( '_', $token );
-        $tokenKey = $tokens [0];
-        $tokenValue = $tokens [1];
-        if ($_SESSION [$tokenName] [$tokenKey] == $tokenValue) {
-            return true;
-        }
-        return false;
+		$token = trim ( $_POST [$tokenName] );
+		$tokens = explode ( '_', $token );
+		$tokenKey = $tokens [0];
+		$tokenValue = $tokens [1];
+		/* if ($_SESSION [$tokenName] [$tokenKey] == $tokenValue) {
+			$return = true;
+		} else {
+			$return = false;
+		} */
+		$return = ($_SESSION [$tokenName] [$tokenKey] == $tokenValue) ? true : false;
+		$_SESSION [$tokenName] [$tokenKey] = null;
+		self::buildToken ();
+		return $return;
     }
 }
