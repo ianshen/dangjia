@@ -20,7 +20,7 @@ class ComTool {
         return Cola_Request::isAjax ();
     }
     
-    static function ajaxRender($status = 100000, $info = 'success', $data = 'success') {
+    static function ajax($status = 100000, $info = 'success', $data = 'success') {
         $json ['status'] = $status;
         $json ['info'] = $info;
         $json ['data'] = $data;
@@ -31,5 +31,51 @@ class ComTool {
     
     static function currentUrl() {
         return Cola_Request::currentUrl ();
+    }
+    
+    static function checkEmpty($str = '', $info = '', $status = 100001, $data = '') {
+        return empty ( $str ) ? self::ajax ( $status, $info, $data ) : $str;
+    }
+    
+    static function url($path, $params = array()) {
+        $host = $_SERVER ['HTTP_HOST'];
+        $url = 'http';
+        if ('on' == Cola_Request::server ( 'HTTPS' ))
+            $url .= 's';
+        $url .= "://" . Cola_Request::server ( 'SERVER_NAME' );
+        $port = Cola_Request::server ( 'SERVER_PORT' );
+        if (80 != $port)
+            $url .= ":{$port}";
+        return $url . Cola_Request::server ( 'SCRIPT_NAME' ) . '/' . $path;
+    }
+    
+    static function buildToken() {
+        $tokenName = 'token';
+        $tokenType = 'md5';
+        if (! isset ( $_SESSION [$tokenName] )) {
+            $_SESSION [$tokenName] = array ();
+        }
+        //标识当前页面唯一性
+        $tokenKey = md5 ( $_SERVER ['REQUEST_URI'] );
+        if (isset ( $_SESSION [$tokenName] [$tokenKey] )) { //相同页面不重复生成session
+            $tokenValue = $_SESSION [$tokenName] [$tokenKey];
+        } else {
+            $tokenValue = $tokenType ( microtime ( TRUE ) );
+            $_SESSION [$tokenName] [$tokenKey] = $tokenValue;
+        }
+        $token = '<input type="hidden" name="' . $tokenName . '" value="' . $tokenKey . '_' . $tokenValue . '" />';
+        return $token;
+    }
+    
+    static function checkToken() {
+        $tokenName = 'token';
+        $token = trim ( $_POST [$tokenName] );
+        $tokens = explode ( '_', $token );
+        $tokenKey = $tokens [0];
+        $tokenValue = $tokens [1];
+        if ($_SESSION [$tokenName] [$tokenKey] == $tokenValue) {
+            return true;
+        }
+        return false;
     }
 }

@@ -1,6 +1,12 @@
 <?php
 class BaseModel extends Cola_Model {
     
+    /**
+     * 表名要加``号以免和系统命令冲突
+     * @var unknown_type
+     */
+    protected $_table = '';
+    
     public function del($id) {
         try {
             $result = $this->delete ( $id );

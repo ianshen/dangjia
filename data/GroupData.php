@@ -20,8 +20,13 @@ class GroupData extends BaseData {
     
     }
     
-    static function add() {
-    
+    static function add($data) {
+        if (! $data) {
+            return false;
+        }
+        $model = new GroupModel ();
+        $result = $model->add ( $data );
+        return $result;
     }
     
     static function modify() {

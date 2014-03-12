@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 03 月 11 日 10:22
+-- 生成日期: 2014 年 03 月 12 日 09:22
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS `category` (
   `level` tinyint(1) NOT NULL DEFAULT '1' COMMENT '分类层级，默认1级',
   `pid` int(11) NOT NULL DEFAULT '0' COMMENT '父级id，level1的pid为0',
   `name` varchar(32) NOT NULL DEFAULT '' COMMENT '分类名称',
-  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `create_time` int(11) NOT NULL DEFAULT '0',
+  `update_time` int(11) NOT NULL DEFAULT '0',
   `time_limit` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否定时',
   `start_time` time NOT NULL DEFAULT '00:00:00' COMMENT '开始时间，time_limit为1时设置此值',
   `end_time` time NOT NULL DEFAULT '00:00:00' COMMENT '结束时间，time_limit为1时设置此值',
@@ -54,8 +54,8 @@ CREATE TABLE IF NOT EXISTS `goods` (
   `category_id` int(11) NOT NULL DEFAULT '0' COMMENT '所属分类',
   `price` int(11) NOT NULL DEFAULT '0' COMMENT '价格',
   `desc` varchar(128) NOT NULL DEFAULT '' COMMENT '商品描述',
-  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `create_date` date NOT NULL DEFAULT '0000-00-00',
+  `create_time` int(11) NOT NULL DEFAULT '0',
+  `create_date` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建日期',
   `order` int(11) NOT NULL DEFAULT '1' COMMENT '商品顺序',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
@@ -71,20 +71,22 @@ CREATE TABLE IF NOT EXISTS `group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL DEFAULT '' COMMENT '名',
   `ename` varchar(32) NOT NULL DEFAULT '' COMMENT '拼音名',
-  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `create_time` int(11) NOT NULL DEFAULT '0',
   `create_date` date NOT NULL DEFAULT '0000-00-00',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `ename` (`ename`) USING BTREE,
   KEY `id` (`id`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `group`
 --
 
 INSERT INTO `group` (`id`, `name`, `ename`, `create_time`, `create_date`, `status`) VALUES
-(1, '北辰泰岳大厦', 'beichentaiyue', '0000-00-00 00:00:00', '0000-00-00', 0);
+(1, '北辰泰岳大厦', 'beichentaiyue', 0, '0000-00-00', 0),
+(2, 'aaaaa', 'bbbbb', 1394606642, '2014-03-12', 4),
+(3, '国务院扶贫办雨露计划网', 'bbbbbbbb', 1394606722, '2014-03-12', 1);
 
 -- --------------------------------------------------------
 
@@ -98,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `order` (
   `user_name` varchar(32) NOT NULL DEFAULT '' COMMENT '用户名',
   `user_tel` varchar(32) NOT NULL DEFAULT '' COMMENT '用户电话',
   `user_addr` varchar(64) NOT NULL DEFAULT '' COMMENT '地址',
-  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '订单创建时间',
+  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '订单创建时间',
   `total_cost` int(11) NOT NULL DEFAULT '0' COMMENT '订单总价',
   `amount` int(11) NOT NULL DEFAULT '0' COMMENT '商品数量',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态',
@@ -131,11 +133,13 @@ CREATE TABLE IF NOT EXISTS `store` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL DEFAULT '' COMMENT '店铺名',
   `ename` varchar(32) NOT NULL DEFAULT '' COMMENT '店铺名称拼音',
-  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '入驻时间',
+  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '入驻时间',
   `create_date` date NOT NULL DEFAULT '0000-00-00' COMMENT '入驻日期',
   `contact` varchar(16) DEFAULT '' COMMENT '联系人',
   `tel` varchar(32) DEFAULT '' COMMENT '联系电话',
-  `addr` varchar(64) NOT NULL DEFAULT '' COMMENT '店铺地址',
+  `addr` varchar(64) NOT NULL DEFAULT '' COMMENT '店铺详细地址',
+  `city` int(10) NOT NULL DEFAULT '0' COMMENT '所属城市',
+  `area` int(10) NOT NULL DEFAULT '0' COMMENT '所属地区',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
@@ -144,10 +148,10 @@ CREATE TABLE IF NOT EXISTS `store` (
 -- 转存表中的数据 `store`
 --
 
-INSERT INTO `store` (`id`, `name`, `ename`, `create_time`, `create_date`, `contact`, `tel`, `addr`, `status`) VALUES
-(1, 'aaa', 'bbb', '0000-00-00 00:00:00', '0000-00-00', NULL, NULL, '', 1),
-(2, 'ccc', 'ddd', '0000-00-00 00:00:00', '0000-00-00', NULL, NULL, '', 1),
-(3, 'eee', 'fff', '0000-00-00 00:00:00', '0000-00-00', NULL, NULL, '', 0);
+INSERT INTO `store` (`id`, `name`, `ename`, `create_time`, `create_date`, `contact`, `tel`, `addr`, `city`, `area`, `status`) VALUES
+(1, 'aaa', 'bbb', 0, '0000-00-00', NULL, NULL, '', 0, 0, 1),
+(2, 'ccc', 'ddd', 0, '0000-00-00', NULL, NULL, '', 0, 0, 1),
+(3, 'eee', 'fff', 0, '0000-00-00', NULL, NULL, '', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -161,8 +165,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `passwd` char(32) NOT NULL DEFAULT '',
   `tel` varchar(32) NOT NULL DEFAULT '',
   `email` varchar(128) NOT NULL DEFAULT '',
-  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `create_time` int(11) NOT NULL DEFAULT '0',
+  `update_time` int(11) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
@@ -172,12 +176,12 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `passwd`, `tel`, `email`, `create_time`, `update_time`, `status`) VALUES
-(3, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', '2014-02-10 08:32:03', '0000-00-00 00:00:00', 0),
-(4, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
-(5, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
-(6, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
-(7, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
-(8, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);
+(3, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 2014, 0, 0),
+(4, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 0, 0, 0),
+(5, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 0, 0, 0),
+(6, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 0, 0, 0),
+(7, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 0, 0, 0),
+(8, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 0, 0, 0);
 
 -- --------------------------------------------------------
 

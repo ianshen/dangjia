@@ -2,10 +2,6 @@
 class KickuassController extends BaseController {
     
     public function indexAction() {
-        $groups = '';
-        $groups = GroupData::getsAll ();
-        //$this->view ()->id = '3ss';
-        $this->assign ( 'list', $groups );
         $this->display ();
     }
     
@@ -13,10 +9,32 @@ class KickuassController extends BaseController {
      * 添加群组
      */
     public function groupAction() {
+        //print_r($_SERVER);
+        //$url = ComTool::url ( 'kickuass/cate', array () );
+        //print_r ( $url );
         if (ComTool::isAjax ()) {
-            ComTool::ajaxRender ();
+            $b=ComTool::checkToken ();
+            var_dump($b);exit;
+            $name = trim ( $this->post ( 'name' ) );
+            ComTool::checkEmpty ( $name, '群组名不能为空' );
+            $ename = trim ( $this->post ( 'ename' ) );
+            ComTool::checkEmpty ( $ename, '群组拼音不能为空' );
+            $status = $this->post ( 'status' );
+            $res = GroupData::add ( array (
+                'name' => $name, 
+                'ename' => $ename, 
+                'status' => $status, 
+                'create_time' => time (), 
+                'create_date' => date ( 'Y-m-d' ) 
+            ) );
+            if ($res === false) {
+                ComTool::ajax ( 100001, 'error' );
+            }
+            ComTool::ajax ();
         }
-        $groups = '';
+        $token = ComTool::buildToken ();
+        $this->assign ( 'token', $token );
+        $groups = GroupData::getsAll ();
         $this->assign ( 'list', $groups );
         $this->display ();
     }
@@ -45,7 +63,13 @@ class KickuassController extends BaseController {
             $data ['status'] = '';
             exit ();
             $res = CategoryData::add ( $data );
+            if ($res === false) {
+                ComTool::ajax ( 100001, 'error' );
+            }
+            ComTool::ajax ();
         }
+        $token = ComTool::buildToken ();
+        $this->assign ( 'token', $token );
         $this->display ();
     }
     
