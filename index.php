@@ -12,7 +12,7 @@ if ($root && $root != '/') {
 }
 define ( 'APP_DIR', $root );
 
-defined ( 'APP_PATH' ) or define ( 'APP_PATH', dirname ( $_SERVER ['SCRIPT_FILENAME'] ) . '/' );
+//defined ( 'APP_PATH' ) or define ( 'APP_PATH', dirname ( $_SERVER ['SCRIPT_FILENAME'] ) . '/' );
 
 require 'Cola/Cola.php';
 
