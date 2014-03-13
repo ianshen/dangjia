@@ -58,5 +58,6 @@ $config = array (
     '_datasHome' => 'data', 
     '_controllersHome' => 'controller', 
     '_viewsHome' => 'view', 
-    '_toolsHome' => 'tool' 
+    '_toolsHome' => 'tool', 
+    '_autoSession' => true 
 );

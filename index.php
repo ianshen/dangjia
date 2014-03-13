@@ -11,7 +11,9 @@ if ($root && $root != '/') {
     $root .= "/";
 }
 define ( 'APP_DIR', $root );
-session_start();
+
+defined ( 'APP_PATH' ) or define ( 'APP_PATH', dirname ( $_SERVER ['SCRIPT_FILENAME'] ) . '/' );
+
 require 'Cola/Cola.php';
 
 $cola = Cola::getInstance ();
