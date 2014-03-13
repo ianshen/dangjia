@@ -2,6 +2,7 @@
 class KickuassController extends BaseController {
     
     public function indexAction() {
+        $url = ComTool::url ( 'kickuass/cate', array () );
         $this->display ();
     }
     
@@ -9,14 +10,8 @@ class KickuassController extends BaseController {
      * 添加群组
      */
     public function groupAction() {
-        //print_r($_SERVER);
-        //$url = ComTool::url ( 'kickuass/cate', array () );
-        //print_r ( $url );
-        //print_r($_SESSION);
         if (ComTool::isAjax ()) {
-            if(!ComTool::checkToken ()){
-            	ComTool::ajax ( 100001, '重复提交' );
-            }
+            ComTool::validToken ();
             $name = trim ( $this->post ( 'name' ) );
             ComTool::checkEmpty ( $name, '群组名不能为空' );
             $ename = trim ( $this->post ( 'ename' ) );
@@ -29,13 +24,8 @@ class KickuassController extends BaseController {
                 'create_time' => time (), 
                 'create_date' => date ( 'Y-m-d' ) 
             ) );
-            if ($res === false) {
-                ComTool::ajax ( 100001, 'error' );
-            }
-            ComTool::ajax ();
+            ComTool::result ( $res );
         }
-        $token = ComTool::buildToken ();
-        $this->assign ( 'token', $token );
         $groups = GroupData::getsAll ();
         $this->assign ( 'list', $groups );
         $this->display ();
