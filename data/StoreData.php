@@ -1,6 +1,12 @@
 <?php
 class StoreData extends BaseData {
     
+    static function getsAll() {
+        $model = new StoreModel ();
+        $result = $model->getsAll ();
+        return $result;
+    }
+    
     static function getsByIds($ids) {
         if (! $ids) {
             return false;

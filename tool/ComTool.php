@@ -83,7 +83,6 @@ class ComTool {
      */
     static function buildToken() {
         $tokenName = 'token';
-        $tokenType = 'md5';
         if (! isset ( $_SESSION [$tokenName] )) {
             $_SESSION [$tokenName] = array ();
         }
@@ -92,7 +91,7 @@ class ComTool {
         if (isset ( $_SESSION [$tokenName] [$tokenKey] )) { //相同页面不重复生成session
             $tokenValue = $_SESSION [$tokenName] [$tokenKey];
         } else {
-            $tokenValue = $tokenType ( microtime ( TRUE ) );
+            $tokenValue = md5 ( microtime ( TRUE ) );
             $_SESSION [$tokenName] [$tokenKey] = $tokenValue;
         }
         $token = '<input type="hidden" name="' . $tokenName . '" value="' . $tokenKey . '_' . $tokenValue . '" />';
@@ -105,6 +104,9 @@ class ComTool {
      */
     static function checkToken() {
         $tokenName = 'token';
+        if (! isset ( $_POST [$tokenName] )) {
+            return true;
+        }
         $token = trim ( $_POST [$tokenName] );
         $tokens = explode ( '_', $token );
         $tokenKey = $tokens [0];

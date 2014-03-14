@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 03 月 12 日 09:22
+-- 生成日期: 2014 年 03 月 14 日 08:51
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -33,9 +33,12 @@ CREATE TABLE IF NOT EXISTS `category` (
   `level` tinyint(1) NOT NULL DEFAULT '1' COMMENT '分类层级，默认1级',
   `pid` int(11) NOT NULL DEFAULT '0' COMMENT '父级id，level1的pid为0',
   `name` varchar(32) NOT NULL DEFAULT '' COMMENT '分类名称',
+  `ename` varchar(32) NOT NULL DEFAULT '' COMMENT '分类拼音',
+  `desc` varchar(512) NOT NULL DEFAULT '' COMMENT '说明文字',
   `create_time` int(11) NOT NULL DEFAULT '0',
   `update_time` int(11) NOT NULL DEFAULT '0',
   `time_limit` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否定时',
+  `days` varchar(32) NOT NULL DEFAULT '' COMMENT '开启时设置,1,2,3,4,5,6,7（表示星期几开启）',
   `start_time` time NOT NULL DEFAULT '00:00:00' COMMENT '开始时间，time_limit为1时设置此值',
   `end_time` time NOT NULL DEFAULT '00:00:00' COMMENT '结束时间，time_limit为1时设置此值',
   `status` tinyint(1) NOT NULL DEFAULT '0',
@@ -77,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `group` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `ename` (`ename`) USING BTREE,
   KEY `id` (`id`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `group`
@@ -86,7 +89,9 @@ CREATE TABLE IF NOT EXISTS `group` (
 INSERT INTO `group` (`id`, `name`, `ename`, `create_time`, `create_date`, `status`) VALUES
 (1, '北辰泰岳大厦', 'beichentaiyue', 0, '0000-00-00', 0),
 (2, 'aaaaa', 'bbbbb', 1394606642, '2014-03-12', 4),
-(3, '国务院扶贫办雨露计划网', 'bbbbbbbb', 1394606722, '2014-03-12', 1);
+(3, '国务院扶贫办雨露计划网', 'bbbbbbbb', 1394606722, '2014-03-12', 1),
+(4, 'aaaaaaa', 'bbbbbbbbb', 1394704837, '2014-03-13', 1),
+(5, 'ddddddd', 'eeeeeeeee', 1394704881, '2014-03-13', 4);
 
 -- --------------------------------------------------------
 

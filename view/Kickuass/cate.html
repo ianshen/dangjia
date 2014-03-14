@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<link rel="stylesheet" href="<?php echo APP_DIR; ?>static/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo WWW_ROOT; ?>static/css/bootstrap.min.css">
 <title></title>
 </head>
 <body>
@@ -61,7 +61,7 @@
 					<li class="nav-header">列表标题</li>
 					<li><a href="<?php echo ComTool::url ('kickuass/group'); ?>">添加群组</a></li>
 					<li><a href="<?php echo ComTool::url ('kickuass/cate'); ?>">添加分类</a></li>
-					<li><a href="/kickuass/store">添加店铺</a></li>
+					<li><a href="<?php echo ComTool::url ('kickuass/store'); ?>">添加店铺</a></li>
 					<li class="nav-header">功能列表</li>
 					<li><a href="#">资料</a></li>
 					<li><a href="#">设置</a></li>
@@ -74,19 +74,90 @@
 					<div class="span12">
 						<form class="form-horizontal" id="myform" method="post">
 							<div class="control-group">
-								<label class="control-label" for="inputEmail">群组</label>
+								<label class="control-label" for="">群组</label>
 								<div class="controls">
-									<input type="text" name="name" placeholder="群组名">
+									<select name="group">
+									<?php foreach($this->groups as $group){ ?>
+										<option value="<?php echo $group['id']; ?>"><?php echo $group['name']; ?></option>
+									<?php } ?>
+									</select>
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="inputEmail">群组拼音</label>
+								<label class="control-label" for="">店铺支持</label>
 								<div class="controls">
-									<input type="text" name="ename" placeholder="群组拼音">
+									<select name="group">
+									<?php foreach($this->stores as $store){ ?>
+										<option value="<?php echo $store['id']; ?>"><?php echo $store['name']; ?></option>
+									<?php } ?>
+									</select>
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="inputEmail">状态</label>
+								<label class="control-label" for="">等级</label>
+								<div class="controls">
+									<select name="level">
+										<option value="1">1</option>
+										<option value="2">2</option>
+									</select>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="">父级分类</label>
+								<div class="controls">
+									<select name="parent">
+										<option value="1">1</option>
+										<option value="2">2</option>
+									</select>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="">分类名</label>
+								<div class="controls">
+									<input type="text" name="name" placeholder="分类名">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="">分类拼音</label>
+								<div class="controls">
+									<input type="text" name="ename" placeholder="分类拼音">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="">描述</label>
+								<div class="controls">
+									<input type="text" name="desc" placeholder="描述">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="">是否定时</label>
+								<div class="controls">
+									<select name="limit">
+										<option value="1">开启</option>
+										<option value="0">关闭</option>
+									</select>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="">开启天数</label>
+								<div class="controls">
+									<input type="text" name="day" placeholder="开始天数">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="">开始时间</label>
+								<div class="controls">
+									<input type="text" name="start" placeholder="开始时间">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="">结束时间</label>
+								<div class="controls">
+									<input type="text" name="end" placeholder="结束时间">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="">状态</label>
 								<div class="controls">
 									<select name="status">
 										<option value="1">开启</option>
@@ -152,11 +223,11 @@
 		</div>
 	</div>
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-	<script src="<?php echo APP_DIR; ?>static/js/jquery.min.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/jquery.min.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-	<script src="<?php echo APP_DIR; ?>static/js/bootstrap.min.js"></script>
-	<script src="<?php echo APP_DIR; ?>static/js/jquery.form.js"></script>
-	<script src="<?php echo APP_DIR; ?>static/js/xizhang.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/bootstrap.min.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/jquery.form.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/xizhang.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			var options = {

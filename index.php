@@ -6,15 +6,10 @@ date_default_timezone_set ( 'Asia/Shanghai' );
 
 header ( "Content-type: text/html; charset=utf-8" );
 
-$root = dirname ( $_SERVER ['SCRIPT_NAME'] );
-if ($root && $root != '/') {
-    $root .= "/";
-}
-define ( 'APP_DIR', $root );
+define ( 'WWW_ROOT', rtrim ( dirname ( $_SERVER ['SCRIPT_NAME'] ), '/\\' ) . '/' ); //定义www根域
+
 
 //defined ( 'APP_PATH' ) or define ( 'APP_PATH', dirname ( $_SERVER ['SCRIPT_FILENAME'] ) . '/' );
-
 require 'Cola/Cola.php';
-
 $cola = Cola::getInstance ();
 $cola->boot ()->dispatch ();

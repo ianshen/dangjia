@@ -32,43 +32,56 @@ class KickuassController extends BaseController {
     }
     
     /**
-     * 添加分类
+     * 添加店铺
      */
-    public function cateAction() {
-        if (ComTool::isAjax ()) {
-            $gid = $this->post ( 'gid' );
-            $sid = $this->post ( 'sid' );
-            $level = $this->post ( 'level' );
-            $pid = $this->post ( 'pid' );
-            $name = $this->post ( 'name' );
-            $data = array ();
-            $data ['group_id'] = '';
-            $data ['store_id'] = '';
-            $data ['level'] = '';
-            $data ['pid'] = '';
-            $data ['name'] = '';
-            $data ['create_time'] = '';
-            $data ['update_time'] = '';
-            $data ['time_limit'] = '';
-            $data ['start_time'] = '';
-            $data ['end_time'] = '';
-            $data ['status'] = '';
-            exit ();
-            $res = CategoryData::add ( $data );
-            if ($res === false) {
-                ComTool::ajax ( 100001, 'error' );
-            }
-            ComTool::ajax ();
-        }
-        $token = ComTool::buildToken ();
-        $this->assign ( 'token', $token );
-        $this->display ();
-    }
-    
     public function storeAction() {
         if (ComTool::isAjax ()) {
             exit ();
         }
+        $stores = StoreData::getsAll ();
+        $this->assign ( 'stores', $stores );
+        $this->display ();
+    }
+    
+    /**
+     * 添加分类
+     */
+    public function cateAction() {
+        if (ComTool::isAjax ()) {
+            $group = $this->post ( 'group' );
+            $store = $this->post ( 'store' );
+            $level = $this->post ( 'level' );
+            $parent = $this->post ( 'parent' );
+            $name = $this->post ( 'name' );
+            $ename = $this->post ( 'ename' );
+            $desc = $this->post ( 'desc' );
+            $limit = $this->post ( 'limit' );
+            $days = $this->post ( 'day' );
+            $start = $this->post ( 'start' );
+            $end = $this->post ( 'end' );
+            $status = $this->post ( 'status' );
+            $data = array ();
+            $data ['group_id'] = $group;
+            $data ['store_id'] = $store;
+            $data ['level'] = $level;
+            $data ['pid'] = $parent;
+            $data ['name'] = $name;
+            $data ['ename'] = $ename;
+            $data ['desc'] = $desc;
+            $data ['create_time'] = '';
+            $data ['update_time'] = '';
+            $data ['time_limit'] = $limit;
+            $data ['days'] = $days;
+            $data ['start_time'] = $start;
+            $data ['end_time'] = $end;
+            $data ['status'] = $status;
+            $res = CategoryData::add ( $data );
+            ComTool::result ( $res );
+        }
+        $groups = GroupData::getsAll ();
+        $stores = StoreData::getsAll ();
+        $this->assign ( 'groups', $groups );
+        $this->assign ( 'stores', $stores );
         $this->display ();
     }
 }

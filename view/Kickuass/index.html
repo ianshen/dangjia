@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<link rel="stylesheet" href="<?php echo APP_DIR; ?>static/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo WWW_ROOT; ?>static/css/bootstrap.min.css">
 <title></title>
 </head>
 <body>
@@ -61,7 +61,7 @@
 					<li class="nav-header">列表标题</li>
 					<li><a href="<?php echo ComTool::url ('kickuass/group'); ?>">添加群组</a></li>
 					<li><a href="<?php echo ComTool::url ('kickuass/cate'); ?>">添加分类</a></li>
-					<li><a href="kickuass/store">添加店铺</a></li>
+					<li><a href="<?php echo ComTool::url ('kickuass/store'); ?>">添加店铺</a></li>
 					<li class="nav-header">功能列表</li>
 					<li><a href="#">资料</a></li>
 					<li><a href="#">设置</a></li>
@@ -72,9 +72,9 @@
 		</div>
 	</div>
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-	<script src="<?php echo APP_DIR; ?>static/js/jquery.min.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/jquery.min.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-	<script src="<?php echo APP_DIR; ?>static/js/bootstrap.min.js"></script>
-	<script src="<?php echo APP_DIR; ?>static/js/jquery.form.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/bootstrap.min.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/jquery.form.js"></script>
 </body>
 </html>

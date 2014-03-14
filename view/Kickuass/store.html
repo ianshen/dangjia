@@ -74,15 +74,33 @@
 					<div class="span12">
 						<form class="form-horizontal" id="myform" method="post">
 							<div class="control-group">
-								<label class="control-label" for="">群组名</label>
+								<label class="control-label" for="">店铺名</label>
 								<div class="controls">
-									<input type="text" name="name" placeholder="群组名">
+									<input type="text" name="name" placeholder="店铺名">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="">群组拼音</label>
+								<label class="control-label" for="">店铺拼音</label>
 								<div class="controls">
-									<input type="text" name="ename" placeholder="群组拼音">
+									<input type="text" name="ename" placeholder="店铺拼音">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="">联系人</label>
+								<div class="controls">
+									<input type="text" name="contact" placeholder="联系人">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="">联系电话</label>
+								<div class="controls">
+									<input type="text" name="tel" placeholder="联系电话">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="">地址</label>
+								<div class="controls">
+									<input type="text" name="addr" placeholder="地址">
 								</div>
 							</div>
 							<div class="control-group">
@@ -117,7 +135,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach($this->list as $v){ ?>
+								<?php foreach($this->stores as $v){ ?>
 								<tr class="">
 									<td>
 										<?php echo $v['id']; ?>
@@ -160,7 +178,7 @@
 	<script type="text/javascript">
 		$(function() {
 			var options = {
-				url : 'group',
+				url : 'store',
 				dataType : 'json',
 				success : function(data) {
 					if(data.status==100000){

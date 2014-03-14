@@ -3,6 +3,15 @@ class StoreModel extends BaseModel {
     
     protected $_table = '`store`';
     
+    public function getsAll() {
+        try {
+            $result = $this->find ();
+            return $result;
+        } catch ( Exception $e ) {
+            echo $e;
+        }
+    }
+    
     public function getById($id) {
         try {
             $result = $this->find ( "id='{$id}'" );

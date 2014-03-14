@@ -3,9 +3,11 @@ class BaseController extends Cola_Controller {
     
     public $tplExt = '.html';
     
+    protected $token = '';
+    
     public function __construct() {
-        $token = ComTool::buildToken ();
-        $this->assign ( 'token', $token );
+        $this->token = ComTool::buildToken ();
+        $this->assign ( 'token', $this->token );
     }
     
     protected function assign($name, $value = '') {
