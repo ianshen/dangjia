@@ -36,10 +36,12 @@ class Cola_Router
         $tmp = explode('/', $pathInfo);
 
         if ($controller = current($tmp)) {
+        	define ( '__CONTROLLER__', $controller );
             $dispatchInfo['controller'] = ucfirst($controller) . 'Controller';
         }
 
         if ($action = next($tmp)) {
+        	define ( '__ACTION__', $action );
             $dispatchInfo['action'] = $action . 'Action';
         }
 

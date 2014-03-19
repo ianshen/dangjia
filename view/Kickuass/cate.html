@@ -84,21 +84,11 @@
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="">店铺支持</label>
-								<div class="controls">
-									<select name="group">
-									<?php foreach($this->stores as $store){ ?>
-										<option value="<?php echo $store['id']; ?>"><?php echo $store['name']; ?></option>
-									<?php } ?>
-									</select>
-								</div>
-							</div>
-							<div class="control-group">
 								<label class="control-label" for="">等级</label>
 								<div class="controls">
 									<select name="level">
-										<option value="1">1</option>
-										<option value="2">2</option>
+										<option value="1">1级</option>
+										<option value="2">2级</option>
 									</select>
 								</div>
 							</div>
@@ -106,8 +96,10 @@
 								<label class="control-label" for="">父级分类</label>
 								<div class="controls">
 									<select name="parent">
-										<option value="1">1</option>
-										<option value="2">2</option>
+										<option value="0">0根分类</option>
+										<?php foreach($this->parentCats as $cat){ ?>
+											<option value="<?php echo $cat['id']; ?>"><?php echo $cat['name']; ?></option>
+										<?php } ?>
 									</select>
 								</div>
 							</div>
@@ -141,7 +133,7 @@
 							<div class="control-group">
 								<label class="control-label" for="">开启天数</label>
 								<div class="controls">
-									<input type="text" name="day" placeholder="开始天数">
+									<input type="text" name="day" placeholder="1,2,3,4,5,6,7">
 								</div>
 							</div>
 							<div class="control-group">
@@ -154,6 +146,27 @@
 								<label class="control-label" for="">结束时间</label>
 								<div class="controls">
 									<input type="text" name="end" placeholder="结束时间">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="">分类订单方式</label>
+								<div class="controls">
+									<select name="orderway">
+										<option value="0">无</option>
+										<option value="1">货到付</option>
+										<option value="2">优惠券</option>
+									</select>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="">店铺支撑</label>
+								<div class="controls">
+									<select name="store">
+										<option value="0">1级父分类无支撑</option>
+									<?php foreach($this->stores as $store){ ?>
+										<option value="<?php echo $store['id']; ?>"><?php echo $store['name']; ?></option>
+									<?php } ?>
+									</select>
 								</div>
 							</div>
 							<div class="control-group">
@@ -188,7 +201,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach($this->list as $v){ ?>
+								<?php foreach($this->allCats as $v){ ?>
 								<tr class="">
 									<td>
 										<?php echo $v['id']; ?>
