@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 03 月 14 日 08:51
+-- 生成日期: 2014 年 03 月 19 日 09:07
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `start_time` time NOT NULL DEFAULT '00:00:00' COMMENT '开始时间，time_limit为1时设置此值',
   `end_time` time NOT NULL DEFAULT '00:00:00' COMMENT '结束时间，time_limit为1时设置此值',
   `status` tinyint(1) NOT NULL DEFAULT '0',
+  `order_way` tinyint(1) NOT NULL DEFAULT '0' COMMENT '此分类订单形式(1普通订单产生方式、2生成优惠码方式)',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
