@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 3.3.9
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 03 月 19 日 09:07
--- 服务器版本: 5.5.24-log
--- PHP 版本: 5.3.13
+-- 生成日期: 2014 年 03 月 19 日 15:38
+-- 服务器版本: 5.5.8
+-- PHP 版本: 5.3.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -44,7 +43,14 @@ CREATE TABLE IF NOT EXISTS `category` (
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `order_way` tinyint(1) NOT NULL DEFAULT '0' COMMENT '此分类订单形式(1普通订单产生方式、2生成优惠码方式)',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `category`
+--
+
+INSERT INTO `category` (`id`, `group_id`, `store_id`, `level`, `pid`, `name`, `ename`, `desc`, `create_time`, `update_time`, `time_limit`, `days`, `start_time`, `end_time`, `status`, `order_way`) VALUES
+(3, 1, 5, 1, 0, '订午餐', 'dingwucan', '供人订午餐', 1395237337, 1395237337, 1, '1,2,3,4,5', '08:00:00', '11:00:00', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -65,6 +71,11 @@ CREATE TABLE IF NOT EXISTS `goods` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- 转存表中的数据 `goods`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -81,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `group` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `ename` (`ename`) USING BTREE,
   KEY `id` (`id`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `group`
@@ -89,10 +100,7 @@ CREATE TABLE IF NOT EXISTS `group` (
 
 INSERT INTO `group` (`id`, `name`, `ename`, `create_time`, `create_date`, `status`) VALUES
 (1, '北辰泰岳大厦', 'beichentaiyue', 0, '0000-00-00', 0),
-(2, 'aaaaa', 'bbbbb', 1394606642, '2014-03-12', 4),
-(3, '国务院扶贫办雨露计划网', 'bbbbbbbb', 1394606722, '2014-03-12', 1),
-(4, 'aaaaaaa', 'bbbbbbbbb', 1394704837, '2014-03-13', 1),
-(5, 'ddddddd', 'eeeeeeeee', 1394704881, '2014-03-13', 4);
+(6, '明天第一城', 'mingtiandiyicheng', 1395236134, '2014-03-19', 1);
 
 -- --------------------------------------------------------
 
@@ -113,6 +121,11 @@ CREATE TABLE IF NOT EXISTS `order` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- 转存表中的数据 `order`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -128,6 +141,11 @@ CREATE TABLE IF NOT EXISTS `order_detail` (
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `order_detail`
+--
+
 
 -- --------------------------------------------------------
 
@@ -148,16 +166,16 @@ CREATE TABLE IF NOT EXISTS `store` (
   `area` int(10) NOT NULL DEFAULT '0' COMMENT '所属地区',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `store`
 --
 
 INSERT INTO `store` (`id`, `name`, `ename`, `create_time`, `create_date`, `contact`, `tel`, `addr`, `city`, `area`, `status`) VALUES
-(1, 'aaa', 'bbb', 0, '0000-00-00', NULL, NULL, '', 0, 0, 1),
-(2, 'ccc', 'ddd', 0, '0000-00-00', NULL, NULL, '', 0, 0, 1),
-(3, 'eee', 'fff', 0, '0000-00-00', NULL, NULL, '', 0, 0, 0);
+(5, '店铺1', 'dian1', 1395232865, '2014-03-19', '联系人1', '联系电话1', '明天第一城', 1, 1, 1),
+(6, '店铺2', 'dian2', 1395236063, '2014-03-19', '联系人2', '联系电话2', '明天第一城', 1, 2, 1),
+(7, '店铺3', 'dian3', 1395236084, '2014-03-19', '联系人3', '联系电话3', '明天第一城', 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -192,6 +210,25 @@ INSERT INTO `user` (`id`, `name`, `passwd`, `tel`, `email`, `create_time`, `upda
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `user_group`
+--
+
+CREATE TABLE IF NOT EXISTS `user_group` (
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户',
+  `group_id` int(11) NOT NULL DEFAULT '0' COMMENT '群组',
+  `detail` varchar(128) NOT NULL DEFAULT '' COMMENT '用户在群组的具体信息，详细地址',
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`user_id`,`group_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `user_group`
+--
+
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `x_goods_type`
 --
 
@@ -205,6 +242,11 @@ CREATE TABLE IF NOT EXISTS `x_goods_type` (
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `x_goods_type`
+--
+
 
 -- --------------------------------------------------------
 
@@ -226,7 +268,3 @@ INSERT INTO `x_group_store` (`group_id`, `store_id`) VALUES
 (1, 1),
 (1, 2),
 (1, 3);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
