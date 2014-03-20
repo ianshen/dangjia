@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 03 月 19 日 15:38
+-- 生成日期: 2014 年 03 月 20 日 15:46
 -- 服务器版本: 5.5.8
 -- PHP 版本: 5.3.5
 
@@ -43,14 +43,18 @@ CREATE TABLE IF NOT EXISTS `category` (
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `order_way` tinyint(1) NOT NULL DEFAULT '0' COMMENT '此分类订单形式(1普通订单产生方式、2生成优惠码方式)',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `category`
 --
 
 INSERT INTO `category` (`id`, `group_id`, `store_id`, `level`, `pid`, `name`, `ename`, `desc`, `create_time`, `update_time`, `time_limit`, `days`, `start_time`, `end_time`, `status`, `order_way`) VALUES
-(3, 1, 5, 1, 0, '订午餐', 'dingwucan', '供人订午餐', 1395237337, 1395237337, 1, '1,2,3,4,5', '08:00:00', '11:00:00', 1, 1);
+(3, 1, 5, 1, 0, '订午餐', 'dingwucan', '供人订午餐', 1395237337, 1395237337, 1, '1,2,3,4,5', '08:00:00', '11:00:00', 1, 1),
+(4, 1, 0, 1, 0, '果蔬', 'guoshu', '订水果蔬菜', 1395323280, 1395323280, 1, '1,2,3,4,5', '11:00:00', '14:00:00', 1, 1),
+(5, 1, 5, 2, 3, '饺子', 'jiaozi', '饺子', 1395323445, 1395323445, 1, '1,2,3,4,5', '08:00:00', '11:00:00', 1, 1),
+(6, 1, 5, 2, 4, '水果', 'shuiguo', '订水果', 1395323656, 1395323656, 1, '1,2,3,4,5', '11:00:00', '14:00:00', 1, 1),
+(7, 1, 6, 2, 4, '蔬菜', 'shucai', '订蔬菜', 1395323716, 1395323716, 1, '1,2,3,4,5', '13:00:00', '16:00:00', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -88,6 +92,8 @@ CREATE TABLE IF NOT EXISTS `group` (
   `ename` varchar(32) NOT NULL DEFAULT '' COMMENT '拼音名',
   `create_time` int(11) NOT NULL DEFAULT '0',
   `create_date` date NOT NULL DEFAULT '0000-00-00',
+  `city` int(11) NOT NULL DEFAULT '0' COMMENT '属所城市',
+  `area` int(11) NOT NULL DEFAULT '0' COMMENT '所属地区',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `ename` (`ename`) USING BTREE,
@@ -98,9 +104,9 @@ CREATE TABLE IF NOT EXISTS `group` (
 -- 转存表中的数据 `group`
 --
 
-INSERT INTO `group` (`id`, `name`, `ename`, `create_time`, `create_date`, `status`) VALUES
-(1, '北辰泰岳大厦', 'beichentaiyue', 0, '0000-00-00', 0),
-(6, '明天第一城', 'mingtiandiyicheng', 1395236134, '2014-03-19', 1);
+INSERT INTO `group` (`id`, `name`, `ename`, `create_time`, `create_date`, `city`, `area`, `status`) VALUES
+(1, '北辰泰岳大厦', 'beichentaiyue', 0, '0000-00-00', 0, 0, 0),
+(6, '明天第一城', 'mingtiandiyicheng', 1395236134, '2014-03-19', 0, 0, 1);
 
 -- --------------------------------------------------------
 

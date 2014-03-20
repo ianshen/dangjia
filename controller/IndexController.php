@@ -13,6 +13,7 @@ class IndexController extends BaseController {
             'passwd' => md5 ( 'aaa' ) 
         ) ); */
         //var_dump ( $r );
+        
         $this->display ();
     }
 }

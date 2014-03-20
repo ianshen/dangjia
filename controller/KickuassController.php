@@ -16,13 +16,17 @@ class KickuassController extends BaseController {
 			ComTool::checkEmpty ( $name, '群组名不能为空' );
 			$ename = trim ( $this->post ( 'ename' ) );
 			ComTool::checkEmpty ( $ename, '群组拼音不能为空' );
+			$city = $this->post ( 'city' );
+			$area = $this->post ( 'area' );
 			$status = $this->post ( 'status' );
 			$res = GroupData::add ( array (
 				'name' => $name, 
 				'ename' => $ename, 
 				'status' => $status, 
 				'create_time' => time (), 
-				'create_date' => date ( 'Y-m-d' ) 
+				'create_date' => date ( 'Y-m-d' ), 
+				'city' => $city, 
+				'area' => $area 
 			) );
 			ComTool::result ( $res );
 		}
