@@ -115,4 +115,30 @@ class KickuassController extends BaseController {
 		$this->assign ( 'stores', $stores );
 		$this->display ();
 	}
+	
+	/**
+	 * 添加区域
+	 */
+	public function regionAction() {
+		if (ComTool::isAjax ()) {
+			$name = $this->post ( 'name' );
+			$ename = $this->post ( 'ename' );
+			$pid = $this->post ( 'pid' );
+			$code = $this->post ( 'code' );
+			$status = $this->post ( 'status' );
+			$data = array ();
+			$data ['name'] = $name;
+			$data ['ename'] = $ename;
+			$data ['pid'] = $pid;
+			$data ['code'] = $code;
+			$data ['status'] = $status;
+			$res = RegionData::add ( $data );
+			ComTool::result ( $res );
+		}
+		$citys = RegionData::getsCity ();
+		$regions = RegionData::getsAll ();
+		$this->assign ( 'citys', $citys );
+		$this->assign ( 'regions', $regions );
+		$this->display ();
+	}
 }

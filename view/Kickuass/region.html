@@ -16,7 +16,7 @@
 							<a data-target=".navbar-responsive-collapse"
 								data-toggle="collapse" class="btn btn-navbar"><span
 								class="icon-bar"></span><span class="icon-bar"></span><span
-								class="icon-bar"></span></a> <a href="#" class="brand">添加群组</a>
+								class="icon-bar"></span></a> <a href="#" class="brand">添加分类</a>
 							<div class="nav-collapse collapse navbar-responsive-collapse">
 								<ul class="nav">
 									<li class="active"><a href="#">导航导航</a></li>
@@ -75,51 +75,32 @@
 					<div class="span12">
 						<form class="form-horizontal" id="myform" method="post">
 							<div class="control-group">
-								<label class="control-label" for="">店铺名</label>
+								<label class="control-label" for="">父区域</label>
 								<div class="controls">
-									<input type="text" name="name" placeholder="店铺名">
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="">店铺拼音</label>
-								<div class="controls">
-									<input type="text" name="ename" placeholder="店铺拼音">
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="">联系人</label>
-								<div class="controls">
-									<input type="text" name="contact" placeholder="联系人">
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="">联系电话</label>
-								<div class="controls">
-									<input type="text" name="tel" placeholder="联系电话">
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="">所属城市</label>
-								<div class="controls">
-									<select name="city">
-										<option value="1">北京</option>
-										<option value="2">天津</option>
+									<select name="pid">
+										<option value="0">大中国</option>
+										<?php foreach($this->citys as $city){ ?>
+											<option value="<?php echo $city['id']; ?>"><?php echo $city['name']; ?></option>
+										<?php } ?>
 									</select>
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="">地区</label>
+								<label class="control-label" for="">区域名</label>
 								<div class="controls">
-									<select name="area">
-										<option value="1">朝阳区</option>
-										<option value="2">海淀区</option>
-									</select>
+									<input type="text" name="name" placeholder="分类名">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="">地址</label>
+								<label class="control-label" for="">区域简写</label>
 								<div class="controls">
-									<input type="text" name="addr" placeholder="地址">
+									<input type="text" name="ename" placeholder="区域简写">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="">邮编</label>
+								<div class="controls">
+									<input type="text" name="code" placeholder="邮编">
 								</div>
 							</div>
 							<div class="control-group">
@@ -146,15 +127,15 @@
 							<thead>
 								<tr>
 									<th>编号</th>
-									<th>群组名</th>
-									<th>群组拼音</th>
-									<th>创建时间</th>
+									<th>名称</th>
+									<th>简写</th>
+									<th>邮编</th>
 									<th>状态</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach($this->stores as $v){ ?>
+								<?php foreach($this->regions as $v){ ?>
 								<tr class="">
 									<td>
 										<?php echo $v['id']; ?>
@@ -166,7 +147,7 @@
 										<?php echo $v['ename']; ?>
 									</td>
 									<td>
-										<?php echo $v['create_time']; ?>
+										<?php echo $v['code']; ?>
 									</td>
 									<td>
 										<?php echo $v['status']; ?>
@@ -197,11 +178,10 @@
 	<script type="text/javascript">
 		$(function() {
 			var options = {
-				url : 'store',
 				dataType : 'json',
 				success : function(data) {
 					if(data.status==100000){
-						//window.location.reload();
+						window.location.reload();
 					}
 				}
 			};
