@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 03 月 23 日 15:47
+-- 生成日期: 2014 年 03 月 24 日 13:00
 -- 服务器版本: 5.5.8
 -- PHP 版本: 5.3.5
 
@@ -164,6 +164,7 @@ CREATE TABLE IF NOT EXISTS `region` (
   `name` varchar(32) NOT NULL DEFAULT '',
   `ename` varchar(32) NOT NULL DEFAULT '',
   `code` varchar(16) NOT NULL DEFAULT '' COMMENT '邮编',
+  `level` tinyint(1) NOT NULL DEFAULT '0' COMMENT '等级(城市、区县)',
   `pid` int(11) NOT NULL DEFAULT '0' COMMENT '父级id',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
@@ -174,11 +175,11 @@ CREATE TABLE IF NOT EXISTS `region` (
 -- 转存表中的数据 `region`
 --
 
-INSERT INTO `region` (`id`, `name`, `ename`, `code`, `pid`, `status`) VALUES
-(1, '北京', 'beijing', '100000', 0, 1),
-(2, '上海', 'shanghai', '200000', 0, 1),
-(3, '朝阳', 'chaoyang', '100000', 1, 1),
-(4, '海淀', 'haidian', '100000', 1, 4);
+INSERT INTO `region` (`id`, `name`, `ename`, `code`, `level`, `pid`, `status`) VALUES
+(1, '北京', 'beijing', '100000', 0, 0, 1),
+(2, '上海', 'shanghai', '200000', 0, 0, 1),
+(3, '朝阳', 'chaoyang', '100000', 0, 1, 1),
+(4, '海淀', 'haidian', '100000', 0, 1, 4);
 
 -- --------------------------------------------------------
 

@@ -15,7 +15,7 @@ class RegionModel extends BaseModel {
 	
 	public function getsArea() {
 		try {
-			$result = $this->find ( 'pid!=0' );
+			$result = $this->find ( 'level=2' );
 			return $result;
 		} catch ( Exception $e ) {
 			echo $e;

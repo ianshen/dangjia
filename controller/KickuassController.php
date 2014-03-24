@@ -125,12 +125,14 @@ class KickuassController extends BaseController {
 			$ename = $this->post ( 'ename' );
 			$pid = $this->post ( 'pid' );
 			$code = $this->post ( 'code' );
+			$level = $this->post ( 'level' );
 			$status = $this->post ( 'status' );
 			$data = array ();
 			$data ['name'] = $name;
 			$data ['ename'] = $ename;
 			$data ['pid'] = $pid;
 			$data ['code'] = $code;
+			$data ['level'] = $level;
 			$data ['status'] = $status;
 			$res = RegionData::add ( $data );
 			ComTool::result ( $res );
@@ -139,6 +141,36 @@ class KickuassController extends BaseController {
 		$regions = RegionData::getsAll ();
 		$this->assign ( 'citys', $citys );
 		$this->assign ( 'regions', $regions );
+		$this->display ();
+	}
+	
+	/**
+	 * 添加商品
+	 */
+	public function goodsAction() {
+		if (ComTool::isAjax ()) {
+			$name = $this->post ( 'name' );
+			$cid = $this->post ( 'cid' );
+			$price = $this->post ( 'price' );
+			$desc = $this->post ( 'desc' );
+			$order = $this->post ( 'order' );
+			$status = $this->post ( 'status' );
+			$data = array ();
+			$data ['name'] = $name;
+			$data ['category_id'] = $cid;
+			$data ['price'] = $price;
+			$data ['desc'] = $desc;
+			$data ['create_time'] = time ();
+			$data ['create_date'] = date ( "Y-m-d" );
+			$data ['order'] = $order;
+			$data ['status'] = $status;
+			$res = GoodsData::add ( $data );
+			ComTool::result ( $res );
+		}
+		$areas = RegionData::getsArea ();
+		$this->assign ( 'areas', $areas );
+		$goods = GoodsData::getsAll ();
+		$this->assign ( 'goods', $goods );
 		$this->display ();
 	}
 }
