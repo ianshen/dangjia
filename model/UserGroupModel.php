@@ -12,6 +12,11 @@ class UserGroupModel extends BaseModel {
 		}
 	}
 	
+	/**
+	 * 获取用户圈子
+	 * @param unknown_type $uid
+	 * @return Ambigous <multitype:, boolean, unknown>
+	 */
 	public function getsGroupByUID($uid) {
 		try {
 			$result = $this->find ( "user_id='{$uid}'" );
