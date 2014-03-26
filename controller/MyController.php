@@ -29,7 +29,7 @@ class MyController extends BaseController {
     /**
      * 我的财富
      */
-    public function wealth() {
+    public function propertyAction() {
     
     }
     
@@ -43,21 +43,21 @@ class MyController extends BaseController {
     /**
      * 我的信息
      */
-    public function info() {
+    public function infoAction() {
     
     }
     
     /**
      * 更改密码
      */
-    public function pass() {
+    public function passAction() {
     
     }
     
     /**
      * 我的地址
      */
-    public function addr() {
+    public function addrAction() {
     
     }
 
