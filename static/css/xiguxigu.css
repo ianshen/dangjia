@@ -1,0 +1,14 @@
+.top_nav {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.padding190 {
+	padding-left: 190px;
+	padding-right: 190px;
+}
+
+.radius0 {
+	/* background: -moz-linear-gradient(center top , #086ED5, #055DB5) repeat-x scroll 0 0 #0767C8; */
+	border-radius: 0px;
+}
