@@ -135,4 +135,35 @@ class ComTool {
     static function result($res, $err = 'error', $succ = 'success') {
         $res === false ? ComTool::ajax ( 100001, $err ) : ComTool::ajax ( 100000, $succ, $succ );
     }
+    
+    /**
+     * 跳转
+     * @param unknown_type $url
+     * @param unknown_type $time
+     * @param unknown_type $msg
+     */
+    static function redirect($url, $time = 0, $msg = '') {
+        //多行URL地址支持
+        $url = str_replace ( array (
+            "\n", 
+            "\r" 
+        ), '', $url );
+        if (empty ( $msg ))
+            $msg = "系统将在{$time}秒之后自动跳转！";
+        if (! headers_sent ()) {
+            // redirect
+            if (0 === $time) {
+                header ( 'Location: ' . $url );
+            } else {
+                header ( "refresh:{$time};url={$url}" );
+                echo ($msg);
+            }
+            exit ();
+        } else {
+            $str = "<meta http-equiv='Refresh' content='{$time};URL={$url}'>";
+            if ($time != 0)
+                $str .= $msg;
+            exit ( $str );
+        }
+    }
 }

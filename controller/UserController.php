@@ -63,6 +63,10 @@ class IndexController extends BaseController {
      * 退出
      */
     public function logoutAction() {
-    
+        $_SESSION = array ();
+        session_unset ();
+        session_destroy ();
+        $url = ComTool::url ( "index" );
+        header ( "Location:{$url}" );
     }
 }
