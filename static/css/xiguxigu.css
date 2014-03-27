@@ -1,3 +1,14 @@
+.index_bg {
+	width: 1350px;
+	/* height: 760px; */
+	top: -40px;
+	left: 0px;
+	opacity: 1;
+	visibility: visible;
+	/* background-image:url("http://s.cn.bing.net/az/hprichbg/rb/SpringFlowers_ZH-CN12146467355_1366x768.jpg"); */
+	/* background-image:url("http://www.bing.com//az/hprichbg/rb/BelgiumBluebells_EN-US11052187729_1366x768.jpg"); */
+}
+
 .top_nav {
 	padding-left: 0px;
 	padding-right: 0px;
