@@ -10,10 +10,6 @@ class BaseController extends Cola_Controller {
 		$this->assign ( 'token', $this->token );
 	}
 	
-	protected function assign($name, $value = '') {
-		$this->view->$name = $value;
-	}
-	
 	/**
 	 * 判断是否登录
 	 * @return boolean

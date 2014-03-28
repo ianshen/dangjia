@@ -16,6 +16,20 @@ class GroupData extends BaseData {
         return $result;
     }
     
+    /**
+     * 根据region_id获取圈子
+     * @param unknown_type $rid
+     * @return boolean|Ambigous <multitype:, boolean, unknown>
+     */
+    static function getsByRid($rid) {
+        if (! $rid) {
+            return false;
+        }
+        $model = new GroupModel ();
+        $result = $model->getsByRid ( $rid );
+        return $result;
+    }
+    
     static function del() {
     
     }

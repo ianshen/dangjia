@@ -137,7 +137,7 @@ class KickuassController extends BaseController {
 			$res = RegionData::add ( $data );
 			ComTool::result ( $res );
 		}
-		$citys = RegionData::getsCity ();
+		$citys = RegionData::getsByPid ();
 		$regions = RegionData::getsAll ();
 		$this->assign ( 'citys', $citys );
 		$this->assign ( 'regions', $regions );

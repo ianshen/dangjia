@@ -71,6 +71,20 @@ abstract class Cola_Controller
     {
         return $this->view = new Cola_View($viewsHome);
     }
+    
+    /**
+     * fetch the view
+     *
+     * @param string $tpl
+     */
+    protected function fetch($tpl = null, $dir = null)
+    {
+        if (empty($tpl)) {
+            $tpl = $this->defaultTemplate();
+        }
+    
+        $this->view->fetch($tpl, $dir);
+    }
 
     /**
      * Display the view
@@ -101,6 +115,16 @@ abstract class Cola_Controller
              . $this->tplExt;
 
         return $tpl;
+    }
+    
+    /**
+     * assign value to view
+     * @param unknown_type $name
+     * @param unknown_type $value
+     */
+    protected function assign($name, $value = '') 
+    {
+        $this->view->$name = $value;
     }
 
     /**

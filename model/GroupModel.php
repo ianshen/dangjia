@@ -12,6 +12,15 @@ class GroupModel extends BaseModel {
         }
     }
     
+    public function getsByRid($rid) {
+        try {
+            $result = $this->find ( "region_id='{$rid}'" );
+            return $result;
+        } catch ( Exception $e ) {
+            echo $e;
+        }
+    }
+    
     public function getsAll() {
         try {
             $result = $this->find ();
