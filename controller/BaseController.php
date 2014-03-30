@@ -8,6 +8,8 @@ class BaseController extends Cola_Controller {
 	public function __construct() {
 		$this->token = ComTool::buildToken ();
 		$this->assign ( 'token', $this->token );
+		$urlroot = ComTool::urlRoot ();
+		$this->assign ( 'urlroot', $urlroot );
 	}
 	
 	/**

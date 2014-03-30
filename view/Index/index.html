@@ -6,59 +6,55 @@
 <link rel="stylesheet" href="<?php echo WWW_ROOT; ?>static/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php echo WWW_ROOT; ?>static/css/main.css">
 <title></title>
+<script type="text/javascript">
+	var $CONFIG = {};
+	$CONFIG['cururl'] = location.href;
+	$CONFIG['webroot'] = "<?php echo $this->urlroot; ?>";
+</script>
 </head>
 <body class="index_bg">
 	<div class="container">
 		<div class="row-fluid">
 			<div class="span12">
-				<div class="btn-group">
-					<button class="btn btn-large">选择城市</button>
+				<div class="btn-group" id="selcity">
+					<button class="btn btn-large jsBtLabel">选择城市</button>
 					<button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-						<li><a href="#">Action</a></li>
-						<li><a href="#">Another action</a></li>
-						<li><a href="#">Something else here</a></li>
-						<li class="divider"></li>
-						<li><a href="#">Separated link</a></li>
+						<?php foreach($this->citys as $city){ ?>
+						<li class="dropdown_data_item"><a class="" href="javascript:;" data-id="<?php echo $city['id']; ?>" data-name="<?php echo $city['name']; ?>"><?php echo $city['name']; ?></a></li>
+						<?php } ?>
 					</ul>
 				</div>
-				<div class="btn-group">
-					<button class="btn btn-large">选择地区</button>
+				<div class="btn-group" id="selarea">
+					<button class="btn btn-large jsBtLabel">选择地区</button>
 					<button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-						<li><a href="#">Action</a></li>
-						<li><a href="#">Another action</a></li>
-						<li><a href="#">Something else here</a></li>
-						<li class="divider"></li>
-						<li><a href="#">Separated link</a></li>
+						<li><a href="#">无</a></li>
 					</ul>
 				</div>
-				<div class="btn-group">
-					<button class="btn btn-large">选择圈子</button>
+				<div class="btn-group" id="selgroup">
+					<button class="btn btn-large jsBtLabel">选择圈子</button>
 					<button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-						<li><a href="#">Action</a></li>
-						<li><a href="#">Another action</a></li>
-						<li><a href="#">Something else here</a></li>
-						<li class="divider"></li>
-						<li><a href="#">Separated link</a></li>
+						<li><a href="#">无</a></li>
 					</ul>
 				</div>
 				<div class="btn-group">
-					<button class="btn btn-large btn-primary" type="button">去看看</button> 
+					<button class="btn btn-large btn-primary" type="button" id="go">去看看</button> 
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-	<script src="<?php echo WWW_ROOT; ?>static/js/jquery.min.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/jquery-1.8.3.min.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="<?php echo WWW_ROOT; ?>static/js/bootstrap.min.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/index.js"></script>
 </body>
 </html>

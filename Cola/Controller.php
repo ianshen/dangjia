@@ -83,7 +83,7 @@ abstract class Cola_Controller
             $tpl = $this->defaultTemplate();
         }
     
-        $this->view->fetch($tpl, $dir);
+        return $this->view->fetch($tpl, $dir);
     }
 
     /**
