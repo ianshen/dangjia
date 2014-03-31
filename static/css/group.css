@@ -1,13 +1,16 @@
 .content-main {
-	
-}
-
-.content-main,.content-narrow,.page-canvas,.permalink {
 	border-radius: 6px;
 }
 
 .content-header {
 	border-bottom-width: 0;
+}
+
+h2 {
+	color: #66757F;
+	font-size: 22px;
+	font-weight: 200;
+	line-height: 22px;
 }
 
 .content-header,.content-no-header {
@@ -23,7 +26,7 @@
 	border-width: 1px 1px 0;
 }
 
-.content-header .header-inner,.content-no-header .no-header-inner {
+.content-header .header-inner {
 	background-color: #FFFFFF;
 	border-bottom: 1px solid #E8E8E8;
 	border-radius: 5px 5px 0 0;
@@ -31,9 +34,152 @@
 	padding: 12px;
 }
 
-h2 {
-	color: #66757F;
-	font-size: 22px;
-	font-weight: 200;
-	line-height: 22px;
+.stream,.stream-items {
+	list-style: none outside none;
+	margin-left: 0;
+	position: relative;
+}
+
+ol {
+	list-style: decimal outside none;
+	margin-left: 20px;
+}
+
+ol,ul {
+	list-style: none outside none;
+	margin: 0;
+	padding: 0;
+}
+
+.clearfix:before,.clearfix:after,.control-group:before,.control-group:after,.stream-item>div:before,.stream-item>div:after,.module:after,.module:before,.follow-card header:after,.follow-card header:before,.follow-bar:after,.follow-bar:before,.search-header:after,.search-header:before,.tweet-form:after,.tweet-form:before,.modal-footer:after,.modal-footer:before,.local-trends-breadcrumb:after,.local-trends-breadcrumb:before,.input-prepend .add-on,.input-append .add-on,.wrapper:after,.wrapper:before,.expanded-content:before,.expanded-content:after,.stream-item:before,.stream-item:after
+	{
+	content: " ";
+	display: table;
+}
+
+.stream-item,.unfocusable-stream-item {
+	background: none repeat scroll 0 0 padding-box #FFFFFF;
+	border-left: 1px solid #E1E8ED;
+	border-right: 1px solid #E1E8ED;
+}
+
+.clearfix:after,.control-group:after,.stream-item>div:after,.module:after,.follow-card header:after,.follow-bar:after,.search-header:after,.tweet-form:after,.modal-footer:after,.local-trends-breadcrumb:after,.wrapper:after,.expanded-content:after,.stream-item:after
+	{
+	clear: both;
+}
+
+.stream-item:first-child .stream-item-activity-network {
+	margin: 20px 0 10px;
+}
+
+.stream-item-activity-network {
+	margin: 10px 0;
+}
+
+.stream-item-activity {
+	position: relative;
+}
+
+.stream-item-activity-network .stream-item-activity-header {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	background-color: #F8F8F8;
+	border-color: #DDDDDD #DDDDDD #E8E8E8;
+	border-image: none;
+	border-radius: 4px 4px 0 0;
+	border-style: solid;
+	border-width: 1px;
+	margin: 0 12px;
+	padding: 8px 8px 8px 12px;
+}
+
+.stream-item-activity-line {
+	font-size: 13px;
+	line-height: 16px;
+}
+
+a,.btn-link,.btn-link:focus,.icon-btn,.pretty-link b,.pretty-link:hover s,.pretty-link:hover b,.pretty-link:focus s,.pretty-link:focus b,.metadata a:hover,.metadata a:focus,.account-group:hover .fullname,.account-group:focus .fullname,.account-summary:focus .fullname,.message .message-text a,.stats a strong,.plain-btn:hover,.plain-btn:focus,.dropdown.open .user-dropdown.plain-btn,.open>.plain-btn,#global-actions .new:before,.module .list-link:hover,.module .list-link:focus,#user-completion-module .user-completion-step:hover,.stats a:hover,.stats a:hover strong,.stats a:focus,.stats a:focus strong,.profile-modal-header .fullname a:hover,.profile-modal-header .username a:hover,.profile-modal-header .fullname a:focus,.profile-modal-header .username a:focus,.story-article:hover .metadata,.story-article .metadata a:focus,.find-friends-sources li:hover .source,.stream-item a:hover .fullname,.stream-item a:focus .fullname,.stream-item .view-all-supplements:hover,.stream-item .view-all-supplements:focus,.tweet .time a:hover,.tweet .time a:focus,.tweet-actions a,.tweet .details.with-icn b,.tweet .details.with-icn .Icon,.stream-item:hover .original-tweet .expand-action-wrapper,.stream-item .original-tweet.focus .expand-action-wrapper,.opened-tweet.original-tweet .expand-action-wrapper,.stream-item:hover .original-tweet .details b,.stream-item .original-tweet.focus .details b,.stream-item.open .original-tweet .details b,.simple-tweet:hover .details b,.simple-tweet.focus .details b,.simple-tweet.open .details b,.simple-tweet:hover .details .expand-action-wrapper,.simple-tweet.focus .details .expand-action-wrapper,.simple-tweet.open .details .collapse-action-wrapper,.simple-tweet:hover .details .simple-details-link,.simple-tweet.focus .details .simple-details-link,.client-and-actions a:hover,.client-and-actions a:focus,.dismiss-promoted:hover b,.tweet .context .pretty-link:hover s,.tweet .context .pretty-link:hover b,.tweet .context .pretty-link:focus s,.tweet .context .pretty-link:focus b,.list .username a:hover,.list .username a:focus,.list-membership-container .create-a-list,.list-membership-container .create-a-list:hover,.story-header:hover .view-tweets,.card .list-details a:hover,.card .list-details a:focus,.card .card-body:hover .attribution,.card .card-body .attribution:focus,.events-card .card-body:hover .attribution,.events-card .card-body .attribution:focus,.new-tweets-bar,.onebox .soccer ul.ticker a:hover,.onebox .soccer ul.ticker a:focus,.discover-item-actions a,.disco-stream-item.disco_exp_actions_on_btm .more-tweet-actions .btn-link,.disco-stream-item.disco_exp_actions_on_btm_without_stats .more-tweet-actions .btn-link,.remove-background-btn,.stream-item-activity-me .latest-tweet .tweet-row a:hover,.stream-item-activity-me .latest-tweet .tweet-row a:focus,.stream-item-activity-me .latest-tweet .tweet-row a:hover b,.stream-item-activity-me .latest-tweet .tweet-row a:focus b
+	{
+	color: #0084B4;
+}
+
+a,a:hover,a:focus,a:active,.u-linkPseudo,.u-linkPseudo:hover,.u-linkPseudo:focus,.u-linkPseudo:active
+	{
+	color: #0084B4;
+}
+
+a {
+	color: #3B88C3;
+	text-decoration: none;
+}
+
+a {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.stream-item-activity-network .follow-more-than-two {
+	padding: 12px 9px 9px;
+}
+
+.stream-item-activity-network .supplement,.stream-item-activity-network .follow-more-than-two,.stream-item-activity-network .follow-exactly-two,.stream-item-activity-network .activity-secondary-supplement
+	{
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	border-color: -moz-use-text-color #DDDDDD #DDDDDD;
+	border-image: none;
+	border-radius: 0 0 4px 4px;
+	border-right: 1px solid #DDDDDD;
+	border-style: none solid solid;
+	border-width: 0 1px 1px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+	margin: 0 12px;
+}
+
+ol {
+	list-style: decimal outside none;
+	margin-left: 20px;
+}
+
+ol,ul {
+	list-style: none outside none;
+	margin: 0;
+	padding: 0;
+}
+
+.stream-item-activity-network .activity-supplement.follow-more-than-two .supplement
+	{
+	margin: 0 3px;
+}
+
+.stream-item-activity-network .follow-more-than-two .supplement,.stream-item-activity-network .follow-exactly-two .supplement,.stream-item-activity-network .activity-secondary-supplement .supplement
+	{
+	border: 0 none;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	box-shadow: none;
+	margin: 0;
+}
+
+.stream-item-activity-network .supplement,.stream-item-activity-network .follow-more-than-two,.stream-item-activity-network .follow-exactly-two,.stream-item-activity-network .activity-secondary-supplement
+	{
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	border-color: -moz-use-text-color #DDDDDD #DDDDDD;
+	border-image: none;
+	border-radius: 0 0 4px 4px;
+	border-right: 1px solid #DDDDDD;
+	border-style: none solid solid;
+	border-width: 0 1px 1px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+	margin: 0 12px;
+}
+
+ol>li {
+	line-height: 20px;
 }
