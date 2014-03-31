@@ -59,6 +59,10 @@ class ComTool {
 		return empty ( $str ) ? self::ajax ( $status, $info, $data ) : $str;
 	}
 	
+	/**
+	 * 网站根
+	 * @return string
+	 */
 	static function urlRoot() {
 		$host = $_SERVER ['HTTP_HOST'];
 		$url = 'http';

@@ -10,8 +10,12 @@
 	background-repeat: no-repeat;
 	background-color: #C0DEED;
 	background-image: url("../img/bg.png");
-	/* background-image:url("http://s.cn.bing.net/az/hprichbg/rb/SpringFlowers_ZH-CN12146467355_1366x768.jpg"); */
-	/* background-image:url("http://www.bing.com//az/hprichbg/rb/BelgiumBluebells_EN-US11052187729_1366x768.jpg"); */}
+	text-align: center;
+	color: #292F33;
+	font-size: 14px;
+	line-height: 18px;
+	overflow-y: scroll;
+}
 
 .top_nav {
 	padding-left: 0px;
@@ -29,12 +33,11 @@
 }
 
 .border1 {
-	background: none repeat scroll 0 0 #FBFBFB;
+	background: none repeat scroll 0 0 #FFFFFF;
 	border: 1px solid #E5E5E5;
-	border-radius: 0px;
-	/* margin-top:10px; */
 	margin-bottom: 10px;
 	padding-bottom: 10px;
+	border-radius: 6px;
 }
 
 .left_sidebar {
@@ -43,4 +46,28 @@
 
 .right_sidebar {
 	
+}
+
+.global_nav {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+	height: 46px;
+	position: relative;
+	width: 100%;
+}
+
+.global-nav-inner {
+	background: none repeat scroll 0 0 #FFFFFF;
+	height: 46px;
+}
+
+.global-nav .container {
+	max-width: 1190px;
+	text-align: center;
+	width: auto;
+}
+
+.container {
+	margin: 0 auto;
+	position: relative;
+	width: 890px;
 }
