@@ -10,7 +10,6 @@
 	background-repeat: no-repeat;
 	background-color: #C0DEED;
 	background-image: url("../img/bg.png");
-	/* text-align: center; */
 	color: #292F33;
 	font-size: 14px;
 	line-height: 18px;
@@ -48,7 +47,7 @@
 	
 }
 
-.global_nav {
+/* .global_nav {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 	height: 46px;
 	position: relative;
@@ -70,4 +69,4 @@
 	margin: 0 auto;
 	position: relative;
 	width: 890px;
-}
+} */
