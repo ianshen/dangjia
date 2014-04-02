@@ -11,6 +11,12 @@
 <link rel="stylesheet"
 	href="<?php echo WWW_ROOT; ?>static/css/group.css">
 <title></title>
+<script type="text/javascript">
+	var $CONFIG = {};
+	$CONFIG['cururl'] = location.href;
+	$CONFIG['wroot'] = "<?php echo $this->wwwroot; ?>";
+	$CONFIG['uroot'] = "<?php echo $this->urlroot; ?>";
+</script>
 </head>
 <body class="index_bg">
 	<div class="container-fluid top_nav">
@@ -89,30 +95,22 @@
 								</div>
 								<div class="stream-container">
 									<div class="stream">
-										<div class="stream-items">
-											<div class="one-category-menus">
-												<div class="product">
-													<p class="product-name">泡菜饼</p>
-													<p class="product-description"></p>
-													<p class="product-price">￥15/份</p>
-													<img src="/static/1396362705/img/icon-add-off.gif"
-														class="img-pick-product normal">
-													<div class="clear-both"></div>
-												</div>
-												<div class="product">
-													<p class="product-name">泡菜饼</p>
-													<p class="product-description"></p>
-													<p class="product-price">￥15/份</p>
-													<img src="/static/1396362705/img/icon-add-off.gif"
-														class="img-pick-product normal">
-													<div class="clear-both"></div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="stream-container">
-									<div class="stream">
+										<table class="table">
+											<tbody>
+												<tr class="product-item">
+													<td>2</td>
+													<td>TB - Monthly</td>
+													<td>02/04/2012</td>
+													<td><img src="<?php echo WWW_ROOT; ?>static/img/icon-add-off.gif" class="img-pick-product over"></td>
+												</tr>
+												<tr class="product-item">
+													<td>2</td>
+													<td>TB - Monthly</td>
+													<td>02/04/2012</td>
+													<td><img src="<?php echo WWW_ROOT; ?>static/img/icon-add-off.gif" class="img-pick-product over"></td>
+												</tr>
+											</tbody>
+										</table>
 										<ol class="stream-items">
 											<li class="stream-item">
 												<div
@@ -123,30 +121,20 @@
 																	James</strong></a>
 														</div>
 													</div>
+													<div class="stream-item-activity-header">
+														<div class="stream-item-activity-line">
+															<a href="#" class=""><strong class="">LeBron
+																	James</strong></a>
+															<a href="#" class=""><strong class="">LeBron
+																	James</strong></a>
+														</div>
+													</div>
 													<ol class="activity-supplement  follow-more-than-two">
-														<li class="supplement"><a>aaa</a></li>
-														<li class="supplement"><a>aaa</a></li>
 														<li class="supplement"><a>aaa</a></li>
 													</ol>
 												</div>
 											</li>
 										</ol>
-										<table class="table">
-											<tbody>
-												<tr class="error">
-													<td>2</td>
-													<td>TB - Monthly</td>
-													<td>02/04/2012</td>
-													<td>Declined</td>
-												</tr>
-												<tr class="error">
-													<td>2</td>
-													<td>TB - Monthly</td>
-													<td>02/04/2012</td>
-													<td>Declined</td>
-												</tr>
-											</tbody>
-										</table>
 									</div>
 								</div>
 							</div>
@@ -256,5 +244,6 @@
 	<script src="<?php echo WWW_ROOT; ?>static/js/jquery-1.8.3.min.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="<?php echo WWW_ROOT; ?>static/js/bootstrap.min.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/category.js"></script>
 </body>
 </html>

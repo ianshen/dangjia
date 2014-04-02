@@ -10,6 +10,7 @@ class BaseController extends Cola_Controller {
 		$this->assign ( 'token', $this->token );
 		$urlroot = ComTool::urlRoot ();
 		$this->assign ( 'urlroot', $urlroot );
+		$this->assign ( 'wwwroot', WWW_ROOT );
 	}
 	
 	/**

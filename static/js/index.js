@@ -1,5 +1,5 @@
 $(function() {
-	var $webroot = $CONFIG['webroot'];
+	var $webroot = $CONFIG['uroot'];
 	//选择城市
 	$("#selcity ul.dropdown-menu li a").die().live("click", function() {
 		var curElem = $(this);
