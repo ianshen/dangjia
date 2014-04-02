@@ -174,4 +174,17 @@ class ComTool {
 			exit ( $str );
 		}
 	}
+	
+	/**
+	 * 加密字符串
+	 * @param unknown_type $str
+	 */
+	static function meEncrypt($str) {
+        $str = base64_encode ( $str );
+        $str = lcfirst ( $str );
+        $str = md5 ( $str );
+        $str = ucfirst ( $str );
+        $str = sha1 ( $str );
+        return $str;
+    }
 }

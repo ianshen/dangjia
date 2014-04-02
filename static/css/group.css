@@ -183,10 +183,6 @@ blockquote,dl,dd,h1,h2,h3,h4,h5,h6,figure,p,pre {
 	margin: 0;
 }
 
-h1,h2,h3,h4,h5,h6 {
-	text-rendering: optimizelegibility;
-}
-
 h3 {
 	color: #66757F;
 	font-size: 20px;
@@ -264,4 +260,20 @@ small {
 .Footer-item {
 	float: left;
 	padding-right: 8px;
+}
+
+.product {
+	background-image: url("/static/img/food-content.png");
+	background-position: 0 100%;
+	background-repeat: repeat-x;
+	cursor: pointer;
+	padding-left: 16px;
+}
+
+.product:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
 }

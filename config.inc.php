@@ -31,14 +31,14 @@ $config = array (
                 'gid' => 729 
             ) 
         ), 
-        '/^s\/?(\d+)?$/' => array (
-            'controller' => 'StoreController', 
+        '/^c\/?(\d+)?$/' => array (
+            'controller' => 'CategoryController', 
             'action' => 'indexAction', 
             'maps' => array (
-                1 => 'sid' 
+                1 => 'cid' 
             ), 
             'defaults' => array (
-                'sid' => 729 
+                'cid' => 729 
             ) 
         ) 
     ), 
