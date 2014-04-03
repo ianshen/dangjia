@@ -12,14 +12,15 @@ class OrderController extends BaseController {
         if (ComTool::isAjax ()) {
         
         }
+        $cart = $_SESSION ['cart'];
         $this->display ();
     }
     
     /**
      * 加入购物车
      */
-    public function acAction(){
-        
+    public function acAction() {
+    
     }
     
     /**
@@ -27,7 +28,8 @@ class OrderController extends BaseController {
      */
     public function ucAction() {
         if (ComTool::isAjax ()) {
-            $cart = $_SESSION ['cart'];
+            //$cart = $_SESSION ['cart'];
+            ComTool::ajax ( 100000, 'ok' );
         }
     }
     

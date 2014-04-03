@@ -1,11 +1,11 @@
 $(function() {
-	var $webroot = $CONFIG['uroot'];
+	var $uroot = $CONFIG['uroot'];
 	//选择城市
 	$("#selcity ul.dropdown-menu li a").die().live("click", function() {
 		var curElem = $(this);
 		var id = parseInt($(this).attr("data-id"));
 		if (id) {
-			$.get($webroot + "acc/getlocation", {
+			$.get($uroot + "acc/getlocation", {
 				ajax : "1",
 				t : "c",
 				id : id
@@ -24,7 +24,7 @@ $(function() {
 		var curElem = $(this);
 		var id = parseInt($(this).attr("data-id"));
 		if (id) {
-			$.get($webroot + "acc/getlocation", {
+			$.get($uroot + "acc/getlocation", {
 				ajax : "1",
 				t : "a",
 				id : id
@@ -54,7 +54,7 @@ $(function() {
 	$("#go").die().live('click', function() {
 		var id = $("#selgroup button.jsBtLabel").attr("data-id");
 		if (id) {
-			window.location.href = $webroot + "g/" + id;
+			window.location.href = $uroot + "g/" + id;
 		}
 	});
 });
