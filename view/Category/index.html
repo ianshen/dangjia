@@ -91,20 +91,25 @@
 						<div id="timeline" class="content-main">
 							<div class="content-header">
 								<div class="header-inner">
-									<h2 class="">动态</h2>
+									<h2 class="">应季水果</h2>
 								</div>
 								<div class="stream-container">
 									<div class="stream">
-										<table class="table">
+										<table class="table product-cart">
+										<thead>
+												<tr>
+													<th>名称</th>
+													<th>价格</th>
+													<th>购买</th>
+												</tr>
+											</thead>
 											<tbody>
 												<tr class="product-item">
-													<td>2</td>
 													<td>TB - Monthly</td>
 													<td>02/04/2012</td>
 													<td><img src="<?php echo WWW_ROOT; ?>static/img/icon-add-off.gif" class="add-to-cart"></td>
 												</tr>
 												<tr class="product-item">
-													<td>2</td>
 													<td>TB - Monthly</td>
 													<td>02/04/2012</td>
 													<td><img src="<?php echo WWW_ROOT; ?>static/img/icon-add-off.gif" class="add-to-cart over"></td>
@@ -160,34 +165,30 @@
 									<div class="flex-module trends-container">
 										<div class="flex-module-header">
 											<h3>
-												<span class="trend-location"> 趋势 </span>
+												<span class="trend-location"> 购物车 </span>
 											</h3>
 											<small>· <a class="change-trends">更改</a></small>
 										</div>
 										<div class="flex-module-inner">
-											<table class="table product-cart">
+											<table class="table product-cart-small">
 												<thead>
 													<tr>
 														<th>名称</th>
 														<th>价格</th>
 														<th>数量</th>
-														<th>操作</th>
 													</tr>
 												</thead>
 												<tbody>
 													<tr class="product-item">
 														<td>TB - Monthly</td>
 														<td><span>9</span></td>
-														<td><a class="js-decrement" href="javascript:void(0);">-</a>
-															<span>&nbsp;<em class="quantity-text">3</em>&nbsp;
-														</span> <a class="js-increment" href="javascript:void(0);">+</a></td>
-														<td><a>删除</a></td>
+														<td><span>&nbsp;<em class="quantity-text">3</em>&nbsp;
+														</span></td>
 													</tr>
 													<tr class="product-item">
 														<td>&nbsp;</td>
 														<td>&nbsp;</td>
-														<td>&nbsp;</td>
-														<td><a href="<?php echo $this->urlroot; ?>order/cart">去购物车结算</a></td>
+														<td><a href="<?php echo $this->urlroot; ?>order/cart">去结算</a></td>
 													</tr>
 												</tbody>
 											</table>

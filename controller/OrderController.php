@@ -12,7 +12,7 @@ class OrderController extends BaseController {
         if (ComTool::isAjax ()) {
         
         }
-        $cart = $_SESSION ['cart'];
+        //$cart = $_SESSION ['cart'];
         $this->display ();
     }
     
