@@ -47,4 +47,18 @@ $(function() {
 			}
 		});
 	});
+	// 删除商品
+	$("a.js-rm-product").die().live("click", function() {
+		art.dialog({
+			id : 'id-js-rm-product',
+			title : '删除商品',
+			follow : this,
+			content : '<div style="color:#666666;font-size:12px;">确定删除此商品吗？</div>',
+			okValue : '确定',
+			width : '15em',
+			ok : function() {
+				
+			}
+		});
+	});
 });

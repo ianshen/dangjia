@@ -10,12 +10,16 @@
 	href="<?php echo WWW_ROOT; ?>static/css/common.css">
 <link rel="stylesheet"
 	href="<?php echo WWW_ROOT; ?>static/css/group.css">
+<link
+	href="<?php echo WWW_ROOT; ?>static/js/artDialog/skins/default.css"
+	rel="stylesheet" />
 <title></title>
 <script type="text/javascript">
 	var $CONFIG = {};
 	$CONFIG['cururl'] = location.href;
 	$CONFIG['wroot'] = "<?php echo $this->wwwroot; ?>";
 	$CONFIG['uroot'] = "<?php echo $this->urlroot; ?>";
+	$CONFIG['cg'] = "";
 </script>
 </head>
 <body class="index_bg">
@@ -124,7 +128,7 @@
 																			href="javascript:void(0);">-</a> <span>&nbsp;<em
 																				class="quantity-text">333</em>&nbsp;
 																		</span> <a class="js-increment" href="javascript:void(0);">+</a></td>
-																		<td><a>删除</a></td>
+																		<td><small><a href="javascript:void(0);" class="js-rm-product">删除</a></small></td>
 																	</tr>
 																	<tr class="product-item">
 																		<td>TB - Monthly</td>
@@ -133,7 +137,7 @@
 																			href="javascript:void(0);">-</a> <span>&nbsp;<em
 																				class="quantity-text">33</em>&nbsp;
 																		</span> <a class="js-increment" href="javascript:void(0);">+</a></td>
-																		<td><a>删除</a></td>
+																		<td><small><a class="js-rm-product">删除</a></small></td>
 																	</tr>
 																	<tr class="product-item">
 																		<td>TB - Monthly</td>
@@ -142,7 +146,7 @@
 																			href="javascript:void(0);">-</a> <span>&nbsp;<em
 																				class="quantity-text">3</em>&nbsp;
 																		</span> <a class="js-increment" href="javascript:void(0);">+</a></td>
-																		<td><a>删除</a></td>
+																		<td><small><a class="js-rm-product">删除</a></small></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -258,6 +262,7 @@
 	<script src="<?php echo WWW_ROOT; ?>static/js/jquery-1.8.3.min.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="<?php echo WWW_ROOT; ?>static/js/bootstrap.min.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/artDialog/artDialog.min.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/order.js"></script>
 </body>
 </html>
