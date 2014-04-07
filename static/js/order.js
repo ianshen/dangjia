@@ -49,6 +49,8 @@ $(function() {
 	});
 	// 删除商品
 	$("a.js-rm-product").die().live("click", function() {
+		var obj=$(this);
+		var id=obj.attr("data-id");
 		art.dialog({
 			id : 'id-js-rm-product',
 			title : '删除商品',
@@ -57,7 +59,19 @@ $(function() {
 			okValue : '确定',
 			width : '15em',
 			ok : function() {
-				
+				$.ajax({
+					async : false,
+					type : "POST",
+					url : $uroot + 'order/uc',
+					data : "",
+					success : function(data) {
+						var data = $.parseJSON(data);
+						if (data.status == 100000) {
+							//$(".table.product-cart").find("tr[data-id='"+id+"']").remove();
+							window.location.reload(true);
+						}
+					}
+				});
 			}
 		});
 	});
