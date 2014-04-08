@@ -337,5 +337,5 @@ small {
 }
 
 .Icon--caretRight:before {
-	content: "";
+	content: ">";
 }
