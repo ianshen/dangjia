@@ -187,4 +187,24 @@ class ComTool {
         $str = sha1 ( $str );
         return $str;
     }
+    
+    /**
+     * 检查邮件格式
+     * @param unknown_type $email
+     * @return boolean
+     */
+    static function isEmail($email) {
+        return preg_match ( '/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/', $email ) ? true : false;
+    }
+    
+    static function isCellphone($Cellphone) {
+    
+    }
+    
+    static function isUrl($url) {
+        //return preg_match ( '/^((https?|ftp|news):\/\/)?([a-z]([a-z0-9\-]*\.)+([a-z]{2}|aero|arpa|biz|com|coop|edu|gov|info|int|jobs|mil|museum|name|nato|net|org|pro|travel)|(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))(\/[a-z0-9_\-\.~]+)*(\/([a-z0-9_\-\.]*)(\?[a-z0-9+_\-\.%=&amp;]*)?)?(#[a-z][a-z0-9_]*)?$/i', $url ) ? true : false;
+        //return preg_match ( '/^(http:\/\/)?(https:\/\/)?([\w\d-]+\.)+[\w-]+(\/[\d\w-.\/?%&=]*)?$/', $url ) ? true : false;
+        //return preg_match ( '/http:\/\/[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is', $url ) ? true : false;
+        return preg_match ( '/^((https?|ftp|news):\/\/)[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is', $url ) ? true : false;
+    }
 }
