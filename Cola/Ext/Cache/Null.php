@@ -2,8 +2,7 @@
 /**
  *
  */
-class Cola_Ext_Cache_Null extends Cola_Ext_Cache_Abstract
-{
+class Cola_Ext_Cache_Null extends Cola_Ext_Cache_Abstract {
     /**
      * Set cache
      *
@@ -12,37 +11,33 @@ class Cola_Ext_Cache_Null extends Cola_Ext_Cache_Abstract
      * @param int $ttl
      * @return boolean
      */
-    public function set($key, $value, $ttl = null)
-    {
+    public function set($key, $value, $ttl = null) {
         return true;
     }
-
+    
     /**
      * Get Cache
      *
      * @param string $key
      * @return mixed
      */
-    public function get($key)
-    {
+    public function get($key) {
         return false;
     }
-
+    
     /**
      * Delete cache
      * @param string $id
      * @return boolean
      */
-    public function delete($key)
-    {
+    public function delete($key) {
         return true;
     }
-
+    
     /**
      * clear cache
      */
-    public function clear()
-    {
+    public function clear() {
         return true;
     }
 }

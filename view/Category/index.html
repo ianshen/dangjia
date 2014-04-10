@@ -11,12 +11,7 @@
 <link rel="stylesheet"
 	href="<?php echo WWW_ROOT; ?>static/css/group.css">
 <title></title>
-<script type="text/javascript">
-	var $CONFIG = {};
-	$CONFIG['cururl'] = location.href;
-	$CONFIG['wroot'] = "<?php echo $this->wwwroot; ?>";
-	$CONFIG['uroot'] = "<?php echo $this->urlroot; ?>";
-</script>
+<?php include('view/Public/jsconfig.html'); ?>
 </head>
 <body class="index_bg">
 	<div class="container-fluid top_nav">
@@ -118,14 +113,16 @@
 																	<tr class="product-item">
 																		<td>TB - Monthly</td>
 																		<td>02/04/2012</td>
-																		<td><img data-name="name" data-id="333" data-price="10元/1个"
+																		<td><img data-name="name" data-id="333"
+																			data-price="10元/1个"
 																			src="<?php echo WWW_ROOT; ?>static/img/icon-add-off.gif"
 																			class="add-to-cart"></td>
 																	</tr>
 																	<tr class="product-item">
 																		<td>TB - Monthly</td>
 																		<td>02/04/2012</td>
-																		<td><img data-name="name" data-id="666" data-price="10元/1个"
+																		<td><img data-name="name" data-id="666"
+																			data-price="10元/1个"
 																			src="<?php echo WWW_ROOT; ?>static/img/icon-add-off.gif"
 																			class="add-to-cart over"></td>
 																	</tr>
@@ -183,6 +180,8 @@
 									</div>
 								</div>
 							</div>
+							<?php include('view/Public/module.html'); ?>
+							<?php include('view/Public/copyright.html'); ?>
 							<div class="module trends">
 								<div class="trends-inner">
 									<div class="flex-module trends-container">

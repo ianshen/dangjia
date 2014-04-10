@@ -1,6 +1,7 @@
 <?php
 error_reporting ( E_ALL );
-ini_set ( 'display_errors', 'on' );//线上设置为off
+ini_set ( 'display_errors', 'on' ); //线上设置为off
+
 
 date_default_timezone_set ( 'Asia/Shanghai' );
 

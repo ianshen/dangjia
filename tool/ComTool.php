@@ -55,10 +55,50 @@ class ComTool {
 	 * @param unknown_type $data
 	 * @return unknown
 	 */
-	static function checkEmpty($str = '', $info = '', $status = 100001, $data = '') {
-		return empty ( $str ) ? self::ajax ( $status, $info, $data ) : $str;
-	}
-	
+	static function checkEmpty($str, $info, $status = 100001, $data = '') {
+        return empty ( $str ) ? self::ajax ( $status, $info, $data ) : $str;
+    }
+    
+    /**
+     * @param unknown_type $str
+     * @param unknown_type $max
+     * @param unknown_type $info
+     * @param unknown_type $status
+     * @param unknown_type $data
+     * @return unknown
+     */
+    static function checkMaxLen($str, $max, $info, $status = 100001, $data = '') {
+        return (mb_strlen ( $str, 'utf-8' ) > $max) ? self::ajax ( $status, $info, $data ) : $str;
+    }
+    
+    /**
+     * @param unknown_type $str
+     * @param unknown_type $min
+     * @param unknown_type $info
+     * @param unknown_type $status
+     * @param unknown_type $data
+     * @return unknown
+     */
+    static function checkMinLen($str, $min, $info, $status = 100001, $data = '') {
+        return (mb_strlen ( $str, 'utf-8' ) < $min) ? self::ajax ( $status, $info, $data ) : $str;
+    }
+    
+    /**
+     * @param unknown_type $str
+     * @param unknown_type $min
+     * @param unknown_type $max
+     * @param unknown_type $info
+     * @param unknown_type $status
+     * @param unknown_type $data
+     * @return unknown
+     */
+    static function checkMinMaxLen($str, $min, $max, $info, $status = 100001, $data = '') {
+        $len = mb_strlen ( $str, 'utf-8' );
+        if ($len < $min || $len > $max) {
+            self::ajax ( $status, $info, $data );
+        }
+        return $str;
+    }
 	/**
 	 * 网站根
 	 * @return string
@@ -197,14 +237,19 @@ class ComTool {
         return preg_match ( '/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/', $email ) ? true : false;
     }
     
-    static function isCellphone($Cellphone) {
-    
+    /**
+     * @param unknown_type $mbile
+     * @return boolean
+     */
+    static function isMobile($mbile) {
+        return preg_match ( '/^1\d{10}$/', $mbile ) ? true : false;
     }
     
+    /**
+     * @param unknown_type $url
+     * @return boolean
+     */
     static function isUrl($url) {
-        //return preg_match ( '/^((https?|ftp|news):\/\/)?([a-z]([a-z0-9\-]*\.)+([a-z]{2}|aero|arpa|biz|com|coop|edu|gov|info|int|jobs|mil|museum|name|nato|net|org|pro|travel)|(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))(\/[a-z0-9_\-\.~]+)*(\/([a-z0-9_\-\.]*)(\?[a-z0-9+_\-\.%=&amp;]*)?)?(#[a-z][a-z0-9_]*)?$/i', $url ) ? true : false;
-        //return preg_match ( '/^(http:\/\/)?(https:\/\/)?([\w\d-]+\.)+[\w-]+(\/[\d\w-.\/?%&=]*)?$/', $url ) ? true : false;
-        //return preg_match ( '/http:\/\/[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is', $url ) ? true : false;
         return preg_match ( '/^((https?|ftp|news):\/\/)[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is', $url ) ? true : false;
     }
 }

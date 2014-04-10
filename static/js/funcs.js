@@ -94,6 +94,7 @@ function search(a) {
         window.location.href = sUrl
     }, 10), search.isSubmitted = !0)
 }
+
 function str_replace(search, replace, subject, count) {
     var i = 0,
         j = 0,
@@ -139,4 +140,15 @@ function str_replace(search, replace, subject, count) {
         }
     }
     return sa ? s : s[0];
+}
+
+function isEmail(email) {
+	var patten = /^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/;
+	return !patten.exec(email) ? false : true;
+}
+
+function isMobile(mobile) {
+	// var patten = /^[+]{0,1}(\d){1,3}[ ]?([-]?((\d)|[ ]){1,12})+$/;
+	var patten = /^1\d{10}$/;
+	return !patten.exec(mobile) ? false : true;
 }

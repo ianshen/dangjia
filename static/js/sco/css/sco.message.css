@@ -15,7 +15,9 @@
 }
 
 .page_mess_error {
-  background-color: #de4343;
+  /* background-color: #de4343;
+  border-color: #ca2424; */
+  background-color: #EAA000;
   border-color: #ca2424;
 }
 

@@ -339,3 +339,55 @@ small {
 .Icon--caretRight:before {
 	content: ">";
 }
+
+.topbar {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 1000;
+}
+
+.topbar {
+	box-shadow: none;
+}
+
+#banners {
+	width: auto;
+}
+
+.global-nav,.global-nav .well,.nav .active>a {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.global-nav,.global-nav-outer {
+	height: 40px;
+}
+
+.global-nav {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+	height: 46px;
+	position: relative;
+	width: 100%;
+}
+
+.global-nav-inner {
+	background: none repeat scroll 0 0 #FFFFFF;
+	height: 46px;
+}
+
+.global-nav .container {
+	max-width: 1190px;
+	text-align: center;
+	width: auto;
+}
+
+.wel-nav,.wel-nav>li {
+	float: left;
+}
+
+.wel-nav {
+	margin-right: 12px;
+	text-align: left;
+}

@@ -59,5 +59,10 @@ $config = array (
     '_controllersHome' => 'controller', 
     '_viewsHome' => 'view', 
     '_toolsHome' => 'tool', 
-    '_autoSession' => true 
+    '_autoSession' => true, 
+    '_error' => array (
+        'ok' => '100000', 
+        'err' => '100001', 
+        'needlogin' => '100002'  //需要登录提示
+    ) 
 );

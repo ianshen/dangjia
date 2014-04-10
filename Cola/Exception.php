@@ -1,6 +1,5 @@
 <?php
 
-class Cola_Exception extends Exception
-{
+class Cola_Exception extends Exception {
 
 }

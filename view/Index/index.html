@@ -8,16 +8,20 @@
 <link rel="stylesheet" href="<?php echo WWW_ROOT; ?>static/css/common.css">
 <link rel="stylesheet" href="<?php echo WWW_ROOT; ?>static/css/index.css">
 <title></title>
-<script type="text/javascript">
-	var $CONFIG = {};
-	$CONFIG['cururl'] = location.href;
-	$CONFIG['wroot'] = "<?php echo $this->wwwroot; ?>";
-	$CONFIG['uroot'] = "<?php echo $this->urlroot; ?>";
-</script>
+<?php include('view/Public/jsconfig.html'); ?>
 </head>
 <body class="index_bg f-tac">
 	<div class="container">
-		<div style="height:200px;line-height:100px;margin-bottom:120px;"></div>
+		<div class="topbar">
+			<div class="" id="banners"></div>
+			<div class="global-nav">
+				<div class="global-nav-inner">
+					<div class="container"></div>
+				</div>
+			</div>
+		</div>
+		<!-- <div style="height:200px;line-height:100px;margin-bottom:120px;"></div> -->
+		<div style="line-height: 100px; margin-bottom: 100px;"></div>
 		<div class="row-fluid">
 			<div class="span12">
 				<div class="btn-group" id="selcity">

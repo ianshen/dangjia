@@ -14,18 +14,13 @@
 	href="<?php echo WWW_ROOT; ?>static/js/artDialog/skins/default.css"
 	rel="stylesheet" />
 <title></title>
-<script type="text/javascript">
-	var $CONFIG = {};
-	$CONFIG['cururl'] = location.href;
-	$CONFIG['wroot'] = "<?php echo $this->wwwroot; ?>";
-	$CONFIG['uroot'] = "<?php echo $this->urlroot; ?>";
-	$CONFIG['cg'] = "";
-</script>
+<?php include('view/Public/jsconfig.html'); ?>
 </head>
 <body class="index_bg">
 	<div class="container-fluid top_nav">
 		<div class="row-fluid">
 			<div class="span12">
+				<?php include('view/Public/topnav.html'); ?>
 				<div class="navbar">
 					<div class="navbar-inner radius0">
 						<div class="container-fluid padding190">
@@ -128,7 +123,8 @@
 																			href="javascript:void(0);">-</a> <span>&nbsp;<em
 																				class="quantity-text">333</em>&nbsp;
 																		</span> <a class="js-increment" href="javascript:void(0);">+</a></td>
-																		<td><small><a href="javascript:void(0);" class="js-rm-product" data-id="333">删除</a></small></td>
+																		<td><small><a href="javascript:void(0);"
+																				class="js-rm-product" data-id="333">删除</a></small></td>
 																	</tr>
 																	<tr class="product-item" data-id="33">
 																		<td>TB - Monthly</td>
@@ -137,7 +133,8 @@
 																			href="javascript:void(0);">-</a> <span>&nbsp;<em
 																				class="quantity-text">33</em>&nbsp;
 																		</span> <a class="js-increment" href="javascript:void(0);">+</a></td>
-																		<td><small><a class="js-rm-product" data-id="33">删除</a></small></td>
+																		<td><small><a class="js-rm-product"
+																				data-id="33">删除</a></small></td>
 																	</tr>
 																	<tr class="product-item" data-id="3">
 																		<td>TB - Monthly</td>
@@ -146,7 +143,8 @@
 																			href="javascript:void(0);">-</a> <span>&nbsp;<em
 																				class="quantity-text">3</em>&nbsp;
 																		</span> <a class="js-increment" href="javascript:void(0);">+</a></td>
-																		<td><small><a class="js-rm-product" data-id="3">删除</a></small></td>
+																		<td><small><a class="js-rm-product"
+																				data-id="3">删除</a></small></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -183,57 +181,8 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="dashboard">
-							<div class="module trends">
-								<div class="trends-inner">
-									<div class="flex-module trends-container">
-										<div class="flex-module-header">
-											<h3>
-												<span class="trend-location"> 趋势 </span>
-											</h3>
-											<small>· <a class="change-trends">更改</a></small>
-										</div>
-										<div class="flex-module-inner">
-											<ul class="trend-items">
-												<li class="trend-item"><a class="trend-name">#RuinACartoon</a></li>
-												<li class="trend-item"><a class="trend-name">#RuinACartoon</a></li>
-												<li class="trend-item"><a class="trend-name">#RuinACartoon</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="module trends">
-								<div class="trends-inner">
-									<div class="flex-module trends-container">
-										<div class="flex-module-header">
-											<h3>
-												<span class="trend-location"> 趋势 </span>
-											</h3>
-											<small>· <a class="change-trends">更改</a></small>
-										</div>
-										<div class="flex-module-inner">
-											<ul class="trend-items">
-												<li class="trend-item"><a class="trend-name">#RuinACartoon</a></li>
-												<li class="trend-item"><a class="trend-name">#RuinACartoon</a></li>
-												<li class="trend-item"><a class="trend-name">#RuinACartoon</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="Footer module">
-								<div class="flex-module">
-									<div class="flex-module-inner">
-										<ul class="u-cf">
-											<li class="Footer-item Footer-copyright copyright">&copy;
-												2014 Twitter</li>
-											<li class="Footer-item"><a class="Footer-link">开发者</a></li>
-											<li class="Footer-item"><a class="Footer-link">开发者</a></li>
-											<li class="Footer-item"><a class="Footer-link">开发者</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
+							<?php include('view/Public/module.html'); ?>
+							<?php include('view/Public/copyright.html'); ?>
 						</div>
 					</div>
 				</div>
@@ -253,7 +202,8 @@
 	<script src="<?php echo WWW_ROOT; ?>static/js/jquery-1.8.3.min.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="<?php echo WWW_ROOT; ?>static/js/bootstrap.min.js"></script>
-	<script src="<?php echo WWW_ROOT; ?>static/js/artDialog/artDialog.min.js"></script>
+	<script
+		src="<?php echo WWW_ROOT; ?>static/js/artDialog/artDialog.min.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/order.js"></script>
 </body>
 </html>

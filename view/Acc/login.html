@@ -9,14 +9,11 @@
 <link rel="stylesheet"
 	href="<?php echo WWW_ROOT; ?>static/css/common.css">
 <link rel="stylesheet"
+	href="<?php echo WWW_ROOT; ?>static/css/group.css">
+<link rel="stylesheet"
 	href="<?php echo WWW_ROOT; ?>static/js/sco/css/sco.message.css">
 <title></title>
-<script type="text/javascript">
-	var $CONFIG = {};
-	$CONFIG['cururl'] = location.href;
-	$CONFIG['wroot'] = "<?php echo $this->wwwroot; ?>";
-	$CONFIG['uroot'] = "<?php echo $this->urlroot; ?>";
-</script>
+<?php include('view/Public/jsconfig.html'); ?>
 </head>
 <body class="index_bg">
 	<div class="container-fluid">
@@ -25,18 +22,29 @@
 		</div>
 	</div>
 	<div class="container">
+		<div class="topbar">
+			<div class="" id="banners"></div>
+			<div class="global-nav">
+				<div class="global-nav-inner">
+					<div class="container">
+						<ul class="wel-nav">
+							<li class=""><a href="/" class=""> <span class="">欢迎光临</span>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="line-height: 100px; margin-bottom: 100px;"></div>
 		<div class="row-fluid">
 			<div class="span2 border1"></div>
 			<div class="span8 border1">
-				<div class="row-fluid">
-					<div class="span12"></div>
-				</div>
 				<form class="form-horizontal" id="loginform" method="post">
 					<div class="control-group">
 						<div class="control-label"></div>
 						<div class="controls">
 							<!-- <h1 style="padding: 40px 0 20px; font-size: 24px; line-height: 0.8;">登录xxx</h1> -->
-							<h1>登录xxx</h1>
+							<h1>登录</h1>
 						</div>
 					</div>
 					<div class="control-group">
@@ -53,7 +61,8 @@
 					</div>
 					<div class="control-group">
 						<div class="controls">
-							<label class="checkbox"><input type="checkbox" name="rememberme" id="rememberme"/> 记住我</label>
+							<label class="checkbox"><input type="checkbox"
+								name="rememberme" id="rememberme" /> 记住我</label>
 							<button type="submit" class="btn">登录</button>
 						</div>
 					</div>
@@ -68,6 +77,7 @@
 	<script src="<?php echo WWW_ROOT; ?>static/js/bootstrap.min.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/jquery.form.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/sco/js/sco.message.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/funcs.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/acc.js"></script>
 </body>
 </html>

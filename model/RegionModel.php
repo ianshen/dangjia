@@ -23,7 +23,7 @@ class RegionModel extends BaseModel {
         return $result;
     }
     
-    public function getsByPid($pid=0) {
+    public function getsByPid($pid = 0) {
         try {
             $result = $this->find ( "pid={$pid}" );
             return $result;
