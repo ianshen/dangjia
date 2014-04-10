@@ -170,7 +170,7 @@ class ComTool {
 	 */
 	static function validToken() {
 		if (! ComTool::checkToken ()) {
-			self::ajax ( 100001, '数据不可重复提交' );
+			self::ajax ( 100001, '数据不可重复提交，刷新重试' );
 		}
 	}
 	

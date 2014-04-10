@@ -6,6 +6,8 @@ $(function() {
 		success : function(data) {
 			if (data.status == 100000) {
 
+			} else {
+				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 			}
 		},
 		beforeSubmit : function(formData, jqForm, options) {

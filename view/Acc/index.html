@@ -16,97 +16,59 @@
 <?php include('view/Public/jsconfig.html'); ?>
 </head>
 <body class="index_bg">
-	<div class="container-fluid top_nav">
+	<div class="container-fluid">
 		<div class="row-fluid">
-			<div class="span12">
-				<?php include('view/Public/topnav.html'); ?>
-			</div>
+			<div class="span12"></div>
 		</div>
 	</div>
 	<div class="container">
-		<div class="row-fluid">
-			<div class="span12">
-				<div class="alert">
-					<button type="button" class="close" data-dismiss="alert">×</button>
-					<strong>nav</strong>
+		<div class="topbar">
+			<div class="" id="banners"></div>
+			<div class="global-nav">
+				<div class="global-nav-inner">
+					<div class="container">
+						<ul class="wel-nav">
+							<li class=""><a href="/" class=""> <span class="">欢迎光临</span>
+							</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
+		<div style="line-height: 100px; margin-bottom: 100px;"></div>
 		<div class="row-fluid">
-			<div class="span8">
-				<div class="row-fluid">
-					<div class="span12">
-						<div id="timeline" class="content-main">
-							<div class="content-header">
-								<div class="header-inner">
-									<h2 class="">动态</h2>
-								</div>
-								<div class="stream-container">
-									<div class="stream">
-										<ol class="stream-items">
-											<li class="stream-item">
-												<div
-													class="clearfix stream-item-activity stream-item-activity-network">
-													<div class="stream-item-activity-header">
-														<div class="stream-item-activity-line">
-															<a href="#" class=""><strong class="">登录</strong></a>
-														</div>
-													</div>
-													<ol class="activity-supplement  follow-more-than-two">
-														<li class="supplement">
-															<div>
-																<form class="form-horizontal" id="loginform"
-																	method="post">
-																	<div class="control-group">
-																		<div class="control-label"></div>
-																		<div class="controls"></div>
-																	</div>
-																	<div class="control-group">
-																		<label class="control-label" for="user">帐号</label>
-																		<div class="controls">
-																			<input id="user" name="user" type="text"
-																				placeholder="邮箱或手机号" />
-																		</div>
-																	</div>
-																	<div class="control-group">
-																		<label class="control-label" for="passwd">密码</label>
-																		<div class="controls">
-																			<input id="passwd" name="passwd" type="password"
-																				placeholder="密码" />
-																		</div>
-																	</div>
-																	<div class="control-group">
-																		<div class="controls">
-																			<label class="checkbox"><input
-																				type="checkbox" name="rememberme" id="rememberme" />
-																				记住我</label>
-																			<button type="submit" class="btn">登录</button>
-																		</div>
-																	</div>
-																</form>
-															</div>
-														</li>
-													</ol>
-												</div>
-											</li>
-										</ol>
-									</div>
-								</div>
-							</div>
+			<div class="span2 border1"></div>
+			<div class="span8 border1">
+				<form class="form-horizontal" id="loginform" method="post">
+					<div class="control-group">
+						<div class="control-label"></div>
+						<div class="controls">
+							<!-- <h1 style="padding: 40px 0 20px; font-size: 24px; line-height: 0.8;">登录xxx</h1> -->
+							<h1>登录</h1>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div class="span4">
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="dashboard">
-							<?php include('view/Public/module.html'); ?>
-							<?php include('view/Public/copyright.html'); ?>
+					<div class="control-group">
+						<label class="control-label" for="user">帐号</label>
+						<div class="controls">
+							<input id="user" name="user" type="text" placeholder="邮箱或手机号" />
 						</div>
 					</div>
-				</div>
+					<div class="control-group">
+						<label class="control-label" for="passwd">密码</label>
+						<div class="controls">
+							<input id="passwd" name="passwd" type="password" placeholder="密码" />
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<label class="checkbox"><input type="checkbox"
+								name="rememberme" id="rememberme" /> 记住我</label>
+							<button type="submit" class="btn">登录</button>
+						</div>
+					</div>
+				</form>
 			</div>
+			<div class="span2 border1"></div>
 		</div>
 	</div>
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
