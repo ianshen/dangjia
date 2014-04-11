@@ -40,7 +40,7 @@ $(function() {
 					// 先判断购物车中是否含有相同商品
 					var trObj=$(".table.product-cart-small").find("tr[data-id='"+id+"']");
 					if(trObj.attr("data-id")==null){
-						$("tr.js-go-cart").before(tr);
+						$("tr.js-total-price").before(tr);
 					}else{
 						var curNumObj=trObj.find("em.quantity-text");
 						var curNum = parseInt(curNumObj.text());

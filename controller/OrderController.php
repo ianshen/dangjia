@@ -21,7 +21,8 @@ class OrderController extends BaseController {
      */
     public function acAction() {
         if (ComTool::isAjax ()) {
-            //$cart = $_SESSION ['cart'];
+            $curCategory = '';
+            $_SESSION ['cart'] [$curCategory] = '';
             ComTool::ajax ( 100000, 'ok' );
         }
     }
@@ -41,7 +42,8 @@ class OrderController extends BaseController {
      */
     public function goAction() {
         if (ComTool::isAjax ()) {
-            $cart = $_SESSION ['cart'];
+            $curCategory = '';
+            $cart = $_SESSION ['cart'] [$curCategory];
             if (! $cart) {
                 ComTool::ajax ( 100001, '购物车为空' );
             }

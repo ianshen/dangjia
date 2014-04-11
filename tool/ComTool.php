@@ -99,6 +99,10 @@ class ComTool {
         }
         return $str;
     }
+    
+    static function checkEqual($param1, $param2, $info, $status = 100001, $data = '') {
+        return $param1 == $param2 ? true : self::ajax ( $status, $info, $data );
+    }
 	/**
 	 * 网站根
 	 * @return string

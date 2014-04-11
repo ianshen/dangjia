@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 03 月 28 日 03:39
+-- 生成日期: 2014 年 04 月 11 日 08:36
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -89,6 +89,7 @@ CREATE TABLE IF NOT EXISTS `group` (
   `create_time` int(11) NOT NULL DEFAULT '0',
   `create_date` date NOT NULL DEFAULT '0000-00-00',
   `region_id` int(11) NOT NULL DEFAULT '0' COMMENT '属所区域',
+  `addr_desc_template` varchar(32) NOT NULL DEFAULT '' COMMENT '圈子的详细地址信息模板',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `ename` (`ename`) USING BTREE,
@@ -99,9 +100,9 @@ CREATE TABLE IF NOT EXISTS `group` (
 -- 转存表中的数据 `group`
 --
 
-INSERT INTO `group` (`id`, `name`, `ename`, `create_time`, `create_date`, `region_id`, `status`) VALUES
-(1, '北辰泰岳大厦', 'beichentaiyue', 0, '0000-00-00', 0, 0),
-(6, '明天第一城', 'mingtiandiyicheng', 1395236134, '2014-03-19', 0, 1);
+INSERT INTO `group` (`id`, `name`, `ename`, `create_time`, `create_date`, `region_id`, `addr_desc_template`, `status`) VALUES
+(1, '北辰泰岳大厦', 'beichentaiyue', 0, '0000-00-00', 3, '', 0),
+(6, '明天第一城', 'mingtiandiyicheng', 1395236134, '2014-03-19', 3, '', 1);
 
 -- --------------------------------------------------------
 

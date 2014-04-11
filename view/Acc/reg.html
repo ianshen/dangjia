@@ -49,37 +49,116 @@
 													class="clearfix stream-item-activity stream-item-activity-network">
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
-															<a href="#" class=""><strong class="">注册</strong></a>
+															<a href="#" class=""><strong class="">注册成为会员</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
 														<li class="supplement">
 															<div>
-																<form class="form-horizontal" id="regform"
-																	method="post">
+																<form class="form-horizontal" id="regform" method="post">
 																	<div class="control-group">
 																		<div class="control-label"></div>
 																		<div class="controls"></div>
 																	</div>
 																	<div class="control-group">
-																		<label class="control-label" for="user">帐号</label>
+																		<label class="control-label" for="email">邮箱</label>
 																		<div class="controls">
-																			<input id="user" name="user" type="text"
-																				placeholder="邮箱或手机号" />
+																			<input id="email" name="email" type="text"
+																				placeholder="常用邮箱" />
+																		</div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="mobile">手机</label>
+																		<div class="controls">
+																			<input id="mobile" name="mobile" type="text"
+																				placeholder="常用手机号" />
+																			<!-- <span class="help-inline">#重要#真实手机号码</span> -->
+																			<span class="help-block f-fs1">#重要#真实手机号码,以便顺利享受服务</span>
+																		</div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="mobile">圈子</label>
+																		<div class="controls">
+																			<div class="span12">
+																				<div class="btn-group" id="selcity">
+																					<a class="btn btn-small jsBtLabel">选择城市</a> <a
+																						class="btn btn-small dropdown-toggle"
+																						data-toggle="dropdown"> <span class="caret"></span>
+																					</a>
+																					<ul class="dropdown-menu">
+																						<?php foreach($this->citys as $city){ ?>
+																						<li class="dropdown_data_item"><a class=""
+																							href="javascript:;"
+																							data-id="<?php echo $city['id']; ?>"
+																							data-name="<?php echo $city['name']; ?>"> <?php echo $city['name']; ?>
+																						</a></li>
+																						<?php } ?>
+																					</ul>
+																				</div>
+																				<div class="btn-group" id="selarea">
+																					<a class="btn btn-small jsBtLabel">选择区域</a> <a
+																						class="btn btn-small dropdown-toggle"
+																						data-toggle="dropdown"> <span class="caret"></span>
+																					</a>
+																					<ul class="dropdown-menu">
+																						<li><a href="#">无</a></li>
+																					</ul>
+																				</div>
+																				<div class="btn-group" id="selgroup">
+																					<a class="btn btn-small jsBtLabel">选择圈子</a> <a
+																						class="btn btn-small dropdown-toggle"
+																						data-toggle="dropdown"> <span class="caret"></span>
+																					</a>
+																					<ul class="dropdown-menu">
+																						<li><a href="#">无</a></li>
+																					</ul>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="group">圈子</label>
+																		<div class="controls">
+																			<select class="input-small" id="city" name="city">
+																				<option>选择城市</option>
+																				<option>2</option>
+																				<option>3</option>
+																				<option>4</option>
+																				<option>5</option>
+																			</select> <select class="input-small" id="area" name="area">
+																				<option>选择区域</option>
+																				<option>2</option>
+																				<option>3</option>
+																				<option>4</option>
+																				<option>5</option>
+																			</select> <select class="input-small" id="group" name="group">
+																				<option>选择圈子</option>
+																				<option>2</option>
+																				<option>3</option>
+																				<option>4</option>
+																				<option>5</option>
+																			</select> <br> <br> <input class="input-large"
+																				id="addr_desc" name="addr_desc" type="text"
+																				placeholder="详细位置如：B座3号楼4层"> <span
+																				class="help-block f-fs1">填写详细信息，以便我们更好的找到你</span>
 																		</div>
 																	</div>
 																	<div class="control-group">
 																		<label class="control-label" for="passwd">密码</label>
 																		<div class="controls">
 																			<input id="passwd" name="passwd" type="password"
-																				placeholder="密码" />
+																				placeholder="输入密码" />
+																		</div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="cpasswd">确认密码</label>
+																		<div class="controls">
+																			<input id="cpasswd" name="cpasswd" type="password"
+																				placeholder="再次输入密码" />
 																		</div>
 																	</div>
 																	<div class="control-group">
 																		<div class="controls">
-																			<label class="checkbox"><input
-																				type="checkbox" name="rememberme" id="rememberme" />
-																				记住我</label>
 																			<button type="submit" class="btn btn-primary">登录</button>
 																		</div>
 																	</div>
