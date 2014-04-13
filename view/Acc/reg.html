@@ -76,7 +76,7 @@
 																			<span class="help-block f-fs1">#重要#真实手机号码,以便顺利享受服务</span>
 																		</div>
 																	</div>
-																	<div class="control-group">
+																	<!-- <div class="control-group">
 																		<label class="control-label" for="mobile">圈子</label>
 																		<div class="controls">
 																			<div class="span12">
@@ -86,13 +86,7 @@
 																						data-toggle="dropdown"> <span class="caret"></span>
 																					</a>
 																					<ul class="dropdown-menu">
-																						<?php foreach($this->citys as $city){ ?>
-																						<li class="dropdown_data_item"><a class=""
-																							href="javascript:;"
-																							data-id="<?php echo $city['id']; ?>"
-																							data-name="<?php echo $city['name']; ?>"> <?php echo $city['name']; ?>
-																						</a></li>
-																						<?php } ?>
+																						<li><a href="#">无</a></li>
 																					</ul>
 																				</div>
 																				<div class="btn-group" id="selarea">
@@ -115,32 +109,20 @@
 																				</div>
 																			</div>
 																		</div>
-																	</div>
+																	</div> -->
 																	<div class="control-group">
 																		<label class="control-label" for="group">圈子</label>
 																		<div class="controls">
 																			<select class="input-small" id="city" name="city">
-																				<option>选择城市</option>
-																				<option>2</option>
-																				<option>3</option>
-																				<option>4</option>
-																				<option>5</option>
 																			</select> <select class="input-small" id="area" name="area">
 																				<option>选择区域</option>
-																				<option>2</option>
-																				<option>3</option>
-																				<option>4</option>
-																				<option>5</option>
 																			</select> <select class="input-small" id="group" name="group">
 																				<option>选择圈子</option>
-																				<option>2</option>
-																				<option>3</option>
-																				<option>4</option>
-																				<option>5</option>
-																			</select> <br> <br> <input class="input-large"
-																				id="addr_desc" name="addr_desc" type="text"
-																				placeholder="详细位置如：B座3号楼4层"> <span
-																				class="help-block f-fs1">填写详细信息，以便我们更好的找到你</span>
+																			</select> <br> <br> <input
+																				class="input-large js-addr-desc" name="addr_desc"
+																				id="addr_desc" type="text" placeholder="如：B座3号楼4层">
+																			<span class="help-block f-fs1">填写详细位置，以便我们更好的找到你，<span
+																				class="js-addr-desc">如：B座3号楼4层</span></span>
 																		</div>
 																	</div>
 																	<div class="control-group">
@@ -159,7 +141,7 @@
 																	</div>
 																	<div class="control-group">
 																		<div class="controls">
-																			<button type="submit" class="btn btn-primary">登录</button>
+																			<button type="submit" class="btn btn-primary">注册</button>
 																		</div>
 																	</div>
 																</form>

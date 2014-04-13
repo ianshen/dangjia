@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 3.3.9
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 04 月 11 日 08:36
--- 服务器版本: 5.5.24-log
--- PHP 版本: 5.3.13
+-- 生成日期: 2014 年 04 月 13 日 14:17
+-- 服务器版本: 5.5.8
+-- PHP 版本: 5.3.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -76,6 +75,11 @@ CREATE TABLE IF NOT EXISTS `goods` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- 转存表中的数据 `goods`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -94,15 +98,16 @@ CREATE TABLE IF NOT EXISTS `group` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `ename` (`ename`) USING BTREE,
   KEY `id` (`id`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `group`
 --
 
 INSERT INTO `group` (`id`, `name`, `ename`, `create_time`, `create_date`, `region_id`, `addr_desc_template`, `status`) VALUES
-(1, '北辰泰岳大厦', 'beichentaiyue', 0, '0000-00-00', 3, '', 0),
-(6, '明天第一城', 'mingtiandiyicheng', 1395236134, '2014-03-19', 3, '', 1);
+(1, '北辰泰岳大厦', 'beichentaiyue', 0, '0000-00-00', 3, '1塔18层', 0),
+(6, '明天第一城', 'mingtiandiyicheng', 1395236134, '2014-03-19', 3, '6号院3号楼2单元101', 1),
+(7, '', '', 0, '0000-00-00', 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -123,6 +128,11 @@ CREATE TABLE IF NOT EXISTS `order` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- 转存表中的数据 `order`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -138,6 +148,11 @@ CREATE TABLE IF NOT EXISTS `order_detail` (
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `order_detail`
+--
+
 
 -- --------------------------------------------------------
 
@@ -209,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL DEFAULT '',
   `passwd` char(32) NOT NULL DEFAULT '',
-  `tel` varchar(32) NOT NULL DEFAULT '',
+  `mobile` varchar(32) NOT NULL DEFAULT '',
   `email` varchar(128) NOT NULL DEFAULT '',
   `create_time` int(11) NOT NULL DEFAULT '0',
   `update_time` int(11) NOT NULL DEFAULT '0',
@@ -221,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- 转存表中的数据 `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `passwd`, `tel`, `email`, `create_time`, `update_time`, `status`) VALUES
+INSERT INTO `user` (`id`, `name`, `passwd`, `mobile`, `email`, `create_time`, `update_time`, `status`) VALUES
 (3, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 2014, 0, 0),
 (4, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 0, 0, 0),
 (5, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 0, 0, 0),
@@ -243,6 +258,7 @@ CREATE TABLE IF NOT EXISTS `user_group` (
   PRIMARY KEY (`user_id`,`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+--
+-- 转存表中的数据 `user_group`
+--
+
