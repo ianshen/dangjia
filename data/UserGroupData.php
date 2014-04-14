@@ -14,7 +14,7 @@ class UserGroupData extends BaseData {
         if (! $id) {
             return false;
         }
-        $model = new UserModel ();
+        $model = new UserGroupModel ();
         $result = $model->getById ( $id );
         return $result;
     }
@@ -23,7 +23,7 @@ class UserGroupData extends BaseData {
         if (! $data) {
             return false;
         }
-        $model = new UserModel ();
+        $model = new UserGroupModel ();
         $result = $model->add ( $data );
         return $result;
     }
@@ -32,7 +32,7 @@ class UserGroupData extends BaseData {
         if (! $id) {
             return false;
         }
-        $model = new UserModel ();
+        $model = new UserGroupModel ();
         $result = $model->del ( $id );
         return $result;
     }
@@ -41,7 +41,7 @@ class UserGroupData extends BaseData {
         if (! $id || ! $data) {
             return false;
         }
-        $model = new UserModel ();
+        $model = new UserGroupModel ();
         $result = $model->update ( $id, $data );
         return $result;
     }

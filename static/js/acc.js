@@ -78,7 +78,7 @@ $(function() {
 		dataType : 'json',
 		success : function(data) {
 			if (data.status == 100000) {
-
+				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
 			} else {
 				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 			}
@@ -110,7 +110,8 @@ $(function() {
 		dataType : 'json',
 		success : function(data) {
 			if (data.status == 100000) {
-
+				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
+				window.location.href = $uroot + "acc/login";
 			} else {
 				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 			}

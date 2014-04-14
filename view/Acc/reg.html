@@ -140,6 +140,17 @@
 																		</div>
 																	</div>
 																	<div class="control-group">
+																		<label class="control-label" for="captcha">验证码</label>
+																		<div class="controls">
+																			<input id="captcha" name="captcha" type="text"
+																				class="input-small border1" placeholder="输入验证码" /> <img
+																				title="点击换一换" id="captcha_img"
+																				onclick="javascript:captchachg();"
+																				src="<?php echo $this->urlroot; ?>acc/captcha" />
+																				<a onclick="javascript:captchachg();" class="f-fs1" href="javascript:void(0);">&nbsp;换一张?</a>
+																		</div>
+																	</div>
+																	<div class="control-group">
 																		<div class="controls">
 																			<button type="submit" class="btn btn-primary">注册</button>
 																		</div>

@@ -152,3 +152,7 @@ function isMobile(mobile) {
 	var patten = /^1\d{10}$/;
 	return !patten.exec(mobile) ? false : true;
 }
+
+function captchachg() {
+	$("#captcha_img").attr('src', $CONFIG['uroot'] + "acc/captcha?" + Math.random());
+}

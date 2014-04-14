@@ -7,7 +7,7 @@ class UserData extends BaseData {
         }
         $model = new UserModel ();
         $result = $model->getById ( $id );
-        return $result;
+        return $result [0];
     }
     
     static function getByEmail($email) {
@@ -16,16 +16,16 @@ class UserData extends BaseData {
         }
         $model = new UserModel ();
         $result = $model->getByEmail ( $email );
-        return $result;
+        return $result [0];
     }
     
-    static function getByTel($tel) {
-        if (! $tel) {
+    static function getByMobile($mobile) {
+        if (! $mobile) {
             return false;
         }
         $model = new UserModel ();
-        $result = $model->getByTel ( $tel );
-        return $result;
+        $result = $model->getByMobile ( $mobile );
+        return $result [0];
     }
     
     static function add($data) {

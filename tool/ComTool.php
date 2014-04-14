@@ -30,14 +30,14 @@ class ComTool {
 	 * @param unknown_type $info
 	 * @param unknown_type $data
 	 */
-	static function ajax($status = 100000, $info = 'success', $data = 'success') {
-		$json ['status'] = $status;
-		$json ['info'] = $info;
-		$json ['data'] = $data;
-		header ( 'Content-Type:text/html; charset=utf-8' );
-		echo json_encode ( $json );
-		exit ();
-	}
+	static function ajax($status = 100000, $info = 'ok', $data = '') {
+        $json ['status'] = $status;
+        $json ['info'] = $info;
+        $json ['data'] = $data;
+        header ( 'Content-Type:text/html; charset=utf-8' );
+        echo json_encode ( $json );
+        exit ();
+    }
 	
 	/**
 	 * 当前url
@@ -103,6 +103,12 @@ class ComTool {
     static function checkEqual($param1, $param2, $info, $status = 100001, $data = '') {
         return $param1 == $param2 ? true : self::ajax ( $status, $info, $data );
     }
+    
+    static function checkCaptcha($value) {
+        $captcha = new Cola_Ext_Captcha ();
+        return $captcha->check ( $value );
+    }
+    
 	/**
 	 * 网站根
 	 * @return string
@@ -184,9 +190,9 @@ class ComTool {
 	 * @param unknown_type $err
 	 * @param unknown_type $succ
 	 */
-	static function result($res, $err = 'error', $succ = 'success') {
-		$res === false ? ComTool::ajax ( 100001, $err ) : ComTool::ajax ( 100000, $succ, $succ );
-	}
+	static function result($res, $errInfo = 'err', $succInfo = 'ok', $errData = '', $succData = '') {
+        $res === false ? ComTool::ajax ( 100001, $errInfo, $errData ) : ComTool::ajax ( 100000, $succInfo, $succData );
+    }
 	
 	/**
 	 * 跳转

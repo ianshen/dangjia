@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.9
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 04 月 13 日 14:17
--- 服务器版本: 5.5.8
--- PHP 版本: 5.3.5
+-- 生成日期: 2014 年 04 月 14 日 09:55
+-- 服务器版本: 5.5.24-log
+-- PHP 版本: 5.3.13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -66,7 +67,9 @@ CREATE TABLE IF NOT EXISTS `goods` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL DEFAULT '' COMMENT '商品名',
   `category_id` int(11) NOT NULL DEFAULT '0' COMMENT '所属分类',
-  `price` int(11) NOT NULL DEFAULT '0' COMMENT '价格',
+  `price` int(11) NOT NULL DEFAULT '0' COMMENT '单价数量如：10元3个，这里就是10',
+  `price_num` int(11) NOT NULL DEFAULT '1' COMMENT '单价数量如：10元3个，这里就是3',
+  `price_unit` varchar(16) NOT NULL DEFAULT '' COMMENT '单位如：10元3个，这里就是个',
   `desc` varchar(128) NOT NULL DEFAULT '' COMMENT '商品描述',
   `create_time` int(11) NOT NULL DEFAULT '0',
   `create_date` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建日期',
@@ -74,11 +77,6 @@ CREATE TABLE IF NOT EXISTS `goods` (
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `goods`
---
-
 
 -- --------------------------------------------------------
 
@@ -128,11 +126,6 @@ CREATE TABLE IF NOT EXISTS `order` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- 转存表中的数据 `order`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -148,11 +141,6 @@ CREATE TABLE IF NOT EXISTS `order_detail` (
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `order_detail`
---
-
 
 -- --------------------------------------------------------
 
@@ -230,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `update_time` int(11) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- 转存表中的数据 `user`
@@ -242,7 +230,9 @@ INSERT INTO `user` (`id`, `name`, `passwd`, `mobile`, `email`, `create_time`, `u
 (5, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 0, 0, 0),
 (6, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 0, 0, 0),
 (7, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 0, 0, 0),
-(8, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 0, 0, 0);
+(8, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 0, 0, 0),
+(11, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951433', 'test1@126.com', 1397444811, 1397444811, 1),
+(12, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951439', 'test2@126.com', 1397444839, 1397444839, 1);
 
 -- --------------------------------------------------------
 
@@ -262,3 +252,10 @@ CREATE TABLE IF NOT EXISTS `user_group` (
 -- 转存表中的数据 `user_group`
 --
 
+INSERT INTO `user_group` (`user_id`, `group_id`, `detail`, `status`) VALUES
+(11, 1, '15层', 1),
+(12, 1, '15层', 1);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

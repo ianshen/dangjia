@@ -21,9 +21,9 @@ class UserModel extends BaseModel {
         }
     }
     
-    public function getByTel($tel) {
+    public function getByMobile($mobile) {
         try {
-            $result = $this->find ( "tel='{$tel}'" );
+            $result = $this->find ( "mobile='{$mobile}'" );
             return $result;
         } catch ( Exception $e ) {
             echo $e;

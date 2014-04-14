@@ -7,6 +7,15 @@ class GoodsData extends BaseData {
         return $result;
     }
     
+    static function getById($id) {
+        if (! $id) {
+            return false;
+        }
+        $model = new GoodsModel ();
+        $result = $model->getById ( $id );
+        return $result [0];
+    }
+    
     static function getsByCid($cid) {
         if (! $cid) {
             return false;

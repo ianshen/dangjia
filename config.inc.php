@@ -63,6 +63,7 @@ $config = array (
     '_error' => array (
         'ok' => '100000', 
         'err' => '100001', 
-        'needlogin' => '100002'  //需要登录提示
+        'needlogin' => '100002',  //需要登录
+        'wrongcaptcha' => '100003'  //验证码错误
     ) 
 );
