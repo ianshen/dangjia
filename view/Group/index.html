@@ -50,11 +50,15 @@
 						<div id="timeline" class="content-main">
 							<div class="content-header">
 								<div class="header-inner">
-									<h2 class="">动态</h2>
+									<h2 class="">
+										<a href="javascript:void(0);">我在</a>&nbsp;&gt; <a href="javascript:void(0);"> <?php echo $this->group['name']; ?>
+										</a>
+									</h2>
 								</div>
 								<div class="stream-container">
 									<div class="stream">
 										<ol class="stream-items">
+											<?php if(empty($this->cats)){ ?>
 											<li class="stream-item">
 												<div
 													class="clearfix stream-item-activity stream-item-activity-network">
@@ -65,29 +69,33 @@
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
+														<li class="supplement f-ib"><a>aaa</a></li>
+													</ol>
+												</div>
+											</li>
+											<?php }else{ ?>
+											<?php foreach($this->cats as $cat){ ?>
+											<li class="stream-item">
+												<div
+													class="clearfix stream-item-activity stream-item-activity-network">
+													<div class="stream-item-activity-header">
+														<div class="stream-item-activity-line">
+															<a href="#" class=""><strong class=""> <?php echo $cat['name']; ?>
+															</strong></a>
+														</div>
+													</div>
+													<ol class="activity-supplement  follow-more-than-two">
+														<?php foreach($cat['children'] as $v){ ?>
 														<li class="supplement f-ib"><a
-															href="http://localhost/dangjia/index.php/c/1">aaa</a></li>
-														<li class="supplement f-ib"><a>aaa</a></li>
-														<li class="supplement f-ib"><a>aaa</a></li>
+															href="<?php echo $this->urlroot; ?>c/<?php echo $v['id']; ?>">
+																<?php echo $v['name']; ?>
+														</a></li>
+														<?php } ?>
 													</ol>
 												</div>
 											</li>
-											<li class="stream-item">
-												<div
-													class="clearfix stream-item-activity stream-item-activity-network">
-													<div class="stream-item-activity-header">
-														<div class="stream-item-activity-line">
-															<a href="#" class=""><strong class="">LeBron
-																	James</strong></a>
-														</div>
-													</div>
-													<ol class="activity-supplement  follow-more-than-two">
-														<li class="supplement"><a>aaa</a></li>
-														<li class="supplement"><a>aaa</a></li>
-														<li class="supplement"><a>aaa</a></li>
-													</ol>
-												</div>
-											</li>
+											<?php } ?>
+											<?php } ?>
 										</ol>
 									</div>
 								</div>

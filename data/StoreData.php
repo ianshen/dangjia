@@ -15,6 +15,17 @@ class StoreData extends BaseData {
         $result = $model->getsByIds ( $ids );
         return $result;
     }
+    static function getById($id) {
+        if (! $id) {
+			return false;
+		}
+		$model = new StoreModel ();
+		$result = $model->getById ( $id );
+		if (! $result) {
+			return false;
+		}
+		return $result;
+    }
     
     static function del() {
     

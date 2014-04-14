@@ -13,6 +13,9 @@ class GroupData extends BaseData {
 		}
 		$model = new GroupModel ();
 		$result = $model->getById ( $id );
+		if (! $result) {
+			return false;
+		}
 		return $result [0];
 	}
 	

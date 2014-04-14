@@ -50,7 +50,13 @@
 						<div id="timeline" class="content-main">
 							<div class="content-header">
 								<div class="header-inner">
-									<h2 class="">应季</h2>
+									<h2 class="">
+										<a
+											href="<?php echo $this->urlroot; ?>g/<?php echo $this->group['id']; ?>">
+											<?php echo $this->group['name']; ?>
+										</a> &nbsp;&gt; <a href="javascript:void(0);"> <?php echo $this->category['name']; ?>
+										</a>
+									</h2>
 								</div>
 								<div class="stream-container">
 									<div class="stream">
@@ -60,7 +66,8 @@
 													class="clearfix stream-item-activity stream-item-activity-network">
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
-															<a href="#" class=""><strong class="">清单</strong></a>
+															<a href="javascript:void(0);" class=""><strong
+																class="">清单</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">

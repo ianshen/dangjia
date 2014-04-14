@@ -132,7 +132,7 @@ class ComTool {
 	 * @return string
 	 */
 	static function url($path, $params = array()) {
-		self::urlRoot () . $path;
+		return self::urlRoot () . $path;
 	}
 	
 	/**
