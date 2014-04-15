@@ -28,7 +28,7 @@ class KickuassController extends BaseController {
                 'city' => $city, 
                 'area' => $area 
             ) );
-            ComTool::result ( $res );
+            ComTool::result ( $res, '失败', '成功' );
         }
         $groups = GroupData::getsAll ();
         $this->assign ( 'list', $groups );
@@ -59,9 +59,8 @@ class KickuassController extends BaseController {
             $data ['city'] = $city;
             $data ['area'] = $area;
             $data ['status'] = $status;
-            print_r ( $data );
             $res = StoreData::add ( $data );
-            ComTool::result ( $res );
+            ComTool::result ( $res, '失败', '成功' );
         }
         $stores = StoreData::getsAll ();
         $this->assign ( 'stores', $stores );
@@ -103,7 +102,7 @@ class KickuassController extends BaseController {
             $data ['order_way'] = $orderway;
             $data ['status'] = $status;
             $res = CategoryData::add ( $data );
-            ComTool::result ( $res );
+            ComTool::result ( $res, '失败', '成功' );
         }
         $parentCats = CategoryData::getParents ();
         $allCats = CategoryData::getsAll ();
@@ -135,7 +134,7 @@ class KickuassController extends BaseController {
             $data ['level'] = $level;
             $data ['status'] = $status;
             $res = RegionData::add ( $data );
-            ComTool::result ( $res );
+            ComTool::result ( $res, '失败', '成功' );
         }
         $citys = RegionData::getsByPid ();
         $regions = RegionData::getsAll ();
@@ -149,26 +148,28 @@ class KickuassController extends BaseController {
      */
     public function goodsAction() {
         if (ComTool::isAjax ()) {
-            $name = $this->post ( 'name' );
-            $cid = $this->post ( 'cid' );
-            $price = $this->post ( 'price' );
-            $desc = $this->post ( 'desc' );
-            $order = $this->post ( 'order' );
-            $status = $this->post ( 'status' );
+            $name = trim ( $this->post ( 'name' ) );
+            $cid = trim ( $this->post ( 'c_cat' ) );
+            $price = trim ( $this->post ( 'price' ) );
+            $priceNum = trim ( $this->post ( 'price_num' ) );
+            $priceUnit = trim ( $this->post ( 'price_unit' ) );
+            $desc = trim ( $this->post ( 'desc' ) );
+            $order = trim ( $this->post ( 'order' ) );
+            $status = trim ( $this->post ( 'status' ) );
             $data = array ();
             $data ['name'] = $name;
             $data ['category_id'] = $cid;
             $data ['price'] = $price;
+            $data ['price_num'] = $priceNum;
+            $data ['price_unit'] = $priceUnit;
             $data ['desc'] = $desc;
             $data ['create_time'] = time ();
             $data ['create_date'] = date ( "Y-m-d" );
             $data ['order'] = $order;
             $data ['status'] = $status;
             $res = GoodsData::add ( $data );
-            ComTool::result ( $res );
+            ComTool::result ( $res, '失败', '成功' );
         }
-        $areas = RegionData::getsArea ();
-        $this->assign ( 'areas', $areas );
         $goods = GoodsData::getsAll ();
         $this->assign ( 'goods', $goods );
         $this->display ();

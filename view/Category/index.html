@@ -81,14 +81,24 @@
 																	</tr>
 																</thead>
 																<tbody>
+																	<?php if(!empty($this->goods)){ ?>
+																	<?php foreach($this->goods as $good){ ?>
 																	<tr class="product-item">
-																		<td>TB - Monthly</td>
-																		<td>02/04/2012</td>
-																		<td><img data-name="name" data-id="333"
+																		<td>
+																			<?php echo $good['name']; ?>
+																		</td>
+																		<td>
+																			<?php echo $good['price']; ?>
+																		</td>
+																		<td><img data-name="name"
+																			data-id="<?php echo $good['id']; ?>"
 																			data-price="10元/1个"
 																			src="<?php echo WWW_ROOT; ?>static/img/icon-add-off.gif"
 																			class="add-to-cart"></td>
 																	</tr>
+																	<?php } ?>
+																	<?php }else{ ?>
+																	<?php } ?>
 																	<tr class="product-item">
 																		<td>TB - Monthly</td>
 																		<td>02/04/2012</td>
@@ -143,7 +153,7 @@
 													<tr class="product-item js-total-price">
 														<td>&nbsp;</td>
 														<td>总计：</td>
-														<td><span data-price="308" id="total-price">¥308</span></td>
+														<td><span data-price="0" id="total-price">¥0</span></td>
 													</tr>
 													<tr class="product-item js-go-cart">
 														<td>&nbsp;</td>
