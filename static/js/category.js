@@ -28,7 +28,7 @@ $(function() {
 			async : false,
 			type : "POST",
 			url : $uroot + 'order/ac',
-			data : "",
+			data : "proid="+id,
 			success : function(data) {
 				var data = $.parseJSON(data);
 				if (data.status == 100000) {

@@ -21,11 +21,15 @@ class OrderController extends BaseController {
 	 */
 	public function acAction() {
 		if (ComTool::isAjax ()) {
-			$curCategory = '';
-			$productId = intval ( $this->post ( 'pid' ) );
+			$curCategory = 0;
+			$productId = intval ( $this->post ( 'proid', 0 ) );
 			$product = GoodsData::getById ( $productId );
 			if (! $product) {
 				ComTool::ajax ( 100001, '服务器忙，请重试' );
+			}
+			$curCategory = $product ['category_id'];
+			if (! isset ( $_SESSION ['cart'] )) {
+				$_SESSION ['cart'] = array ();
 			}
 			if ($_SESSION ['cart'] [$curCategory] [$productId]) {
 				$productQuantity = intval ( $_SESSION ['cart'] [$curCategory] [$productId] ['quantity'] ) + 1;
@@ -35,6 +39,9 @@ class OrderController extends BaseController {
 					'quantity' => $productQuantity 
 				);
 			} else {
+				if (! isset ( $_SESSION ['cart'] [$curCategory] )) {
+					$_SESSION ['cart'] = array ();
+				}
 				$_SESSION ['cart'] [$curCategory] [$productId] = array (
 					'name' => $product ['name'], 
 					'price_text' => "{$product ['price']}元{$product ['price_num']}{$product ['price_unit']}", 
