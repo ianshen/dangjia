@@ -262,9 +262,26 @@ class ComTool {
     static function isUrl($url) {
         return preg_match ( '/^((https?|ftp|news):\/\/)[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is', $url ) ? true : false;
     }
-    
-    /**
-     * @param unknown_type $value
-     * @param unknown_type $default
-     */
+	
+	/**
+	 * 
+	 * @param unknown_type $categoryId
+	 * @return multitype:unknown number 
+	 */
+	static function getCart($categoryId) {
+		$cart = array ();
+		$cart ['products'] = array ();
+		$cart ['totalPrice'] = 0;
+		if (isset ( $_SESSION ['cart'] [$categoryId] )) {
+			$products = $_SESSION ['cart'] [$categoryId];
+			$totalPrice = 0;
+			foreach ( $products as &$v ) {
+				$v ['thisTotalPrice'] = intval ( $v ['price'] ) * intval ( $v ['quantity'] );
+				$totalPrice += $v ['thisTotalPrice'];
+			}
+			$cart ['products'] = $products;
+			$cart ['totalPrice'] = $totalPrice;
+		}
+		return $cart;
+	}
 }

@@ -50,10 +50,10 @@ $(function() {
 						trObj.attr("data-total-price" , thisTotalPrice);
 					}
 					// 计算总价
-					$("tbody tr.js-product-incart").each(function(){
+					$("table.product-cart-small tbody tr.js-product-incart").each(function(){
 						totalPrice += parseInt($(this).attr('data-total-price'));
 					});
-					$("#total-price").text("¥"+totalPrice);
+					$("#total-price").text("¥" + totalPrice);
 				}
 			}
 		});
