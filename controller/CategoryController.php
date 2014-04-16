@@ -11,6 +11,17 @@ class CategoryController extends BaseController {
         $this->assign ( 'group', $group );
         $this->assign ( 'store', $store );
         $this->assign ( 'goods', $goods );
+        if (isset ( $_SESSION ['cart'] [$cid] )) {
+            $curCart = $_SESSION ['cart'] [$cid];
+            $totalPrice = 0;
+            foreach ( $curCart as $v ) {
+                $v ['thisTotalPrice'] = intval ( $v ['price'] ) * intval ( $v ['quantity'] );
+                $totalPrice += $v ['thisTotalPrice'];
+            }
+            $this->assign ( 'curCart', $curCart );
+            $this->assign ( 'totalPrice', $totalPrice );
+        }
+        //print_r ( $_SESSION );
         $this->display ();
     }
 }

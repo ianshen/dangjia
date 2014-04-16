@@ -262,4 +262,9 @@ class ComTool {
     static function isUrl($url) {
         return preg_match ( '/^((https?|ftp|news):\/\/)[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is', $url ) ? true : false;
     }
+    
+    /**
+     * @param unknown_type $value
+     * @param unknown_type $default
+     */
 }

@@ -59,11 +59,19 @@ $config = array (
     '_controllersHome' => 'controller', 
     '_viewsHome' => 'view', 
     '_toolsHome' => 'tool', 
-    '_autoSession' => true, 
     '_error' => array (
         'ok' => '100000', 
         'err' => '100001', 
         'needlogin' => '100002',  //需要登录
         'wrongcaptcha' => '100003'  //验证码错误
+    ), 
+    '_session' => array (
+        'autoStart' => true 
+    ), 
+    '_cookie' => array (
+        'COOKIE_PREFIX' => '', 
+        'COOKIE_EXPIRE' => '', 
+        'COOKIE_PATH' => '', 
+        'COOKIE_DOMAIN' => '' 
     ) 
 );

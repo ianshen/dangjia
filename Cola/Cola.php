@@ -93,7 +93,8 @@ class Cola {
         self::getInstance ()->config->merge ( $config );
         
         //session_start
-        if (self::getConfig ( '_autoSession' )) {
+        if (self::getConfig ( '_session.autoStart' )) {
+            //ini_set('session.auto_start', 0);
             session_start ();
         }
         return self::$_instance;

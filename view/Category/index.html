@@ -85,15 +85,17 @@
 																	<?php foreach($this->goods as $good){ ?>
 																	<tr class="product-item">
 																		<td>
-																			<?php echo $good['name']; ?>
+																			<?php show($good['name']); ?>
 																		</td>
-																		<td>
-																			<?php $p='¥'.$good['price'].'('.$good['price_num'].$good['price_unit'].')';echo $p; ?>
+																		<td>¥<span> <?php show($good['price'],0); ?>
+																		</span>(<span> <?php show($good['price_num']); ?>
+																		</span> <?php show($good['price_unit']); ?>)
 																		</td>
-																		<td><img data-name="name"
-																			data-id="<?php echo $good['id']; ?>"
-																			data-price="<?php echo $p; ?>"
-																			src="<?php echo WWW_ROOT; ?>static/img/icon-add-off.gif"
+																		<td><img
+																			data-name="<?php show($good['name']); ?>"
+																			data-id="<?php show($good['id'],0); ?>"
+																			data-price="<?php show($good['price'],0); ?>"
+																			src="<?php show(WWW_ROOT); ?>static/img/icon-add-off.gif"
 																			class="add-to-cart"></td>
 																	</tr>
 																	<?php } ?>
@@ -136,6 +138,25 @@
 													</tr>
 												</thead>
 												<tbody>
+													<?php if(empty($this->curCart)){ ?>
+													<?php }else{ ?>
+													<?php foreach($this->curCart as $item){ ?>
+													<tr class="product-item js-product-incart"
+														data-total-price="" data-id="">
+														<td>'+ name +'</td>
+														<td><span>'+ price +'</span></td>
+														<td><span>&nbsp;<em class="quantity-text">1</em>&nbsp;
+														</span></td>
+													</tr>
+													<?php } ?>
+													<?php } ?>
+													<tr class="product-item js-product-incart"
+														data-total-price="" data-id="">
+														<td>'+ name +'</td>
+														<td><span>'+ price +'</span></td>
+														<td><span>&nbsp;<em class="quantity-text">1</em>&nbsp;
+														</span></td>
+													</tr>
 													<tr class="product-item js-total-price">
 														<td>&nbsp;</td>
 														<td>总计：</td>
