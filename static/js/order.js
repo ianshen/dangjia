@@ -24,7 +24,7 @@ $(function() {
 						async : false,
 						type : "POST",
 						url : $uroot + 'order/uc',
-						data : "",
+						data : "type=dec&proid="+id,
 						success : function(data) {
 							var data = $.parseJSON(data);
 							if (data.status == 100000) {
@@ -63,7 +63,7 @@ $(function() {
 			async : false,
 			type : "POST",
 			url : $uroot + 'order/uc',
-			data : "",
+			data : "type=inc&proid="+id,
 			success : function(data) {
 				var data = $.parseJSON(data);
 				if (data.status == 100000) {
@@ -84,25 +84,28 @@ $(function() {
 			follow : this,
 			content : '<div style="color:#666666;font-size:12px;">确定删除此商品吗？</div>',
 			okValue : '确定',
+			cancelValue : '取消',
 			width : '15em',
 			ok : function() {
 				$.ajax({
 					async : false,
 					type : "POST",
 					url : $uroot + 'order/uc',
-					data : "",
+					data : "type=rm&proid=" + id,
 					success : function(data) {
 						var data = $.parseJSON(data);
 						if (data.status == 100000) {
-							$(".table.product-cart").find("tr[data-id='"+id+"']").remove();
+							window.location.reload(true);
+							/*$(".table.product-cart").find("tr[data-id='"+id+"']").remove();
 							var len=$(".table.product-cart tbody tr").length;
 							if (len < 1) {
 								window.location.reload(true);
-							}
+							}*/
 						}
 					}
 				});
-			}
+			},
+			cancel:function(){}
 		});
 	});
 });

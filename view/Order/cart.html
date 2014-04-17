@@ -82,27 +82,33 @@
 																	<?php if(empty($this->products)){ ?>
 																	<?php }else{ ?>
 																	<?php foreach($this->products as $item){ ?>
-																	<tr class="product-item" data-id="<?php show($item['id']); ?>">
-																		<td><?php show($item['name']); ?></td>
-																		<td><span><?php show($item['price'],0); ?></span></td>
+																	<tr class="product-item"
+																		data-id="<?php show($item['id']); ?>">
+																		<td>
+																			<?php show($item['name']); ?>
+																		</td>
+																		<td>¥<span> <?php show($item['price'],0); ?>
+																		</span>(<span> <?php show($item['price_num'],0); ?>
+																		</span> <?php show($item['price_unit']); ?>)
+																		</td>
 																		<td><a class="js-decrement"
 																			href="javascript:void(0);">-</a> <span>&nbsp;<em
-																				class="quantity-text"><?php show($item['quantity'],0); ?></em>&nbsp;
+																				class="quantity-text"> <?php show($item['quantity'],0); ?>
+																			</em>&nbsp;
 																		</span> <a class="js-increment" href="javascript:void(0);">+</a></td>
 																		<td><small><a href="javascript:void(0);"
-																				class="js-rm-product" data-id="<?php show($item['id']); ?>">删除</a></small></td>
+																				class="js-rm-product"
+																				data-id="<?php show($item['id']); ?>">删除</a></small></td>
 																	</tr>
 																	<?php } ?>
 																	<?php } ?>
-																	<tr class="product-item" data-id="3">
-																		<td>TB - Monthly</td>
-																		<td><span>9</span></td>
-																		<td><a class="js-decrement"
-																			href="javascript:void(0);">-</a> <span>&nbsp;<em
-																				class="quantity-text">3</em>&nbsp;
-																		</span> <a class="js-increment" href="javascript:void(0);">+</a></td>
-																		<td><small><a class="js-rm-product"
-																				data-id="3">删除</a></small></td>
+																	<tr class="product-item js-total-price">
+																		<td>&nbsp;</td>
+																		<td>&nbsp;</td>
+																		<td>总计：</td>
+																		<td><span
+																			data-price="<?php show($this->totalPrice,0); ?>"
+																			id="total-price">¥<?php show($this->totalPrice,0); ?></span></td>
 																	</tr>
 																</tbody>
 															</table>
