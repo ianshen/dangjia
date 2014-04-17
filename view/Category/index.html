@@ -54,8 +54,8 @@
 										<a
 											href="<?php echo $this->urlroot; ?>g/<?php echo $this->group['id']; ?>">
 											<?php echo $this->group['name']; ?>
-										</a> &nbsp;&gt; <a href="javascript:void(0);"> <?php echo $this->category['name']; ?>
-										</a>
+										</a> &nbsp;&gt;
+										<?php echo $this->category['name']; ?>
 									</h2>
 								</div>
 								<div class="stream-container">
@@ -144,16 +144,22 @@
 													<tr class="product-item js-product-incart"
 														data-total-price="<?php show($item['thisTotalPrice']); ?>"
 														data-id="<?php show($item['id']); ?>">
-														<td><?php show($item['name']); ?></td>
-														<td><span><?php show($item['price'],0); ?></span></td>
-														<td><span>&nbsp;<em class="quantity-text"><?php show($item['quantity'],0); ?></em>&nbsp;</span></td>
+														<td>
+															<?php show($item['name']); ?>
+														</td>
+														<td><span> <?php show($item['price'],0); ?>
+														</span></td>
+														<td><span><em class="quantity-text"> <?php show($item['quantity'],0); ?>
+															</em> </span></td>
 													</tr>
 													<?php } ?>
 													<?php } ?>
 													<tr class="product-item js-total-price">
 														<td>&nbsp;</td>
 														<td>总计：</td>
-														<td><span data-price="<?php show($this->totalPrice,0); ?>" id="total-price">¥<?php show($this->totalPrice,0); ?></span></td>
+														<td><span
+															data-price="<?php show($this->totalPrice,0); ?>"
+															id="total-price">¥<?php show($this->totalPrice,0); ?></span></td>
 													</tr>
 													<tr class="product-item js-go-cart">
 														<td>&nbsp;</td>

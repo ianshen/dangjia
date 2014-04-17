@@ -10,7 +10,8 @@ $(function() {
 	$("a.js-decrement").die().live("click", function() {
 		var curNumObj = $(this).parent().find("em.quantity-text");
 		var curNum = parseInt(curNumObj.text());
-		var id = $(this).parent().parent().attr("data-id");
+		var id = $(this).attr("data-id");
+		var price = parseInt($(this).attr("data-price"));
 		if (curNum <= 1) {
 			art.dialog({
 				id : 'id-js-rm-product',
@@ -18,24 +19,29 @@ $(function() {
 				follow : this,
 				content : '<div style="color:#666666;font-size:12px;">确定删除此商品吗？</div>',
 				okValue : '确定',
+				cancelValue : '取消',
 				width : '15em',
 				ok : function() {
 					$.ajax({
 						async : false,
 						type : "POST",
 						url : $uroot + 'order/uc',
-						data : "type=dec&proid="+id,
+						data : "type=rm&proid="+id,
 						success : function(data) {
 							var data = $.parseJSON(data);
 							if (data.status == 100000) {
-								$(".table.product-cart").find("tr[data-id='"+id+"']").remove();
+								window.location.reload(true);
+								/*$(".table.product-cart").find("tr[data-id='"+id+"']").remove();
 								var len=$(".table.product-cart tbody tr").length;
 								if (len < 1) {
 									window.location.reload(true);
-								}
+								}*/
 							}
 						}
 					});
+				},
+				cancel:function(){
+					
 				}
 			});
 		}else{
@@ -43,13 +49,23 @@ $(function() {
 				async : false,
 				type : "POST",
 				url : $uroot + 'order/uc',
-				data : "",
+				data : "type=dec&proid="+id,
 				success : function(data) {
 					var data = $.parseJSON(data);
 					if (data.status == 100000) {
 						// 更新数量
-						curNumObj.text(curNum - 1);
+						var trObj = $(".table.product-cart-big").find("tr[data-id='"+id+"']");
+						var totalPrice = 0;
+						var thisTotalPrice = 0;
+						curNum = curNum - 1;
+						thisTotalPrice = curNum*price;
+						curNumObj.text(" "+curNum+" ");
+						trObj.attr("data-total-price" , thisTotalPrice);
 						// 更新总价
+						$("table.product-cart-big tbody tr.js-product-incart").each(function(){
+							totalPrice += parseInt($(this).attr('data-total-price'));
+						});
+						$("#total-price").text("¥" + totalPrice);
 					}
 				}
 			});
@@ -59,6 +75,8 @@ $(function() {
 	$("a.js-increment").die().live("click", function() {
 		var curNumObj = $(this).parent().find("em.quantity-text");
 		var curNum = parseInt(curNumObj.text());
+		var id = $(this).attr("data-id");
+		var price = parseInt($(this).attr("data-price"));
 		$.ajax({
 			async : false,
 			type : "POST",
@@ -68,8 +86,18 @@ $(function() {
 				var data = $.parseJSON(data);
 				if (data.status == 100000) {
 					// 更新数量
-					curNumObj.text(curNum + 1);
+					var trObj = $(".table.product-cart-big").find("tr[data-id='"+id+"']");
+					var totalPrice = 0;
+					var thisTotalPrice = 0;
+					curNum = curNum + 1;
+					thisTotalPrice = curNum*price;
+					curNumObj.text(" "+curNum+" ");
+					trObj.attr("data-total-price" , thisTotalPrice);
 					// 更新总价
+					$("table.product-cart-big tbody tr.js-product-incart").each(function(){
+						totalPrice += parseInt($(this).attr('data-total-price'));
+					});
+					$("#total-price").text("¥" + totalPrice);
 				}
 			}
 		});

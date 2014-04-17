@@ -24,7 +24,6 @@ class CategoryController extends BaseController {
 		$cart = ComTool::getCart ( $cid );
 		$this->assign ( 'products', $cart ['products'] );
 		$this->assign ( 'totalPrice', $cart ['totalPrice'] );
-		//print_r ( $curCart );
 		$this->display ();
 	}
 }
