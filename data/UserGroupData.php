@@ -40,12 +40,12 @@ class UserGroupData extends BaseData {
 		return $result;
 	}
 	
-	static function modify($id, $data) {
-		if (! $id || ! $data) {
+	static function modify($uid, $gid, $field, $data) {
+		if (! $uid || $gid || ! $data) {
 			return false;
 		}
 		$model = new UserGroupModel ();
-		$result = $model->update ( $id, $data );
+		$result = $model->modify ( $uid, $gid, $field, $data );
 		return $result;
 	}
 }

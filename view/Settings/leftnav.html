@@ -1,0 +1,15 @@
+<div class="module">
+	<ul>
+		<li class="<?php if(__ACTION__=='index'){ ?>active<?php } ?>"><a
+			href="<?php show($this->urlroot); ?>settings" class="list-link">帐号<span
+				class="Icon Icon--caretRight"></span></a></li>
+		<li class="<?php if(__ACTION__=='group'){ ?>active<?php } ?>"><a
+			href="<?php show($this->urlroot); ?>settings/group" class="list-link">圈子
+				<span class="Icon Icon--caretRight"></span>
+		</a></li>
+		<li class="<?php if(__ACTION__=='password'){ ?>active<?php } ?>"><a
+			href="<?php show($this->urlroot); ?>settings/password"
+			class="list-link">密码 <span class="Icon Icon--caretRight"></span>
+		</a></li>
+	</ul>
+</div>

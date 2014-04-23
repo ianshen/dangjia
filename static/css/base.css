@@ -259,3 +259,15 @@ h1,h2,h3,h4,h5,h6 {
 .f-lh30 {
 	line-height: 30px;
 }
+
+.f-wth100 {
+	width: 100px;
+}
+
+.f-wth150 {
+	width: 150px;
+}
+
+.f-wth200 {
+	width: 200px;
+}

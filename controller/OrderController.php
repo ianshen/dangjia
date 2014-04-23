@@ -104,7 +104,7 @@ class OrderController extends BaseController {
                         $_SESSION ['cart'] [$curCategory] [$productId] = $productInCart;
                     }
                     break;
-                case 'rm' :
+                case 'rm' : //delete
                     $_SESSION ['cart'] [$curCategory] [$productId] = array ();
                     unset ( $_SESSION ['cart'] [$curCategory] [$productId] );
                     break;

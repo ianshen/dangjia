@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 3.3.9
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 04 月 14 日 09:55
--- 服务器版本: 5.5.24-log
--- PHP 版本: 5.3.13
+-- 生成日期: 2014 年 04 月 20 日 10:58
+-- 服务器版本: 5.5.8
+-- PHP 版本: 5.3.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -76,7 +75,16 @@ CREATE TABLE IF NOT EXISTS `goods` (
   `order` int(11) NOT NULL DEFAULT '1' COMMENT '商品顺序',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `goods`
+--
+
+INSERT INTO `goods` (`id`, `name`, `category_id`, `price`, `price_num`, `price_unit`, `desc`, `create_time`, `create_date`, `order`, `status`) VALUES
+(1, '韭菜鸡蛋', 5, 15, 15, '个', '韭菜鸡蛋饺子', 1397571915, '2014-04-15', 0, 1),
+(2, '猪肉大葱', 5, 20, 15, '个', '猪肉大葱饺子', 1397571998, '2014-04-15', 0, 1),
+(3, '牛肉大葱', 5, 20, 1, '份', '牛肉大葱饺子', 1397572588, '2014-04-15', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -96,16 +104,15 @@ CREATE TABLE IF NOT EXISTS `group` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `ename` (`ename`) USING BTREE,
   KEY `id` (`id`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `group`
 --
 
 INSERT INTO `group` (`id`, `name`, `ename`, `create_time`, `create_date`, `region_id`, `addr_desc_template`, `status`) VALUES
-(1, '北辰泰岳大厦', 'beichentaiyue', 0, '0000-00-00', 3, '1塔18层', 0),
-(6, '明天第一城', 'mingtiandiyicheng', 1395236134, '2014-03-19', 3, '6号院3号楼2单元101', 1),
-(7, '', '', 0, '0000-00-00', 0, '', 0);
+(1, '北辰泰岳大厦', 'beichentaiyue', 1395236134, '2014-03-19', 3, '1塔18层', 1),
+(6, '明天第一城', 'mingtiandiyicheng', 1395236134, '2014-03-19', 3, '6号院3号楼2单元101', 1);
 
 -- --------------------------------------------------------
 
@@ -126,6 +133,11 @@ CREATE TABLE IF NOT EXISTS `order` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- 转存表中的数据 `order`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -141,6 +153,11 @@ CREATE TABLE IF NOT EXISTS `order_detail` (
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `order_detail`
+--
+
 
 -- --------------------------------------------------------
 
@@ -189,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `store` (
   `area` int(10) NOT NULL DEFAULT '0' COMMENT '所属地区',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `store`
@@ -198,9 +215,7 @@ CREATE TABLE IF NOT EXISTS `store` (
 INSERT INTO `store` (`id`, `name`, `ename`, `create_time`, `create_date`, `contact`, `tel`, `addr`, `city`, `area`, `status`) VALUES
 (5, '店铺1', 'dian1', 1395232865, '2014-03-19', '联系人1', '联系电话1', '明天第一城', 1, 1, 1),
 (6, '店铺2', 'dian2', 1395236063, '2014-03-19', '联系人2', '联系电话2', '明天第一城', 1, 2, 1),
-(7, '店铺3', 'dian3', 1395236084, '2014-03-19', '联系人3', '联系电话3', '明天第一城', 1, 2, 1),
-(8, 'aaa', 'aaa', 0, '0000-00-00', '', '', '', 0, 0, 1),
-(9, 'aaa', 'aaa', 0, '0000-00-00', '', '', '', 0, 0, 1);
+(7, '店铺3', 'dian3', 1395236084, '2014-03-19', '联系人3', '联系电话3', '明天第一城', 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -218,21 +233,18 @@ CREATE TABLE IF NOT EXISTS `user` (
   `update_time` int(11) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- 转存表中的数据 `user`
 --
 
 INSERT INTO `user` (`id`, `name`, `passwd`, `mobile`, `email`, `create_time`, `update_time`, `status`) VALUES
-(3, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 2014, 0, 0),
-(4, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 0, 0, 0),
-(5, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 0, 0, 0),
-(6, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 0, 0, 0),
-(7, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 0, 0, 0),
-(8, 'ian', 'a71a448d3d8474653e831749b8e71fcc', '', '', 0, 0, 0),
 (11, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951433', 'test1@126.com', 1397444811, 1397444811, 1),
-(12, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951439', 'test2@126.com', 1397444839, 1397444839, 1);
+(12, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951439', 'test2@126.com', 1397444839, 1397444839, 1),
+(13, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951435', 'test3@126.com', 1397480095, 1397480095, 1),
+(14, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951434', 'test4@126.com', 1397480588, 1397480588, 1),
+(15, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951436', 'test5@126.com', 1397480629, 1397480629, 1);
 
 -- --------------------------------------------------------
 
@@ -244,6 +256,8 @@ CREATE TABLE IF NOT EXISTS `user_group` (
   `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户',
   `group_id` int(11) NOT NULL DEFAULT '0' COMMENT '群组',
   `detail` varchar(128) NOT NULL DEFAULT '' COMMENT '用户在群组的具体信息，详细地址',
+  `linkman` varchar(32) NOT NULL DEFAULT '' COMMENT '在当前圈子内的联系人，非必须',
+  `mobile` varchar(32) NOT NULL DEFAULT '' COMMENT '在当前圈子内的联系电话，非必须',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`,`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -252,10 +266,6 @@ CREATE TABLE IF NOT EXISTS `user_group` (
 -- 转存表中的数据 `user_group`
 --
 
-INSERT INTO `user_group` (`user_id`, `group_id`, `detail`, `status`) VALUES
-(11, 1, '15层', 1),
-(12, 1, '15层', 1);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO `user_group` (`user_id`, `group_id`, `detail`, `linkman`, `mobile`, `status`) VALUES
+(11, 1, '15层', '', '', 1),
+(11, 6, '6号院3号楼', '', '', 1);

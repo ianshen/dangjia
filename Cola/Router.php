@@ -40,10 +40,10 @@ class Cola_Router {
         }
         
         if ($action = next ( $tmp )) {
-            define ( '__ACTION__', $action );
             $dispatchInfo ['action'] = $action . 'Action';
         }
         
+        define ( '__ACTION__', $action ? $action : 'index' );
         $params = array ();
         while ( false !== ($next = next ( $tmp )) ) {
             $params [$next] = urldecode ( next ( $tmp ) );

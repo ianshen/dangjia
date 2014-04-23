@@ -42,11 +42,10 @@ class AccController extends BaseController {
             $_SESSION ['islogin'] = 1; //登录标识
             $_SESSION ['user'] = array (
                 'id' => $user ['id'], 
-                'mobile' => $user ['id'], 
-                'email' => $user ['id'], 
-                'passwd' => $user ['id'] 
+                'mobile' => $user ['mobile'], 
+                'email' => $user ['email'], 
+                'passwd' => $user ['passwd'] 
             ); //登录用户信息
-            //$_SESSION ['cart'] = $_SESSION ['cart'] ? $_SESSION ['cart'] : array (); //购物车
             $returnUrl = '';
             /* $returnUrl = trim ( $this->post ( 'returnUrl' ) );
             $returnUrl = $returnUrl ? $returnUrl : ''; */

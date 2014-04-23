@@ -10,6 +10,9 @@
 	href="<?php echo WWW_ROOT; ?>static/css/common.css">
 <link rel="stylesheet"
 	href="<?php echo WWW_ROOT; ?>static/css/group.css">
+<link
+	href="<?php echo WWW_ROOT; ?>static/js/artDialog/skins/default.css"
+	rel="stylesheet" />
 <link rel="stylesheet"
 	href="<?php echo WWW_ROOT; ?>static/js/sco/css/sco.message.css">
 <title></title>
@@ -59,41 +62,91 @@
 													class="clearfix stream-item-activity stream-item-activity-network">
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
-															<a href="#" class=""><strong class="">帐号信息</strong></a>
+															<a href="#" class=""><strong class="">我加入的圈子</strong></a>
+														</div>
+													</div>
+													<ol class="activity-supplement  follow-more-than-two">
+														<li class="supplement">
+															<table class="table product-cart product-cart-big">
+																<thead>
+																	<tr>
+																		<th>圈子名称</th>
+																		<th>我在圈子里的位置</th>
+																		<th>操作</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<?php if(empty($this->myGroups)){ ?>
+																	<?php }else{ ?>
+																	<?php foreach($this->myGroups as $item){ ?>
+																	<tr data-gid="<?php show($item['group_id']); ?>">
+																		<td class="f-wth150"><a href="#"> <?php show($item['name']); ?>
+																		</a></td>
+																		<td class="js-group-detail f-wth150"><span
+																			class="js-addr-desc-text"> <?php show($item['detail']); ?>
+																		</span><span class="f-dn js-addr-desc-input"><input
+																				class="input-large js-addr-desc" type="text"
+																				placeholder="如：B座3号楼4层"
+																				value="<?php show($item['detail']); ?>"></span></td>
+																		<td class="f-wth150"><small><a
+																				href="javascript:void(0);" class="js-mod-detail"
+																				data-gid="<?php show($item['group_id']); ?>">修改</a></small>&nbsp;|&nbsp;<small><a
+																				href="javascript:void(0);" class="js-quit-group"
+																				data-gid="<?php show($item['group_id']); ?>">退出圈子</a></small></td>
+																	</tr>
+																	<?php } ?>
+																	<?php } ?>
+																</tbody>
+															</table>
+														</li>
+													</ol>
+												</div>
+											</li>
+										</ol>
+										<ol class="stream-items">
+											<li class="stream-item">
+												<div
+													class="clearfix stream-item-activity stream-item-activity-network">
+													<div class="stream-item-activity-header">
+														<div class="stream-item-activity-line">
+															<a href="#" class=""><strong class="">加入新的圈子</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
 														<li class="supplement">
 															<div>
-																<form class="form-horizontal" id="accountform"
+																<form
+																	action="<?php show($this->urlroot); ?>settings/joingroup"
+																	class="form-horizontal" id="joingroupform"
 																	method="post">
 																	<div class="control-group">
 																		<div class="control-label"></div>
 																		<div class="controls"></div>
 																	</div>
-																	<div class="control-group">
-																		<label class="control-label" for="email">邮箱</label>
+																	<?php include('view/Public/group/detail.html'); ?>
+																	<!-- <div class="control-group">
 																		<div class="controls">
-																			<input id="email" name="email" type="text"
-																				placeholder="常用邮箱" /> <span
-																				class="help-block f-fs1">常用邮箱（可用作登录号）</span>
+																			<a id="js-show-more" class="">更多+</a>
 																		</div>
 																	</div>
-																	<div class="control-group">
-																		<label class="control-label" for="mobile">手机</label>
-																		<div class="controls">
-																			<input id="mobile" name="mobile" type="text"
-																				placeholder="常用手机号" /> <span
-																				class="help-block f-fs1">真实手机号码（可用作登录号），以便顺利享受服务</span>
+																	<div class="f-dn" id="js-more-settings">
+																		<div class="control-group">
+																			<label class="control-label" for="mobile">手机</label>
+																			<div class="controls">
+																				<input id="mobile" name="mobile" type="text"
+																					placeholder="常用手机号" /> <span
+																					class="help-block f-fs1">你在此圈子里的常用手机号</span>
+																			</div>
 																		</div>
-																	</div>
-																	<div class="control-group">
-																		<label class="control-label" for="name">名称</label>
-																		<div class="controls">
-																			<input id="name" name="name" type="text"
-																				placeholder="常用名" /> <span class="help-block f-fs1">可为真实姓名或你想用的任何代号</span>
+																		<div class="control-group">
+																			<label class="control-label" for="name">名称</label>
+																			<div class="controls">
+																				<input id="name" name="name" type="text"
+																					placeholder="常用名" /> <span
+																					class="help-block f-fs1">可为真实姓名或你想用的任何代号</span>
+																			</div>
 																		</div>
-																	</div>
+																	</div> -->
 																	<div class="control-group">
 																		<label class="control-label" for="captcha">验证码</label>
 																		<div class="controls">
@@ -137,7 +190,10 @@
 	<script src="<?php echo WWW_ROOT; ?>static/js/bootstrap.min.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/jquery.form.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/sco/js/sco.message.js"></script>
+	<script
+		src="<?php echo WWW_ROOT; ?>static/js/artDialog/artDialog.min.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/funcs.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/common.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/settings.js"></script>
 </body>
 </html>

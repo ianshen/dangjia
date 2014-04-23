@@ -7,6 +7,22 @@ class GroupData extends BaseData {
 		return $result;
 	}
 	
+	static function dataByWhere($where) {
+		if (! $where) {
+			return false;
+		}
+		$model = new GroupModel ();
+		$result = $model->dataByWhere ( $where );
+		if (! $result) {
+			return false;
+		}
+		$list = array ();
+		foreach ( $result as $k => $item ) {
+			$list [$item ['id']] = $item;
+		}
+		return $list;
+	}
+	
 	static function getById($id) {
 		if (! $id) {
 			return false;
