@@ -1,6 +1,7 @@
 $(function() {
 	var $uroot = $CONFIG['uroot'];
-	//选择城市
+	var $wroot = $CONFIG['wroot'];
+	/*//选择城市
 	$("#selcity ul.dropdown-menu li a").die().live("click", function() {
 		var curElem = $(this);
 		var id = parseInt($(this).attr("data-id"));
@@ -56,5 +57,25 @@ $(function() {
 		if (id) {
 			window.location.href = $uroot + "g/" + id;
 		}
+	});*/
+	//跳转去选定圈子
+	$("#gogogo").die().live('click', function() {
+		var city = parseInt($('select#city').val());
+		var area = parseInt($('select#area').val());
+		var group = parseInt($('select#group').val());
+		var addr_desc = $('input#addr_desc').val();
+		if (!city) {
+			$.scojs_message('请选择城市', $.scojs_message.TYPE_ERROR);
+			return false;
+		}
+		if (!area) {
+			$.scojs_message('请选择区域', $.scojs_message.TYPE_ERROR);
+			return false;
+		}
+		if (!group) {
+			$.scojs_message('请选择圈子', $.scojs_message.TYPE_ERROR);
+			return false;
+		}
+		window.location.href = $uroot + "g/" + group;
 	});
 });

@@ -1,4 +1,9 @@
 <?php
+/**
+ * 订单相关
+ * @author Administrator
+ *
+ */
 class OrderController extends BaseController {
     
     public function indexAction() {

@@ -1,4 +1,9 @@
 <?php
+/**
+ * 帐号登录、注册
+ * @author Administrator
+ *
+ */
 class AccController extends BaseController {
     
     public function indexAction() {
@@ -40,19 +45,24 @@ class AccController extends BaseController {
             }
             //成功则写session
             $_SESSION ['islogin'] = 1; //登录标识
+            //登录用户信息
             $_SESSION ['user'] = array (
                 'id' => $user ['id'], 
                 'mobile' => $user ['mobile'], 
                 'email' => $user ['email'], 
                 'passwd' => $user ['passwd'] 
-            ); //登录用户信息
-            $returnUrl = '';
-            /* $returnUrl = trim ( $this->post ( 'returnUrl' ) );
-            $returnUrl = $returnUrl ? $returnUrl : ''; */
-            ComTool::ajax ( 100000, 'ok', $returnUrl );
+            );
+            $returnUrl = trim ( $this->post ( 'returnUrl' ) );
+            $returnUrl = $returnUrl ? $returnUrl : '#';
+            ComTool::ajax ( 100000, '登录成功，即将跳转', $returnUrl );
         }
+        if ($this->isLogin ()) {
+            $returnUrl = ComTool::urlRoot ();
+            //Cola_Response::redirect ( $returnUrl );
+        }
+        $returnUrl = urldecode ( $this->get ( 'returnUrl', '' ) );
+        $this->assign ( 'returnUrl', $returnUrl );
         $this->display ();
-    
     }
     
     /**
@@ -121,6 +131,10 @@ class AccController extends BaseController {
                 'status' => 1 
             ) );
             ComTool::result ( $res, '服务器忙，请重试', '注册成功' );
+        }
+        if ($this->isLogin ()) {
+            $returnUrl = ComTool::urlRoot ();
+            //Cola_Response::redirect ( $returnUrl );
         }
         $this->display ();
     }

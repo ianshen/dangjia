@@ -79,6 +79,9 @@ $(function() {
 		success : function(data) {
 			if (data.status == 100000) {
 				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
+				setTimeout(function() {
+					window.location.href = data.data;
+				}, 3000);
 			} else {
 				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 			}

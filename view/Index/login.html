@@ -49,77 +49,38 @@
 													class="clearfix stream-item-activity stream-item-activity-network">
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
-															<a href="#" class=""><strong class="">注册成为会员</strong></a>
+															<a href="#" class=""><strong class="">选择要查看的圈子</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
 														<li class="supplement">
 															<div>
-																<form class="form-horizontal" id="regform" method="post">
+																<form class="form-horizontal" id="form" method="post">
 																	<div class="control-group">
 																		<div class="control-label"></div>
 																		<div class="controls"></div>
 																	</div>
 																	<div class="control-group">
-																		<label class="control-label" for="email">邮箱</label>
-																		<div class="controls">
-																			<input id="email" name="email" type="text"
-																				placeholder="常用邮箱" />
-																		</div>
-																	</div>
-																	<div class="control-group">
-																		<label class="control-label" for="mobile">手机</label>
-																		<div class="controls">
-																			<input id="mobile" name="mobile" type="text"
-																				placeholder="常用手机号" />
-																			<!-- <span class="help-inline">#重要#真实手机号码</span> -->
-																			<span class="help-block f-fs1">#重要#真实手机号码,以便顺利享受服务</span>
-																		</div>
-																	</div>
-																	<div class="control-group">
-																		<label class="control-label" for="group">圈子</label>
+																		<label class="control-label">你先要&nbsp;&gt;</label>
 																		<div class="controls">
 																			<select class="input-small" id="city" name="city">
 																			</select> <select class="input-small" id="area" name="area">
 																				<option>选择区域</option>
 																			</select> <select class="input-small" id="group" name="group">
 																				<option>选择圈子</option>
-																			</select> <br> <br> <input
-																				class="input-large js-addr-desc" name="addr_desc"
-																				id="addr_desc" type="text" placeholder="如：B座3号楼4层">
-																			<span class="help-block f-fs1">填写详细位置，以便我们更好的找到你，<span
-																				class="js-addr-desc">如：B座3号楼4层</span></span>
+																			</select>
 																		</div>
 																	</div>
+																	<hr>
 																	<div class="control-group">
-																		<label class="control-label" for="passwd">密码</label>
-																		<div class="controls">
-																			<input id="passwd" name="passwd" type="password"
-																				placeholder="输入密码" />
-																		</div>
+																		<div class="control-label"></div>
+																		<div class="controls"></div>
 																	</div>
 																	<div class="control-group">
-																		<label class="control-label" for="cpasswd">确认密码</label>
+																		<label class="control-label"></label>
 																		<div class="controls">
-																			<input id="cpasswd" name="cpasswd" type="password"
-																				placeholder="再次输入密码" />
-																		</div>
-																	</div>
-																	<div class="control-group">
-																		<label class="control-label" for="captcha">验证码</label>
-																		<div class="controls">
-																			<input id="captcha" name="captcha" type="text"
-																				class="input-small border1" placeholder="输入验证码" />
-																			<img title="点击换一换" id="captcha_img"
-																				onclick="javascript:captchachg();"
-																				src="<?php echo $this->urlroot; ?>acc/captcha" /> <a
-																				onclick="javascript:captchachg();" class="f-fs1"
-																				href="javascript:void(0);">&nbsp;换一张?</a>
-																		</div>
-																	</div>
-																	<div class="control-group">
-																		<div class="controls">
-																			<button type="submit" class="btn btn-primary">注册</button>
+																			<button type="button" class="btn btn-primary"
+																				id="gogogo">继续前往&gt;&gt;</button>
 																		</div>
 																	</div>
 																</form>
@@ -152,9 +113,8 @@
 	<script src="<?php echo WWW_ROOT; ?>static/js/jquery-1.8.3.min.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="<?php echo WWW_ROOT; ?>static/js/bootstrap.min.js"></script>
-	<script src="<?php echo WWW_ROOT; ?>static/js/jquery.form.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/sco/js/sco.message.js"></script>
-	<script src="<?php echo WWW_ROOT; ?>static/js/funcs.js"></script>
-	<script src="<?php echo WWW_ROOT; ?>static/js/acc.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/common.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/index.js"></script>
 </body>
 </html>
