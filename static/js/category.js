@@ -1,7 +1,6 @@
 $(function() {
 	var $uroot = $CONFIG['uroot'];
 	var $wroot = $CONFIG['wroot'];
-	var $uroot = $CONFIG['uroot'];
 	// 商品列表table hover事件
 	$(".product-item").die().hover(
 			function() {
@@ -39,7 +38,7 @@ $(function() {
 						var tr = '<tr class="product-item js-product-incart" data-total-price="'+ price +'" data-id="' + id + '"> \
 						<td>'+ name +'</td> \
 						<td><span>'+ price +'</span></td> \
-						<td><span>&nbsp;<em class="quantity-text">1</em>&nbsp;</span></td> \
+						<td><span><em class="quantity-text">1</em></span></td> \
 						</tr>';
 						$("tr.js-total-price").before(tr);
 					}else{

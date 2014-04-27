@@ -31,19 +31,6 @@
 			</div>
 		</div>
 		<div class="row-fluid">
-			<!-- <div class="span2">
-				<ul class="nav nav-list">
-					<li class="nav-header">列表标题</li>
-					<li class="active"><a href="#">首页</a></li>
-					<li><a href="#">库</a></li>
-					<li><a href="#">应用</a></li>
-					<li class="nav-header">功能列表</li>
-					<li><a href="#">资料</a></li>
-					<li><a href="#">设置</a></li>
-					<li class="divider"></li>
-					<li><a href="#">帮助</a></li>
-				</ul>
-			</div> -->
 			<div class="span8">
 				<div class="row-fluid">
 					<div class="span12">
@@ -66,8 +53,11 @@
 													class="clearfix stream-item-activity stream-item-activity-network">
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
-															<a href="javascript:void(0);" class=""><strong
-																class="">清单</strong></a>
+															<a href="javascript:void(0);" class="f-cst"><strong
+																class="">清单</strong> <?php if($this->isOn){ ?> <strong
+																id="time-countdown" class="f-fr">剩余：0小时00分00秒</strong> <?php }else{ ?>
+																<strong class="f-fr">（每天<?php show($this->category['start_time']); ?>至<?php show($this->category['end_time']); ?>开放）
+															</strong> <?php } ?></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
@@ -77,7 +67,9 @@
 																	<tr>
 																		<th>名称</th>
 																		<th>价格</th>
+																		<?php if($this->isOn){ ?>
 																		<th>购买</th>
+																		<?php } ?>
 																	</tr>
 																</thead>
 																<tbody>
@@ -91,12 +83,14 @@
 																		</span>(<span> <?php show($good['price_num']); ?>
 																		</span> <?php show($good['price_unit']); ?>)
 																		</td>
+																		<?php if($this->isOn){ ?>
 																		<td><img
 																			data-name="<?php show($good['name']); ?>"
 																			data-id="<?php show($good['id'],0); ?>"
 																			data-price="<?php show($good['price'],0); ?>"
 																			src="<?php show(WWW_ROOT); ?>static/img/icon-add-off.gif"
 																			class="add-to-cart"></td>
+																		<?php } ?>
 																	</tr>
 																	<?php } ?>
 																	<?php }else{ ?>
@@ -119,60 +113,9 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="dashboard">
-							<div class="module trends">
-								<div class="trends-inner">
-									<div class="flex-module trends-container">
-										<div class="flex-module-header">
-											<h3>
-												<span class="trend-location"> 购物车 </span>
-											</h3>
-											<small>· <a class="change-trends">更改</a></small>
-										</div>
-										<div class="flex-module-inner">
-											<table class="table product-cart-small">
-												<thead>
-													<tr>
-														<th>名称</th>
-														<th>价格</th>
-														<th>数量</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php if(empty($this->products)){ ?>
-													<?php }else{ ?>
-													<?php foreach($this->products as $item){ ?>
-													<tr class="product-item js-product-incart"
-														data-total-price="<?php show($item['thisTotalPrice']); ?>"
-														data-id="<?php show($item['id']); ?>">
-														<td>
-															<?php show($item['name']); ?>
-														</td>
-														<td><span> <?php show($item['price'],0); ?>
-														</span></td>
-														<td><span><em class="quantity-text"> <?php show($item['quantity'],0); ?>
-															</em> </span></td>
-													</tr>
-													<?php } ?>
-													<?php } ?>
-													<tr class="product-item js-total-price">
-														<td>&nbsp;</td>
-														<td>总计：</td>
-														<td><span
-															data-price="<?php show($this->totalPrice,0); ?>"
-															id="total-price">¥<?php show($this->totalPrice,0); ?></span></td>
-													</tr>
-													<tr class="product-item js-go-cart">
-														<td>&nbsp;</td>
-														<td>&nbsp;</td>
-														<td><a class="btn btn-danger btn-small"
-															href="<?php echo $this->urlroot; ?>order/cart/g/<?php show(base64_encode($this->group['id'])); ?>/c/<?php show(base64_encode($this->category['id'])); ?>">去结算</a></td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
+							<?php if($this->isOn){ ?>
+							<?php include('view/Public/smallcart.html'); ?>
+							<?php } ?>
 							<?php include('view/Public/module.html'); ?>
 							<?php include('view/Public/copyright.html'); ?>
 						</div>
@@ -185,6 +128,21 @@
 	<script src="<?php echo WWW_ROOT; ?>static/js/jquery-1.8.3.min.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="<?php echo WWW_ROOT; ?>static/js/bootstrap.min.js"></script>
+	<script
+		src="<?php echo WWW_ROOT; ?>static/js/countdown/jquery.countdown.min.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/category.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			var endtime = '<?php show(date("Y/m/d")." ".$this->category["end_time"]); ?>';
+			$('#time-countdown').countdown(endtime).on('update.countdown',
+					function(event) {
+						$(this).html(event.strftime('剩余：%-H小时%M分%S秒'));
+					}).on('finish.countdown', function() {
+				setTimeout(function() {
+					window.location.reload(true);
+				}, 1000);
+			});
+		});
+	</script>
 </body>
 </html>

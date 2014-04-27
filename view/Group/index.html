@@ -64,12 +64,11 @@
 													class="clearfix stream-item-activity stream-item-activity-network">
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
-															<a href="#" class=""><strong class="">LeBron
-																	James</strong></a>
+															<a href="javascript:void(0);" class="f-cst"><strong class="">敬请期待</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
-														<li class="supplement f-ib"><a>aaa</a></li>
+														<li class="supplement f-ib"><a>啊哦！此圈子暂时还没有分类哦~~~</a></li>
 													</ol>
 												</div>
 											</li>
@@ -80,15 +79,15 @@
 													class="clearfix stream-item-activity stream-item-activity-network">
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
-															<a href="#" class=""><strong class=""> <?php echo $cat['name']; ?>
+															<a href="javascript:void(0);" class="f-cst"><strong class=""> <?php show($cat['name']); ?>
 															</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
 														<?php foreach($cat['children'] as $v){ ?>
 														<li class="supplement f-ib"><a
-															href="<?php echo $this->urlroot; ?>c/<?php echo $v['id']; ?>">
-																<?php echo $v['name']; ?>
+															href="<?php show($this->urlroot); ?>c/<?php show($v['id'],0); ?>">
+																<?php show($v['name']); ?>
 														</a></li>
 														<?php } ?>
 													</ol>
