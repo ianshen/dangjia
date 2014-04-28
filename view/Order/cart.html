@@ -175,59 +175,13 @@
 																</div>
 															</div>
 														</li>
-														<li class="supplement"><a href="javascript:void(0);"
+														<li class="supplement"><input type="" id="cate"
+															value="<?php show(base64_encode($this->category['id'])); ?>">
+															<a href="javascript:void(0);"
 															class="btn btn-danger btn-small">提交订单</a></li>
 													</ol>
 												</div>
 											</li>
-											<!-- <li class="stream-item">
-												<div
-													class="clearfix stream-item-activity stream-item-activity-network">
-													<div class="stream-item-activity-header">
-														<div class="stream-item-activity-line">
-															<a href="javascript:void(0);" class=""><strong
-																class="">收货人</strong></a>
-														</div>
-													</div>
-													<ol class="activity-supplement  follow-more-than-two">
-														<li class="supplement f-ib">
-															<div class="control-group">
-																<div class="controls">
-																	<input class="input-small" name="" id="" type="text"
-																		placeholder="常用手机号码">&nbsp;<input
-																		class="input-small" name="" id="" type="text"
-																		placeholder="收货人姓名">
-																</div>
-															</div>
-														</li>
-													</ol>
-												</div>
-											</li> -->
-											<!-- <li class="stream-item">
-												<div
-													class="clearfix stream-item-activity stream-item-activity-network">
-													<div class="stream-item-activity-header">
-														<div class="stream-item-activity-line">
-															<a href="javascript:void(0);" class=""><strong
-																class="">收货地址</strong></a>
-														</div>
-													</div>
-													<ol class="activity-supplement  follow-more-than-two">
-														<li class="supplement f-ib">
-															<div class="control-group">
-																<div class="controls">
-																	<span class="input-small uneditable-input"> <?php show($this->group['name']); ?>
-																	</span>&nbsp;<input class="input-medium js-addr-desc"
-																		name="addr_desc" id="addr_desc" type="text"
-																		placeholder="如：B座3号楼4层"> <span
-																		class="help-block f-fs1">填写详细位置，以便我们更好的找到你，<span
-																		class="js-addr-desc">如：B座3号楼4层</span></span>
-																</div>
-															</div>
-														</li>
-													</ol>
-												</div>
-											</li> -->
 										</ol>
 									</div>
 								</div>
@@ -244,6 +198,7 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="dashboard">
+							<?php include('view/Public/provider.html'); ?>
 							<?php include('view/Public/module.html'); ?>
 							<?php include('view/Public/copyright.html'); ?>
 						</div>

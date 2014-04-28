@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 04 月 20 日 10:58
+-- 生成日期: 2014 年 04 月 28 日 14:32
 -- 服务器版本: 5.5.8
 -- PHP 版本: 5.3.5
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `pid` int(11) NOT NULL DEFAULT '0' COMMENT '父级id，level1的pid为0',
   `name` varchar(32) NOT NULL DEFAULT '' COMMENT '分类名称',
   `ename` varchar(32) NOT NULL DEFAULT '' COMMENT '分类拼音',
-  `desc` varchar(512) NOT NULL DEFAULT '' COMMENT '说明文字',
+  `desc` varchar(256) NOT NULL DEFAULT '' COMMENT '说明文字',
   `create_time` int(11) NOT NULL DEFAULT '0',
   `update_time` int(11) NOT NULL DEFAULT '0',
   `time_limit` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否定时',
@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `end_time` time NOT NULL DEFAULT '00:00:00' COMMENT '结束时间，time_limit为1时设置此值',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `order_way` tinyint(1) NOT NULL DEFAULT '0' COMMENT '此分类订单形式(1普通订单产生方式、2生成优惠码方式)',
+  `deliver_desc` varchar(64) NOT NULL DEFAULT '' COMMENT '货物配送时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
@@ -49,12 +50,12 @@ CREATE TABLE IF NOT EXISTS `category` (
 -- 转存表中的数据 `category`
 --
 
-INSERT INTO `category` (`id`, `group_id`, `store_id`, `level`, `pid`, `name`, `ename`, `desc`, `create_time`, `update_time`, `time_limit`, `days`, `start_time`, `end_time`, `status`, `order_way`) VALUES
-(3, 1, 5, 1, 0, '订午餐', 'dingwucan', '供人订午餐', 1395237337, 1395237337, 1, '1,2,3,4,5', '08:00:00', '11:00:00', 1, 1),
-(4, 1, 0, 1, 0, '果蔬', 'guoshu', '订水果蔬菜', 1395323280, 1395323280, 1, '1,2,3,4,5', '11:00:00', '14:00:00', 1, 1),
-(5, 1, 5, 2, 3, '饺子', 'jiaozi', '饺子', 1395323445, 1395323445, 1, '1,2,3,4,5', '08:00:00', '11:00:00', 1, 1),
-(6, 1, 5, 2, 4, '水果', 'shuiguo', '订水果', 1395323656, 1395323656, 1, '1,2,3,4,5', '11:00:00', '14:00:00', 1, 1),
-(7, 1, 6, 2, 4, '蔬菜', 'shucai', '订蔬菜', 1395323716, 1395323716, 1, '1,2,3,4,5', '13:00:00', '16:00:00', 1, 1);
+INSERT INTO `category` (`id`, `group_id`, `store_id`, `level`, `pid`, `name`, `ename`, `desc`, `create_time`, `update_time`, `time_limit`, `days`, `start_time`, `end_time`, `status`, `order_way`, `deliver_desc`) VALUES
+(3, 1, 5, 1, 0, '订午餐', 'dingwucan', '供人订午餐', 1395237337, 1395237337, 1, '1,2,3,4,5', '08:00:00', '11:00:00', 1, 1, ''),
+(4, 1, 0, 1, 0, '果蔬', 'guoshu', '订水果蔬菜', 1395323280, 1395323280, 1, '1,2,3,4,5', '11:00:00', '14:00:00', 1, 1, ''),
+(5, 1, 5, 2, 3, '饺子', 'jiaozi', '饺子', 1395323445, 1395323445, 1, '1,2,3,4,5', '08:00:00', '11:00:00', 1, 1, ''),
+(6, 1, 5, 2, 4, '水果', 'shuiguo', '订水果', 1395323656, 1395323656, 1, '1,2,3,4,5', '11:00:00', '14:00:00', 1, 1, ''),
+(7, 1, 6, 2, 4, '蔬菜', 'shucai', '订蔬菜', 1395323716, 1395323716, 1, '1,2,3,4,5', '13:00:00', '16:00:00', 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -202,6 +203,7 @@ CREATE TABLE IF NOT EXISTS `store` (
   `contact` varchar(16) DEFAULT '' COMMENT '联系人',
   `tel` varchar(32) DEFAULT '' COMMENT '联系电话',
   `addr` varchar(64) NOT NULL DEFAULT '' COMMENT '店铺详细地址',
+  `desc` varchar(256) NOT NULL DEFAULT '' COMMENT '店铺描述',
   `city` int(10) NOT NULL DEFAULT '0' COMMENT '所属城市',
   `area` int(10) NOT NULL DEFAULT '0' COMMENT '所属地区',
   `status` tinyint(1) NOT NULL DEFAULT '0',
@@ -212,10 +214,10 @@ CREATE TABLE IF NOT EXISTS `store` (
 -- 转存表中的数据 `store`
 --
 
-INSERT INTO `store` (`id`, `name`, `ename`, `create_time`, `create_date`, `contact`, `tel`, `addr`, `city`, `area`, `status`) VALUES
-(5, '店铺1', 'dian1', 1395232865, '2014-03-19', '联系人1', '联系电话1', '明天第一城', 1, 1, 1),
-(6, '店铺2', 'dian2', 1395236063, '2014-03-19', '联系人2', '联系电话2', '明天第一城', 1, 2, 1),
-(7, '店铺3', 'dian3', 1395236084, '2014-03-19', '联系人3', '联系电话3', '明天第一城', 1, 2, 1);
+INSERT INTO `store` (`id`, `name`, `ename`, `create_time`, `create_date`, `contact`, `tel`, `addr`, `desc`, `city`, `area`, `status`) VALUES
+(5, '店铺1', 'dian1', 1395232865, '2014-03-19', '联系人1', '联系电话1', '明天第一城', '', 1, 1, 1),
+(6, '店铺2', 'dian2', 1395236063, '2014-03-19', '联系人2', '联系电话2', '明天第一城', '', 1, 2, 1),
+(7, '店铺3', 'dian3', 1395236084, '2014-03-19', '联系人3', '联系电话3', '明天第一城', '', 1, 2, 1);
 
 -- --------------------------------------------------------
 

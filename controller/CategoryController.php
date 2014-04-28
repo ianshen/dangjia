@@ -6,7 +6,7 @@ class CategoryController extends BaseController {
 		$category = CategoryData::getById ( $cid );
 		$curTime = time ();
 		$category ['start_time'] = '21:00:00';
-		$category ['end_time'] = '23:00:00';
+		$category ['end_time'] = '24:00:00';
 		$startTime = $category ['start_time'];
 		$startTime = strtotime ( $startTime );
 		$endTime = $category ['end_time'];

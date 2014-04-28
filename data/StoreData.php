@@ -24,7 +24,7 @@ class StoreData extends BaseData {
 		if (! $result) {
 			return false;
 		}
-		return $result;
+		return $result[0];
     }
     
     static function del() {

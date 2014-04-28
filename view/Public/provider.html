@@ -1,0 +1,41 @@
+<div class="module trends">
+	<div class="trends-inner">
+		<div class="flex-module trends-container">
+			<div class="flex-module-header">
+				<h3>
+					<span class="trend-location"> 介绍 </span>
+				</h3>
+			</div>
+			<div class="flex-module-inner">
+				<dl>
+					<dt>服务时间</dt>
+					<dd>
+						<?php show($this->category['start_time']); ?>
+						至
+						<?php show($this->category['end_time']); ?>
+					</dd>
+					<dt>配送说明</dt>
+					<dd>
+						<?php show($this->category['deliver_desc']); ?>
+					</dd>
+					<dt>服务提供方</dt>
+					<dd>
+						<?php show($this->store['name']); ?>
+					</dd>
+					<dt>联系电话</dt>
+					<dd>
+						<?php show($this->store['tel']); ?>
+					</dd>
+					<dt>联系地址</dt>
+					<dd>
+						<?php show($this->store['addr']); ?>
+					</dd>
+					<dt>描述</dt>
+					<dd>
+						<?php show($this->store['desc']); ?>
+					</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+</div>
