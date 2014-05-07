@@ -38,7 +38,7 @@
 							<div class="content-header">
 								<div class="header-inner">
 									<h2 class="">
-										<a
+										<a title="去看看所有分类"
 											href="<?php echo $this->urlroot; ?>g/<?php echo $this->group['id']; ?>">
 											<?php echo $this->group['name']; ?>
 										</a> &nbsp;&gt;
@@ -84,7 +84,7 @@
 																		</span> <?php show($good['price_unit']); ?>)
 																		</td>
 																		<?php if($this->isOn){ ?>
-																		<td><img
+																		<td><img title="点击加入购物车"
 																			data-name="<?php show($good['name']); ?>"
 																			data-id="<?php show($good['id'],0); ?>"
 																			data-price="<?php show($good['price'],0); ?>"

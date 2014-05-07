@@ -123,12 +123,29 @@ class OrderController extends BaseController {
 	 */
 	public function goAction() {
 		if (ComTool::isAjax ()) {
+			if (! $this->isLogin ()) {
+				ComTool::ajax ( Cola::getConfig ( '_error.mustlogin' ), '请先登录' );
+			}
+			$mobile = trim ( $this->post ( 'mobile' ) );
+			ComTool::checkEmpty ( $mobile, '请填写常用手机号' );
+			if (! ComTool::isMobile ( $mobile )) {
+				ComTool::ajax ( 100001, '请填写正确的手机号' );
+			}
+			$receiver = $this->post ( 'receiver', '' );
+			ComTool::checkMaxLen ( $receiver, 16, "收货人姓名最多16位" );
+			$addrDesc = $this->post ( 'addr_desc', '' );
+			ComTool::checkMaxLen ( $addrDesc, 32, "详细位置最多32位" );
 			$curCategory = $this->post ( 'cate', 0 );
+			$curCategory = intval ( base64_decode ( $curCategory ) );
+			if (! isset ( $_SESSION ['cart'] [$curCategory] )) {
+				ComTool::ajax ( 100001, '购物车为空' );
+			}
 			$cart = $_SESSION ['cart'] [$curCategory];
 			if (! $cart) {
 				ComTool::ajax ( 100001, '购物车为空' );
 			}
-		
+			
+			ComTool::ajax ( 100000, 'ok' );
 		}
 	}
 	

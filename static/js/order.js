@@ -136,4 +136,42 @@ $(function() {
 			cancel:function(){}
 		});
 	});
+	// 提交订单
+	var goOptions = {
+		dataType : 'json',
+		success : function(data) {
+			if (data.status == 100000) {
+				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
+				setTimeout(function() {
+					
+				}, 3000);
+			} else if(data.status == 100002) {
+				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
+				setTimeout(function() {
+					var curUrl = window.location.href;
+					window.location.href = $uroot + "acc/login?returnUrl=" + urlencode(curUrl);
+				}, 3000);
+			} else {
+				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
+			}
+		},
+		beforeSubmit : function() {
+			var mobile = $('input#mobile').val();
+			var receiver = $('input#receiver').val();
+			var addr_desc = $('input#addr_desc').val();
+			if (!mobile) {
+				$.scojs_message('请填写常用手机号', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if (!isMobile(mobile)) {
+				$.scojs_message('请填写正确的手机号', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if (receiver.length>16) {
+				$.scojs_message('收货人姓名最多16位', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+		}
+	};
+	$('#goform').ajaxForm(goOptions);
 });

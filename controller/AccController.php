@@ -37,7 +37,7 @@ class AccController extends BaseController {
                 ComTool::ajax ( 100001, '请填写正确的邮箱或手机号' );
             }
             if (empty ( $user ) || md5 ( $passwd ) != $user ['passwd']) {
-                ComTool::ajax ( 100001, '帐号或密码错误' );
+                //ComTool::ajax ( 100001, '帐号或密码错误' );
             }
             //记住我一个月
             if (! empty ( $rememberme ) && $rememberme == 'on') {
