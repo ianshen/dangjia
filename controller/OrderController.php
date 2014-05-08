@@ -26,7 +26,21 @@ class OrderController extends BaseController {
 		$cart = array ();
 		$cart = $this->getCart ( $cid );
 		$group = GroupData::getById ( $category ['group_id'] );
+		$currUser = $currUserGroup = array ();
+		$isLogin = $this->isLogin ();
+		if ($isLogin) {
+			$currUser = $this->getCurrentUser ();
+			$userGroups = UserGroupData::getsGroupByUID ( $currUser ['id'] );
+			foreach ( $userGroups as $userGroup ) {
+				if ($group ['id'] == $userGroup ['group_id']) {
+					$currUserGroup = $userGroup;
+					break;
+				}
+			}
+		}
 		$this->assign ( 'group', $group );
+		$this->assign ( 'currUser', $currUser );
+		$this->assign ( 'currUserGroup', $currUserGroup );
 		$this->assign ( 'category', $category );
 		$this->assign ( 'products', $cart ['products'] );
 		$this->assign ( 'totalPrice', $cart ['totalPrice'] );

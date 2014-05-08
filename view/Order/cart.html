@@ -168,18 +168,22 @@
 																	<label class="f-fs1">收货人：</label>
 																	<div class="controls">
 																		<input class="input-small" name="mobile" id="mobile"
-																			type="text" placeholder="常用手机号码">&nbsp;<input
+																			type="text" placeholder="常用手机号码"
+																			value="<?php show($this->currUser['mobile']); ?>">&nbsp;<input
 																			class="input-small" name="receiver" id="receiver"
-																			type="text" placeholder="收货人姓名">
+																			type="text" placeholder="收货人姓名"
+																			value="<?php show($this->currUser['name']); ?>">
+																		<span class="help-block f-fs1">#重要#请使用真实手机号码，以便顺利享受服务</span>
 																	</div>
 																	<label class="f-fs1">详细地址：</label>
 																	<div class="controls">
 																		<span class="input-small uneditable-input"> <?php show($this->group['name']); ?>
 																		</span>&nbsp;<input class="input-medium js-addr-desc"
 																			name="addr_desc" id="addr_desc" type="text"
-																			placeholder="如：B座3号楼4层"> <span
-																			class="help-block f-fs1">填写详细位置，以便我们更好的找到你，<span
-																			class="js-addr-desc">如：</span></span>
+																			value="<?php show($this->currUserGroup['detail']); ?>"
+																			placeholder="如：<?php show($this->group['addr_desc_template']); ?>">
+																		<span class="help-block f-fs1">填写详细位置，以便我们更好的找到你，<span
+																			class="js-addr-desc">如：<?php show($this->group['addr_desc_template']); ?></span></span>
 																	</div>
 																</div>
 															</li>

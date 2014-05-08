@@ -37,7 +37,7 @@ class AccController extends BaseController {
                 ComTool::ajax ( 100001, '请填写正确的邮箱或手机号' );
             }
             if (empty ( $user ) || md5 ( $passwd ) != $user ['passwd']) {
-                //ComTool::ajax ( 100001, '帐号或密码错误' );
+                ComTool::ajax ( 100001, '帐号或密码错误' );
             }
             //记住我一个月
             if (! empty ( $rememberme ) && $rememberme == 'on') {
@@ -45,13 +45,14 @@ class AccController extends BaseController {
             }
             //成功则写session
             $_SESSION ['islogin'] = 1; //登录标识
-            //登录用户信息
-            $_SESSION ['user'] = array (
-                'id' => $user ['id'], 
-                'mobile' => $user ['mobile'], 
-                'email' => $user ['email'], 
-                'passwd' => $user ['passwd'] 
-            );
+			//登录用户信息
+			$_SESSION ['user'] = array (
+				'id' => $user ['id'], 
+				'mobile' => $user ['mobile'], 
+				'email' => $user ['email'], 
+				'passwd' => $user ['passwd'], 
+				'name' => $user ['name'] 
+			);
             $returnUrl = trim ( $this->post ( 'returnUrl' ) );
             $returnUrl = $returnUrl ? $returnUrl : '#';
             ComTool::ajax ( 100000, '登录成功，即将跳转', $returnUrl );
