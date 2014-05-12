@@ -138,7 +138,7 @@ class OrderController extends BaseController {
 	public function goAction() {
 		if (ComTool::isAjax ()) {
 			if (! $this->isLogin ()) {
-				ComTool::ajax ( Cola::getConfig ( '_error.mustlogin' ), '请先登录' );
+				ComTool::ajax ( Cola::getConfig ( '_error.mustlogin' ), '请先登录，即将跳转至登录页面' );
 			}
 			$mobile = trim ( $this->post ( 'mobile' ) );
 			ComTool::checkEmpty ( $mobile, '请填写常用手机号' );

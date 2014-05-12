@@ -70,6 +70,25 @@
 										<form id="goform" method="post"
 											action="<?php show($this->urlroot); ?>order/go">
 											<ol class="stream-items">
+												<?php if(empty($this->products)){ ?>
+												<li class="stream-item">
+													<div
+														class="clearfix stream-item-activity stream-item-activity-network">
+														<div class="stream-item-activity-header">
+															<div class="stream-item-activity-line">
+																<a href="javascript:void(0);" class=""><strong
+																	class="">购物清单</strong></a>
+															</div>
+														</div>
+														<ol class="activity-supplement  follow-more-than-two">
+															<li class="supplement f-lh30 f-fs1"><label
+																class="f-fs1">购物清单暂时为空哦！<a
+																	href="<?php show($this->urlroot); ?>g/<?php show($this->group['id']); ?>">去逛逛&gt;&gt;</a>
+															</label></li>
+														</ol>
+													</div>
+												</li>
+												<?php }else{ ?>
 												<li class="stream-item">
 													<div
 														class="clearfix stream-item-activity stream-item-activity-network">
@@ -91,8 +110,6 @@
 																		</tr>
 																	</thead>
 																	<tbody>
-																		<?php if(empty($this->products)){ ?>
-																		<?php }else{ ?>
 																		<?php foreach($this->products as $item){ ?>
 																		<tr class="product-item js-product-incart"
 																			data-id="<?php show($item['id']); ?>"
@@ -118,7 +135,6 @@
 																					href="javascript:void(0);" class="js-rm-product"
 																					data-id="<?php show($item['id']); ?>">删除</a></small></td>
 																		</tr>
-																		<?php } ?>
 																		<?php } ?>
 																		<tr class="product-item js-total-price">
 																			<td>&nbsp;</td>
@@ -194,6 +210,7 @@
 														</ol>
 													</div>
 												</li>
+												<?php } ?>
 											</ol>
 										</form>
 									</div>

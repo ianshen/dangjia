@@ -1,6 +1,7 @@
 $(function() {
 	var $uroot = $CONFIG['uroot'];
 	var $wroot = $CONFIG['wroot'];
+	var isLogin = $CONFIG['islogin'];
 	$(".product-item").die().hover(function() {
 		$(this).addClass('warning');
 	}, function() {
@@ -159,17 +160,19 @@ $(function() {
 			var mobile = $('input#mobile').val();
 			var receiver = $('input#receiver').val();
 			var addr_desc = $('input#addr_desc').val();
-			if (!mobile) {
-				$.scojs_message('请填写常用手机号', $.scojs_message.TYPE_ERROR);
-				return false;
-			}
-			if (!isMobile(mobile)) {
-				$.scojs_message('请填写正确的手机号', $.scojs_message.TYPE_ERROR);
-				return false;
-			}
-			if (receiver.length>16) {
-				$.scojs_message('收货人姓名最多16位', $.scojs_message.TYPE_ERROR);
-				return false;
+			if(isLogin){
+				if (!mobile) {
+					$.scojs_message('请填写常用手机号', $.scojs_message.TYPE_ERROR);
+					return false;
+				}
+				if (!isMobile(mobile)) {
+					$.scojs_message('请填写正确的手机号', $.scojs_message.TYPE_ERROR);
+					return false;
+				}
+				if (receiver.length>16) {
+					$.scojs_message('收货人姓名最多16位', $.scojs_message.TYPE_ERROR);
+					return false;
+				}
 			}
 		}
 	};

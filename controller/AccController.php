@@ -55,7 +55,7 @@ class AccController extends BaseController {
 			);
             $returnUrl = trim ( $this->post ( 'returnUrl' ) );
             $returnUrl = $returnUrl ? $returnUrl : '#';
-            ComTool::ajax ( 100000, '登录成功，即将跳转', $returnUrl );
+            ComTool::ajax ( 100000, '登录成功，即将跳转至登录前页面', $returnUrl );
         }
         if ($this->isLogin ()) {
             $returnUrl = ComTool::urlRoot ();

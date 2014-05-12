@@ -48,6 +48,25 @@
 								<div class="stream-container">
 									<div class="stream">
 										<ol class="stream-items">
+										<?php if(empty($this->goods)){ ?>
+											<li class="stream-item">
+												<div
+													class="clearfix stream-item-activity stream-item-activity-network">
+													<div class="stream-item-activity-header">
+														<div class="stream-item-activity-line">
+															<a href="javascript:void(0);" class=""><strong
+																class="">清单</strong></a>
+														</div>
+													</div>
+													<ol class="activity-supplement  follow-more-than-two">
+														<li class="supplement f-lh30 f-fs1"><label
+															class="f-fs1">此分类列表暂时为空哦！<a
+																href="<?php show($this->urlroot); ?>g/<?php show($this->group['id']); ?>">去逛逛&gt;&gt;</a>
+														</label></li>
+													</ol>
+												</div>
+											</li>
+										<?php }else{ ?>
 											<li class="stream-item">
 												<div
 													class="clearfix stream-item-activity stream-item-activity-network">
@@ -73,7 +92,6 @@
 																	</tr>
 																</thead>
 																<tbody>
-																	<?php if(!empty($this->goods)){ ?>
 																	<?php foreach($this->goods as $good){ ?>
 																	<tr class="product-item">
 																		<td>
@@ -93,14 +111,13 @@
 																		<?php } ?>
 																	</tr>
 																	<?php } ?>
-																	<?php }else{ ?>
-																	<?php } ?>
 																</tbody>
 															</table>
 														</li>
 													</ol>
 												</div>
 											</li>
+										<?php } ?>
 										</ol>
 									</div>
 								</div>
