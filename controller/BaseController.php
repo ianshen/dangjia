@@ -33,6 +33,16 @@ class BaseController extends Cola_Controller {
     }
     
     /**
+     * 重新获取当前登录用户信息
+     */
+    protected function refreshCurrentUser() {
+        $currUser = $this->getCurrentUser ();
+        $currUser = UserData::getById ( $currUser ['id'] );
+        $_SESSION ['user'] = $currUser;
+        return $currUser;
+    }
+    
+    /**
      * 获取某分类的购物车
      * @param unknown_type $categoryId
      * @return multitype:multitype: number unknown 

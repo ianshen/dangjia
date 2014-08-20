@@ -50,8 +50,8 @@ $config = array (
         'user' => 'root', 
         'password' => '', 
         'database' => 'xiaodangjia', 
-        'charset' => 'utf8', 
-        'persitent' => true 
+        //         'persitent' => true, 
+        'charset' => 'utf8' 
     ), 
     
     '_modelsHome' => 'model', 

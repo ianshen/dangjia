@@ -75,7 +75,7 @@
 																		<label class="control-label" for="email">邮箱</label>
 																		<div class="controls">
 																			<input id="email" name="email" type="text"
-																				placeholder="常用邮箱" /> <span
+																				placeholder="常用邮箱" value="<?php show(htmlentities($this->currUser['email']),ENT_QUOTES,'utf-8'); ?>"/> <span
 																				class="help-block f-fs1">常用邮箱（可用作登录号）</span>
 																		</div>
 																	</div>
@@ -83,7 +83,7 @@
 																		<label class="control-label" for="mobile">手机</label>
 																		<div class="controls">
 																			<input id="mobile" name="mobile" type="text"
-																				placeholder="常用手机号" /> <span
+																				placeholder="常用手机号" value="<?php show(htmlentities($this->currUser['mobile']),ENT_QUOTES,'utf-8'); ?>"/> <span
 																				class="help-block f-fs1">真实手机号码（可用作登录号），以便顺利享受服务</span>
 																		</div>
 																	</div>
@@ -91,7 +91,7 @@
 																		<label class="control-label" for="name">名称</label>
 																		<div class="controls">
 																			<input id="name" name="name" type="text"
-																				placeholder="常用名" /> <span class="help-block f-fs1">可为真实姓名或你想用的任何代号</span>
+																				placeholder="常用名" value="<?php show(htmlentities($this->currUser['name']),ENT_QUOTES,'utf-8'); ?>"/> <span class="help-block f-fs1">可为真实姓名或你想用的任何代号</span>
 																		</div>
 																	</div>
 																	<div class="control-group">

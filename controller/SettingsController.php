@@ -24,7 +24,8 @@ class SettingsController extends BaseController {
     }
     
     public function indexAction() {
-        $currUser = $this->getCurrentUser ();
+        $currUser = $this->refreshCurrentUser ();
+        //$currUser = $this->getCurrentUser ();
         if (ComTool::isAjax ()) {
             if (isset ( $_POST ['captcha'] )) {
                 $captcha = trim ( $this->post ( 'captcha' ) );
@@ -63,6 +64,7 @@ class SettingsController extends BaseController {
             ) );
             ComTool::result ( $res, '服务器忙，请重试', '保存成功' );
         }
+        $this->assign ( "currUser", $currUser );
         $this->display ();
     }
     
