@@ -13,7 +13,8 @@ class ComTool {
 		$msec = floor ( $microtime [0] * 1000 );
 		$rand = str_pad ( mt_rand ( 0, 999 ), 3, '0', STR_PAD_LEFT );
 		$serialNumber = date ( 'ymd' ) . $time . $msec . $rand;
-		return $serialNumber;
+		//return $serialNumber;
+		return str_pad ( $serialNumber, 17, '0' );
 	}
 	
 	/**

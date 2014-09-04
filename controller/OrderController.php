@@ -154,12 +154,35 @@ class OrderController extends BaseController {
 			if (! isset ( $_SESSION ['cart'] [$curCategory] )) {
 				ComTool::ajax ( 100001, '购物车为空' );
 			}
-			$cart = $_SESSION ['cart'] [$curCategory];
+			$cart = $this->getCart ( $curCategory );
 			if (! $cart) {
 				ComTool::ajax ( 100001, '购物车为空' );
 			}
-			
-			ComTool::ajax ( 100000, 'ok' );
+			$groupName = $this->post ( 'group', '' );
+            if (! $groupName) {
+                $category = CategoryData::getById ( $curCategory );
+                $group = GroupData::getById ( $category ['group_id'] );
+                $groupName = $group ['name'];
+            } else {
+                $groupName = base64_decode ( $groupName );
+            }
+            $currUser = $this->getCurrentUser ();
+            $data = array ();
+            $data ['id'] = ComTool::getOrderId ();
+            $data ['user_id'] = $currUser ['id'];
+            $data ['user_name'] = $receiver;
+            $data ['user_tel'] = $mobile;
+            $data ['user_addr'] = "{$groupName} {$addrDesc}";
+            $data ['create_time'] = time ();
+            $data ['total_cost'] = $cart ['totalPrice'];
+            $data ['amount'] = '';
+            $data ['status'] = '1';
+            $res = OrderData::add ( $data );
+            if ($res === false) {
+                ComTool::ajax ( 100001, '服务器忙，请重试' );
+            }
+            $sql = "";
+            ComTool::ajax ( 100000, 'ok' );
 		}
 	}
 	
