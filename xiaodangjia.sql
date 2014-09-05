@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.9
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 04 月 28 日 14:32
--- 服务器版本: 5.5.8
--- PHP 版本: 5.3.5
+-- 生成日期: 2014 年 09 月 05 日 03:16
+-- 服务器版本: 5.5.24-log
+-- PHP 版本: 5.3.13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -138,6 +139,14 @@ CREATE TABLE IF NOT EXISTS `order` (
 -- 转存表中的数据 `order`
 --
 
+INSERT INTO `order` (`id`, `user_id`, `user_name`, `user_tel`, `user_addr`, `create_time`, `total_cost`, `amount`, `status`) VALUES
+(1409045763494083, 13, '<scrip', '13436951435', '5YyX6L6w5rOw5bKz5aSn5Y6m 11111', 1409817634, 55, 0, 1),
+(1409046700019522, 13, '<scrip', '13436951435', '北辰泰岳大厦 ', 1409827000, 55, 0, 1),
+(14090456616232229, 13, '<sc', '13436951435', '', 1409816616, 55, 0, 1),
+(14090467227612456, 13, '<scrip', '13436951435', '北辰泰岳大厦 ', 1409827227, 55, 0, 1),
+(14090539265324708, 13, '<scrip', '13436951435', '北辰泰岳大厦 ', 1409885665, 105, 0, 1),
+(14090539314221428, 13, '<scrip', '13436951435', '北辰泰岳大厦 ', 1409885714, 105, 0, 1),
+(14090540525857777, 13, '<scrip', '13436951435', '北辰泰岳大厦 ', 1409886925, 105, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -149,16 +158,27 @@ CREATE TABLE IF NOT EXISTS `order_detail` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `order_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '订单号',
   `good_id` int(11) NOT NULL DEFAULT '0' COMMENT '商品id',
+  `good_name` varchar(32) NOT NULL DEFAULT '',
   `amount` int(11) NOT NULL DEFAULT '0' COMMENT '数量',
   `price` int(11) NOT NULL DEFAULT '0' COMMENT '单价',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- 转存表中的数据 `order_detail`
 --
 
+INSERT INTO `order_detail` (`id`, `order_id`, `good_id`, `good_name`, `amount`, `price`, `status`) VALUES
+(1, 14090538696860596, 3, '', 1, 20, 1),
+(2, 14090538696860596, 2, '', 2, 20, 1),
+(3, 14090538696860596, 1, '', 3, 15, 1),
+(4, 14090539265324708, 3, '', 1, 20, 1),
+(5, 14090539265324708, 2, '', 2, 20, 1),
+(6, 14090539265324708, 1, '', 3, 15, 1),
+(7, 14090540525857777, 3, '牛肉大葱', 1, 20, 1),
+(8, 14090540525857777, 2, '猪肉大葱', 2, 20, 1),
+(9, 14090540525857777, 1, '韭菜鸡蛋', 3, 15, 1);
 
 -- --------------------------------------------------------
 
@@ -244,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`id`, `name`, `passwd`, `mobile`, `email`, `create_time`, `update_time`, `status`) VALUES
 (11, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951433', 'test1@126.com', 1397444811, 1397444811, 1),
 (12, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951439', 'test2@126.com', 1397444839, 1397444839, 1),
-(13, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951435', 'test3@126.com', 1397480095, 1397480095, 1),
+(13, '<script>alert(''x'');</script>', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951435', 'test3@126.com', 1397480095, 1408524389, 1),
 (14, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951434', 'test4@126.com', 1397480588, 1397480588, 1),
 (15, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951436', 'test5@126.com', 1397480629, 1397480629, 1);
 
@@ -271,3 +291,7 @@ CREATE TABLE IF NOT EXISTS `user_group` (
 INSERT INTO `user_group` (`user_id`, `group_id`, `detail`, `linkman`, `mobile`, `status`) VALUES
 (11, 1, '15层', '', '', 1),
 (11, 6, '6号院3号楼', '', '', 1);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

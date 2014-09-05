@@ -168,7 +168,8 @@ class OrderController extends BaseController {
             }
             $currUser = $this->getCurrentUser ();
             $data = array ();
-            $data ['id'] = ComTool::getOrderId ();
+            $orderId = ComTool::getOrderId ();
+            $data ['id'] = $orderId;
             $data ['user_id'] = $currUser ['id'];
             $data ['user_name'] = $receiver;
             $data ['user_tel'] = $mobile;
@@ -181,7 +182,15 @@ class OrderController extends BaseController {
             if ($res === false) {
                 ComTool::ajax ( 100001, '服务器忙，请重试' );
             }
-            $sql = "";
+            $sql = "insert into order_detail(order_id,good_id,good_name,amount,`price`,`status`) values";
+            foreach ( $cart ['products'] as $product ) {
+                $sql .= "('{$orderId}','{$product['id']}','{$product['name']}','{$product['quantity']}','{$product['price']}','1'),";
+            }
+            $sql = trim ( $sql, ',' );
+            $res = OrderData::sql ( $sql );
+            if ($res === false) {
+                ComTool::ajax ( 100001, '服务器忙，请重试' );
+            }
             ComTool::ajax ( 100000, 'ok' );
 		}
 	}

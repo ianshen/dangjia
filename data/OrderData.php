@@ -27,4 +27,13 @@ class OrderData extends BaseData {
         $result = $model->update ( $id, $data );
         return $result;
     }
+    
+    static function sql($sql) {
+        if (! $sql) {
+            return false;
+        }
+        $model = new OrderModel ();
+        $result = $model->sql ( $sql );
+        return $result;
+    }
 }
