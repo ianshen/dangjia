@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 09 月 05 日 03:16
+-- 生成日期: 2014 年 09 月 09 日 07:08
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -129,8 +129,8 @@ CREATE TABLE IF NOT EXISTS `order` (
   `user_tel` varchar(32) NOT NULL DEFAULT '' COMMENT '用户电话',
   `user_addr` varchar(64) NOT NULL DEFAULT '' COMMENT '地址',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '订单创建时间',
+  `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   `total_cost` int(11) NOT NULL DEFAULT '0' COMMENT '订单总价',
-  `amount` int(11) NOT NULL DEFAULT '0' COMMENT '商品数量',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -139,14 +139,13 @@ CREATE TABLE IF NOT EXISTS `order` (
 -- 转存表中的数据 `order`
 --
 
-INSERT INTO `order` (`id`, `user_id`, `user_name`, `user_tel`, `user_addr`, `create_time`, `total_cost`, `amount`, `status`) VALUES
-(1409045763494083, 13, '<scrip', '13436951435', '5YyX6L6w5rOw5bKz5aSn5Y6m 11111', 1409817634, 55, 0, 1),
-(1409046700019522, 13, '<scrip', '13436951435', '北辰泰岳大厦 ', 1409827000, 55, 0, 1),
-(14090456616232229, 13, '<sc', '13436951435', '', 1409816616, 55, 0, 1),
-(14090467227612456, 13, '<scrip', '13436951435', '北辰泰岳大厦 ', 1409827227, 55, 0, 1),
-(14090539265324708, 13, '<scrip', '13436951435', '北辰泰岳大厦 ', 1409885665, 105, 0, 1),
-(14090539314221428, 13, '<scrip', '13436951435', '北辰泰岳大厦 ', 1409885714, 105, 0, 1),
-(14090540525857777, 13, '<scrip', '13436951435', '北辰泰岳大厦 ', 1409886925, 105, 0, 1);
+INSERT INTO `order` (`id`, `user_id`, `user_name`, `user_tel`, `user_addr`, `create_time`, `update_time`, `total_cost`, `status`) VALUES
+(1409046700019522, 13, '<scrip', '13436951435', '北辰泰岳大厦 ', 1409827000, 0, 55, 1),
+(14090467227612456, 13, '<scrip', '13436951435', '北辰泰岳大厦 ', 1409827227, 0, 55, 1),
+(14090539265324708, 13, '<scrip', '13436951435', '北辰泰岳大厦 ', 1409885665, 0, 105, 1),
+(14090539314221428, 13, '<scrip', '13436951435', '北辰泰岳大厦 ', 1409885714, 1410246438, 105, 1),
+(14090540525857777, 13, '<scrip', '13436951435', '北辰泰岳大厦 ', 1409886925, 0, 105, 1),
+(14090555469207936, 13, '<scrip', '13436951435', '北辰泰岳大厦 ', 1409901869, 0, 105, 1);
 
 -- --------------------------------------------------------
 
@@ -163,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `order_detail` (
   `price` int(11) NOT NULL DEFAULT '0' COMMENT '单价',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- 转存表中的数据 `order_detail`
@@ -178,7 +177,10 @@ INSERT INTO `order_detail` (`id`, `order_id`, `good_id`, `good_name`, `amount`, 
 (6, 14090539265324708, 1, '', 3, 15, 1),
 (7, 14090540525857777, 3, '牛肉大葱', 1, 20, 1),
 (8, 14090540525857777, 2, '猪肉大葱', 2, 20, 1),
-(9, 14090540525857777, 1, '韭菜鸡蛋', 3, 15, 1);
+(9, 14090540525857777, 1, '韭菜鸡蛋', 3, 15, 1),
+(10, 14090555469207936, 3, '牛肉大葱', 1, 20, 1),
+(11, 14090555469207936, 2, '猪肉大葱', 2, 20, 1),
+(12, 14090555469207936, 1, '韭菜鸡蛋', 3, 15, 1);
 
 -- --------------------------------------------------------
 

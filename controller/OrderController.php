@@ -14,9 +14,6 @@ class OrderController extends BaseController {
 	 * 购物车
 	 */
 	public function cartAction() {
-		if (ComTool::isAjax ()) {
-		
-		}
 		$gid = intval ( base64_decode ( $this->param ( 'g' ) ) );
 		$cid = intval ( base64_decode ( $this->param ( 'c' ) ) );
 		$category = CategoryData::getById ( $cid );
@@ -174,9 +171,8 @@ class OrderController extends BaseController {
             $data ['user_name'] = $receiver;
             $data ['user_tel'] = $mobile;
             $data ['user_addr'] = "{$groupName} {$addrDesc}";
-            $data ['create_time'] = time ();
+            $data ['create_time'] = $data ['update_time'] = time ();
             $data ['total_cost'] = $cart ['totalPrice'];
-            $data ['amount'] = '';
             $data ['status'] = '1';
             $res = OrderData::add ( $data );
             if ($res === false) {
@@ -194,6 +190,37 @@ class OrderController extends BaseController {
             ComTool::ajax ( 100000, 'ok' );
 		}
 	}
+	
+	/**
+	 * 订单详情
+	 */
+	public function detailAction() {
+	    $this->display ();
+    }
+    
+    /**
+     * 删除订单
+     */
+    public function delAction() {
+        if (ComTool::isAjax ()) {
+            if (! $this->isLogin ()) {
+                ComTool::ajax ( Cola::getConfig ( '_error.mustlogin' ), '请先登录，即将跳转至登录页面' );
+            }
+            $currUser = $this->getCurrentUser ();
+            $orderId = $this->post ( 'oid', '' );
+            if (! $orderId) {
+                ComTool::ajax ( 100001, '未知订单' );
+            }
+            $updateTime = time ();
+            $sql = "update `order` set `status`=4,update_time='{$updateTime}' where id='{$orderId}' and user_id='{$currUser['id']}'";
+            $res = OrderData::sql ( $sql );
+            if ($res === false) {
+                ComTool::ajax ( 100001, '服务器忙，请重试' );
+            }
+            //暂时不删除订单详情
+            ComTool::ajax ( 100000, 'ok' );
+        }
+    }
 	
 	/**
 	 * 取消订单

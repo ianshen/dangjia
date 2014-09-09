@@ -36,4 +36,13 @@ class OrderData extends BaseData {
         $result = $model->sql ( $sql );
         return $result;
     }
+    
+    static function count($where) {
+        if (! $where) {
+            return false;
+        }
+        $model = new OrderModel ();
+        $result = $model->count ( $where );
+        return $result;
+    }
 }

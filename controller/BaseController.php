@@ -7,10 +7,13 @@ class BaseController extends Cola_Controller {
     
     protected $token = '';
     
+    protected $urlroot = '';
+    
     public function __construct() {
         /* $this->token = ComTool::buildToken ();
         $this->assign ( 'token', $this->token ); */
         $urlroot = ComTool::urlRoot ();
+        $this->urlroot = $urlroot;
         $this->assign ( 'urlroot', $urlroot );
         $this->assign ( 'wwwroot', WWW_ROOT );
         $this->assign ( 'isLogin', $this->isLogin () );
