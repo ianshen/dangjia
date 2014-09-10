@@ -57,6 +57,25 @@
 								<div class="stream-container">
 									<div class="stream">
 										<ol class="stream-items">
+											<?php if(empty($this->list)){ ?>
+											<li class="stream-item">
+												<div
+													class="clearfix stream-item-activity stream-item-activity-network">
+													<div class="stream-item-activity-header">
+														<div class="stream-item-activity-line">
+															<a href="javascript:void(0);" class=""><strong
+																class="">我的订单</strong></a>
+														</div>
+													</div>
+													<ol class="activity-supplement  follow-more-than-two">
+														<li class="supplement f-lh30 f-fs1"><label
+															class="f-fs1">订单列表暂时为空哦！<a
+																href="<?php show($this->urlroot); ?>">去逛逛&gt;&gt;</a>
+														</label></li>
+													</ol>
+												</div>
+											</li>
+											<?php }else{ ?>
 											<li class="stream-item">
 												<div
 													class="clearfix stream-item-activity stream-item-activity-network">
@@ -77,25 +96,24 @@
 																	</tr>
 																</thead>
 																<tbody>
-																	<?php if(empty($this->list)){ ?>
-																	<?php }else{ ?>
 																	<?php foreach($this->list as $item){ ?>
 																	<tr>
-																		<td class="f-wth100"> <?php show(htmlentities($item['user_name'],ENT_QUOTES,'utf-8')); ?></td>
+																		<td class="f-wth100">
+																			<?php show(htmlentities($item['user_name'],ENT_QUOTES,'utf-8')); ?>
+																		</td>
 																		<td class="f-wth50"><span class=""> ￥<?php show(intval($item['total_cost'])); ?>
 																		</span></td>
-																		<td class="f-wth150"><span
-																			class=""> <?php show(date('m-d H:i:s',$item['create_time'])); ?>
+																		<td class="f-wth150"><span class=""> <?php show(date('m-d H:i',$item['create_time'])); ?>
 																		</span></td>
 																		<td class="f-wth150"><small><a
-																				href="<?php show($this->urlroot); ?>order/detail/o/<?php show($item['id']); ?>" target="_blank" class="">查看</a></small>&nbsp;|&nbsp;<small><a
-																				href="javascript:void(0);" class="js-order-del" data-oid="<?php show($item['id']); ?>">删除</a></small></td>
+																				href="<?php show($this->urlroot); ?>order/detail/o/<?php show($item['id']); ?>"
+																				target="_blank" class="">查看</a></small>&nbsp;|&nbsp;<small><a
+																				href="javascript:void(0);" class="js-order-del"
+																				data-oid="<?php show($item['id']); ?>">删除</a></small></td>
 																	</tr>
 																	<?php } ?>
-																	<?php } ?>
 																</tbody>
-															</table>
-															<!-- <div class="pagination">
+															</table> <!-- <div class="pagination">
 																<ul>
 																	<li><a href="#">上一页</a></li>
 																	<li><a href="#">1</a></li>
@@ -105,12 +123,12 @@
 																	<li><a href="#">5</a></li>
 																	<li><a href="#">下一页</a></li>
 																</ul>
-															</div> -->
-															<?php show($this->pageHtml); ?>
+															</div> --> <?php show($this->pageHtml); ?>
 														</li>
 													</ol>
 												</div>
 											</li>
+											<?php } ?>
 										</ol>
 									</div>
 								</div>

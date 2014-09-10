@@ -263,4 +263,27 @@ class ComTool {
     static function isUrl($url) {
         return preg_match ( '/^((https?|ftp|news):\/\/)[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is', $url ) ? true : false;
     }
+    
+    /**
+     * @param unknown_type $curPage 当前页
+     * @param unknown_type $pageSize 每页数量
+     * @param unknown_type $totalItems 总记录数
+     * @param unknown_type $url 链接
+     * @return string
+     */
+    static function pageHtml($curPage, $pageSize, $totalItems, $url) {
+        $pageTool = new Cola_Ext_Pager ( $curPage, $pageSize, $totalItems, $url );
+        $pageTool->config ( 'prevNums', '3' );
+        $pageTool->config ( 'nextNums', '3' );
+        $pageTool->config ( 'prefix', '<div class="pagination"><ul>' );
+        $pageTool->config ( 'first', '<li><a href="%link%/%page%">%page%...</a></li>' );
+        $pageTool->config ( 'last', '<li><a href="%link%/%page%">...%page%</a></li>' );
+        $pageTool->config ( 'prev', '<li><a href="%link%/%page%">上一页</a></li>' );
+        $pageTool->config ( 'next', '<li><a href="%link%/%page%">下一页</a></li>' );
+        $pageTool->config ( 'current', '<li><a href="javascript:void(0);"><strong>%page%</strong></a></li>' );
+        $pageTool->config ( 'page', '<li><a href="%link%/%page%">%page%</a></li>' );
+        $pageTool->config ( 'suffix', '</ul></div>' );
+        $pageHtml = $pageTool->html ();
+        return $pageHtml;
+    }
 }
