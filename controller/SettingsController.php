@@ -10,17 +10,7 @@ class SettingsController extends BaseController {
     
     public function __construct() {
         parent::__construct ();
-        if ($this->mustLogin) {
-            if (! $this->isLogin ()) {
-                if (ComTool::isAjax ()) {
-                
-                } else {
-                    $pathinfo = trim ( $_SERVER ['PATH_INFO'], '/\\' );
-                    $returnUrl = urlencode ( ComTool::urlRoot () . $pathinfo );
-                    Cola_Response::redirect ( ComTool::url ( "acc/login?returnUrl={$returnUrl}" ) );
-                }
-            }
-        }
+        $this->mustLoginCheck ();
     }
     
     public function indexAction() {
@@ -100,17 +90,19 @@ class SettingsController extends BaseController {
         if (ComTool::isAjax ()) {
         
         }
-        //$groups = UserGroupData::getsGroupByUID ( $currUser ['id'] );
-        $myGroups = UserGroupData::getsGroupByUID ( 11 );
-        $gids = array ();
-        foreach ( $myGroups as $group ) {
-            $gids [] = $group ['group_id'];
+        $myGroups = UserGroupData::getsGroupByUID ( $currUser ['id'] );
+        if ($myGroups) {
+            $gids = array ();
+            foreach ( $myGroups as $group ) {
+                $gids [] = $group ['group_id'];
+            }
+            $gids = join ( ',', $gids );
+            $groups = GroupData::dataByWhere ( "id in ({$gids})" );
+            foreach ( $myGroups as &$group ) {
+                $group ['name'] = $groups [$group ['group_id']] ['name'];
+            }
         }
-        $gids = join ( ',', $gids );
-        $groups = GroupData::dataByWhere ( "id in ({$gids})" );
-        foreach ( $myGroups as &$group ) {
-            $group ['name'] = $groups [$group ['group_id']] ['name'];
-        }
+        $_SESSION ['groups'] = $myGroups;
         $this->assign ( 'myGroups', $myGroups );
         $this->display ();
     }
@@ -120,13 +112,14 @@ class SettingsController extends BaseController {
      */
     public function setaddrdescAction() {
         if (ComTool::isAjax ()) {
-            $gid = intval ( $this->get ( 'gid', 0 ) );
-            ComTool::checkEmpty ( $gid, "操作失败，请刷新重试", 'empty gid' );
-            $detail = trim ( $this->get ( 'detail', '' ) );
+            $gid = intval ( $this->post ( 'gid', 0 ) );
+            ComTool::checkEmpty ( $gid, "操作失败，请刷新重试" );
+            $detail = trim ( $this->post ( 'detail', '' ) );
             ComTool::checkMaxLen ( $detail, 32, "详细位置最多32位" );
             $currUser = $this->getCurrentUser ();
             $uid = $currUser ['id'];
-            $res = UserGroupData::modify ( $uid, $gid, 'detail', $detail );
+            $sql = "update user_group set `detail`='{$detail}' where user_id='{$uid}' and group_id='{$gid}'";
+            $res = UserGroupData::sql ( $sql );
             ComTool::result ( $res, '操作失败，请刷新重试', '操作成功' );
         }
     }
@@ -136,6 +129,12 @@ class SettingsController extends BaseController {
      */
     public function joingroupAction() {
         if (ComTool::isAjax ()) {
+            if (isset ( $_POST ['captcha'] )) {
+                $captcha = trim ( $this->post ( 'captcha' ) );
+                if (! ComTool::checkCaptcha ( $captcha )) {
+                    ComTool::ajax ( 100001, '验证码错误' );
+                }
+            }
             $city = trim ( $this->post ( 'city' ) );
             ComTool::checkEmpty ( $city, '请选择城市' );
             $area = trim ( $this->post ( 'area' ) );
@@ -148,6 +147,11 @@ class SettingsController extends BaseController {
             $currUser = $this->getCurrentUser ();
             $groupsNumLimit = Cola::getConfig ( '_groupsNumLimit' );
             $groups = UserGroupData::getsGroupByUID ( $currUser ['id'] );
+            foreach($groups as $v){
+                if ($group == $v ['group_id']) {
+                    ComTool::ajax ( 100001, '你已加入该圈子' );
+                }
+            }
             if (count ( $groups ) > $groupsNumLimit) {
                 ComTool::ajax ( 100001, '你加入的圈子超过最大限制' );
             }
@@ -165,10 +169,11 @@ class SettingsController extends BaseController {
      */
     public function quitgroupAction() {
         if (ComTool::isAjax ()) {
-            $gid = trim ( $this->post ( 'gid' ) );
-            ComTool::checkEmpty ( $gid, "操作失败，请刷新重试", 'empty gid' );
+            $gid = intval ( $this->post ( 'gid', 0 ) );
+            ComTool::checkEmpty ( $gid, "操作失败，请刷新重试" );
             $currUser = $this->getCurrentUser ();
-            $res = UserGroupData::modify ( $currUser ['id'], $gid, 'status', 4 );
+            $sql = "delete from user_group where user_id='{$currUser ['id']}' and group_id='{$gid}'";
+            $res = UserGroupData::sql ( $sql );
             ComTool::result ( $res, '操作失败，请刷新重试', '操作成功' );
         }
     }

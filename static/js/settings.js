@@ -9,7 +9,7 @@ $(function() {
 				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
 				setTimeout(function() {
 					window.location.reload(true);
-				}, 3000);
+				}, 1000);
 			} else {
 				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 				captchachg();
@@ -55,7 +55,7 @@ $(function() {
 				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
 				setTimeout(function() {
 					window.location.reload(true);
-				}, 3000);
+				}, 1000);
 			} else {
 				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 				captchachg();
@@ -121,6 +121,7 @@ $(function() {
 					success : function(data) {
 						var data = $.parseJSON(data);
 						if (data.status == 100000) {
+							$.scojs_message(data.info, $.scojs_message.TYPE_OK);
 							trObj.find("td.js-group-detail span.js-addr-desc-text").text(detail);
 							trObj.find("td.js-group-detail span.js-addr-desc-input input.js-addr-desc").val(detail);
 						}else{
@@ -158,7 +159,7 @@ $(function() {
 							$.scojs_message(data.info, $.scojs_message.TYPE_OK);
 							setTimeout(function() {
 								window.location.reload(true);
-							}, 3000);
+							}, 1000);
 						}else{
 							$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 							return false;
@@ -183,9 +184,10 @@ $(function() {
 				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
 				setTimeout(function() {
 					window.location.reload(true);
-				}, 3000);
+				}, 1000);
 			} else {
 				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
+				$("#captcha_img").attr("src",$uroot + 'acc/captcha?'+(new Date()).getTime());
 			}
 		},
 		beforeSubmit : function() {

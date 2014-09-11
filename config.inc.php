@@ -59,6 +59,7 @@ $config = array (
     '_controllersHome' => 'controller', 
     '_viewsHome' => 'view', 
     '_toolsHome' => 'tool', 
+    '_groupsNumLimit' => '3', //每用户可加入的分组数限制
     '_error' => array (
         'ok' => '100000', 
         'err' => '100001', 

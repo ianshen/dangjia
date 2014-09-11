@@ -12,7 +12,8 @@ class Cola_Ext_Captcha {
         'type' => 'png', 
         'seed' => '34678ABCDEFGHJKLMNPQRTUVWXYabcdefhjkmnpwxy', 
         'fonts' => array (
-            'c:\windows\fonts\times.ttf' 
+            'c:\windows\fonts\times.ttf', 
+            'static/css/times.ttf' 
         ), 
         'size' => 20, 
         'padding' => 5, 

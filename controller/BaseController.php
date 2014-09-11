@@ -14,6 +14,8 @@ class BaseController extends Cola_Controller {
         $this->assign ( 'token', $this->token ); */
         $urlroot = ComTool::urlRoot ();
         $this->urlroot = $urlroot;
+        $mygroups = $_SESSION ['groups'];
+        $this->assign ( 'mygroups', $mygroups );
         $this->assign ( 'urlroot', $urlroot );
         $this->assign ( 'wwwroot', WWW_ROOT );
         $this->assign ( 'isLogin', $this->isLogin () );
@@ -65,5 +67,22 @@ class BaseController extends Cola_Controller {
             $cart ['totalPrice'] = $totalPrice;
         }
         return $cart;
+    }
+    
+    /**
+     * 必须登录检查，若未登录跳转至登录页
+     */
+    protected function mustLoginCheck() {
+        if ($this->mustLogin) {
+            if (! $this->isLogin ()) {
+                if (ComTool::isAjax ()) {
+                
+                } else {
+                    $pathinfo = trim ( $_SERVER ['PATH_INFO'], '/\\' );
+                    $returnUrl = urlencode ( ComTool::urlRoot () . $pathinfo );
+                    Cola_Response::redirect ( ComTool::url ( "acc/login?returnUrl={$returnUrl}" ) );
+                }
+            }
+        }
     }
 }

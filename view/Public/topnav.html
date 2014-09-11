@@ -8,35 +8,45 @@
 				href="<?php show($this->urlroot); ?>" class="brand">嘻咕嘻咕</a>
 			<div class="nav-collapse collapse navbar-responsive-collapse">
 				<ul class="nav">
-					<li><a href="#">首页</a></li>
+					<!-- <li><a href="#">首页</a></li>
 					<li><a href="#">促销/团购</a></li>
 					<li><a href="#">流言板</a></li>
 					<li><a href="#">跳蚤市场</a></li>
 					<li><a href="#">早市/夜市</a></li>
-					<li><a href="#">动态</a></li>
+					<li><a href="#">动态</a></li> -->
 				</ul>
 				<ul class="nav pull-right">
-					<li><a href="#">购物车</a></li>
-					<li><a href="<?php show($this->urlroot); ?>">闲逛</a></li>
+					<!-- <li><a href="#">购物车</a></li>
+					<li><a href="<?php show($this->urlroot); ?>">闲逛</a></li> -->
 					<li class="divider-vertical"></li>
 					<li class="dropdown"><a data-toggle="dropdown"
-						class="dropdown-toggle" href="#">我的嘻咕<strong class="caret"></strong></a>
+						class="dropdown-toggle" href="javascript:void(0);">我的嘻咕<strong
+							class="caret"></strong></a>
 						<ul class="dropdown-menu">
+							<li><a href="<?php show($this->urlroot); ?>settings/group">我的圈子</a></li>
 							<li><a href="<?php show($this->urlroot); ?>my/order">我的订单</a></li>
 							<li><a href="<?php show($this->urlroot); ?>settings">帐号信息</a></li>
-							<li><a href="<?php show($this->urlroot); ?>settings/group">圈子设置</a></li>
 							<li><a
 								href="<?php show($this->urlroot); ?>settings/password">修改密码</a></li>
 							<li class="divider"></li>
 							<li><a href="<?php show($this->urlroot); ?>acc/logout">退出</a></li>
 						</ul></li>
 					<li class="dropdown"><a data-toggle="dropdown"
-						class="dropdown-toggle" href="#">我的圈子<strong class="caret"></strong></a>
+						class="dropdown-toggle" title="查看我的圈子" href="javascript:void(0);">圈子<strong
+							class="caret"></strong></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">北辰泰岳大厦</a></li>
-							<li><a href="#">明天第一城</a></li>
+							<?php if(empty($this->mygroups)){ ?>
+							<li><a href="<?php show($this->urlroot); ?>settings/group">加入新的圈子</a></li>
+							<?php }else{ ?>
+							<?php foreach($this->mygroups as $group){ ?>
+							<li><a
+								href="<?php show($this->urlroot); ?>g/<?php show($group['group_id']); ?>">
+									<?php show($group['name']); ?>
+							</a></li>
+							<?php } ?>
+							<?php } ?>
 							<li class="divider"></li>
-							<li><a href="<?php show($this->urlroot); ?>settings/group">圈子设置</a></li>
+							<li><a href="<?php show($this->urlroot); ?>settings/group">我的圈子</a></li>
 						</ul></li>
 				</ul>
 			</div>
@@ -53,12 +63,12 @@
 				href="<?php show($this->urlroot); ?>" class="brand">嘻咕嘻咕</a>
 			<div class="nav-collapse collapse navbar-responsive-collapse">
 				<ul class="nav">
-					<li><a href="<?php show($this->urlroot); ?>">闲逛</a></li>
+					<!-- <li><a href="<?php show($this->urlroot); ?>">闲逛</a></li>
 					<li><a href="#">促销/团购</a></li>
 					<li><a href="#">流言板</a></li>
 					<li><a href="#">跳蚤市场</a></li>
 					<li><a href="#">早市/夜市</a></li>
-					<li><a href="#">动态</a></li>
+					<li><a href="#">动态</a></li> -->
 				</ul>
 				<ul class="nav pull-right">
 					<li><a href="<?php show($this->urlroot); ?>acc/login">登录</a></li>

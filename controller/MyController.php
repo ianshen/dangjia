@@ -1,6 +1,13 @@
 <?php
 class MyController extends BaseController {
     
+    protected $mustLogin = 1;
+    
+    public function __construct() {
+        parent::__construct ();
+        $this->mustLoginCheck ();
+    }
+    
     /**
      * 我的首页
      */
@@ -42,7 +49,7 @@ class MyController extends BaseController {
      * 我的圈子
      */
     public function groupAction() {
-    
+        $this->display ();
     }
     
     /**

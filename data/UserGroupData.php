@@ -40,6 +40,15 @@ class UserGroupData extends BaseData {
 		return $result;
 	}
 	
+	static function sql($sql) {
+        if (! $sql) {
+            return false;
+        }
+        $model = new UserGroupModel ();
+        $result = $model->sql ( $sql );
+        return $result;
+    }
+	
 	static function modify($uid, $gid, $field, $data) {
 		if (! $uid || $gid || ! $data) {
 			return false;

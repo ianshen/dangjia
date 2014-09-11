@@ -200,7 +200,6 @@ class OrderController extends BaseController {
         $totalPrice = 0;
         if ($oid) {
             $sql = "SELECT * FROM `order` where id='{$oid}' and `status`='1' limit 1";
-            //$sql = "SELECT a.user_id,a.user_name,a.user_tel,a.user_addr,a.create_time,a.total_cost,a.`status`,b.order_id,b.good_id,b.good_name,b.amount,b.price FROM `order` a LEFT JOIN order_detail b on a.id=b.order_id where a.id='{$oid}' and a.`status`='1';";
             $order = OrderData::sql ( $sql );
             if ($order) {
                 $sql = "SELECT * FROM `order_detail` where order_id='{$oid}'";
@@ -237,7 +236,7 @@ class OrderController extends BaseController {
             if ($res === false) {
                 ComTool::ajax ( 100001, '服务器忙，请重试' );
             }
-            //暂时不删除订单详情
+            //暂时不删除订单详情(order_detail表)
             ComTool::ajax ( 100000, 'ok' );
         }
     }
