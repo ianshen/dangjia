@@ -1,7 +1,7 @@
 <?php
 /**
  * 设置
- * @author Administrator
+ * @author Ian
  *
  */
 class SettingsController extends BaseController {
@@ -64,7 +64,7 @@ class SettingsController extends BaseController {
             if (isset ( $_POST ['captcha'] )) {
                 $captcha = trim ( $this->post ( 'captcha' ) );
                 if (! ComTool::checkCaptcha ( $captcha )) {
-                    ComTool::ajax ( 100001, '验证码错误' );
+                    //ComTool::ajax ( 100001, '验证码错误' );
                 }
             }
             $curpass = trim ( $this->post ( 'curpass' ) );
@@ -76,10 +76,11 @@ class SettingsController extends BaseController {
             ComTool::checkMinMaxLen ( $passwd, 6, 16, '密码6-16位' );
             $cpasswd = trim ( $this->post ( 'cpasswd' ) );
             ComTool::checkEqual ( $passwd, $cpasswd, '两次输入的密码不同' );
-            $res = UserData::modify ( $currUser ['id'], array (
-                'passw' => md5 ( $passwd ), 
-                'update_time' => time () 
-            ) );
+            $passwd = md5 ( $passwd );
+            $time = time ();
+            $sql = "update `user` set passwd='{$passwd}',update_time='{$time}' where id={$currUser ['id']}";
+            echo $sql;
+            $res = UserData::sql ( $sql );
             ComTool::result ( $res, '服务器忙，请重试', '保存成功' );
         }
         $this->display ();
@@ -149,11 +150,11 @@ class SettingsController extends BaseController {
             $groups = UserGroupData::getsGroupByUID ( $currUser ['id'] );
             foreach($groups as $v){
                 if ($group == $v ['group_id']) {
-                    ComTool::ajax ( 100001, '你已加入该圈子' );
+                    ComTool::ajax ( 100001, '已加入该圈子' );
                 }
             }
             if (count ( $groups ) > $groupsNumLimit) {
-                ComTool::ajax ( 100001, '你加入的圈子超过最大限制' );
+                ComTool::ajax ( 100001, '已加入圈子数超过限制' );
             }
             $res = UserGroupData::add ( array (
                 'user_id' => $currUser ['id'], 

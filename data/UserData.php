@@ -55,6 +55,15 @@ class UserData extends BaseData {
 		return $result;
 	}
 	
+	static function sql($sql) {
+        if (! $sql) {
+            return false;
+        }
+        $model = new UserModel ();
+        $result = $model->sql ( $sql );
+        return $result;
+    }
+	
 	static function modify($id, $data) {
 		if (! $id || ! $data) {
 			return false;

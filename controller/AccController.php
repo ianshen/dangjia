@@ -54,8 +54,8 @@ class AccController extends BaseController {
 				'name' => $user ['name'] 
 			);
             $returnUrl = trim ( $this->post ( 'returnUrl' ) );
-            $returnUrl = $returnUrl ? $returnUrl : $this->urlroot . 'settings/group';
-            ComTool::ajax ( 100000, '登录成功，即将跳转至登录前页面', $returnUrl );
+            $returnUrl = $returnUrl ? $returnUrl : $this->urlroot . 'my/group';
+            ComTool::ajax ( 100000, '登录成功，即将跳转', $returnUrl );
         }
         if ($this->isLogin ()) {
             $returnUrl = ComTool::urlRoot ();

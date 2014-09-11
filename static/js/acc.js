@@ -81,7 +81,7 @@ $(function() {
 				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
 				setTimeout(function() {
 					window.location.href = data.data;
-				}, 3000);
+				}, 1000);
 			} else {
 				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 			}
@@ -116,7 +116,7 @@ $(function() {
 				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
 				setTimeout(function() {
 					window.location.href = $uroot + "acc/login";
-				}, 3000);
+				}, 1000);
 			} else {
 				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 				captchachg();

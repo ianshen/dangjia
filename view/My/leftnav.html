@@ -1,0 +1,18 @@
+<div class="module">
+	<ul>
+		<li class="<?php if(__ACTION__=='group'){ ?>active<?php } ?>"><a
+			href="<?php show($this->urlroot); ?>my/group" class="list-link">我的圈子
+				<span class="Icon Icon--caretRight"></span>
+		</a></li>
+		<li class="<?php if(__ACTION__=='order'){ ?>active<?php } ?>"><a
+			href="<?php show($this->urlroot); ?>my/order" class="list-link">我的订单<span
+				class="Icon Icon--caretRight"></span></a></li>
+		<li class="<?php if(__ACTION__=='index'){ ?>active<?php } ?>"><a
+			href="<?php show($this->urlroot); ?>my" class="list-link">帐号信息<span
+				class="Icon Icon--caretRight"></span></a></li>
+		<li class="<?php if(__ACTION__=='password'){ ?>active<?php } ?>"><a
+			href="<?php show($this->urlroot); ?>my/password"
+			class="list-link">修改密码 <span class="Icon Icon--caretRight"></span>
+		</a></li>
+	</ul>
+</div>
