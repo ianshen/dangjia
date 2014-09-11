@@ -10,6 +10,12 @@ class UserGroupData extends BaseData {
 		return $result;
 	}
 	
+	static function getGroupsByUid($uid) {
+        $sql = "SELECT * FROM `user_group` where user_id='{$uid}' and status=1";
+        $groups = self::sql ( $sql );
+        return $groups;
+    }
+	
 	static function getById($id) {
 		if (! $id) {
 			return false;
