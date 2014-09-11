@@ -190,12 +190,32 @@ class OrderController extends BaseController {
             ComTool::ajax ( 100000, 'ok' );
 		}
 	}
-	
-	/**
-	 * 订单详情
-	 */
-	public function detailAction() {
-	    $this->display ();
+    
+    /**
+     * 订单详情
+     */
+    public function detailAction() {
+        $oid = $this->param ( 'o', 0 );
+        $details = array ();
+        $totalPrice = 0;
+        if ($oid) {
+            $sql = "SELECT * FROM `order` where id='{$oid}' and `status`='1' limit 1";
+            //$sql = "SELECT a.user_id,a.user_name,a.user_tel,a.user_addr,a.create_time,a.total_cost,a.`status`,b.order_id,b.good_id,b.good_name,b.amount,b.price FROM `order` a LEFT JOIN order_detail b on a.id=b.order_id where a.id='{$oid}' and a.`status`='1';";
+            $order = OrderData::sql ( $sql );
+            if ($order) {
+                $sql = "SELECT * FROM `order_detail` where order_id='{$oid}'";
+                $details = OrderData::sql ( $sql );
+                if ($details) {
+                    foreach ( $details as $detail ) {
+                        $totalPrice += intval ( $detail ['price'] * $detail ['amount'] );
+                    }
+                }
+            }
+        }
+        $this->assign ( 'totalPrice', $totalPrice );
+        $this->assign ( 'order', $order [0] );
+        $this->assign ( 'details', $details );
+        $this->display ();
     }
     
     /**
