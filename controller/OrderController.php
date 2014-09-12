@@ -27,7 +27,7 @@ class OrderController extends BaseController {
 		$isLogin = $this->isLogin ();
 		if ($isLogin) {
 			$currUser = $this->getCurrentUser ();
-			$userGroups = UserGroupData::getsGroupByUID ( $currUser ['id'] );
+            $userGroups = UserGroupData::getGroupsByUid ( $currUser ['id'] );
 			foreach ( $userGroups as $userGroup ) {
 				if ($group ['id'] == $userGroup ['group_id']) {
 					$currUserGroup = $userGroup;

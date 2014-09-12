@@ -91,7 +91,7 @@ class SettingsController extends BaseController {
         if (ComTool::isAjax ()) {
         
         }
-        $myGroups = UserGroupData::getsGroupByUID ( $currUser ['id'] );
+        $myGroups = UserGroupData::getGroupsByUid ( $currUser ['id'] );
         if ($myGroups) {
             $gids = array ();
             foreach ( $myGroups as $group ) {
@@ -147,7 +147,7 @@ class SettingsController extends BaseController {
             ComTool::checkMaxLen ( $addr_desc, 32, '详细位置最多32位' );
             $currUser = $this->getCurrentUser ();
             $groupsNumLimit = Cola::getConfig ( '_groupsNumLimit' );
-            $groups = UserGroupData::getsGroupByUID ( $currUser ['id'] );
+            $groups = UserGroupData::getGroupsByUid ( $currUser ['id'] );
             foreach($groups as $v){
                 if ($group == $v ['group_id']) {
                     ComTool::ajax ( 100001, '已加入该圈子' );
