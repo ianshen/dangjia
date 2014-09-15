@@ -12,6 +12,15 @@ class MyController extends BaseController {
      * 我的首页
      */
     public function indexAction() {
+        $url = ComTool::url ( "my/group" );
+        header ( "Location:{$url}" );
+        exit ();
+    }
+    
+    /**
+     * 我的信息
+     */
+    public function infoAction() {
         $currUser = $this->refreshCurrentUser ();
         //$currUser = $this->getCurrentUser ();
         if (ComTool::isAjax ()) {
@@ -217,20 +226,6 @@ class MyController extends BaseController {
      * 我的积分（积分以penny形式表示，penny=角）
      */
     public function pennyAction() {
-    
-    }
-    
-    /**
-     * 我的信息
-     */
-    public function infoAction() {
-    
-    }
-    
-    /**
-     * 更改密码
-     */
-    public function passAction() {
     
     }
     

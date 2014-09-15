@@ -1,6 +1,7 @@
 $(function() {
 	var $uroot = $CONFIG['uroot'];
 	var $wroot = $CONFIG['wroot'];
+	var $tmot = $CONFIG['tmot'];
 	// 帐号设置
 	var accountOptions = {
 		dataType : 'json',
@@ -9,7 +10,7 @@ $(function() {
 				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
 				setTimeout(function() {
 					window.location.reload(true);
-				}, 1000);
+				}, $tmot);
 			} else {
 				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 				captchachg();
@@ -55,7 +56,7 @@ $(function() {
 				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
 				setTimeout(function() {
 					window.location.reload(true);
-				}, 1000);
+				}, $tmot);
 			} else {
 				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 				captchachg();
@@ -159,7 +160,7 @@ $(function() {
 							$.scojs_message(data.info, $.scojs_message.TYPE_OK);
 							setTimeout(function() {
 								window.location.reload(true);
-							}, 1000);
+							}, $tmot);
 						}else{
 							$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 							return false;
@@ -184,7 +185,7 @@ $(function() {
 				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
 				setTimeout(function() {
 					window.location.reload(true);
-				}, 1000);
+				}, $tmot);
 			} else {
 				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 				$("#captcha_img").attr("src",$uroot + 'acc/captcha?'+(new Date()).getTime());
@@ -240,7 +241,7 @@ $(function() {
 							$.scojs_message(data.info, $.scojs_message.TYPE_OK);
 							setTimeout(function() {
 								window.location.reload(true);
-							}, 1000);
+							}, $tmot);
 						}else{
 							$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 							return false;

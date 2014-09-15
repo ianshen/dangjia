@@ -1,6 +1,7 @@
 $(function() {
 	var $uroot = $CONFIG['uroot'];
 	var $wroot = $CONFIG['wroot'];
+	var $tmot = $CONFIG['tmot'];
 	// 加载城市列表
 	$.get($uroot + "acc/getlocation", {
 		ajax : "1",
@@ -81,7 +82,7 @@ $(function() {
 				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
 				setTimeout(function() {
 					window.location.href = data.data;
-				}, 1000);
+				}, $tmot);
 			} else {
 				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 			}
@@ -116,7 +117,7 @@ $(function() {
 				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
 				setTimeout(function() {
 					window.location.href = $uroot + "acc/login";
-				}, 1000);
+				}, $tmot);
 			} else {
 				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 				captchachg();

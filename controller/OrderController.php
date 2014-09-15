@@ -14,13 +14,13 @@ class OrderController extends BaseController {
 	 * 购物车
 	 */
 	public function cartAction() {
-		$gid = intval ( base64_decode ( $this->param ( 'g' ) ) );
-		$cid = intval ( base64_decode ( $this->param ( 'c' ) ) );
-		$category = CategoryData::getById ( $cid );
-		if ($category ['group_id'] != $gid) {
-			exit ( 'wrong params' );
-		}
-		$cart = array ();
+		$gid = intval ( $this->param ( 'g', 0 ) );
+        $cid = intval ( $this->param ( 'c', 0 ) );
+        $category = CategoryData::getById ( $cid );
+        if ($category ['group_id'] != $gid) {
+            exit ( 'wrong params' );
+        }
+        $cart = array ();
 		$cart = $this->getCart ( $cid );
 		$group = GroupData::getById ( $category ['group_id'] );
 		$currUser = $currUserGroup = array ();
@@ -187,6 +187,8 @@ class OrderController extends BaseController {
             if ($res === false) {
                 ComTool::ajax ( 100001, '服务器忙，请重试' );
             }
+            //TODO 清除此分类购物车的session
+            
             ComTool::ajax ( 100000, 'ok' );
 		}
 	}

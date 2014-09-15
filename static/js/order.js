@@ -1,6 +1,7 @@
 $(function() {
 	var $uroot = $CONFIG['uroot'];
 	var $wroot = $CONFIG['wroot'];
+	var $tmot = $CONFIG['tmot'];
 	var isLogin = $CONFIG['islogin'];
 	$(".product-item").die().hover(function() {
 		$(this).addClass('warning');
@@ -144,14 +145,14 @@ $(function() {
 			if (data.status == 100000) {
 				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
 				setTimeout(function() {
-					
-				}, 3000);
+					window.location.href = $uroot + "my/order";
+				}, $tmot);
 			} else if(data.status == 100002) {
 				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 				setTimeout(function() {
 					var curUrl = window.location.href;
 					window.location.href = $uroot + "acc/login?returnUrl=" + urlencode(curUrl);
-				}, 3000);
+				}, $tmot);
 			} else {
 				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 			}
