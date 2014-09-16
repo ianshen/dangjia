@@ -7,7 +7,7 @@ class GroupController extends BaseController {
         $group = GroupData::getById ( $gid );
         if (! $group) {
             $url = ComTool::url ( "index" );
-            header ( "Location:{$url}" );
+            ComTool::redirect ( $url );
         }
         //根据群组id获取群组支持的分类，一级和二级
         $cats = CategoryData::groupCategorys ( $gid );

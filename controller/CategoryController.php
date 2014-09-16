@@ -5,12 +5,12 @@ class CategoryController extends BaseController {
         $cid = intval ( $this->param ( 'cid', 0 ) );
         if (! $cid) {
             $url = ComTool::url ( "index" );
-            header ( "Location:{$url}" );
+            ComTool::redirect ( $url );
         }
         $category = CategoryData::getById ( $cid );
         if (! $category) {
             $url = ComTool::url ( "index" );
-            header ( "Location:{$url}" );
+            ComTool::redirect ( $url );
         }
         $curTime = time ();
         $category ['start_time'] = '09:00:00';

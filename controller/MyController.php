@@ -13,8 +13,7 @@ class MyController extends BaseController {
      */
     public function indexAction() {
         $url = ComTool::url ( "my/group" );
-        header ( "Location:{$url}" );
-        exit ();
+        ComTool::redirect ( $url );
     }
     
     /**
@@ -154,6 +153,7 @@ class MyController extends BaseController {
             ComTool::checkMaxLen ( $detail, 32, "详细位置最多32位" );
             $currUser = $this->getCurrentUser ();
             $uid = $currUser ['id'];
+            $detail = ComTool::escape ( $detail ); //(addslashes($detail));
             $sql = "update user_group set `detail`='{$detail}' where user_id='{$uid}' and group_id='{$gid}'";
             $res = UserGroupData::sql ( $sql );
             ComTool::result ( $res, '操作失败，请刷新重试', '操作成功' );

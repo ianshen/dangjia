@@ -76,7 +76,7 @@ class BaseController extends Cola_Controller {
         if ($this->mustLogin) {
             if (! $this->isLogin ()) {
                 if (ComTool::isAjax ()) {
-                
+                    //ComTool::ajax ( Cola::getConfig ( '_error.mustlogin' ), '请先登录，即将跳转至登录页面' );
                 } else {
                     $pathinfo = trim ( $_SERVER ['PATH_INFO'], '/\\' );
                     $returnUrl = urlencode ( ComTool::urlRoot () . $pathinfo );

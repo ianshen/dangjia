@@ -189,7 +189,10 @@
 																			class="input-small" name="receiver" id="receiver"
 																			type="text" placeholder="收货人姓名"
 																			value="<?php show($this->currUser['name']); ?>">
-																		<span class="help-block f-fs1">#重要#请使用真实手机号码，以便顺利享受服务</span>
+																		<span class="help-block f-fs1">#重要#请使用真实手机号码，以便顺利享受服务。#<a
+																			href="<?php show($this->urlroot); ?>my/info"
+																			target="_blank" title="点击去设置帐号信息">设置帐号信息</a>#
+																		</span>
 																	</div>
 																	<label class="f-fs1">详细地址：</label>
 																	<div class="controls">
@@ -206,7 +209,8 @@
 															<li class="supplement"><input type="hidden"
 																id="cate" name="cate"
 																value="<?php show(base64_encode($this->category['id'])); ?>">
-																<input type="hidden" id="group" name="group" value="<?php show(base64_encode($this->group['name'])); ?>">
+																<input type="hidden" id="group" name="group"
+																value="<?php show(base64_encode($this->group['name'])); ?>">
 																<button type="submit" class="btn btn-danger btn-small">提交订单</button></li>
 														</ol>
 													</div>

@@ -3,7 +3,7 @@ $(function() {
 	var $wroot = $CONFIG['wroot'];
 	var $tmot = $CONFIG['tmot'];
 	// 加载城市列表
-	$.get($uroot + "acc/getlocation", {
+	/*$.get($uroot + "acc/getlocation", {
 		ajax : "1",
 		t : "c",
 		id : 0,
@@ -14,7 +14,7 @@ $(function() {
 			var html = '<option value="0">选择城市</option>';
 			$("select#city").html(html + data.data);
 		}
-	});
+	});*/
 	// 选择城市
 	$("select#city").die().live("change", function() {
 		var id = parseInt($(this).val());
@@ -133,6 +133,7 @@ $(function() {
 			var addr_desc = $('input#addr_desc').val();
 			var passwd = $('input#passwd').val();
 			var cpasswd = $('input#cpasswd').val();
+			var captcha = $('input#captcha').val();
 			if (!email) {
 				$.scojs_message('请填写常用邮箱', $.scojs_message.TYPE_ERROR);
 				return false;
@@ -145,15 +146,15 @@ $(function() {
 				$.scojs_message('请填写正确的邮箱', $.scojs_message.TYPE_ERROR);
 				return false;
 			}
-			if (!mobile) {
+			/*if (!mobile) {
 				$.scojs_message('请填写常用手机号', $.scojs_message.TYPE_ERROR);
 				return false;
 			}
 			if (!isMobile(mobile)) {
 				$.scojs_message('请填写正确的手机号', $.scojs_message.TYPE_ERROR);
 				return false;
-			}
-			if (!city) {
+			}*/
+			/*if (!city) {
 				$.scojs_message('请选择城市', $.scojs_message.TYPE_ERROR);
 				return false;
 			}
@@ -172,7 +173,7 @@ $(function() {
 			if (addr_desc.length > 32) {
 				$.scojs_message('详细位置最多32位', $.scojs_message.TYPE_ERROR);
 				return false;
-			}
+			}*/
 			if (!passwd) {
 				$.scojs_message('请输入密码', $.scojs_message.TYPE_ERROR);
 				return false;
@@ -187,6 +188,10 @@ $(function() {
 			}
 			if (passwd != cpasswd) {
 				$.scojs_message('两次输入的密码不同', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if (!captcha) {
+				$.scojs_message('请输入验证码', $.scojs_message.TYPE_ERROR);
 				return false;
 			}
 		}

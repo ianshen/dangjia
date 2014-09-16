@@ -286,4 +286,8 @@ class ComTool {
         $pageHtml = $pageTool->html ();
         return $pageHtml;
     }
+    
+    static function escape($str) {
+        return addslashes ( $str );
+    }
 }

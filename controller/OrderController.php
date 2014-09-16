@@ -197,24 +197,22 @@ class OrderController extends BaseController {
      * 订单详情
      */
     public function detailAction() {
-        $oid = $this->param ( 'o', 0 );
+        $this->mustLogin = 1;
+        $this->mustLoginCheck ();
+        $oid = $this->param ( 'o', '' );
         $details = array ();
         $totalPrice = 0;
         if ($oid) {
-            $sql = "SELECT * FROM `order` where id='{$oid}' and `status`='1' limit 1";
-            $order = OrderData::sql ( $sql );
-            if ($order) {
-                $sql = "SELECT * FROM `order_detail` where order_id='{$oid}'";
-                $details = OrderData::sql ( $sql );
-                if ($details) {
-                    foreach ( $details as $detail ) {
-                        $totalPrice += intval ( $detail ['price'] * $detail ['amount'] );
-                    }
+            $oid = ComTool::escape ( $oid );
+            $sql = "SELECT a.user_id,a.user_name,a.user_tel,a.user_addr,a.create_time,a.total_cost,a.`status`,b.order_id,b.good_id,b.good_name,b.amount,b.price FROM `order` a LEFT JOIN order_detail b on a.id=b.order_id where a.id='{$oid}' and a.`status`='1'";
+            $details = BaseData::sql ( $sql );
+            if ($details) {
+                foreach ( $details as $detail ) {
+                    $totalPrice += intval ( $detail ['price'] * $detail ['amount'] );
                 }
             }
         }
         $this->assign ( 'totalPrice', $totalPrice );
-        $this->assign ( 'order', $order [0] );
         $this->assign ( 'details', $details );
         $this->display ();
     }
@@ -232,6 +230,7 @@ class OrderController extends BaseController {
             if (! $orderId) {
                 ComTool::ajax ( 100001, '未知订单' );
             }
+            $orderId=ComTool::escape($orderId);
             $updateTime = time ();
             $sql = "update `order` set `status`=4,update_time='{$updateTime}' where id='{$orderId}' and user_id='{$currUser['id']}'";
             $res = OrderData::sql ( $sql );

@@ -7,7 +7,8 @@
 class AccController extends BaseController {
     
     public function indexAction() {
-        $this->display ();
+        $url = ComTool::url ( 'acc/login' );
+        ComTool::redirect ( $url );
     }
     
     /**
@@ -45,21 +46,21 @@ class AccController extends BaseController {
             }
             //成功则写session
             $_SESSION ['islogin'] = 1; //登录标识
-			//登录用户信息
-			$_SESSION ['user'] = array (
-				'id' => $user ['id'], 
-				'mobile' => $user ['mobile'], 
-				'email' => $user ['email'], 
-				'passwd' => $user ['passwd'], 
-				'name' => $user ['name'] 
-			);
+            //登录用户信息
+            $_SESSION ['user'] = array (
+                'id' => $user ['id'], 
+                'mobile' => $user ['mobile'], 
+                'email' => $user ['email'], 
+                'passwd' => $user ['passwd'], 
+                'name' => $user ['name'] 
+            );
             $returnUrl = trim ( $this->post ( 'returnUrl' ) );
             $returnUrl = $returnUrl ? $returnUrl : $this->urlroot . 'my/group';
             ComTool::ajax ( 100000, '登录成功，即将跳转', $returnUrl );
         }
         if ($this->isLogin ()) {
             $returnUrl = ComTool::urlRoot ();
-            //Cola_Response::redirect ( $returnUrl );
+            ComTool::redirect ( $returnUrl );
         }
         $returnUrl = urldecode ( $this->get ( 'returnUrl', '' ) );
         $this->assign ( 'returnUrl', $returnUrl );
@@ -89,7 +90,8 @@ class AccController extends BaseController {
             if ($user) {
                 ComTool::ajax ( 100001, '邮箱已被注册' );
             }
-            $mobile = trim ( $this->post ( 'mobile' ) );
+            $mobile = '';
+            /* $mobile = trim ( $this->post ( 'mobile' ) );
             ComTool::checkEmpty ( $mobile, '请填写常用手机号' );
             if (! ComTool::isMobile ( $mobile )) {
                 ComTool::ajax ( 100001, '请填写正确的手机号' );
@@ -98,8 +100,8 @@ class AccController extends BaseController {
             $user = UserData::getByMobile ( $mobile );
             if ($user) {
                 ComTool::ajax ( 100001, '手机号已被注册' );
-            }
-            $city = trim ( $this->post ( 'city' ) );
+            } */
+            /* $city = trim ( $this->post ( 'city' ) );
             ComTool::checkEmpty ( $city, '请选择城市' );
             $area = trim ( $this->post ( 'area' ) );
             ComTool::checkEmpty ( $area, '请选择区域' );
@@ -107,8 +109,7 @@ class AccController extends BaseController {
             ComTool::checkEmpty ( $group, '请选择圈子' );
             $addr_desc = trim ( $this->post ( 'addr_desc' ) );
             ComTool::checkEmpty ( $addr_desc, '请填写详细位置' );
-            ComTool::checkMaxLen ( $addr_desc, 32, '详细位置最多32位' );
-            //$name = trim ( $this->post ( 'name' ) ); //姓名或代号
+            ComTool::checkMaxLen ( $addr_desc, 32, '详细位置最多32位' ); */
             $passwd = trim ( $this->post ( 'passwd' ) );
             ComTool::checkEmpty ( $passwd, '请输入密码' );
             ComTool::checkMinMaxLen ( $passwd, 6, 16, '密码6-16位' );
@@ -122,7 +123,7 @@ class AccController extends BaseController {
                 'update_time' => time (), 
                 'status' => 1 
             ) );
-            if ($res === false) {
+            /* if ($res === false) {
                 ComTool::ajax ( 100001, '服务器忙，请重试' );
             }
             $res = UserGroupData::add ( array (
@@ -130,12 +131,12 @@ class AccController extends BaseController {
                 'group_id' => $group, 
                 'detail' => $addr_desc, 
                 'status' => 1 
-            ) );
+            ) ); */
             ComTool::result ( $res, '服务器忙，请重试', '注册成功' );
         }
         if ($this->isLogin ()) {
             $returnUrl = ComTool::urlRoot ();
-            //Cola_Response::redirect ( $returnUrl );
+            ComTool::redirect ( $returnUrl );
         }
         $this->display ();
     }
