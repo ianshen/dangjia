@@ -65,6 +65,7 @@
 																		<label class="control-label" for="user">帐号</label>
 																		<div class="controls">
 																			<input id="user" name="user" type="text"
+																				value="<?php show($this->lastLoginAcc); ?>"
 																				placeholder="邮箱或手机号" />
 																		</div>
 																	</div>
@@ -78,12 +79,14 @@
 																	<div class="control-group">
 																		<div class="controls">
 																			<label class="checkbox"><input
-																				type="checkbox" name="rememberme" id="rememberme" />
-																				记住我</label> <input id="returnUrl" name="returnUrl"
+																				type="checkbox" name="rememberme" id="rememberme"<?php
+																				if($this->lastLoginAcc){ ?> checked="true"<?php } ?>
+																				/> 记住我</label> <input id="returnUrl" name="returnUrl"
 																				type="hidden"
 																				value="<?php show($this->returnUrl,''); ?>" />
 																			<button type="submit" class="btn btn-primary">登录</button>
-																			&nbsp;&nbsp;&nbsp;<a href="<?php show($this->urlroot); ?>acc/reg">去注册&gt;&gt;</a>
+																			&nbsp;&nbsp;&nbsp;<a
+																				href="<?php show($this->urlroot); ?>acc/reg">去注册&gt;&gt;</a>
 																		</div>
 																	</div>
 																</form>

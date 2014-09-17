@@ -6,6 +6,8 @@
  */
 class AccController extends BaseController {
     
+    public $lastLoginAcc = "last_login_acc";//上次登录帐号COOKIENAME
+    
     public function indexAction() {
         $url = ComTool::url ( 'acc/login' );
         ComTool::redirect ( $url );
@@ -33,16 +35,19 @@ class AccController extends BaseController {
             if (ComTool::isEmail ( $acc )) {
                 $user = UserData::getByEmail ( $acc );
             } elseif (ComTool::isMobile ( $acc )) {
-                $user = UserData::getByTel ( $acc );
+                $user = UserData::getByMobile ( $acc );
             } else {
                 ComTool::ajax ( 100001, '请填写正确的邮箱或手机号' );
             }
             if (empty ( $user ) || md5 ( $passwd ) != $user ['passwd']) {
                 ComTool::ajax ( 100001, '帐号或密码错误' );
             }
-            //记住我一个月
             if (! empty ( $rememberme ) && $rememberme == 'on') {
-                exit ( 'x' );
+                //记住我一周3600*24*7
+                Cola_Ext_Cookie::set ( $this->lastLoginAcc, $acc, 604800 );
+            } else {
+                //取消记住帐号、清COOKIE
+                Cola_Ext_Cookie::delete ( $this->lastLoginAcc );
             }
             //成功则写session
             $_SESSION ['islogin'] = 1; //登录标识
@@ -62,7 +67,10 @@ class AccController extends BaseController {
             $returnUrl = ComTool::urlRoot ();
             ComTool::redirect ( $returnUrl );
         }
+        $lastLoginAcc = '';//上次登录帐号
+        $lastLoginAcc = Cola_Ext_Cookie::get ( $this->lastLoginAcc );
         $returnUrl = urldecode ( $this->get ( 'returnUrl', '' ) );
+        $this->assign ( 'lastLoginAcc', $lastLoginAcc );
         $this->assign ( 'returnUrl', $returnUrl );
         $this->display ();
     }
