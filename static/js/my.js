@@ -33,11 +33,11 @@ $(function() {
 				$.scojs_message('请填写正确的邮箱', $.scojs_message.TYPE_ERROR);
 				return false;
 			}
-			if (!mobile) {
+			/*if (!mobile) {
 				$.scojs_message('请填写常用手机号', $.scojs_message.TYPE_ERROR);
 				return false;
-			}
-			if (!isMobile(mobile)) {
+			}*/
+			if (mobile && !isMobile(mobile)) {
 				$.scojs_message('请填写正确的手机号', $.scojs_message.TYPE_ERROR);
 				return false;
 			}

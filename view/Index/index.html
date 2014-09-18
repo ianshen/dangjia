@@ -9,73 +9,101 @@
 <link rel="stylesheet"
 	href="<?php echo WWW_ROOT; ?>static/css/common.css">
 <link rel="stylesheet"
-	href="<?php echo WWW_ROOT; ?>static/css/index.css">
-<title></title>
+	href="<?php echo WWW_ROOT; ?>static/css/group.css">
+<link rel="stylesheet"
+	href="<?php echo WWW_ROOT; ?>static/js/sco/css/sco.message.css">
+<title>嘻咕嘻咕</title>
 <?php include('view/Public/jsconfig.html'); ?>
 </head>
-<body class="index_bg f-tac">
+<body class="index_bg">
+	<div class="container-fluid top_nav">
+		<div class="row-fluid">
+			<div class="span12">
+				<?php include('view/Public/topnav.html'); ?>
+			</div>
+		</div>
+	</div>
 	<div class="container">
-		<div class="topbar">
-			<div class="" id="banners"></div>
-			<div class="global-nav">
-				<div class="global-nav-inner">
-					<div class="container"></div>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="alert">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>nav</strong>
 				</div>
 			</div>
 		</div>
-		<!-- <div style="height:200px;line-height:100px;margin-bottom:120px;"></div> -->
-		<div style="line-height: 100px; margin-bottom: 100px;"></div>
 		<div class="row-fluid">
-			<div class="span12">
-				<div class="btn-group" id="selcity">
-					<button class="btn btn-large jsBtLabel">选择城市</button>
-					<button class="btn btn-large dropdown-toggle"
-						data-toggle="dropdown">
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-						<?php foreach($this->citys as $city){ ?>
-						<li class="dropdown_data_item"><a class=""
-							href="javascript:;" data-id="<?php echo $city['id']; ?>"
-							data-name="<?php echo $city['name']; ?>"> <?php echo $city['name']; ?>
-						</a></li>
-						<?php } ?>
-					</ul>
-				</div>
-				<div class="btn-group" id="selarea">
-					<button class="btn btn-large jsBtLabel">选择地区</button>
-					<button class="btn btn-large dropdown-toggle"
-						data-toggle="dropdown">
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-						<li><a href="#">无</a></li>
-					</ul>
-				</div>
-				<div class="btn-group" id="selgroup">
-					<button class="btn btn-large jsBtLabel">选择圈子</button>
-					<button class="btn btn-large dropdown-toggle"
-						data-toggle="dropdown">
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-						<li><a href="#">无</a></li>
-					</ul>
-				</div>
-				<div class="btn-group">
-					<button class="btn btn-large btn-primary" type="button" id="go">去看看</button>
+			<div class="span8">
+				<div class="row-fluid">
+					<div class="span12">
+						<div id="timeline" class="content-main">
+							<div class="content-header">
+								<div class="header-inner">
+									<h2 class="">欢迎来到@嘻咕嘻咕</h2>
+								</div>
+								<div class="stream-container">
+									<div class="stream">
+										<ol class="stream-items">
+											<li class="stream-item">
+												<div
+													class="clearfix stream-item-activity stream-item-activity-network">
+													<div class="stream-item-activity-header">
+														<div class="stream-item-activity-line">
+															<a href="#" class=""><strong class="">选择要逛的圈子</strong></a>
+														</div>
+													</div>
+													<ol class="activity-supplement  follow-more-than-two">
+														<li class="supplement">
+															<div>
+																<form class="form-horizontal" id="form" method="post">
+																	<div class="control-group">
+																		<div class="control-label"></div>
+																		<div class="controls"></div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label">你先要&nbsp;&nbsp;&nbsp;&gt;&gt;</label>
+																		<div class="controls">
+																			<select class="input-small" id="city" name="city">
+																			</select> <select class="input-small" id="area" name="area">
+																				<option>选择区域</option>
+																			</select> <select class="input-small" id="group" name="group">
+																				<option>选择圈子</option>
+																			</select>
+																		</div>
+																	</div>
+																	<hr>
+																	<div class="control-group">
+																		<div class="control-label"></div>
+																		<div class="controls"></div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label"></label>
+																		<div class="controls">
+																			<button type="button" class="btn btn-primary"
+																				id="gogogo">继续前往&gt;&gt;</button>
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</li>
+													</ol>
+												</div>
+											</li>
+										</ol>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="span12">
-				<div class="control-group form-inline">
-					<div class="controls">
-						<select class="input-medium" id="city" name="city">
-						</select> <select class="input-medium" id="area" name="area">
-							<option>选择区域</option>
-						</select> <select class="input-medium" id="group" name="group">
-							<option>选择圈子</option>
-						</select>
-						<button class="btn btn-medium btn-primary" type="button" id="go">前往&gt;&gt;</button>
+			<div class="span4">
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="dashboard">
+							<?php include('view/Public/module.html'); ?>
+							<?php include('view/Public/copyright.html'); ?>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -85,6 +113,7 @@
 	<script src="<?php echo WWW_ROOT; ?>static/js/jquery-1.8.3.min.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="<?php echo WWW_ROOT; ?>static/js/bootstrap.min.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/sco/js/sco.message.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/common.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/index.js"></script>
 </body>

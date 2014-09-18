@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 09 月 16 日 12:23
+-- 生成日期: 2014 年 09 月 18 日 08:57
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -44,7 +44,8 @@ CREATE TABLE IF NOT EXISTS `category` (
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `order_way` tinyint(1) NOT NULL DEFAULT '0' COMMENT '此分类订单形式(1普通订单产生方式、2生成优惠码方式)',
   `deliver_desc` varchar(64) NOT NULL DEFAULT '' COMMENT '货物配送时间',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `group_id` (`group_id`) USING BTREE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
@@ -105,7 +106,8 @@ CREATE TABLE IF NOT EXISTS `group` (
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `ename` (`ename`) USING BTREE,
-  KEY `id` (`id`) USING BTREE
+  KEY `id` (`id`) USING BTREE,
+  KEY `region_id` (`region_id`) USING BTREE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
@@ -183,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `region` (
   `pid` int(11) NOT NULL DEFAULT '0' COMMENT '父级id',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uni_code` (`ename`)
+  KEY `pid` (`pid`) USING BTREE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
@@ -244,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`) USING HASH,
-  UNIQUE KEY `mobile` (`mobile`) USING BTREE
+  KEY `mobile` (`mobile`) USING BTREE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 --
@@ -252,8 +254,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `passwd`, `mobile`, `email`, `create_time`, `update_time`, `status`) VALUES
-(11, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951433', 'test1@126.com', 1397444811, 1397444811, 1),
-(13, '<script>alert(''x'');</script>', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951435', 'test3@126.com', 1397480095, 1410856824, 1),
+(11, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951431', 'test1@126.com', 1397444811, 1397444811, 1),
+(13, 'alert(''x'')', '55dcfd7f49dbc71b5fe90d199851ee89', '', 'test3@126.com', 1397480095, 1411030637, 1),
 (17, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951432', 'test2@126.com', 1410852095, 1410852095, 1),
 (18, '', '55dcfd7f49dbc71b5fe90d199851ee89', '', 'test4@126.com', 1410853546, 1410853546, 1);
 
@@ -270,7 +272,8 @@ CREATE TABLE IF NOT EXISTS `user_group` (
   `linkman` varchar(32) NOT NULL DEFAULT '' COMMENT '在当前圈子内的联系人，非必须',
   `mobile` varchar(32) NOT NULL DEFAULT '' COMMENT '在当前圈子内的联系电话，非必须',
   `status` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`user_id`,`group_id`)
+  PRIMARY KEY (`user_id`,`group_id`),
+  KEY `user_id` (`user_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

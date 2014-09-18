@@ -17,7 +17,16 @@ class AccController extends BaseController {
      * 登录
      */
     public function loginAction() {
+        $lastLoginAcc = '';//上次登录帐号
+        $lastLoginAcc = Cola_Ext_Cookie::get ( $this->lastLoginAcc );
+        //var_dump($lastLoginAcc);
         if (ComTool::isAjax ()) {
+            if (isset ( $_POST ['captcha'] )) {
+                $captcha = trim ( $this->post ( 'captcha' ) );
+                if (! ComTool::checkCaptcha ( $captcha )) {
+                    ComTool::ajax ( 100001, '验证码错误' );
+                }
+            }
             //登录可使用邮箱和手机，系统自动判断登录号类型
             $type = $this->post ( 'type' );
             $acc = trim ( $this->post ( 'user' ) );
@@ -42,12 +51,16 @@ class AccController extends BaseController {
             if (empty ( $user ) || md5 ( $passwd ) != $user ['passwd']) {
                 ComTool::ajax ( 100001, '帐号或密码错误' );
             }
-            if (! empty ( $rememberme ) && $rememberme == 'on') {
+            /* if (! empty ( $rememberme ) && $rememberme == 'on') {
                 //记住我一周3600*24*7
                 Cola_Ext_Cookie::set ( $this->lastLoginAcc, $acc, 604800 );
             } else {
                 //取消记住帐号、清COOKIE
                 Cola_Ext_Cookie::delete ( $this->lastLoginAcc );
+            } */
+            //上次登录帐号与本次登录帐号不同重新记录COOKIE，3600*24*30
+            if ($lastLoginAcc != $acc) {
+                Cola_Ext_Cookie::set ( $this->lastLoginAcc, $acc, 2592000 );
             }
             //成功则写session
             $_SESSION ['islogin'] = 1; //登录标识
@@ -67,8 +80,6 @@ class AccController extends BaseController {
             $returnUrl = ComTool::urlRoot ();
             ComTool::redirect ( $returnUrl );
         }
-        $lastLoginAcc = '';//上次登录帐号
-        $lastLoginAcc = Cola_Ext_Cookie::get ( $this->lastLoginAcc );
         $returnUrl = urldecode ( $this->get ( 'returnUrl', '' ) );
         $this->assign ( 'lastLoginAcc', $lastLoginAcc );
         $this->assign ( 'returnUrl', $returnUrl );
@@ -140,7 +151,7 @@ class AccController extends BaseController {
                 'detail' => $addr_desc, 
                 'status' => 1 
             ) ); */
-            ComTool::result ( $res, '服务器忙，请重试', '注册成功' );
+            ComTool::result ( $res, '服务器忙，请重试', '注册成功，即将跳转' );
         }
         if ($this->isLogin ()) {
             $returnUrl = ComTool::urlRoot ();
@@ -192,7 +203,7 @@ class AccController extends BaseController {
             $field = $this->get ( 'f' );
             $id = intval ( $this->get ( 'id', 0 ) );
             if (empty ( $id )) {
-                ComTool::ajax ( 100001, 'wrong id' );
+                ComTool::ajax ( 100001, 'empty id' );
             }
             $group = GroupData::getById ( $id );
             if (! $group) {
@@ -211,7 +222,7 @@ class AccController extends BaseController {
             $ctype = $this->get ( 'ctype' );
             $id = intval ( $this->get ( 'id', 0 ) );
             if (empty ( $id )) {
-                ComTool::ajax ( 100001, 'wrong gid' );
+                ComTool::ajax ( 100001, 'empty gid' );
             }
             if ($ctype == 'p') {
                 $cats = CategoryData::getl1CatsByGid ( $id );

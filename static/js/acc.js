@@ -2,6 +2,7 @@ $(function() {
 	var $uroot = $CONFIG['uroot'];
 	var $wroot = $CONFIG['wroot'];
 	var $tmot = $CONFIG['tmot'];
+	var errCnts = 0;
 	// 加载城市列表
 	/*$.get($uroot + "acc/getlocation", {
 		ajax : "1",
@@ -85,6 +86,14 @@ $(function() {
 				}, $tmot);
 			} else {
 				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
+				captchachg();
+				$("input#captcha").val("");
+				// 错误5次以上显示验证码
+				errCnts = parseInt(errCnts) + 1;
+				if (errCnts >= 5) {
+					$("input#captcha").attr("name", "captcha");
+					$("div#js-div-captcha").removeClass("f-dn");
+				}
 			}
 		},
 		beforeSubmit : function() {

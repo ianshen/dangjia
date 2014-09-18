@@ -29,7 +29,7 @@ class MyController extends BaseController {
                     ComTool::ajax ( 100001, '验证码错误' );
                 }
             }
-            $email = trim ( $this->post ( 'email' ) );
+            $email = trim ( $this->post ( 'email', '' ) );
             ComTool::checkEmpty ( $email, '请填写常用邮箱' );
             ComTool::checkMaxLen ( $email, 32, '邮箱最多32位' );
             if (! ComTool::isEmail ( $email )) {
@@ -40,15 +40,17 @@ class MyController extends BaseController {
             if ($user && $user ['id'] != $currUser ['id']) {
                 ComTool::ajax ( 100001, '邮箱已被占用' );
             }
-            $mobile = trim ( $this->post ( 'mobile' ) );
-            ComTool::checkEmpty ( $mobile, '请填写常用手机号' );
-            if (! ComTool::isMobile ( $mobile )) {
+            $mobile = trim ( $this->post ( 'mobile', '' ) );
+            //ComTool::checkEmpty ( $mobile, '请填写常用手机号' );
+            if ($mobile && ! ComTool::isMobile ( $mobile )) {
                 ComTool::ajax ( 100001, '请填写正确的手机号' );
             }
-            //检查手机唯一性
-            $user = UserData::getByMobile ( $mobile );
-            if ($user && $user ['id'] != $currUser ['id']) {
-                ComTool::ajax ( 100001, '手机号已被占用' );
+            //检查手机号唯一性
+            if ($mobile) {
+                $user = UserData::getByMobile ( $mobile );
+                if ($user && $user ['id'] != $currUser ['id']) {
+                    ComTool::ajax ( 100001, '手机号已被占用' );
+                }
             }
             $name = trim ( $this->post ( 'name' ) );
             ComTool::checkMaxLen ( $name, 16, "名称最多16位" );
@@ -122,9 +124,6 @@ class MyController extends BaseController {
      */
     public function groupAction() {
         $currUser = $this->getCurrentUser ();
-        if (ComTool::isAjax ()) {
-        
-        }
         $myGroups = UserGroupData::getGroupsByUid ( $currUser ['id'] );
         if ($myGroups) {
             $gids = array ();

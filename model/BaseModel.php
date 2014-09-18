@@ -42,4 +42,8 @@ class BaseModel extends Cola_Model {
             echo $e;
         }
     }
+    
+    public function getError() {
+        return $this->error;
+    }
 }

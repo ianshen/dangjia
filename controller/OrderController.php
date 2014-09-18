@@ -7,18 +7,25 @@
 class OrderController extends BaseController {
 	
 	public function indexAction() {
-		$this->display ();
-	}
+        $url = ComTool::url ( 'index' );
+        ComTool::redirect ( $url );
+    }
 	
 	/**
 	 * 购物车
 	 */
 	public function cartAction() {
 		$gid = intval ( $this->param ( 'g', 0 ) );
+        if (! $gid) {
+            exit ( 'empty g' );
+        }
         $cid = intval ( $this->param ( 'c', 0 ) );
+        if (! $cid) {
+            exit ( 'empty c' );
+        }
         $category = CategoryData::getById ( $cid );
         if ($category ['group_id'] != $gid) {
-            exit ( 'wrong params' );
+            exit ( '该圈子无此分类' );
         }
         $cart = array ();
 		$cart = $this->getCart ( $cid );
