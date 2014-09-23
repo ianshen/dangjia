@@ -1,9 +1,36 @@
 <?php
 class KickuassController extends BaseController {
     
+    protected $mustLogin = 1;
+    
+    public function __construct() {
+        parent::__construct ();
+        $this->mustLoginCheck ();
+    }
+    
+    protected function isLogin() {
+        return isset ( $_SESSION ['super_islogin'] ) && $_SESSION ['super_islogin'] ? true : false;
+    }
+    
+    /**
+     * 必须登录检查，若未登录跳转至登录页
+     */
+    protected function mustLoginCheck() {
+        if ($this->mustLogin) {
+            if (! $this->isLogin ()) {
+                if (ComTool::isAjax ()) {
+                    exit ( 'not login' );
+                } else {
+                    $token = "";
+                    Cola_Response::redirect ( ComTool::url ( "acc/super_login?token={$token}" ) );
+                }
+            }
+        }
+    }
+    
     public function indexAction() {
         $url = ComTool::url ( 'kickuass/cate', array () );
-        $this->display ();
+        ComTool::redirect ( $url );
     }
     
     /**
@@ -16,17 +43,21 @@ class KickuassController extends BaseController {
             ComTool::checkEmpty ( $name, '群组名不能为空' );
             $ename = trim ( $this->post ( 'ename' ) );
             ComTool::checkEmpty ( $ename, '群组拼音不能为空' );
+            $addr_desc = $this->post ( 'addr_desc' );
+            ComTool::checkEmpty ( $addr_desc, '地址模板不能为空' );
             $city = $this->post ( 'city' );
+            ComTool::checkEmpty ( $city, '请选择城市' );
             $area = $this->post ( 'area' );
+            ComTool::checkEmpty ( $area, '请选择地区' );
             $status = $this->post ( 'status' );
             $res = GroupData::add ( array (
                 'name' => $name, 
                 'ename' => $ename, 
-                'status' => $status, 
                 'create_time' => time (), 
                 'create_date' => date ( 'Y-m-d' ), 
-                'city' => $city, 
-                'area' => $area 
+                'region_id' => $area, 
+                'addr_desc_template' => $addr_desc, 
+                'status' => $status 
             ) );
             ComTool::result ( $res, '失败', '成功' );
         }

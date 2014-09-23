@@ -5,7 +5,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link rel="stylesheet"
 	href="<?php echo WWW_ROOT; ?>static/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo WWW_ROOT; ?>static/css/base.css">
+<link rel="stylesheet"
+	href="<?php echo WWW_ROOT; ?>static/css/common.css">
+<link rel="stylesheet"
+	href="<?php echo WWW_ROOT; ?>static/css/group.css">
+<link rel="stylesheet"
+	href="<?php echo WWW_ROOT; ?>static/js/sco/css/sco.message.css">
 <title></title>
+<?php include('view/Public/jsconfig.html'); ?>
 </head>
 <body>
 	<div class="container-fluid">
@@ -43,9 +51,16 @@
 								</div>
 							</div>
 							<div class="control-group">
+								<label class="control-label" for="">地址模板</label>
+								<div class="controls">
+									<input type="text" placeholder="如：1塔18层" value=""
+										id="addr_desc" name="addr_desc">
+								</div>
+							</div>
+							<div class="control-group">
 								<label class="control-label" for="">城市</label>
 								<div class="controls">
-									<select name="city">
+									<select name="city" id="city">
 										<option value="1"></option>
 									</select>
 								</div>
@@ -53,7 +68,7 @@
 							<div class="control-group">
 								<label class="control-label" for="">地区</label>
 								<div class="controls">
-									<select name="area">
+									<select name="area" id="area">
 										<option value="1"></option>
 									</select>
 								</div>
@@ -84,6 +99,7 @@
 									<th>编号</th>
 									<th>群组名</th>
 									<th>群组拼音</th>
+									<th>地址模板</th>
 									<th>创建时间</th>
 									<th>状态</th>
 									<th></th>
@@ -100,6 +116,9 @@
 									</td>
 									<td>
 										<?php echo $v['ename']; ?>
+									</td>
+									<td>
+										<?php echo $v['addr_desc_template']; ?>
 									</td>
 									<td>
 										<?php echo $v['create_time']; ?>
@@ -128,6 +147,9 @@
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="<?php echo WWW_ROOT; ?>static/js/bootstrap.min.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/jquery.form.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/sco/js/sco.message.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/funcs.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/common.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			var options = {
@@ -135,7 +157,10 @@
 				dataType : 'json',
 				success : function(data) {
 					if (data.status == 100000) {
+						$.scojs_message(data.info, $.scojs_message.TYPE_OK);
 						//window.location.reload();
+					} else {
+						$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
 					}
 				}
 			};

