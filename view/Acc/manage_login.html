@@ -64,7 +64,7 @@
 																	<div class="control-group">
 																		<label class="control-label" for="user">帐号</label>
 																		<div class="controls">
-																			<input id="user" name="user" type="password"
+																			<input id="user" name="user" type="text"
 																				value="<?php show($this->lastLoginAcc); ?>"
 																				placeholder="输入帐号" />
 																		</div>
@@ -76,7 +76,7 @@
 																				placeholder="输入密码" />
 																		</div>
 																	</div>
-																	<div class="control-group">
+																	<div class="control-group" id="js-div-captcha">
 																		<label class="control-label" for="captcha">验证码</label>
 																		<div class="controls">
 																			<input id="captcha" name="captcha" type="text"
@@ -90,10 +90,9 @@
 																	</div>
 																	<div class="control-group">
 																		<div class="controls">
-																			<!-- <label class="checkbox"><input
-																				type="checkbox" name="rememberme" id="rememberme" />
-																				记住我</label> -->
-																			<input id="returnUrl" name="returnUrl" type="hidden"
+																			<input id="token" name="token" type="hidden"
+																				value="<?php show($this->token,''); ?>" /> <input
+																				id="returnUrl" name="returnUrl" type="hidden"
 																				value="<?php show($this->returnUrl,''); ?>" />
 																			<button type="submit" class="btn btn-primary">登录</button>
 																		</div>

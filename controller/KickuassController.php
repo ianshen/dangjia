@@ -21,8 +21,7 @@ class KickuassController extends BaseController {
                 if (ComTool::isAjax ()) {
                     exit ( 'not login' );
                 } else {
-                    $token = "";
-                    Cola_Response::redirect ( ComTool::url ( "acc/super_login?token={$token}" ) );
+                    Cola_Response::redirect ( ComTool::url ( "acc/super_login" ) );
                 }
             }
         }
