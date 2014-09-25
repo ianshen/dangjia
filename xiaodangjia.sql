@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 09 月 18 日 08:57
+-- 生成日期: 2014 年 09 月 25 日 02:44
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `group` (
   UNIQUE KEY `ename` (`ename`) USING BTREE,
   KEY `id` (`id`) USING BTREE,
   KEY `region_id` (`region_id`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `group`
@@ -116,7 +116,8 @@ CREATE TABLE IF NOT EXISTS `group` (
 
 INSERT INTO `group` (`id`, `name`, `ename`, `create_time`, `create_date`, `region_id`, `addr_desc_template`, `status`) VALUES
 (1, '北辰泰岳大厦', 'beichentaiyue', 1395236134, '2014-03-19', 3, '1塔18层', 1),
-(6, '明天第一城', 'mingtiandiyicheng', 1395236134, '2014-03-19', 3, '6号院3号楼2单元101', 1);
+(6, '明天第一城', 'mingtiandiyicheng', 1395236134, '2014-03-19', 3, '6号院3号楼2单元101', 1),
+(8, '甜水园', 'tianshuiyuan', 1411460198, '2014-09-23', 3, '15层', 1);
 
 -- --------------------------------------------------------
 
@@ -208,26 +209,29 @@ CREATE TABLE IF NOT EXISTS `store` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL DEFAULT '' COMMENT '店铺名',
   `ename` varchar(32) NOT NULL DEFAULT '' COMMENT '店铺名称拼音',
-  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '入驻时间',
-  `create_date` date NOT NULL DEFAULT '0000-00-00' COMMENT '入驻日期',
+  `passwd` char(32) NOT NULL DEFAULT '' COMMENT '密码',
+  `secret` varchar(64) NOT NULL DEFAULT '' COMMENT '凭证UUID',
   `contact` varchar(16) DEFAULT '' COMMENT '联系人',
   `tel` varchar(32) DEFAULT '' COMMENT '联系电话',
   `addr` varchar(64) NOT NULL DEFAULT '' COMMENT '店铺详细地址',
   `desc` varchar(256) NOT NULL DEFAULT '' COMMENT '店铺描述',
   `city` int(10) NOT NULL DEFAULT '0' COMMENT '所属城市',
   `area` int(10) NOT NULL DEFAULT '0' COMMENT '所属地区',
+  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '入驻时间',
+  `create_date` date NOT NULL DEFAULT '0000-00-00' COMMENT '入驻日期',
   `status` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ename` (`ename`) USING BTREE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `store`
 --
 
-INSERT INTO `store` (`id`, `name`, `ename`, `create_time`, `create_date`, `contact`, `tel`, `addr`, `desc`, `city`, `area`, `status`) VALUES
-(5, '店铺1', 'dian1', 1395232865, '2014-03-19', '联系人1', '联系电话1', '明天第一城', '', 1, 1, 1),
-(6, '店铺2', 'dian2', 1395236063, '2014-03-19', '联系人2', '联系电话2', '明天第一城', '', 1, 2, 1),
-(7, '店铺3', 'dian3', 1395236084, '2014-03-19', '联系人3', '联系电话3', '明天第一城', '', 1, 2, 1);
+INSERT INTO `store` (`id`, `name`, `ename`, `passwd`, `secret`, `contact`, `tel`, `addr`, `desc`, `city`, `area`, `create_time`, `create_date`, `status`) VALUES
+(5, '店铺1', 'dian1', '55dcfd7f49dbc71b5fe90d199851ee89', '0e6915b9-43c3-11e4-aa07-206a8a319380', '联系人1', '联系电话1', '明天第一城', '', 1, 1, 1395232865, '2014-03-19', 1),
+(6, '店铺2', 'dian2', '55dcfd7f49dbc71b5fe90d199851ee89', '1743259e-43c3-11e4-aa07-206a8a319380', '联系人2', '联系电话2', '明天第一城', '', 1, 2, 1395236063, '2014-03-19', 1),
+(7, '店铺3', 'dian3', '55dcfd7f49dbc71b5fe90d199851ee89', '1e1fd431-43c3-11e4-aa07-206a8a319380', '联系人3', '联系电话3', '明天第一城', '', 1, 2, 1395236084, '2014-03-19', 1);
 
 -- --------------------------------------------------------
 
@@ -247,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`) USING HASH,
   KEY `mobile` (`mobile`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- 转存表中的数据 `user`
@@ -255,9 +259,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `name`, `passwd`, `mobile`, `email`, `create_time`, `update_time`, `status`) VALUES
 (11, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951431', 'test1@126.com', 1397444811, 1397444811, 1),
-(13, 'alert(''x'')', '55dcfd7f49dbc71b5fe90d199851ee89', '', 'test3@126.com', 1397480095, 1411030637, 1),
+(13, 'alert(''x'')', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951433', 'test3@126.com', 1397480095, 1411030793, 1),
 (17, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951432', 'test2@126.com', 1410852095, 1410852095, 1),
-(18, '', '55dcfd7f49dbc71b5fe90d199851ee89', '', 'test4@126.com', 1410853546, 1410853546, 1);
+(18, '', '55dcfd7f49dbc71b5fe90d199851ee89', '', 'test4@126.com', 1410853546, 1410853546, 1),
+(19, '', '66353c24a2ba3b00870a13575a9a33f7', '', 'test5@126.com', 1411031378, 1411031975, 1);
 
 -- --------------------------------------------------------
 

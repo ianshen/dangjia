@@ -282,7 +282,7 @@ class AccController extends BaseController {
             if (isset ( $_POST ['captcha'] )) {
                 $captcha = trim ( $this->post ( 'captcha' ) );
                 if (! ComTool::checkCaptcha ( $captcha )) {
-                    //ComTool::ajax ( 100001, '验证码错误' );
+                    ComTool::ajax ( 100001, '验证码错误' );
                 }
             }
             //登录可使用邮箱和手机，系统自动判断登录号类型
@@ -318,7 +318,12 @@ class AccController extends BaseController {
                 'ename' => $user ['ename'], 
                 'secret' => $user ['secret'], 
                 'contact' => $user ['contact'], 
-                'tel' => $user ['tel'] 
+                'tel' => $user ['tel'], 
+                'addr' => $user ['addr'], 
+                'desc' => $user ['desc'], 
+                'city' => $user ['city'], 
+                'area' => $user ['area'], 
+                'create_time' => $user ['create_time'] 
             );
             $returnUrl = $this->urlroot . 'manage';
             ComTool::ajax ( 100000, '登录成功，即将跳转', $returnUrl );

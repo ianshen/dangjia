@@ -12,6 +12,10 @@ class ManageController extends BaseController {
         return isset ( $_SESSION ['manage_islogin'] ) && $_SESSION ['manage_islogin'] ? true : false;
     }
     
+    protected function getCurrentUser() {
+        return isset ( $_SESSION ['manage_user'] ) && $_SESSION ['manage_user'] ? $_SESSION ['manage_user'] : array ();
+    }
+    
     /**
      * 必须登录检查，若未登录跳转至登录页
      */
@@ -21,7 +25,8 @@ class ManageController extends BaseController {
                 if (ComTool::isAjax ()) {
                     exit ( 'not login' );
                 } else {
-                    Cola_Response::redirect ( ComTool::url ( "acc/manage_login" ) );
+                    $token = trim ( $this->get ( 'token', '' ) );
+                    Cola_Response::redirect ( ComTool::url ( "acc/manage_login?token={$token}" ) );
                 }
             }
         }
@@ -31,7 +36,16 @@ class ManageController extends BaseController {
      * 
      */
     public function indexAction() {
-        print_r($_SESSION);
+        $currUser = $this->getCurrentUser ();
+        $this->assign ( 'currUser', $currUser );
+        $this->display ();
+    }
+    
+    public function orderAction() {
+        $this->display ();
+    }
+    
+    public function infoAction() {
         $this->display ();
     }
 }
