@@ -6,8 +6,9 @@
  */
 class AccController extends BaseController {
     
-    public $lastLoginAcc = "last_login_acc";//上次登录帐号COOKIENAME
+    public $lastLoginAcc = "last_login_acc"; //上次登录帐号COOKIENAME
     
+
     public function indexAction() {
         $url = ComTool::url ( 'acc/login' );
         ComTool::redirect ( $url );
@@ -17,7 +18,7 @@ class AccController extends BaseController {
      * 登录
      */
     public function loginAction() {
-        $lastLoginAcc = '';//上次登录帐号
+        $lastLoginAcc = ''; //上次登录帐号
         $lastLoginAcc = Cola_Ext_Cookie::get ( $this->lastLoginAcc );
         if (ComTool::isAjax ()) {
             if (isset ( $_POST ['captcha'] )) {
@@ -296,7 +297,7 @@ class AccController extends BaseController {
             ComTool::checkMaxLen ( $acc, 32, '参数错误5' );
             ComTool::checkMinMaxLen ( $passwd, 6, 16, '参数错误4' );
             $acc = ComTool::escape ( $acc );
-            $sql = "SELECT * FROM `store` WHERE `ename`='{$acc}'";
+            $sql = "SELECT * FROM `store` WHERE `ename`='{$acc}' limit 1";
             $user = BaseData::sql ( $sql );
             if (empty ( $user )) {
                 ComTool::ajax ( 100001, '参数错误3' );
@@ -313,18 +314,7 @@ class AccController extends BaseController {
             Cola_Ext_Cookie::set ( $cookieName, $acc, 2592000 );
             //成功则写session
             $_SESSION ['manage_islogin'] = 1; //登录标识
-            $_SESSION ['manage_user'] = array (
-                'name' => $user ['name'], 
-                'ename' => $user ['ename'], 
-                'secret' => $user ['secret'], 
-                'contact' => $user ['contact'], 
-                'tel' => $user ['tel'], 
-                'addr' => $user ['addr'], 
-                'desc' => $user ['desc'], 
-                'city' => $user ['city'], 
-                'area' => $user ['area'], 
-                'create_time' => $user ['create_time'] 
-            );
+            $_SESSION ['manage_user'] = $user;
             $returnUrl = $this->urlroot . 'manage';
             ComTool::ajax ( 100000, '登录成功，即将跳转', $returnUrl );
         }

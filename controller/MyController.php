@@ -93,7 +93,8 @@ class MyController extends BaseController {
     }
     
     public function passwordAction() {
-        $currUser = $this->getCurrentUser ();
+        $currUser = $this->refreshCurrentUser ();
+        //$currUser = $this->getCurrentUser ();
         if (ComTool::isAjax ()) {
             if (isset ( $_POST ['captcha'] )) {
                 $captcha = trim ( $this->post ( 'captcha' ) );
@@ -112,7 +113,7 @@ class MyController extends BaseController {
             ComTool::checkEqual ( $passwd, $cpasswd, '两次输入的密码不同' );
             $passwd = md5 ( $passwd );
             $time = time ();
-            $sql = "update `user` set passwd='{$passwd}',update_time='{$time}' where id={$currUser ['id']}";
+            $sql = "update `user` set passwd='{$passwd}',update_time='{$time}' where id={$currUser ['id']} limit 1";
             $res = UserData::sql ( $sql );
             ComTool::result ( $res, '服务器忙，请重试', '保存成功' );
         }

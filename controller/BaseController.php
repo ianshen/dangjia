@@ -43,7 +43,13 @@ class BaseController extends Cola_Controller {
     protected function refreshCurrentUser() {
         $currUser = $this->getCurrentUser ();
         $currUser = UserData::getById ( $currUser ['id'] );
-        $_SESSION ['user'] = $currUser;
+        $_SESSION ['user'] = array (
+            'id' => $currUser ['id'], 
+            'mobile' => $currUser ['mobile'], 
+            'email' => $currUser ['email'], 
+            'passwd' => $currUser ['passwd'], 
+            'name' => $currUser ['name'] 
+        );
         return $currUser;
     }
     
