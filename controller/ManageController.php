@@ -81,7 +81,12 @@ class ManageController extends BaseController {
     }
     
     public function orderAction() {
-        
+        $currUser = $this->refreshCurrentUser ();
+        //店铺支撑的品类
+        $sql = "select * from `category` where store_id='{$currUser['id']}'";
+        $categorys = BaseData::sql ( $sql );
+        print_r ( $categorys );
+        $this->assign ( 'categorys', $categorys );
         $this->display ();
     }
 }

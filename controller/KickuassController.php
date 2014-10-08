@@ -1,7 +1,7 @@
 <?php
 class KickuassController extends BaseController {
     
-    protected $mustLogin = 1;
+    protected $mustLogin = 0;
     
     public function __construct() {
         parent::__construct ();
