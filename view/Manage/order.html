@@ -22,7 +22,7 @@
 	<div class="container-fluid top_nav">
 		<div class="row-fluid">
 			<div class="span12">
-				<?php include('view/Public/topnav.html'); ?>
+				<?php include('view/Manage/managetopnav.html'); ?>
 			</div>
 		</div>
 	</div>
@@ -56,7 +56,7 @@
 								</div>
 								<div class="stream-container">
 									<div class="stream">
-										<?php if(empty($this->myGroups)){ ?>
+										<?php if(empty($this->categorys)){ ?>
 										<ol class="stream-items">
 											<li class="stream-item">
 												<div
@@ -64,7 +64,7 @@
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
 															<a href="javascript:void(0);" class="f-cst"><strong
-																class=""> 挑个圈子逛逛 </strong></a>
+																class=""> 今日订单 </strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
@@ -83,11 +83,11 @@
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
 															<a href="javascript:void(0);" class="f-cst"><strong
-																class=""> 挑个圈子逛逛 </strong></a>
+																class=""> 今日订单 </strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
-														<?php foreach($this->myGroups as $item){ ?>
+														<?php foreach($this->categorys as $item){ ?>
 														<li class="supplement f-ib">&nbsp;<a target="_blank"
 															href="<?php show($this->urlroot); ?>g/<?php show($item['group_id']); ?>">
 																<?php show($item['name']); ?>
@@ -98,123 +98,7 @@
 												</div>
 											</li>
 										</ol>
-										<ol class="stream-items">
-											<li class="stream-item">
-												<div
-													class="clearfix stream-item-activity stream-item-activity-network">
-													<div class="stream-item-activity-header">
-														<div class="stream-item-activity-line">
-															<a href="javascript:void(0);" class=""><strong
-																class="">我加入的圈子</strong></a>
-														</div>
-													</div>
-													<ol class="activity-supplement  follow-more-than-two">
-														<li class="supplement">
-															<table class="table product-cart product-cart-big">
-																<thead>
-																	<tr>
-																		<th><small>我在圈子里的位置</small></th>
-																		<th><small>圈子名称</small></th>
-																		<th><small>操作</small></th>
-																	</tr>
-																</thead>
-																<tbody>
-																	<?php foreach($this->myGroups as $item){ ?>
-																	<tr data-gid="<?php show($item['group_id']); ?>">
-																		<td class="js-group-detail f-wth150"><span
-																			class="js-addr-desc-text"> <small> <?php show(htmlentities($item['detail'],ENT_QUOTES,'utf-8')); ?>
-																			</small>
-																		</span><span class="f-dn js-addr-desc-input"><input
-																				class="input-large js-addr-desc" type="text"
-																				placeholder="如：B座3号楼4层"
-																				value="<?php show($item['detail']); ?>"></span></td>
-																		<td class="f-wth150"><small> <?php show($item['name']); ?>
-																		</small></td>
-
-																		<td class="f-wth150"><small><a
-																				href="javascript:void(0);" class="js-mod-detail"
-																				data-gid="<?php show($item['group_id']); ?>">修改位置</a></small>&nbsp;|&nbsp;<small><a
-																				href="javascript:void(0);" class="js-quit-group"
-																				data-gid="<?php show($item['group_id']); ?>">退出圈子</a></small></td>
-																	</tr>
-																	<?php } ?>
-																</tbody>
-															</table>
-														</li>
-													</ol>
-												</div>
-											</li>
-										</ol>
 										<?php } ?>
-										<ol class="stream-items">
-											<li class="stream-item">
-												<div
-													class="clearfix stream-item-activity stream-item-activity-network">
-													<div class="stream-item-activity-header">
-														<div class="stream-item-activity-line">
-															<a href="javascript:void(0);" class=""><strong
-																class="">加入新的圈子</strong></a>
-														</div>
-													</div>
-													<ol class="activity-supplement  follow-more-than-two">
-														<li class="supplement">
-															<div>
-																<form
-																	action="<?php show($this->urlroot); ?>my/joingroup"
-																	class="form-horizontal" id="joingroupform"
-																	method="post">
-																	<div class="control-group">
-																		<div class="control-label"></div>
-																		<div class="controls"></div>
-																	</div>
-																	<?php include('view/Public/group/detail.html'); ?>
-																	<!-- <div class="control-group">
-																		<div class="controls">
-																			<a id="js-show-more" class="">更多+</a>
-																		</div>
-																	</div>
-																	<div class="f-dn" id="js-more-settings">
-																		<div class="control-group">
-																			<label class="control-label" for="mobile">手机</label>
-																			<div class="controls">
-																				<input id="mobile" name="mobile" type="text"
-																					placeholder="常用手机号" /> <span
-																					class="help-block f-fs1">你在此圈子里的常用手机号</span>
-																			</div>
-																		</div>
-																		<div class="control-group">
-																			<label class="control-label" for="name">名称</label>
-																			<div class="controls">
-																				<input id="name" name="name" type="text"
-																					placeholder="常用名" /> <span
-																					class="help-block f-fs1">可为真实姓名或你想用的任何代号</span>
-																			</div>
-																		</div>
-																	</div> -->
-																	<div class="control-group">
-																		<label class="control-label" for="captcha">验证码</label>
-																		<div class="controls">
-																			<input id="captcha" name="captcha" type="text"
-																				class="input-small border1" placeholder="输入验证码" />
-																			<img title="点击换一换" id="captcha_img"
-																				onclick="javascript:captchachg();"
-																				src="<?php echo $this->urlroot; ?>acc/captcha" /> <a
-																				onclick="javascript:captchachg();" class="f-fs1"
-																				href="javascript:void(0);">&nbsp;换一张?</a>
-																		</div>
-																	</div>
-																	<div class="control-group">
-																		<div class="controls">
-																			<button type="submit" class="btn btn-primary">保存</button>
-																		</div>
-																	</div>
-																</form>
-															</div>
-														</li>
-													</ol>
-												</div>
-											</li>
-										</ol>
 									</div>
 								</div>
 							</div>
