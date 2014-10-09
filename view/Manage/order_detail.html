@@ -20,50 +20,79 @@
 	</div>
 	<div class="container-fluid">
 		<div class="row-fluid">
+			<?php if(empty($this->details)){ ?>
+			<div class="span12">暂无下单</div>
+			<?php }else{ ?>
 			<div class="span12">
+				订单日期：
+				<?php show($this->details[0]['create_date']); ?>
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>编号</th>
-							<th>产品</th>
-							<th>交付时间</th>
-							<th>状态</th>
+							<th>收货人</th>
+							<th>手机</th>
+							<th>地址</th>
+							<th>商品名</th>
+							<th>数量</th>
+							<th>单价</th>
+							<th>应付款总价</th>
+							<th>确认收货签名</th>
 						</tr>
 					</thead>
 					<tbody>
+						<?php foreach($this->details as $item){ ?>
 						<tr>
-							<td>1</td>
-							<td>TB - Monthly</td>
-							<td>01/04/2012</td>
-							<td>Default</td>
+							<td>
+								<?php show(htmlentities($item['user_name'],ENT_QUOTES,'utf-8')); ?>
+							</td>
+							<td>
+								<?php show(htmlentities($item['user_tel'],ENT_QUOTES,'utf-8')); ?>
+							</td>
+							<td>
+								<?php show(htmlentities($item['user_addr'],ENT_QUOTES,'utf-8')); ?>
+							</td>
+							<td>
+								<?php show(htmlentities($item['good_name'],ENT_QUOTES,'utf-8')); ?>
+							</td>
+							<td>
+								<?php show($item['amount']); ?>
+							</td>
+							<td>
+								<?php show($item['price']); ?>
+							</td>
+							<td>
+								<?php show($item['total_cost']); ?>
+							</td>
+							<td></td>
 						</tr>
-						<tr class="success">
-							<td>1</td>
-							<td>TB - Monthly</td>
-							<td>01/04/2012</td>
-							<td>Approved</td>
-						</tr>
-						<tr class="error">
-							<td>2</td>
-							<td>TB - Monthly</td>
-							<td>02/04/2012</td>
-							<td>Declined</td>
-						</tr>
-						<tr class="warning">
-							<td>3</td>
-							<td>TB - Monthly</td>
-							<td>03/04/2012</td>
-							<td>Pending</td>
-						</tr>
-						<tr class="info">
-							<td>4</td>
-							<td>TB - Monthly</td>
-							<td>04/04/2012</td>
-							<td>Call in to confirm</td>
-						</tr>
+						<?php } ?>
 					</tbody>
 				</table>
+				<table class="table table-hover">
+					<tr>
+						<td rowspan="2">收货人姓名</td>
+						<td>555 77 854</td>
+						<td>555 77 854</td>
+						<td>555 77 854</td>
+						<td>555 77 854</td>
+						<td>555 77 854</td>
+						<td>555 77 854</td>
+						<td>555 77 854</td>
+						<td>555 77 854</td>
+						<td rowspan="2">555 77 854</td>
+					</tr>
+					<tr>
+						<td>555 77 854</td>
+						<td>555 77 854</td>
+						<td>555 77 854</td>
+						<td>555 77 854</td>
+						<td>555 77 854</td>
+						<td>555 77 854</td>
+						<td>555 77 854</td>
+					</tr>
+				</table>
 			</div>
+			<?php } ?>
 		</div>
 	</div>
 </body>
