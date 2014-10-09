@@ -175,10 +175,12 @@ class OrderController extends BaseController {
             $orderId = ComTool::getOrderId ();
             $data ['id'] = $orderId;
             $data ['user_id'] = $currUser ['id'];
+            $data ['category_id'] = $curCategory;
             $data ['user_name'] = $receiver;
             $data ['user_tel'] = $mobile;
             $data ['user_addr'] = "{$groupName} {$addrDesc}";
             $data ['create_time'] = $data ['update_time'] = time ();
+            $data ['create_date'] = date ( "Y-m-d" );
             $data ['total_cost'] = $cart ['totalPrice'];
             $data ['status'] = '1';
             $res = OrderData::add ( $data );

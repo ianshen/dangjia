@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 09 月 25 日 02:44
+-- 生成日期: 2014 年 10 月 09 日 10:11
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -53,10 +53,10 @@ CREATE TABLE IF NOT EXISTS `category` (
 --
 
 INSERT INTO `category` (`id`, `group_id`, `store_id`, `level`, `pid`, `name`, `ename`, `desc`, `create_time`, `update_time`, `time_limit`, `days`, `start_time`, `end_time`, `status`, `order_way`, `deliver_desc`) VALUES
-(3, 1, 5, 1, 0, '订午餐', 'dingwucan', '供人订午餐', 1395237337, 1395237337, 1, '1,2,3,4,5', '08:00:00', '11:00:00', 1, 1, ''),
+(3, 1, 0, 1, 0, '订午餐', 'dingwucan', '供人订午餐', 1395237337, 1395237337, 1, '1,2,3,4,5', '08:00:00', '11:00:00', 1, 1, ''),
 (4, 1, 0, 1, 0, '果蔬', 'guoshu', '订水果蔬菜', 1395323280, 1395323280, 1, '1,2,3,4,5', '11:00:00', '14:00:00', 1, 1, ''),
 (5, 1, 5, 2, 3, '饺子', 'jiaozi', '饺子', 1395323445, 1395323445, 1, '1,2,3,4,5', '08:00:00', '11:00:00', 1, 1, ''),
-(6, 1, 5, 2, 4, '水果', 'shuiguo', '订水果', 1395323656, 1395323656, 1, '1,2,3,4,5', '11:00:00', '14:00:00', 1, 1, ''),
+(6, 6, 5, 2, 4, '水果', 'shuiguo', '订水果', 1395323656, 1395323656, 1, '1,2,3,4,5', '11:00:00', '14:00:00', 1, 1, ''),
 (7, 1, 6, 2, 4, '蔬菜', 'shucai', '订蔬菜', 1395323716, 1395323716, 1, '1,2,3,4,5', '13:00:00', '16:00:00', 1, 1, '');
 
 -- --------------------------------------------------------
@@ -128,22 +128,26 @@ INSERT INTO `group` (`id`, `name`, `ename`, `create_time`, `create_date`, `regio
 CREATE TABLE IF NOT EXISTS `order` (
   `id` bigint(20) NOT NULL DEFAULT '0' COMMENT '订单号',
   `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `category_id` int(11) NOT NULL DEFAULT '0' COMMENT '订单商品的品类',
   `user_name` varchar(32) NOT NULL DEFAULT '' COMMENT '用户名',
   `user_tel` varchar(32) NOT NULL DEFAULT '' COMMENT '用户电话',
   `user_addr` varchar(64) NOT NULL DEFAULT '' COMMENT '地址',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '订单创建时间',
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `create_date` date NOT NULL DEFAULT '0000-00-00' COMMENT '订单日期',
   `total_cost` int(11) NOT NULL DEFAULT '0' COMMENT '订单总价',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`) USING BTREE,
+  KEY `user_id` (`user_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `order`
 --
 
-INSERT INTO `order` (`id`, `user_id`, `user_name`, `user_tel`, `user_addr`, `create_time`, `update_time`, `total_cost`, `status`) VALUES
-(14091673270597741, 13, '<script>al', '13436951435', '北辰泰岳大厦 1塔15层', 1410870070, 1410870070, 50, 1);
+INSERT INTO `order` (`id`, `user_id`, `category_id`, `user_name`, `user_tel`, `user_addr`, `create_time`, `update_time`, `create_date`, `total_cost`, `status`) VALUES
+(14091673270597741, 13, 5, '<script>al', '13436951435', '北辰泰岳大厦 1塔15层', 1410870070, 1410870070, '2014-10-09', 50, 1);
 
 -- --------------------------------------------------------
 
@@ -211,13 +215,14 @@ CREATE TABLE IF NOT EXISTS `store` (
   `ename` varchar(32) NOT NULL DEFAULT '' COMMENT '店铺名称拼音',
   `passwd` char(32) NOT NULL DEFAULT '' COMMENT '密码',
   `secret` varchar(64) NOT NULL DEFAULT '' COMMENT '凭证UUID',
-  `contact` varchar(16) DEFAULT '' COMMENT '联系人',
-  `tel` varchar(32) DEFAULT '' COMMENT '联系电话',
+  `contact` varchar(16) NOT NULL DEFAULT '' COMMENT '联系人',
+  `tel` varchar(32) NOT NULL DEFAULT '' COMMENT '联系电话',
   `addr` varchar(64) NOT NULL DEFAULT '' COMMENT '店铺详细地址',
   `desc` varchar(256) NOT NULL DEFAULT '' COMMENT '店铺描述',
   `city` int(10) NOT NULL DEFAULT '0' COMMENT '所属城市',
   `area` int(10) NOT NULL DEFAULT '0' COMMENT '所属地区',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '入驻时间',
+  `update_time` int(11) NOT NULL DEFAULT '0',
   `create_date` date NOT NULL DEFAULT '0000-00-00' COMMENT '入驻日期',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
@@ -228,10 +233,10 @@ CREATE TABLE IF NOT EXISTS `store` (
 -- 转存表中的数据 `store`
 --
 
-INSERT INTO `store` (`id`, `name`, `ename`, `passwd`, `secret`, `contact`, `tel`, `addr`, `desc`, `city`, `area`, `create_time`, `create_date`, `status`) VALUES
-(5, '店铺1', 'dian1', '55dcfd7f49dbc71b5fe90d199851ee89', '0e6915b9-43c3-11e4-aa07-206a8a319380', '联系人1', '联系电话1', '明天第一城', '', 1, 1, 1395232865, '2014-03-19', 1),
-(6, '店铺2', 'dian2', '55dcfd7f49dbc71b5fe90d199851ee89', '1743259e-43c3-11e4-aa07-206a8a319380', '联系人2', '联系电话2', '明天第一城', '', 1, 2, 1395236063, '2014-03-19', 1),
-(7, '店铺3', 'dian3', '55dcfd7f49dbc71b5fe90d199851ee89', '1e1fd431-43c3-11e4-aa07-206a8a319380', '联系人3', '联系电话3', '明天第一城', '', 1, 2, 1395236084, '2014-03-19', 1);
+INSERT INTO `store` (`id`, `name`, `ename`, `passwd`, `secret`, `contact`, `tel`, `addr`, `desc`, `city`, `area`, `create_time`, `update_time`, `create_date`, `status`) VALUES
+(5, '店铺1', 'dian1', '55dcfd7f49dbc71b5fe90d199851ee89', '0e6915b9-43c3-11e4-aa07-206a8a319380', '联系人1', '联系电话1', '明天第一城', '明天第', 1, 1, 1395232865, 1411723611, '2014-03-19', 1),
+(6, '店铺2', 'dian2', '55dcfd7f49dbc71b5fe90d199851ee89', '1743259e-43c3-11e4-aa07-206a8a319380', '联系人2', '联系电话2', '明天第一城', '明天第', 1, 2, 1395236063, 0, '2014-03-19', 1),
+(7, '店铺3', 'dian3', '55dcfd7f49dbc71b5fe90d199851ee89', '1e1fd431-43c3-11e4-aa07-206a8a319380', '联系人3', '联系电话3', '明天第一城', '明天第', 1, 2, 1395236084, 0, '2014-03-19', 1);
 
 -- --------------------------------------------------------
 

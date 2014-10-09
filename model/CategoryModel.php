@@ -31,6 +31,10 @@ class CategoryModel extends BaseModel {
         return $result;
     }
     
+    /**get level 1 cats
+     * @param unknown_type $gid
+     * @return Ambigous <multitype:, boolean, unknown>
+     */
     public function getl1CatsByGid($gid) {
         try {
             $result = $this->find ( "group_id={$gid} and pid=0" );

@@ -68,9 +68,7 @@
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
-														<li class="supplement f-ib"><small>还没加入圈子，你可以</small><a
-															href="<?php show($this->urlroot); ?>">&nbsp;随便逛逛&nbsp;</a><small>或在下方#加入新的圈子#</small>
-														</li>
+														<li class="supplement f-ib"><small>还没有订单哦！</small></li>
 													</ol>
 												</div>
 											</li>
@@ -88,12 +86,60 @@
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
 														<?php foreach($this->categorys as $item){ ?>
-														<li class="supplement f-ib">&nbsp;<a target="_blank"
-															href="<?php show($this->urlroot); ?>g/<?php show($item['group_id']); ?>">
-																<?php show($item['name']); ?>
+														<li class="supplement f-lh30">&nbsp;<a
+															target="_blank" title="点击查看"
+															href="<?php show($this->urlroot); ?>manage/order_detail/o/<?php show($item['group_id']); ?>">
+																【<?php show($item['group']['name']); ?>】<?php show($item['name']); ?>
 														</a>&nbsp;
 														</li>
 														<?php } ?>
+													</ol>
+												</div>
+											</li>
+										</ol>
+										<ol class="stream-items">
+											<li class="stream-item">
+												<div
+													class="clearfix stream-item-activity stream-item-activity-network">
+													<div class="stream-item-activity-header">
+														<div class="stream-item-activity-line">
+															<a href="javascript:void(0);" class=""><strong
+																class="">今日订单</strong></a>
+														</div>
+													</div>
+													<ol class="activity-supplement  follow-more-than-two">
+														<li class="supplement">
+															<table class="table product-cart product-cart-big">
+																<thead>
+																	<tr>
+																		<th><small>品类</small></th>
+																		<th><small>圈子</small></th>
+																		<th><small>说明</small></th>
+																		<th><small>订单生成时间（）</small><br>（）</th>
+																		<th><small>操作</small></th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<?php foreach($this->categorys as $item){ ?>
+																	<tr data-gid="<?php show($item['group_id']); ?>">
+																		<td class="js-group-detail f-wth50"><span
+																			class="js-addr-desc-text"> <small> <?php show(htmlentities($item['name'],ENT_QUOTES,'utf-8')); ?>
+																			</small>
+																		</span></td>
+																		<td class="f-wth100"><small> <?php show(htmlentities($item['group']['name'],ENT_QUOTES,'utf-8')); ?>
+																		</small></td>
+																		<td class="f-wth150"><small> </small></td>
+																		<td class="f-wth150"><small> </small></td>
+																		<td class="f-wth150"><small><a
+																				href="<?php show($this->urlroot); ?>manage/order_detail/c/<?php show($item['id']); ?>"
+																				target="_blank" class="">查看订单</a></small>&nbsp;|&nbsp;<small><a
+																				href="javascript:void(0);" class="js-order-del"
+																				data-oid="<?php show($item['id']); ?>">暂停营业</a></small></td>
+																	</tr>
+																	<?php } ?>
+																</tbody>
+															</table>
+														</li>
 													</ol>
 												</div>
 											</li>
