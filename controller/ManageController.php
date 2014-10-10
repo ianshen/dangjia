@@ -108,17 +108,22 @@ class ManageController extends BaseController {
     
     public function order_detailAction() {
         $cid = $this->param ( 'c', '' );
+		$type = $this->param ( 't', '' );
         $details = array ();
         if ($cid) {
             $currUser = $this->refreshCurrentUser ();
             $cid = ComTool::escape ( $cid );
-            $createDate = date ( "Y-m-d" );
-            $sql = "SELECT a.id,a.user_id,a.category_id,a.user_name,a.user_tel,a.user_addr,a.create_time,a.create_date,a.total_cost,b.good_id,b.good_name,b.amount,b.price FROM `order` a LEFT JOIN order_detail b on a.id=b.order_id where a.category_id='{$cid}' and a.create_date='{$createDate}' and a.`status`='1'";
-            $details = BaseData::sql ( $sql );
-            foreach ( $details as $detail ) {
-                $tmp [$detail ['user_id']] [] = $detail;
-            }
-            //$details = $tmp;
+			$createDate = date ( "Y-m-d" );
+			$sql = "SELECT a.id,a.user_id,a.category_id,a.user_name,a.user_tel,a.user_addr,a.create_time,a.create_date,a.total_cost,b.good_id,b.good_name,b.amount,b.price FROM `order` a LEFT JOIN order_detail b on a.id=b.order_id where a.category_id='{$cid}' and a.create_date='{$createDate}' and a.`status`='1'";
+			$details = BaseData::sql ( $sql );
+			if ($type) {
+			
+			} else {
+				foreach ( $details as $detail ) {
+					$tmp [$detail ['user_id']] [] = $detail;
+				}
+				$details = $tmp;
+			}
         }
         $this->assign ( 'details', $details );
         $this->display ();
