@@ -279,3 +279,7 @@ h1,h2,h3,h4,h5,h6 {
 .f-wth200 {
 	width: 200px;
 }
+
+.f-mb0 {
+	margin-bottom: 0px;
+}

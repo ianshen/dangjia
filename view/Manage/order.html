@@ -131,12 +131,16 @@
 																		</small></td>
 																		<td class="f-wth150"><small> </small></td>
 																		<td class="f-wth150"><small><a
+																				title="制货单方便商户准备货品"
 																				href="<?php show($this->urlroot); ?>manage/order_detail/c/<?php show($item['id']); ?>"
-																				target="_blank" class="">查看订单</a></small>&nbsp;|&nbsp;<small><a
+																				target="_blank" class="">制货单</a></small>&nbsp;|&nbsp;<small><a
+																				title="送货单方便商户递送货品"
+																				href="<?php show($this->urlroot); ?>manage/order_detail/c/<?php show($item['id']); ?>"
+																				target="_blank" class="">送货单</a></small><br /> <small><a
+																				title="当你想停止此圈子内此品类的服务时，可使用暂停营业功能"
 																				href="javascript:void(0);" class="js-order-del"
 																				data-oid="<?php show($item['id']); ?>">暂停营业</a></small></td>
-																		<td class="f-wth150"><small>
-																				<?php show($item['end_time']); ?>
+																		<td class="f-wth150"><small> <?php show($item['end_time']); ?>
 																		</small></td>
 																	</tr>
 																	<?php } ?>
