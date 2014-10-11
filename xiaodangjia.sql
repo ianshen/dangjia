@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 10 月 09 日 10:11
+-- 生成日期: 2014 年 10 月 11 日 08:37
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -132,6 +132,7 @@ CREATE TABLE IF NOT EXISTS `order` (
   `user_name` varchar(32) NOT NULL DEFAULT '' COMMENT '用户名',
   `user_tel` varchar(32) NOT NULL DEFAULT '' COMMENT '用户电话',
   `user_addr` varchar(64) NOT NULL DEFAULT '' COMMENT '地址',
+  `message` varchar(128) NOT NULL DEFAULT '' COMMENT '订单留言',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '订单创建时间',
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   `create_date` date NOT NULL DEFAULT '0000-00-00' COMMENT '订单日期',
@@ -146,8 +147,9 @@ CREATE TABLE IF NOT EXISTS `order` (
 -- 转存表中的数据 `order`
 --
 
-INSERT INTO `order` (`id`, `user_id`, `category_id`, `user_name`, `user_tel`, `user_addr`, `create_time`, `update_time`, `create_date`, `total_cost`, `status`) VALUES
-(14091673270597741, 13, 5, '<script>al', '13436951435', '北辰泰岳大厦 1塔15层', 1410870070, 1410870070, '2014-10-09', 50, 1);
+INSERT INTO `order` (`id`, `user_id`, `category_id`, `user_name`, `user_tel`, `user_addr`, `message`, `create_time`, `update_time`, `create_date`, `total_cost`, `status`) VALUES
+(14101158059485551, 13, 5, 'alert(''x'')', '13436951433', '北辰泰岳大厦 1塔15层', 'sf asfsda', 1413014859, 1413014859, '2014-10-11', 95, 1),
+(14101158528639419, 11, 5, '哈哈', '13436951431', '北辰泰岳大厦 ', '', 1413015328, 1413015328, '2014-10-11', 35, 1);
 
 -- --------------------------------------------------------
 
@@ -162,18 +164,22 @@ CREATE TABLE IF NOT EXISTS `order_detail` (
   `good_name` varchar(32) NOT NULL DEFAULT '',
   `amount` int(11) NOT NULL DEFAULT '0' COMMENT '数量',
   `price` int(11) NOT NULL DEFAULT '0' COMMENT '单价',
+  `price_desc` varchar(32) NOT NULL DEFAULT '' COMMENT '价格描述如：￥20（15个）',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=101 ;
 
 --
 -- 转存表中的数据 `order_detail`
 --
 
-INSERT INTO `order_detail` (`id`, `order_id`, `good_id`, `good_name`, `amount`, `price`, `status`) VALUES
-(76, 14091673270597741, 1, '韭菜鸡蛋', 2, 15, 1),
-(77, 14091673270597741, 2, '猪肉大葱', 1, 20, 1);
+INSERT INTO `order_detail` (`id`, `order_id`, `good_id`, `good_name`, `amount`, `price`, `price_desc`, `status`) VALUES
+(96, 14101158059485551, 1, '韭菜鸡蛋', 1, 15, '15(15个)', 1),
+(97, 14101158059485551, 3, '牛肉大葱', 2, 20, '20(1份)', 1),
+(98, 14101158059485551, 2, '猪肉大葱', 2, 20, '20(15个)', 1),
+(99, 14101158528639419, 1, '韭菜鸡蛋', 1, 15, '15(15个)', 1),
+(100, 14101158528639419, 3, '牛肉大葱', 1, 20, '20(1份)', 1);
 
 -- --------------------------------------------------------
 
@@ -263,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `passwd`, `mobile`, `email`, `create_time`, `update_time`, `status`) VALUES
-(11, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951431', 'test1@126.com', 1397444811, 1397444811, 1),
+(11, '哈哈', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951431', 'test1@126.com', 1397444811, 1413015318, 1),
 (13, 'alert(''x'')', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951433', 'test3@126.com', 1397480095, 1411030793, 1),
 (17, '', '55dcfd7f49dbc71b5fe90d199851ee89', '13436951432', 'test2@126.com', 1410852095, 1410852095, 1),
 (18, '', '55dcfd7f49dbc71b5fe90d199851ee89', '', 'test4@126.com', 1410853546, 1410853546, 1),

@@ -161,6 +161,7 @@ $(function() {
 			var mobile = $('input#mobile').val();
 			var receiver = $('input#receiver').val();
 			var addr_desc = $('input#addr_desc').val();
+			var message = $('textarea#message').val();
 			if(isLogin){
 				if (!mobile) {
 					$.scojs_message('请填写常用手机号', $.scojs_message.TYPE_ERROR);
@@ -172,6 +173,10 @@ $(function() {
 				}
 				if (receiver.length>16) {
 					$.scojs_message('收货人姓名最多16位', $.scojs_message.TYPE_ERROR);
+					return false;
+				}
+				if (message.length>100) {
+					$.scojs_message('留言最多100字', $.scojs_message.TYPE_ERROR);
 					return false;
 				}
 			}

@@ -29,71 +29,26 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>收货人</th>
-							<th>手机</th>
-							<th>地址</th>
-							<th>商品名</th>
-							<th>份数</th>
-							<th>单价</th>
-							<th>应付总价</th>
-							<th>签字确认</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php foreach($this->details as $item){ ?>
-						<tr>
-							<td>
-								<?php show(htmlentities($item['user_name'],ENT_QUOTES,'utf-8')); ?>
-							</td>
-							<td>
-								<?php show(htmlentities($item['user_tel'],ENT_QUOTES,'utf-8')); ?>
-							</td>
-							<td>
-								<?php show(htmlentities($item['user_addr'],ENT_QUOTES,'utf-8')); ?>
-							</td>
-							<td>
-								<?php show(htmlentities($item['good_name'],ENT_QUOTES,'utf-8')); ?>
-							</td>
-							<td>
-								<?php show($item['amount']); ?>
-							</td>
-							<td>
-								<?php show($item['price']); ?>
-							</td>
-							<td>
-								<?php show($item['total_cost']); ?>
-							</td>
-							<td></td>
-						</tr>
-						<?php } ?>
-					</tbody>
-				</table>
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th width="20%" style="padding: 0px; vertical-align: middle;">地址</th>
-							<th width="10%" style="padding: 0px; vertical-align: middle;">商品</th>
+							<th width="5%" style="padding: 0px; vertical-align: middle;">商品</th>
 							<th width="5%" style="padding: 0px; vertical-align: middle;">份数</th>
-							<th width="5%" style="padding: 0px; vertical-align: middle;">单价</th>
+							<th width="5%" style="padding: 0px; vertical-align: middle;">价格</th>
 							<th width="5%" style="padding: 0px; vertical-align: middle;">总价</th>
-							<th width="10%" style="padding: 0px; vertical-align: middle;">说明</th>
+							<th width="20%" style="padding: 0px; vertical-align: middle;">说明</th>
 							<th width="5%"
-								style="padding: 0px; vertical-align: middle;; vertical-align: middle;">签字</th>
+								style="padding: 0px; vertical-align: middle;; vertical-align: middle;">客户签字</th>
 						</tr>
 					</thead>
 				</table>
-				<table class="table table-hover f-mb0">
+				<!-- <table class="table table-hover f-mb0">
 					<tbody>
 						<tr>
-							<td width="20%" style="padding: 0px; vertical-align: middle;">北辰泰岳大北辰泰岳大厦
-								1塔15层</td>
-							<td width="10%" style="padding: 0px; vertical-align: middle;">韭菜鸡蛋</td>
+							<td width="5%" style="padding: 0px; vertical-align: middle;">韭菜鸡蛋</td>
 							<td width="5%" style="padding: 0px; vertical-align: middle;">1</td>
 							<td width="5%" style="padding: 0px; vertical-align: middle;">15</td>
 							<td width="5%" style="padding: 0px; vertical-align: middle;">15</td>
-							<td width="10%" rowspan="2"
+							<td width="20%" rowspan="2"
 								style="padding: 0px; vertical-align: middle;">
-								<div>收货人：xxx</div>
+								<div>收货人：北辰泰岳大厦北辰泰岳大厦（张三）</div>
 								<div>手机号：13436951433</div>
 								<div>应付款：¥88</div>
 							</td>
@@ -101,43 +56,67 @@
 								style="padding: 0px; vertical-align: middle;"></td>
 						</tr>
 						<tr>
-							<td style="padding: 0px; vertical-align: middle;">北辰泰岳大厦
-								1塔15层</td>
 							<td style="padding: 0px; vertical-align: middle;">韭菜鸡蛋</td>
 							<td style="padding: 0px; vertical-align: middle;">1</td>
 							<td style="padding: 0px; vertical-align: middle;">55元1个</td>
 							<td style="padding: 0px; vertical-align: middle;">¥55</td>
 						</tr>
 					</tbody>
-				</table>
+				</table> -->
+				<?php foreach($this->details as $detail){ ?>
 				<table class="table table-hover f-mb0">
 					<tbody>
+						<?php foreach($detail as $k=>$item){ ?>
+						<?php if(!$k){ ?>
 						<tr>
-							<td width="10%" rowspan="3">1</td>
-							<td width="10%">Mark</td>
-							<td width="10%">Otto</td>
-							<td width="10%">Otto</td>
-							<td width="10%">Otto</td>
-							<td width="10%">Otto</td>
-							<td width="10%" rowspan="3">Otto</td>
-							<td width="10%" rowspan="3">@mdo</td>
+							<td width="5%" style="padding: 0px; vertical-align: middle;">
+								<?php show($item['good_name']); ?>
+							</td>
+							<td width="5%" style="padding: 0px; vertical-align: middle;">
+								<?php show($item['amount']); ?>
+							</td>
+							<td width="5%" style="padding: 0px; vertical-align: middle;">
+								¥<?php show($item['price_desc']); ?>
+							</td>
+							<td width="5%" style="padding: 0px; vertical-align: middle;">¥<?php show(intval($item['price'])*intval($item['amount'])); ?></td>
+							<td width="20%" rowspan="2"
+								style="padding: 0px; vertical-align: middle;">
+								<div>
+									收货人：
+									<?php show(htmlentities($item['user_addr'],ENT_QUOTES,'utf-8')); ?>
+									（
+									<?php show(htmlentities($item['user_name'],ENT_QUOTES,'utf-8')); ?>
+									）
+								</div>
+								<div>
+									手机号：
+									<?php show(htmlentities($item['user_tel'],ENT_QUOTES,'utf-8')); ?>
+								</div>
+								<div>
+									应付款：&nbsp;¥
+									<?php show($item['total_cost']); ?>
+								</div>
+							</td>
+							<td width="5%" rowspan="2"
+								style="padding: 0px; vertical-align: middle;"></td>
 						</tr>
+						<?php }else{ ?>
 						<tr>
-							<td>Mark</td>
-							<td>Mark</td>
-							<td>Mark</td>
-							<td>Mark</td>
-							<td>Otto</td>
+							<td style="padding: 0px; vertical-align: middle;">
+								<?php show($item['good_name']); ?>
+							</td>
+							<td style="padding: 0px; vertical-align: middle;">
+								<?php show($item['amount']); ?>
+							</td>
+							<td style="padding: 0px; vertical-align: middle;">¥<?php show($item['price_desc']); ?>
+							</td>
+							<td style="padding: 0px; vertical-align: middle;">¥<?php show(intval($item['price'])*intval($item['amount'])); ?></td>
 						</tr>
-						<tr>
-							<td>Mark</td>
-							<td>Mark</td>
-							<td>Mark</td>
-							<td>Mark</td>
-							<td>Otto</td>
-						</tr>
+						<?php } ?>
+						<?php } ?>
 					</tbody>
 				</table>
+				<?php } ?>
 			</div>
 			<?php } ?>
 		</div>

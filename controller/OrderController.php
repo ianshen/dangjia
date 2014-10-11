@@ -153,6 +153,8 @@ class OrderController extends BaseController {
 			ComTool::checkMaxLen ( $receiver, 16, "收货人姓名最多16位" );
 			$addrDesc = $this->post ( 'addr_desc', '' );
 			ComTool::checkMaxLen ( $addrDesc, 32, "详细位置最多32位" );
+			$message = trim ( $this->post ( 'message', '' ) );
+			ComTool::checkMaxLen ( $message, 100, "留言最多100字" );
 			$curCategory = $this->post ( 'cate', 0 );
 			$curCategory = intval ( base64_decode ( $curCategory ) );
 			if (! isset ( $_SESSION ['cart'] [$curCategory] )) {
@@ -179,6 +181,7 @@ class OrderController extends BaseController {
             $data ['user_name'] = $receiver;
             $data ['user_tel'] = $mobile;
             $data ['user_addr'] = "{$groupName} {$addrDesc}";
+            $data ['message'] = $message;
             $data ['create_time'] = $data ['update_time'] = time ();
             $data ['create_date'] = date ( "Y-m-d" );
             $data ['total_cost'] = $cart ['totalPrice'];
@@ -187,9 +190,9 @@ class OrderController extends BaseController {
             if ($res === false) {
                 ComTool::ajax ( 100001, '服务器忙，请重试' );
             }
-            $sql = "insert into order_detail(order_id,good_id,good_name,amount,`price`,`status`) values";
+            $sql = "insert into order_detail(order_id,good_id,good_name,amount,`price`,price_desc,`status`) values";
             foreach ( $cart ['products'] as $product ) {
-                $sql .= "('{$orderId}','{$product['id']}','{$product['name']}','{$product['quantity']}','{$product['price']}','1'),";
+                $sql .= "('{$orderId}','{$product['id']}','{$product['name']}','{$product['quantity']}','{$product['price']}','{$product['price']}({$product['price_num']}{$product['price_unit']})','1'),";
             }
             $sql = trim ( $sql, ',' );
             $res = OrderData::sql ( $sql );
