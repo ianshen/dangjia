@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet"
+	href="<?php echo WWW_ROOT; ?>static/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo WWW_ROOT; ?>static/css/base.css">
+<link rel="stylesheet"
+	href="<?php echo WWW_ROOT; ?>static/css/common.css">
+<link rel="stylesheet"
+	href="<?php echo WWW_ROOT; ?>static/css/group.css">
+<title>嘻咕嘻咕 - 今日订单</title>
+</head>
+<body class="">
+	<div class="container-fluid top_nav">
+		<div class="row-fluid">
+			<div class="span12"></div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<?php if(empty($this->details)){ ?>
+			<div class="span12">暂无下单</div>
+			<?php }else{ ?>
+			<div class="span12">
+				订单日期：
+				<?php show($this->details[0]['create_date']); ?>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>收货人</th>
+							<th>手机</th>
+							<th>地址</th>
+							<th>商品名</th>
+							<th>份数</th>
+							<th>单价</th>
+							<th>应付总价</th>
+							<th>签字确认</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach($this->details as $item){ ?>
+						<tr>
+							<td>
+								<?php show(htmlentities($item['user_name'],ENT_QUOTES,'utf-8')); ?>
+							</td>
+							<td>
+								<?php show(htmlentities($item['user_tel'],ENT_QUOTES,'utf-8')); ?>
+							</td>
+							<td>
+								<?php show(htmlentities($item['user_addr'],ENT_QUOTES,'utf-8')); ?>
+							</td>
+							<td>
+								<?php show(htmlentities($item['good_name'],ENT_QUOTES,'utf-8')); ?>
+							</td>
+							<td>
+								<?php show($item['amount']); ?>
+							</td>
+							<td>
+								<?php show($item['price']); ?>
+							</td>
+							<td>
+								<?php show($item['total_cost']); ?>
+							</td>
+							<td></td>
+						</tr>
+						<?php } ?>
+					</tbody>
+				</table>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th width="5%" style="padding: 0px; vertical-align: middle;">商品</th>
+							<th width="5%" style="padding: 0px; vertical-align: middle;">份数</th>
+							<th width="5%" style="padding: 0px; vertical-align: middle;">价格</th>
+							<th width="5%" style="padding: 0px; vertical-align: middle;">总价</th>
+							<th width="20%" style="padding: 0px; vertical-align: middle;">说明</th>
+							<th width="5%"
+								style="padding: 0px; vertical-align: middle;; vertical-align: middle;">客户签字</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<?php } ?>
+		</div>
+	</div>
+</body>
+</html>
