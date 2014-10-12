@@ -82,19 +82,19 @@
 							<td width="20%" rowspan="2"
 								style="padding: 0px; vertical-align: middle;">
 								<div>
-									收货人：
+									&nbsp;收货人：
 									<?php show(htmlentities($item['user_addr'],ENT_QUOTES,'utf-8')); ?>
 									（
 									<?php show(htmlentities($item['user_name'],ENT_QUOTES,'utf-8')); ?>
 									）
 								</div>
 								<div>
-									手机号：
+									&nbsp;手机号：
 									<?php show(htmlentities($item['user_tel'],ENT_QUOTES,'utf-8')); ?>
 								</div>
 								<div>
-									应付款：&nbsp;¥
-									<?php show($item['total_cost']); ?>
+									&nbsp;应付款：&nbsp;¥
+									<?php $cnt=count($detail); ?>
 								</div>
 							</td>
 							<td width="5%" rowspan="2"

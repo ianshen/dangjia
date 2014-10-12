@@ -116,18 +116,26 @@ class ManageController extends BaseController {
             $createDate = date ( "Y-m-d" );
             $sql = "SELECT a.id,a.user_id,a.category_id,a.user_name,a.user_tel,a.user_addr,a.message,a.create_time,a.create_date,a.total_cost,b.good_id,b.good_name,b.amount,b.price,b.price_desc FROM `order` a LEFT JOIN order_detail b on a.id=b.order_id where a.category_id='{$cid}' and a.create_date='{$createDate}' and a.`status`='1'";
             $details = BaseData::sql ( $sql );
-            if ($type == 1) {
-                foreach ( $details as $detail ) {
-                    $tmp [$detail ['user_id']] [] = $detail;
-                }
-                $details = $tmp;
-                $tpl = "Manage/order_detail.html";
-            } elseif ($type == 2) {
-                $tpl = "Manage/order_detail_.html";
-            } else {
-                exit ();
-            }
+            if ($details) {
+				if ($type == 1) {
+					foreach ( $details as $detail ) {
+						$tmp [$detail ['user_id']] [] = $detail;
+					}
+					/* foreach ( $tmp as $userId => $detail ) {
+					foreach ( $detail as $item ) {
+						$totalCost += intval ( $item ['price'] * $item ['amount'] );
+					}
+				} */
+					$details = $tmp;
+					$tpl = "Manage/order_detail.html";
+				} elseif ($type == 2) {
+					$tpl = "Manage/order_detail_.html";
+				} else {
+					exit ();
+				}
+			}
         }
+        print_r($details);
         $this->assign ( 'details', $details );
         $this->display ($tpl);
     }
