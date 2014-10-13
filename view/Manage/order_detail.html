@@ -29,6 +29,7 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
+							<th width="5%" style="padding: 0px; vertical-align: middle;">日期</th>
 							<th width="5%" style="padding: 0px; vertical-align: middle;">商品</th>
 							<th width="5%" style="padding: 0px; vertical-align: middle;">份数</th>
 							<th width="5%" style="padding: 0px; vertical-align: middle;">价格</th>
@@ -63,12 +64,15 @@
 						</tr>
 					</tbody>
 				</table> -->
-				<?php foreach($this->details as $detail){ ?>
+				<?php foreach($this->details as $userId=>$detail){ ?>
 				<table class="table table-hover f-mb0">
 					<tbody>
 						<?php foreach($detail as $k=>$item){ ?>
 						<?php if(!$k){ ?>
 						<tr>
+							<td width="5%" style="padding: 0px; vertical-align: middle;">
+								<?php show(substr($item['create_date'],-5,5)); ?>
+							</td>
 							<td width="5%" style="padding: 0px; vertical-align: middle;">
 								<?php show($item['good_name']); ?>
 							</td>
@@ -94,7 +98,7 @@
 								</div>
 								<div>
 									&nbsp;应付款：&nbsp;¥
-									<?php $cnt=count($detail); ?>
+									<?php show($this->totalPrices[$userId]); ?>
 								</div>
 							</td>
 							<td width="5%" rowspan="2"
@@ -102,6 +106,9 @@
 						</tr>
 						<?php }else{ ?>
 						<tr>
+							<td style="padding: 0px; vertical-align: middle;">
+								<?php show(substr($item['create_date'],-5,5)); ?>
+							</td>
 							<td style="padding: 0px; vertical-align: middle;">
 								<?php show($item['good_name']); ?>
 							</td>
