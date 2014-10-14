@@ -24,50 +24,10 @@
 			<div class="span12">暂无下单</div>
 			<?php }else{ ?>
 			<div class="span12">
-				订单日期：
-				<?php show($this->details[0]['create_date']); ?>
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>收货人</th>
-							<th>手机</th>
-							<th>地址</th>
-							<th>商品名</th>
-							<th>份数</th>
-							<th>单价</th>
-							<th>应付总价</th>
-							<th>签字确认</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php foreach($this->details as $item){ ?>
-						<tr>
-							<td>
-								<?php show(htmlentities($item['user_name'],ENT_QUOTES,'utf-8')); ?>
-							</td>
-							<td>
-								<?php show(htmlentities($item['user_tel'],ENT_QUOTES,'utf-8')); ?>
-							</td>
-							<td>
-								<?php show(htmlentities($item['user_addr'],ENT_QUOTES,'utf-8')); ?>
-							</td>
-							<td>
-								<?php show(htmlentities($item['good_name'],ENT_QUOTES,'utf-8')); ?>
-							</td>
-							<td>
-								<?php show($item['amount']); ?>
-							</td>
-							<td>
-								<?php show($item['price']); ?>
-							</td>
-							<td>
-								<?php show($item['total_cost']); ?>
-							</td>
-							<td></td>
-						</tr>
-						<?php } ?>
-					</tbody>
-				</table>
+				<div class="">
+					<em>下表为订单详细列表：<?php show($this->createDate); ?></em>
+				</div>
+				<div class="span12" style="min-height: 10px;"></div>
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -76,10 +36,79 @@
 							<th width="5%" style="padding: 0px; vertical-align: middle;">价格</th>
 							<th width="5%" style="padding: 0px; vertical-align: middle;">总价</th>
 							<th width="20%" style="padding: 0px; vertical-align: middle;">说明</th>
-							<th width="5%"
-								style="padding: 0px; vertical-align: middle;; vertical-align: middle;">客户签字</th>
 						</tr>
 					</thead>
+				</table>
+				<?php foreach($this->details as $orderId=>$detail){ ?>
+				<table class="table table-hover f-mb0">
+					<tbody>
+						<?php foreach($detail as $k=>$item){ ?>
+						<?php if(!$k){ ?>
+						<tr>
+							<td width="5%" style="padding: 0px; vertical-align: middle;">
+								<?php show($item['good_name']); ?>
+							</td>
+							<td width="5%" style="padding: 0px; vertical-align: middle;">
+								<?php show($item['amount']); ?>
+							</td>
+							<td width="5%" style="padding: 0px; vertical-align: middle;">
+								¥<?php show($item['price_desc']); ?>
+							</td>
+							<td width="5%" style="padding: 0px; vertical-align: middle;">¥<?php show(intval($item['price'])*intval($item['amount'])); ?></td>
+							<td width="20%" rowspan="2"
+								style="padding: 0px; vertical-align: middle;">
+								<div>
+									&nbsp;订单号：
+									<?php show($orderId); ?>
+								</div>
+								<div>
+									&nbsp;客户留言：
+									<?php show(htmlentities($item['message'],ENT_QUOTES,'utf-8')); ?>
+								</div>
+							</td>
+						</tr>
+						<?php }else{ ?>
+						<tr>
+							<td style="padding: 0px; vertical-align: middle;">
+								<?php show($item['good_name']); ?>
+							</td>
+							<td style="padding: 0px; vertical-align: middle;">
+								<?php show($item['amount']); ?>
+							</td>
+							<td style="padding: 0px; vertical-align: middle;">¥<?php show($item['price_desc']); ?>
+							</td>
+							<td style="padding: 0px; vertical-align: middle;">¥<?php show(intval($item['price'])*intval($item['amount'])); ?></td>
+						</tr>
+						<?php } ?>
+						<?php } ?>
+					</tbody>
+				</table>
+				<?php } ?>
+				<div class="span12"></div>
+				<div class="span12"></div>
+				<div class="">
+					<em>下表为订单统计</em>
+				</div>
+				<div class="span12" style="min-height: 10px;"></div>
+				<table class="table table-hover f-mb0">
+					<thead>
+						<tr>
+							<th width="5%" style="padding: 0px; vertical-align: middle;">商品</th>
+							<th width="5%" style="padding: 0px; vertical-align: middle;">总份数</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach($this->statistics as $one){ ?>
+						<tr>
+							<td style="padding: 0px; vertical-align: middle;">
+								<?php show($one['good_name']); ?>
+							</td>
+							<td style="padding: 0px; vertical-align: middle;">
+								<?php show($one['amount']); ?>
+							</td>
+						</tr>
+						<?php } ?>
+					</tbody>
 				</table>
 			</div>
 			<?php } ?>
