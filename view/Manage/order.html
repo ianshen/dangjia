@@ -113,10 +113,14 @@
 																				target="_blank" class="">制货单</a></small>&nbsp;|&nbsp;<small><a
 																				title="送货单方便商户递送货品"
 																				href="<?php show($this->urlroot); ?>manage/order_detail/c/<?php show($item['id']); ?>/t/1"
-																				target="_blank" class="">送货单</a></small><br /> <small><a
-																				title="当你想停止此圈子内此品类的服务时，可使用暂停营业功能"
-																				href="javascript:void(0);" class="js-order-del"
-																				data-oid="<?php show($item['id']); ?>">暂停营业</a></small></td>
+																				target="_blank" class="">送货单</a></small><br /> <?php if($item['status']==1){ ?>
+																			<small><a title="当你想停止此圈子内此品类的服务时，可使用暂停营业功能"
+																				href="javascript:void(0);" class="js-store-off"
+																				data-cid="<?php show($item['id']); ?>">暂停营业</a></small> <?php }else{ ?>
+																			<small><a title="当你想开启此圈子内此品类的服务时，可使用开始营业功能"
+																				href="javascript:void(0);" class="js-store-on"
+																				data-cid="<?php show($item['id']); ?>">开始营业</a></small> <?php } ?>
+																		</td>
 																		<td class="f-wth150"><small> <?php show($item['end_time']); ?>
 																		</small></td>
 																	</tr>
@@ -152,6 +156,6 @@
 		src="<?php echo WWW_ROOT; ?>static/js/artDialog/artDialog.min.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/funcs.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/common.js"></script>
-	<script src="<?php echo WWW_ROOT; ?>static/js/my.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/manage.js"></script>
 </body>
 </html>

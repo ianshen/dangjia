@@ -145,17 +145,30 @@ class ManageController extends BaseController {
     }
     
     /**
-     * 暂停营业
+     * 暂停/开始营业
      */
-    public function offAction() {
-    
-    }
-    
-    /**
-     * 恢复营业
-     */
-    public function onAction() {
-    
+    public function onoffAction() {
+        $currUser = $this->getCurrentUser ();
+        if (ComTool::isAjax ()) {
+            $cid = intval ( $this->post ( 'cid', 0 ) );
+            $op = $this->post ( 'op', 'on' );
+            ComTool::checkEmpty ( $cid, '必选参数为空' );
+            $time = time ();
+            $status = 0;
+            if ($op == 'on') {
+                $status = 1;
+            } elseif ($op == 'off') {
+                $status = 4;
+            } else {
+                ComTool::ajax ( 100001, '参数错误，请刷新重试' );
+            }
+            $sql = "UPDATE `category` SET `status`='{$status}',update_time='{$time}' WHERE id='{$cid}' and store_id='{$currUser['id']}';";
+            $res = BaseData::sql ( $sql );
+            if ($res === false) {
+                ComTool::ajax ( 100001, '服务器忙，请刷新重试' );
+            }
+            ComTool::ajax ( 100000, '操作成功' );
+        }
     }
     
     /**

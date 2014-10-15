@@ -64,7 +64,8 @@
 													class="clearfix stream-item-activity stream-item-activity-network">
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
-															<a href="javascript:void(0);" class="f-cst"><strong class="">敬请期待</strong></a>
+															<a href="javascript:void(0);" class="f-cst"><strong
+																class="">敬请期待</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
@@ -79,16 +80,21 @@
 													class="clearfix stream-item-activity stream-item-activity-network">
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
-															<a href="javascript:void(0);" class="f-cst"><strong class=""> <?php show($cat['name']); ?>
+															<a href="javascript:void(0);" class="f-cst"><strong
+																class=""> <?php show($cat['name'],'列表'); ?>
 															</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
+														<?php if(empty($cat['children'])){ ?>
+														<li class="supplement f-ib"><a>啊哦！此分类暂时为空哦~~~</a></li>
+														<?php }else{ ?>
 														<?php foreach($cat['children'] as $v){ ?>
 														<li class="supplement f-ib"><a
 															href="<?php show($this->urlroot); ?>c/<?php show($v['id'],0); ?>">
 																<?php show($v['name']); ?>
 														</a></li>
+														<?php } ?>
 														<?php } ?>
 													</ol>
 												</div>

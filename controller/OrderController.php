@@ -42,7 +42,9 @@ class OrderController extends BaseController {
 				}
 			}
 		}
+		$store = StoreData::getById ( $category ['store_id'] );
 		$this->assign ( 'group', $group );
+		$this->assign ( 'store', $store );
 		$this->assign ( 'currUser', $currUser );
 		$this->assign ( 'currUserGroup', $currUserGroup );
 		$this->assign ( 'category', $category );

@@ -73,6 +73,12 @@
 																		<div class="controls"></div>
 																	</div>
 																	<div class="control-group">
+																		<label class="control-label" for="">管理后台登录地址</label>
+																		<div class="controls">
+																			<span class="input-large"> <?php show($this->urlroot); ?>acc/manage_login?token=<?php show($this->currUser['secret']); ?></span>
+																		</div>
+																	</div>
+																	<div class="control-group">
 																		<label class="control-label" for="">店铺名</label>
 																		<div class="controls">
 																			<span class="input-medium uneditable-input"> <?php show(htmlentities($this->currUser['name'],ENT_QUOTES,'utf-8')); ?></span>
@@ -137,18 +143,5 @@
 	<script src="<?php echo WWW_ROOT; ?>static/js/sco/js/sco.message.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/funcs.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/manage.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			var options = {
-				dataType : 'json',
-				success : function(data) {
-					if (data.status == 100000) {
-						//window.location.reload();
-					}
-				}
-			};
-			$('#myform').ajaxForm(options);
-		});
-	</script>
 </body>
 </html>

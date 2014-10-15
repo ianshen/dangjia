@@ -115,6 +115,7 @@ class KickuassController extends BaseController {
             $end = $this->post ( 'end' );
             $orderway = $this->post ( 'orderway' );
             $status = $this->post ( 'status' );
+            $deliver_desc = $this->post ( 'deliver_desc' );
             $data = array ();
             $data ['group_id'] = $group;
             $data ['store_id'] = $store;
@@ -131,6 +132,7 @@ class KickuassController extends BaseController {
             $data ['end_time'] = $end;
             $data ['order_way'] = $orderway;
             $data ['status'] = $status;
+            $data ['deliver_desc'] = $deliver_desc;
             $res = CategoryData::add ( $data );
             ComTool::result ( $res, '失败', '成功' );
         }

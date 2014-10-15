@@ -5,7 +5,7 @@ class CategoryModel extends BaseModel {
     
     public function getsByGid($gid) {
         try {
-            $result = $this->find ( "group_id='{$gid}'" );
+            $result = $this->find ( "group_id='{$gid}' and `status`='1'" );
             return $result;
         } catch ( Exception $e ) {
             echo $e;
@@ -14,7 +14,7 @@ class CategoryModel extends BaseModel {
     
     public function getById($id) {
         try {
-            $result = $this->find ( "id='{$id}'" );
+            $result = $this->find ( "id='{$id}' and `status`='1'" );
             return $result;
         } catch ( Exception $e ) {
             echo $e;
