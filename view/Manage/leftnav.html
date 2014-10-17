@@ -1,14 +1,18 @@
 <div class="module">
 	<ul>
-		<li class="<?php if(__ACTION__=='index'){ ?>active<?php } ?>"><a
-			href="<?php show($this->urlroot); ?>manage/index" class="list-link">我的信息<span
-				class="Icon Icon--caretRight"></span></a></li>
 		<li class="<?php if(__ACTION__=='order'){ ?>active<?php } ?>"><a
 			href="<?php show($this->urlroot); ?>manage/order" class="list-link">今日订单<span
+				class="Icon Icon--caretRight"></span></a></li>
+		<li class="<?php if(__ACTION__=='index'){ ?>active<?php } ?>"><a
+			href="<?php show($this->urlroot); ?>manage/index" class="list-link">我的信息<span
 				class="Icon Icon--caretRight"></span></a></li>
 		<li class="<?php if(__ACTION__=='password'){ ?>active<?php } ?>"><a
 			href="<?php show($this->urlroot); ?>manage/password"
 			class="list-link">修改密码 <span class="Icon Icon--caretRight"></span>
+		</a></li>
+		<li class="<?php if(__ACTION__=='helper'){ ?>active<?php } ?>"><a
+			href="<?php show($this->urlroot); ?>manage/store" class="list-link">我的店铺
+				<span class="Icon Icon--caretRight"></span>
 		</a></li>
 		<li class="<?php if(__ACTION__=='helper'){ ?>active<?php } ?>"><a
 			href="<?php show($this->urlroot); ?>manage/helper" class="list-link">用户指南

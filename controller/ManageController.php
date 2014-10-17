@@ -158,7 +158,7 @@ class ManageController extends BaseController {
             if ($op == 'on') {
                 $status = 1;
             } elseif ($op == 'off') {
-                $status = 4;
+                $status = 3;
             } else {
                 ComTool::ajax ( 100001, '参数错误，请刷新重试' );
             }
@@ -176,5 +176,9 @@ class ManageController extends BaseController {
      */
     public function helperAction() {
         $this->display ();
+    }
+    
+    public function storeAction() {
+    
     }
 }
