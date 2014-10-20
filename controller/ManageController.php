@@ -179,6 +179,7 @@ class ManageController extends BaseController {
     }
     
     public function storeAction() {
-    
+        
+        $this->display ();
     }
 }

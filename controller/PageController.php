@@ -11,4 +11,8 @@ class PageController extends BaseController {
     public function storeAction() {
         $this->display ();
     }
+    
+    public function showAction() {
+    
+    }
 }
