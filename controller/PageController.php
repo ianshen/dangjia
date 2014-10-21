@@ -13,6 +13,7 @@ class PageController extends BaseController {
 	}
 	
 	public function showAction() {
+	    //http://amazeui.org/
 		$this->display ();
 	}
 }
