@@ -12,8 +12,11 @@ class PageController extends BaseController {
 		$this->display ();
 	}
 	
+	/**
+	 * 小店通
+	 */
 	public function showAction() {
-	    //http://amazeui.org/
+		//http://amazeui.org/
 		$this->display ();
 	}
 }
