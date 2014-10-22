@@ -10,8 +10,14 @@
 			href="<?php show($this->urlroot); ?>manage/password"
 			class="list-link">修改密码 <span class="Icon Icon--caretRight"></span>
 		</a></li>
-		<li class="<?php if(__ACTION__=='store'){ ?>active<?php } ?>"><a
-			href="<?php show($this->urlroot); ?>manage/store" class="list-link">我的店铺
+		<li class="<?php if(__ACTION__=='cate'){ ?>active<?php } ?>"><a
+			href="<?php show($this->urlroot); ?>manage/cate" class="list-link">分类管理<span
+				class="Icon Icon--caretRight"></span></a></li>
+		<li class="<?php if(__ACTION__=='goods'){ ?>active<?php } ?>"><a
+			href="<?php show($this->urlroot); ?>manage/goods" class="list-link">商品管理<span
+				class="Icon Icon--caretRight"></span></a></li>
+		<li class="<?php if(__ACTION__=='qr'){ ?>active<?php } ?>"><a
+			href="<?php show($this->urlroot); ?>manage/qr" class="list-link">互联网名片
 				<span class="Icon Icon--caretRight"></span>
 		</a></li>
 		<li class="<?php if(__ACTION__=='helper'){ ?>active<?php } ?>"><a

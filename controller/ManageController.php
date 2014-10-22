@@ -171,15 +171,22 @@ class ManageController extends BaseController {
         }
     }
     
+    public function cateAction() {
+        $this->display ();
+    }
+    
+    public function goodsAction() {
+        $this->display ();
+    }
+    
+    public function qrAction() {
+        $this->display ();
+    }
+    
     /**
      * 用户指南
      */
     public function helperAction() {
-        $this->display ();
-    }
-    
-    public function storeAction() {
-        
         $this->display ();
     }
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 10 月 16 日 07:50
+-- 生成日期: 2014 年 10 月 22 日 05:28
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -256,21 +256,23 @@ CREATE TABLE IF NOT EXISTS `store_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `store_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(32) NOT NULL DEFAULT '' COMMENT '分类名称',
+  `pid` int(11) NOT NULL DEFAULT '0' COMMENT '父分类',
+  `path` varchar(128) NOT NULL DEFAULT '0' COMMENT '族谱',
   `desc` varchar(256) NOT NULL DEFAULT '' COMMENT '说明文字',
   `create_time` int(11) NOT NULL DEFAULT '0',
   `update_time` int(11) NOT NULL DEFAULT '0',
   `order` tinyint(1) NOT NULL DEFAULT '0' COMMENT '排序',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `store_category`
 --
 
-INSERT INTO `store_category` (`id`, `store_id`, `name`, `desc`, `create_time`, `update_time`, `order`, `status`) VALUES
-(3, 5, '盖饭', '', 1395237337, 1395237337, 1, 1),
-(4, 5, '炒菜', '', 1395323280, 1395323280, 1, 1);
+INSERT INTO `store_category` (`id`, `store_id`, `name`, `pid`, `path`, `desc`, `create_time`, `update_time`, `order`, `status`) VALUES
+(3, 5, '盖饭', 0, '', '', 1395237337, 1395237337, 1, 1),
+(4, 5, '炒菜', 0, '', '', 1395323280, 1395323280, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -289,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `store_goods` (
   `order` int(11) NOT NULL DEFAULT '1' COMMENT '商品顺序',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

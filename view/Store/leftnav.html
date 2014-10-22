@@ -1,0 +1,16 @@
+<div class="module">
+	<ul>
+		<li class=""><a href="<?php show($this->urlroot); ?>manage/index"
+			class="list-link">店铺信息<span class="Icon Icon--caretRight"></span></a></li>
+		<li class="<?php if(__ACTION__=='cate'){ ?>active<?php } ?>"><a
+			href="<?php show($this->urlroot); ?>store/cate" class="list-link">分类管理<span
+				class="Icon Icon--caretRight"></span></a></li>
+		<li class="<?php if(__ACTION__=='goods'){ ?>active<?php } ?>"><a
+			href="<?php show($this->urlroot); ?>store/goods" class="list-link">商品管理<span
+				class="Icon Icon--caretRight"></span></a></li>
+		<li class="<?php if(__ACTION__=='qr'){ ?>active<?php } ?>"><a
+			href="<?php show($this->urlroot); ?>store/qr" class="list-link">互联网名片
+				<span class="Icon Icon--caretRight"></span>
+		</a></li>
+	</ul>
+</div>

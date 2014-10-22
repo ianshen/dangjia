@@ -39,34 +39,6 @@
 	border-radius: 6px;
 }
 
-.left_sidebar {
-	
+.f-pl10 {
+	padding-left: 10px;
 }
-
-.right_sidebar {
-	
-}
-
-/* .global_nav {
-	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-	height: 46px;
-	position: relative;
-	width: 100%;
-}
-
-.global-nav-inner {
-	background: none repeat scroll 0 0 #FFFFFF;
-	height: 46px;
-}
-
-.global-nav .container {
-	max-width: 1190px;
-	text-align: center;
-	width: auto;
-}
-
-.container {
-	margin: 0 auto;
-	position: relative;
-	width: 890px;
-} */

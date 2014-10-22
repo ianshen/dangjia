@@ -8,12 +8,15 @@
 	href="<?php echo WWW_ROOT; ?>static/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="<?php echo WWW_ROOT; ?>static/css/bootstrap-responsive.css">
+<link rel="stylesheet"
+	href="<?php echo WWW_ROOT; ?>static/css/common.css">
 <title>叶问的小店 - 嘻咕嘻咕·秀</title>
 <?php include('view/Public/jsconfig.html'); ?>
 <style>
 .show_bg {
 	background-attachment: fixed;
-	background-color: #c0deed;
+	/* background-color: #c0deed; */
+	background-color: #F6F6F6;
 	background-image: url("../img/bg.png");
 	background-repeat: no-repeat;
 	color: #292f33;
@@ -40,11 +43,17 @@
 				<div class="row-fluid">
 					<div class="span4"></div>
 					<div class="span4">
+
 						<div class="page-header">
 							<h4>
 								<small>叶问的小店 - 嘻咕嘻咕·秀</small>
 							</h4>
 						</div>
+						<!-- <div class="alert">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<h4>提示!</h4>
+							<strong>公告!</strong> 请注意你的个人隐私安全.
+						</div> -->
 						<div class="tabbable" id="tabs-899479">
 							<ul class="nav nav-tabs">
 								<li class="active"><a data-toggle="tab"
@@ -89,9 +98,9 @@
 									</div>
 									<p>&nbsp;第一部分内容.</p>
 								</div>
-								<div class="tab-pane" id="panel-430276">
+								<div class="tab-pane f-pl10" id="panel-430276">
 									<div>
-										<h6>&nbsp;&nbsp;&nbsp;店铺名</h6>
+										<h6>&nbsp;&nbsp;&nbsp;名称</h6>
 										<p>本可视化布局程序在HTML5</p>
 									</div>
 									<div>
@@ -104,13 +113,19 @@
 											能实现自动本地化保存,即使关闭了网页,下一次打开仍然能恢复上一次的操作.</p>
 									</div>
 									<div>
+										<h6>&nbsp;&nbsp;&nbsp;公告</h6>
+										<p>公告公告公告公告公告公告</p>
+									</div>
+									<div>
 										<h6>&nbsp;&nbsp;&nbsp;介绍</h6>
 										<p>可视化布局程序在HTML5浏览器上运行更加完美, 能实现自动本地化保存,
 											即使关闭了网页,下一次打开仍然能恢复上一次的操作.</p>
 									</div>
 									<div>
 										<h6>&nbsp;&nbsp;&nbsp;互联网名片</h6>
-										<p>二维码</p>
+										<p>
+											<img src="..." class="img-polaroid">
+										</p>
 									</div>
 								</div>
 							</div>
