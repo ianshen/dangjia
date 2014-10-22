@@ -175,6 +175,10 @@ class ManageController extends BaseController {
         $this->display ();
     }
     
+    public function addCateAction() {
+        
+    }
+    
     public function goodsAction() {
         $this->display ();
     }
