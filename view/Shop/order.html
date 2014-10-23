@@ -15,14 +15,14 @@
 	rel="stylesheet" />
 <link rel="stylesheet"
 	href="<?php echo WWW_ROOT; ?>static/js/sco/css/sco.message.css">
-<title>嘻咕嘻咕 - 我的圈子</title>
+<title>嘻咕嘻咕 - 今日订单</title>
 <?php include('view/Public/jsconfig.html'); ?>
 </head>
 <body class="index_bg">
 	<div class="container-fluid top_nav">
 		<div class="row-fluid">
 			<div class="span12">
-				<?php include('view/Public/topnav.html'); ?>
+				<?php include('view/Shop/managetopnav.html'); ?>
 			</div>
 		</div>
 	</div>
@@ -40,7 +40,7 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="dashboard">
-							<?php include('view/Manage/leftnav.html'); ?>
+							<?php include('view/Shop/leftnav.html'); ?>
 							<?php include('view/Public/copyright.html'); ?>
 						</div>
 					</div>
@@ -56,7 +56,7 @@
 								</div>
 								<div class="stream-container">
 									<div class="stream">
-										<?php if(empty($this->cates)){ ?>
+										<?php if(empty($this->categorys)){ ?>
 										<ol class="stream-items">
 											<li class="stream-item">
 												<div
@@ -64,12 +64,11 @@
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
 															<a href="javascript:void(0);" class="f-cst"><strong
-																class=""> 我的分类列表 </strong></a>
+																class=""> 今日订单 </strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
-														<li class="supplement f-ib"><small>还没创建分类，你可以在下方#创建新分类#</small>
-														</li>
+														<li class="supplement f-ib"><small>还没有订单哦！</small></li>
 													</ol>
 												</div>
 											</li>
@@ -82,7 +81,7 @@
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
 															<a href="javascript:void(0);" class=""><strong
-																class="">我的分类列表</strong></a>
+																class="">今日订单</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
@@ -90,29 +89,40 @@
 															<table class="table product-cart product-cart-big">
 																<thead>
 																	<tr>
-																		<th><small>我在圈子里的位置</small></th>
-																		<th><small>圈子名称</small></th>
+																		<th><small>品类</small></th>
+																		<th><small>圈子</small></th>
+																		<th><small>说明</small></th>
 																		<th><small>操作</small></th>
+																		<th><small>订单生成时间<br>（最终订单以此时间后为准）
+																		</small></th>
 																	</tr>
 																</thead>
 																<tbody>
-																	<?php foreach($this->cates as $item){ ?>
+																	<?php foreach($this->categorys as $item){ ?>
 																	<tr data-gid="<?php show($item['group_id']); ?>">
-																		<td class="js-group-detail f-wth150"><span
-																			class="js-addr-desc-text"> <small> <?php show(htmlentities($item['detail'],ENT_QUOTES,'utf-8')); ?>
+																		<td class="js-group-detail f-wth50"><span
+																			class="js-addr-desc-text"> <small> <?php show(htmlentities($item['name'],ENT_QUOTES,'utf-8')); ?>
 																			</small>
-																		</span><span class="f-dn js-addr-desc-input"><input
-																				class="input-large js-addr-desc" type="text"
-																				placeholder="如：B座3号楼4层"
-																				value="<?php show($item['detail']); ?>"></span></td>
-																		<td class="f-wth150"><small> <?php show($item['name']); ?>
+																		</span></td>
+																		<td class="f-wth100"><small> <?php show(htmlentities($item['group']['name'],ENT_QUOTES,'utf-8')); ?>
 																		</small></td>
-
+																		<td class="f-wth150"><small> </small></td>
 																		<td class="f-wth150"><small><a
-																				href="javascript:void(0);" class="js-mod-detail"
-																				data-gid="<?php show($item['group_id']); ?>">修改</a></small>&nbsp;|&nbsp;<small><a
-																				href="javascript:void(0);" class="js-quit-group"
-																				data-gid="<?php show($item['group_id']); ?>">删除</a></small></td>
+																				title="制货单方便商户准备货品"
+																				href="<?php show($this->urlroot); ?>shop/order_detail/c/<?php show($item['id']); ?>/t/2"
+																				target="_blank" class="">制货单</a></small>&nbsp;|&nbsp;<small><a
+																				title="送货单方便商户递送货品"
+																				href="<?php show($this->urlroot); ?>shop/order_detail/c/<?php show($item['id']); ?>/t/1"
+																				target="_blank" class="">送货单</a></small><br /> <?php if($item['status']==1){ ?>
+																			<small><a title="当你想停止此圈子内此品类的服务时，可使用暂停营业功能"
+																				href="javascript:void(0);" class="js-store-off"
+																				data-cid="<?php show($item['id']); ?>">暂停营业</a></small> <?php }else{ ?>
+																			<small><a title="当你想开启此圈子内此品类的服务时，可使用开始营业功能"
+																				href="javascript:void(0);" class="js-store-on"
+																				data-cid="<?php show($item['id']); ?>">开始营业</a></small> <?php } ?>
+																		</td>
+																		<td class="f-wth150"><small> <?php show($item['end_time']); ?>
+																		</small></td>
 																	</tr>
 																	<?php } ?>
 																</tbody>
@@ -123,58 +133,6 @@
 											</li>
 										</ol>
 										<?php } ?>
-										<ol class="stream-items">
-											<li class="stream-item">
-												<div
-													class="clearfix stream-item-activity stream-item-activity-network">
-													<div class="stream-item-activity-header">
-														<div class="stream-item-activity-line">
-															<a href="javascript:void(0);" class=""><strong
-																class="">创建新分类</strong></a>
-														</div>
-													</div>
-													<ol class="activity-supplement  follow-more-than-two">
-														<li class="supplement">
-															<div>
-																<form
-																	action="<?php show($this->urlroot); ?>manage/addCate"
-																	class="form-horizontal" id="joingroupform"
-																	method="post">
-																	<div class="control-group">
-																		<div class="control-label"></div>
-																		<div class="controls"></div>
-																	</div>
-																	<div class="control-group">
-																		<div class="control-label"></div>
-																		<div class="controls"></div>
-																	</div>
-																	<div class="control-group">
-																		<label class="control-label" for="name">分类名</label>
-																		<div class="controls">
-																			<input id="name" name="name" type="text"
-																				placeholder="输入新分类名" />
-																		</div>
-																	</div>
-																	<div class="control-group">
-																		<label class="control-label" for="desc">分类描述</label>
-																		<div class="controls">
-																			<input id="desc" name="desc" type="text"
-																				placeholder="输入分类描述" />
-																		</div>
-																	</div>
-																	<?php include('view/Public/captcha.html'); ?>
-																	<div class="control-group">
-																		<div class="controls">
-																			<button type="submit" class="btn btn-primary">保存</button>
-																		</div>
-																	</div>
-																</form>
-															</div>
-														</li>
-													</ol>
-												</div>
-											</li>
-										</ol>
 									</div>
 								</div>
 							</div>

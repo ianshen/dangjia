@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet"
+	href="<?php echo WWW_ROOT; ?>static/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo WWW_ROOT; ?>static/css/base.css">
+<link rel="stylesheet"
+	href="<?php echo WWW_ROOT; ?>static/css/common.css">
+<link rel="stylesheet"
+	href="<?php echo WWW_ROOT; ?>static/css/group.css">
+<title>嘻咕嘻咕 - 今日订单</title>
+</head>
+<body class="">
+	<div class="container-fluid top_nav">
+		<div class="row-fluid">
+			<div class="span12"></div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<?php if(empty($this->details)){ ?>
+			<div class="span12">暂无下单</div>
+			<?php }else{ ?>
+			<div class="span12">
+				<div class="">
+					<em>下表为订单详细列表：<?php show($this->createDate); ?></em>
+				</div>
+				<div class="span12" style="min-height: 10px;"></div>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th width="5%" style="padding: 0px; vertical-align: middle;">商品</th>
+							<th width="5%" style="padding: 0px; vertical-align: middle;">份数</th>
+							<th width="5%" style="padding: 0px; vertical-align: middle;">价格</th>
+							<th width="5%" style="padding: 0px; vertical-align: middle;">总价</th>
+							<th width="20%" style="padding: 0px; vertical-align: middle;">说明</th>
+						</tr>
+					</thead>
+				</table>
+				<?php foreach($this->details as $orderId=>$detail){ ?>
+				<table class="table table-hover f-mb0">
+					<tbody>
+						<?php foreach($detail as $k=>$item){ ?>
+						<?php if(!$k){ ?>
+						<tr>
+							<td width="5%" style="padding: 0px; vertical-align: middle;">
+								<?php show($item['good_name']); ?>
+							</td>
+							<td width="5%" style="padding: 0px; vertical-align: middle;">
+								<?php show($item['amount']); ?>
+							</td>
+							<td width="5%" style="padding: 0px; vertical-align: middle;">
+								¥<?php show($item['price_desc']); ?>
+							</td>
+							<td width="5%" style="padding: 0px; vertical-align: middle;">¥<?php show(intval($item['price'])*intval($item['amount'])); ?></td>
+							<td width="20%" rowspan="2"
+								style="padding: 0px; vertical-align: middle;">
+								<div>
+									&nbsp;订单号：
+									<?php show($orderId); ?>
+								</div>
+								<div>
+									&nbsp;客户留言：
+									<?php show(htmlentities($item['message'],ENT_QUOTES,'utf-8')); ?>
+								</div>
+							</td>
+						</tr>
+						<?php }else{ ?>
+						<tr>
+							<td style="padding: 0px; vertical-align: middle;">
+								<?php show($item['good_name']); ?>
+							</td>
+							<td style="padding: 0px; vertical-align: middle;">
+								<?php show($item['amount']); ?>
+							</td>
+							<td style="padding: 0px; vertical-align: middle;">¥<?php show($item['price_desc']); ?>
+							</td>
+							<td style="padding: 0px; vertical-align: middle;">¥<?php show(intval($item['price'])*intval($item['amount'])); ?></td>
+						</tr>
+						<?php } ?>
+						<?php } ?>
+					</tbody>
+				</table>
+				<?php } ?>
+				<div class="span12"></div>
+				<div class="span12"></div>
+				<div class="">
+					<em>下表为订单统计</em>
+				</div>
+				<div class="span12" style="min-height: 10px;"></div>
+				<table class="table table-hover f-mb0">
+					<thead>
+						<tr>
+							<th width="5%" style="padding: 0px; vertical-align: middle;">商品</th>
+							<th width="5%" style="padding: 0px; vertical-align: middle;">总份数</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach($this->statistics as $one){ ?>
+						<tr>
+							<td style="padding: 0px; vertical-align: middle;">
+								<?php show($one['good_name']); ?>
+							</td>
+							<td style="padding: 0px; vertical-align: middle;">
+								<?php show($one['amount']); ?>
+							</td>
+						</tr>
+						<?php } ?>
+					</tbody>
+				</table>
+			</div>
+			<?php } ?>
+		</div>
+	</div>
+</body>
+</html>

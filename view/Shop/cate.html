@@ -40,7 +40,7 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="dashboard">
-							<?php include('view/Manage/leftnav.html'); ?>
+							<?php include('view/Shop/leftnav.html'); ?>
 							<?php include('view/Public/copyright.html'); ?>
 						</div>
 					</div>
@@ -90,29 +90,30 @@
 															<table class="table product-cart product-cart-big">
 																<thead>
 																	<tr>
-																		<th><small>我在圈子里的位置</small></th>
-																		<th><small>圈子名称</small></th>
+																		<th><small>分类名</small></th>
+																		<th><small>描述</small></th>
 																		<th><small>操作</small></th>
 																	</tr>
 																</thead>
 																<tbody>
 																	<?php foreach($this->cates as $item){ ?>
-																	<tr data-gid="<?php show($item['group_id']); ?>">
-																		<td class="js-group-detail f-wth150"><span
-																			class="js-addr-desc-text"> <small> <?php show(htmlentities($item['detail'],ENT_QUOTES,'utf-8')); ?>
+																	<tr data-gid="<?php show($item['id']); ?>">
+																		<td class="f-wth150"><span class=""> <small>
+																					<?php show(htmlentities($item['name'],ENT_QUOTES,'utf-8')); ?>
 																			</small>
-																		</span><span class="f-dn js-addr-desc-input"><input
-																				class="input-large js-addr-desc" type="text"
-																				placeholder="如：B座3号楼4层"
-																				value="<?php show($item['detail']); ?>"></span></td>
-																		<td class="f-wth150"><small> <?php show($item['name']); ?>
-																		</small></td>
-
+																		</span><span class=""><input class="input-small "
+																				type="text" placeholder="如：冷饮/热饮"
+																				value="<?php show(htmlentities($item['name'],ENT_QUOTES,'utf-8')); ?>"></span></td>
+																		<td class="f-wth150"><span><small>
+																					<?php show(htmlentities($item['desc'],ENT_QUOTES,'utf-8')); ?>
+																			</small></span><span class=" "><input class="input-small "
+																				type="text" placeholder="分类说明"
+																				value="<?php show(htmlentities($item['desc'],ENT_QUOTES,'utf-8')); ?>"></span></td>
 																		<td class="f-wth150"><small><a
-																				href="javascript:void(0);" class="js-mod-detail"
-																				data-gid="<?php show($item['group_id']); ?>">修改</a></small>&nbsp;|&nbsp;<small><a
-																				href="javascript:void(0);" class="js-quit-group"
-																				data-gid="<?php show($item['group_id']); ?>">删除</a></small></td>
+																				href="javascript:void(0);" class="js-mod-cate"
+																				data-gid="<?php show($item['id']); ?>">修改</a></small>&nbsp;|&nbsp;<small><a
+																				href="javascript:void(0);" class="js-del-cate"
+																				data-gid="<?php show($item['id']); ?>">删除</a></small></td>
 																	</tr>
 																	<?php } ?>
 																</tbody>
@@ -137,9 +138,8 @@
 														<li class="supplement">
 															<div>
 																<form
-																	action="<?php show($this->urlroot); ?>manage/addCate"
-																	class="form-horizontal" id="joingroupform"
-																	method="post">
+																	action="<?php show($this->urlroot); ?>shop/addCate"
+																	class="form-horizontal" id="addCateform" method="post">
 																	<div class="control-group">
 																		<div class="control-label"></div>
 																		<div class="controls"></div>
@@ -156,10 +156,10 @@
 																		</div>
 																	</div>
 																	<div class="control-group">
-																		<label class="control-label" for="desc">分类描述</label>
+																		<label class="control-label" for="desc">说明</label>
 																		<div class="controls">
 																			<input id="desc" name="desc" type="text"
-																				placeholder="输入分类描述" />
+																				placeholder="输入分类说明" />
 																		</div>
 																	</div>
 																	<?php include('view/Public/captcha.html'); ?>

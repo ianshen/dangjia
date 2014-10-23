@@ -315,7 +315,7 @@ class AccController extends BaseController {
             //成功则写session
             $_SESSION ['manage_islogin'] = 1; //登录标识
             $_SESSION ['manage_user'] = $user;
-            $returnUrl = $this->urlroot . 'manage';
+            $returnUrl = $this->urlroot . 'shop';
             ComTool::ajax ( 100000, '登录成功，即将跳转', $returnUrl );
         }
         $token = $this->get ( 'token', '' );
