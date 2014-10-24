@@ -68,7 +68,7 @@
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
-														<li class="supplement f-ib"><small>还没添加分类，你可以在下方#添加新分类#</small>
+														<li class="supplement f-ib"><small>还没添加商品，你可以在下方#添加新商品#</small>
 														</li>
 													</ol>
 												</div>
@@ -134,15 +134,15 @@
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
 															<a href="javascript:void(0);" class=""><strong
-																class="">添加新分类</strong></a>
+																class="">添加新商品</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
 														<li class="supplement">
 															<div>
 																<form
-																	action="<?php show($this->urlroot); ?>shop/addCate"
-																	class="form-horizontal" id="addCateform" method="post">
+																	action="<?php show($this->urlroot); ?>shop/addGood"
+																	class="form-horizontal" id="addGoodform" method="post">
 																	<div class="control-group">
 																		<div class="control-label"></div>
 																		<div class="controls"></div>
@@ -152,17 +152,37 @@
 																		<div class="controls"></div>
 																	</div>
 																	<div class="control-group">
-																		<label class="control-label" for="name">分类名</label>
+																		<label class="control-label" for="name">名称</label>
 																		<div class="controls">
 																			<input id="name" name="name" type="text"
-																				placeholder="输入新分类名" />
+																				placeholder="输入商品名" />
+																		</div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="price">价格</label>
+																		<div class="controls">
+																			<input id="price" name="price" type="text"
+																				placeholder="价格如：20元1份" />
+																		</div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="cate">分类</label>
+																		<div class="controls">
+																			<select class="input-large" id="cate" name="cate">
+																				<option value="0">选择分类</option>
+																				<?php foreach($this->cates as $cate){ ?>
+																				<option value="<?php show($cate['id']); ?>">
+																					<?php show(htmlentities($cate['name'],ENT_QUOTES,'utf-8')); ?>
+																				</option>
+																				<?php } ?>
+																			</select>
 																		</div>
 																	</div>
 																	<div class="control-group">
 																		<label class="control-label" for="desc">说明</label>
 																		<div class="controls">
-																			<input id="desc" name="desc" type="text"
-																				placeholder="输入分类说明" />
+																			<textarea id="desc" name="desc" rows="3"
+																				placeholder="添加商品说明"></textarea>
 																		</div>
 																	</div>
 																	<?php include('view/Public/captcha.html'); ?>

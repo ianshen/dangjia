@@ -123,7 +123,7 @@ $(function() {
 			}
 		});
 	});
-	// 密码设置
+	// 创建分类
 	var addCateformOptions = {
 		dataType : 'json',
 		success : function(data) {
@@ -153,4 +153,82 @@ $(function() {
 		}
 	};
 	$('#addCateform').ajaxForm(addCateformOptions);
+	
+	// 修改按钮---功能未完成
+	$("table.product-cart-big a.js-mod-cate").die().live('click', function() {
+		var cid = $(this).attr('data-cid');
+		var trObj = $("table.product-cart-big").find("tr[data-cid='"+cid+"']");
+		var value = trObj.find("td.js-group-detail span.js-addr-desc-input input.js-addr-desc").val();
+		var content = '<input id="addr_desc" class="input-large" type="text" placeholder="如：B座3号楼4层" value="'+value+'">';
+		art.dialog({
+			title : '修改详细地址',
+			lock: true,
+			content : content,
+			okValue : '确定',
+			cancelValue : '取消',
+			width : '15em',
+			ok : function() {
+				var detail = $("input#addr_desc").val();
+				$.ajax({
+					async : false,
+					type : "POST",
+					url : $uroot + 'my/setaddrdesc',
+					data : {"gid":gid,'detail':detail},
+					success : function(data) {
+						var data = $.parseJSON(data);
+						if (data.status == 100000) {
+							$.scojs_message(data.info, $.scojs_message.TYPE_OK);
+							trObj.find("td.js-group-detail span.js-addr-desc-text").text(detail);
+							trObj.find("td.js-group-detail span.js-addr-desc-input input.js-addr-desc").val(detail);
+						}else{
+							$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
+							return false;
+						}
+					}
+				});
+			},
+			cancel:function(){
+				
+			}
+		});
+	});
+	
+	//删除分组
+	$("table.product-cart-big a.js-del-cate").die().live('click',function(){
+		var cid = $(this).attr('data-cid');
+		var trObj = $("table.product-cart-big").find("tr[data-cid='"+cid+"']");
+		art.dialog({
+			title : '删除分类',
+			lock: true,
+			content : '<div style="color:#666666;font-size:12px;">确定退出此分类吗？</div>',
+			okValue : '确定',
+			cancelValue : '取消',
+			width : '15em',
+			ok : function() {
+				$.ajax({
+					async : false,
+					type : "POST",
+					url : $uroot + 'shop/delCate',
+					data : {"cid":cid},
+					success : function(data) {
+						var data = $.parseJSON(data);
+						if (data.status == 100000) {
+							$.scojs_message(data.info, $.scojs_message.TYPE_OK);
+							setTimeout(function() {
+								window.location.reload(true);
+							}, $tmot);
+						}else{
+							$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
+							return false;
+						}
+					}
+				});
+			},
+			cancel:function(){
+				
+			}
+		});
+	});
+	
+	
 });

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 10 月 22 日 05:28
+-- 生成日期: 2014 年 10 月 24 日 08:57
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `category` (
 INSERT INTO `category` (`id`, `group_id`, `store_id`, `level`, `pid`, `name`, `ename`, `desc`, `create_time`, `update_time`, `time_limit`, `days`, `start_time`, `end_time`, `status`, `order_way`, `deliver_desc`) VALUES
 (3, 1, 0, 1, 0, '订午餐', 'dingwucan', '供人订午餐', 1395237337, 1395237337, 1, '1,2,3,4,5', '08:00:00', '11:00:00', 1, 1, ''),
 (4, 1, 0, 1, 0, '果蔬', 'guoshu', '订水果蔬菜', 1395323280, 1395323280, 1, '1,2,3,4,5', '11:00:00', '14:00:00', 1, 1, ''),
-(5, 1, 5, 2, 3, '饺子', 'jiaozi', '饺子', 1395323445, 1413359937, 1, '1,2,3,4,5', '08:00:00', '11:00:00', 1, 1, 'xxxxxxxxx'),
+(5, 1, 5, 2, 3, '饺子', 'jiaozi', '饺子', 1395323445, 1414048847, 1, '1,2,3,4,5', '08:00:00', '11:00:00', 1, 1, 'xxxxxxxxx'),
 (7, 1, 6, 2, 4, '蔬菜', 'shucai', '订蔬菜', 1395323716, 1395323716, 1, '1,2,3,4,5', '13:00:00', '16:00:00', 1, 1, '');
 
 -- --------------------------------------------------------
@@ -242,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `store` (
 --
 
 INSERT INTO `store` (`id`, `name`, `ename`, `passwd`, `secret`, `contact`, `tel`, `addr`, `desc`, `city`, `area`, `create_time`, `update_time`, `create_date`, `status`) VALUES
-(5, '店铺1', 'dian1', '55dcfd7f49dbc71b5fe90d199851ee89', '0e6915b9-43c3-11e4-aa07-206a8a319380', '联系人1', '联系电话1', '明天第一城', '明天第', 1, 1, 1395232865, 1411723611, '2014-03-19', 1),
+(5, '店铺1', 'dian1', '55dcfd7f49dbc71b5fe90d199851ee89', '0e6915b9-43c3-11e4-aa07-206a8a319380', '联系人1', '联系电话1', '明天第一城', '明天第', 1, 1, 1395232865, 1414049008, '2014-03-19', 1),
 (6, '店铺2', 'dian2', '55dcfd7f49dbc71b5fe90d199851ee89', '1743259e-43c3-11e4-aa07-206a8a319380', '联系人2', '联系电话2', '明天第一城', '明天第', 1, 2, 1395236063, 0, '2014-03-19', 1),
 (7, '店铺3', 'dian3', '55dcfd7f49dbc71b5fe90d199851ee89', '1e1fd431-43c3-11e4-aa07-206a8a319380', '联系人3', '联系电话3', '明天第一城', '明天第', 1, 2, 1395236084, 0, '2014-03-19', 1);
 
@@ -264,15 +264,7 @@ CREATE TABLE IF NOT EXISTS `store_category` (
   `order` tinyint(1) NOT NULL DEFAULT '0' COMMENT '排序',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
---
--- 转存表中的数据 `store_category`
---
-
-INSERT INTO `store_category` (`id`, `store_id`, `name`, `pid`, `path`, `desc`, `create_time`, `update_time`, `order`, `status`) VALUES
-(3, 5, '盖饭', 0, '', '', 1395237337, 1395237337, 1, 1),
-(4, 5, '炒菜', 0, '', '', 1395323280, 1395323280, 1, 1);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -288,6 +280,7 @@ CREATE TABLE IF NOT EXISTS `store_goods` (
   `price` varchar(64) NOT NULL DEFAULT '0' COMMENT '价格如：10元3个',
   `desc` varchar(128) NOT NULL DEFAULT '' COMMENT '商品描述',
   `create_time` int(11) NOT NULL DEFAULT '0',
+  `update_time` int(11) NOT NULL DEFAULT '0',
   `order` int(11) NOT NULL DEFAULT '1' COMMENT '商品顺序',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)

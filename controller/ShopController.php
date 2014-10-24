@@ -171,6 +171,9 @@ class ShopController extends BaseController {
         }
     }
     
+    /**
+     * 分类管理
+     */
     public function cateAction() {
         $currUser = $this->getCurrentUser ();
         $sql = "SELECT * FROM `store_category` WHERE store_id='{$currUser['id']}' AND `status`='1';";
@@ -191,10 +194,10 @@ class ShopController extends BaseController {
                     ComTool::ajax ( 100001, '验证码错误' );
                 }
             }
-            $storeId = $this->post ( 'op', 'on' );
             $name = trim ( $this->post ( 'name' ) );
             ComTool::checkMinMaxLen ( $name, 1, 16, '分类名1-16位' );
             $desc = $this->post ( 'desc' );
+            ComTool::checkMaxLen ( $desc, 200, '分类描述最多200位' );
             $res = ShopData::addStoreCate ( array (
                 'store_id' => $currUser ['id'], 
                 'name' => $name, 
@@ -210,10 +213,66 @@ class ShopController extends BaseController {
         }
     }
     
+    /**
+     * 删除分类
+     */
+    public function delCateAction() {
+        $currUser = $this->getCurrentUser ();
+        if (ComTool::isAjax ()) {
+            $cid = intval ( $this->post ( 'cid', 0 ) );
+            $sql = "DELETE FROM `store_category` WHERE id='{$cid}' and store_id='{$currUser ['id']}';";
+            $res = BaseData::sql ( $sql );
+            if ($res === false) {
+                ComTool::ajax ( 100001, '服务器忙，请刷新重试' );
+            }
+            ComTool::ajax ( 100000, '操作成功' );
+        }
+    }
+    
+    /**
+     * 商品管理
+     */
     public function goodsAction() {
+        $currUser = $this->getCurrentUser ();
+        $sql = "SELECT * FROM `store_goods` WHERE store_id='' and `status`='1';";
+        $goods = BaseData::sql ( $sql );
+        $sql = "SELECT * FROM `store_category` WHERE store_id='{$currUser['id']}' AND `status`='1';";
+        $cates = BaseData::sql ( $sql );
+        $this->assign ( 'goods', $goods );
+        $this->assign ( 'cates', $cates );
         $this->display ();
     }
     
+    public function addGoodAction() {
+        $currUser = $this->getCurrentUser ();
+        if (ComTool::isAjax ()) {
+            $name = trim ( $this->post ( 'name' ) );
+            ComTool::checkMinMaxLen ( $name, 1, 30, '商品名称1-30位' );
+            $desc = trim ( $this->post ( 'desc' ) );
+            ComTool::checkMaxLen ( $desc, 100, '商品描述最多100位' );
+            $cate = intval ( $this->post ( 'cate', 0 ) );
+            $price = trim ( $this->post ( 'price' ) );
+            ComTool::checkMinMaxLen ( $name, 1, 30, '价格1-30位' );
+            $res = ShopData::addGood ( array (
+                'store_id' => $currUser ['id'], 
+                'name' => $name, 
+                'desc' => $desc, 
+                'store_cate_id' => $cate, 
+                'price' => $price, 
+                'create_time' => time (), 
+                'update_time' => time (), 
+                'status' => 1 
+            ) );
+            if ($res === false) {
+                ComTool::ajax ( 100001, '服务器忙，请刷新重试' );
+            }
+            ComTool::ajax ( 100000, '操作成功' );
+        }
+    }
+    
+    /**
+     * 互联网名片
+     */
     public function qrAction() {
         $this->display ();
     }
