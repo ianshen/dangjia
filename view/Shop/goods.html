@@ -15,7 +15,7 @@
 	rel="stylesheet" />
 <link rel="stylesheet"
 	href="<?php echo WWW_ROOT; ?>static/js/sco/css/sco.message.css">
-<title>嘻咕嘻咕 - 分类管理</title>
+<title>嘻咕嘻咕 - 商品管理</title>
 <?php include('view/Public/jsconfig.html'); ?>
 </head>
 <body class="index_bg">
@@ -56,7 +56,7 @@
 								</div>
 								<div class="stream-container">
 									<div class="stream">
-										<?php if(empty($this->cates)){ ?>
+										<?php if(empty($this->goods)){ ?>
 										<ol class="stream-items">
 											<li class="stream-item">
 												<div
@@ -64,7 +64,7 @@
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
 															<a href="javascript:void(0);" class="f-cst"><strong
-																class="">分类列表</strong></a>
+																class="">商品列表</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
@@ -82,7 +82,7 @@
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
 															<a href="javascript:void(0);" class=""><strong
-																class="">分类列表</strong></a>
+																class="">商品列表</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
@@ -91,32 +91,29 @@
 																<thead>
 																	<tr>
 																		<th><small>名称</small></th>
+																		<th><small>价格</small></th>
 																		<th><small>描述</small></th>
 																		<th><small>操作</small></th>
 																	</tr>
 																</thead>
 																<tbody>
-																	<?php foreach($this->cates as $item){ ?>
-																	<tr data-cid="<?php show($item['id']); ?>">
+																	<?php foreach($this->goods as $item){ ?>
+																	<tr data-gid="<?php show($item['id']); ?>">
 																		<td class="f-wth150"><span class=""> <small>
 																					<?php show(htmlentities($item['name'],ENT_QUOTES,'utf-8')); ?>
 																			</small>
-																		</span> <!-- <span class=""><input class="input-small "
-																				type="text" placeholder="如：冷饮/热饮"
-																				value="<?php show(htmlentities($item['name'],ENT_QUOTES,'utf-8')); ?>"></span> --></td>
+																		</span></td>
+																		<td class="f-wth150"><span><small>
+																					<?php show(htmlentities($item['price'],ENT_QUOTES,'utf-8')); ?>
+																			</small></span></td>
 																		<td class="f-wth150"><span><small>
 																					<?php show(htmlentities($item['desc'],ENT_QUOTES,'utf-8')); ?>
-																			</small></span> <!-- <span class=" "><input class="input-small "
-																				type="text" placeholder="分类说明"
-																				value="<?php show(htmlentities($item['desc'],ENT_QUOTES,'utf-8')); ?>"></span> --></td>
-																		<td class="f-wth150">
-																			<!-- <small><a
-																				href="javascript:void(0);" class="js-mod-cate"
-																				data-cid="<?php show($item['id']); ?>">修改</a></small>&nbsp;|&nbsp; -->
-																			<small><a href="javascript:void(0);"
-																				class="js-del-cate"
-																				data-cid="<?php show($item['id']); ?>">删除</a></small>
-																		</td>
+																			</small></span></td>
+																		<td class="f-wth150"><small><a
+																				href="<?php show($this->urlroot); ?>shop/goods/edit/<?php show($item['id']); ?>"
+																				class="">修改</a></small>&nbsp;|&nbsp; <small><a
+																				href="javascript:void(0);" class="js-del-good"
+																				data-gid="<?php show($item['id']); ?>">删除</a></small></td>
 																	</tr>
 																	<?php } ?>
 																</tbody>
@@ -162,7 +159,7 @@
 																		<label class="control-label" for="price">价格</label>
 																		<div class="controls">
 																			<input id="price" name="price" type="text"
-																				placeholder="价格如：20元1份" />
+																				placeholder="如：20元/份" />
 																		</div>
 																	</div>
 																	<div class="control-group">
@@ -182,7 +179,7 @@
 																		<label class="control-label" for="desc">说明</label>
 																		<div class="controls">
 																			<textarea id="desc" name="desc" rows="3"
-																				placeholder="添加商品说明"></textarea>
+																				style="padding: 5px;" placeholder="添加商品说明"></textarea>
 																		</div>
 																	</div>
 																	<?php include('view/Public/captcha.html'); ?>

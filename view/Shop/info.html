@@ -15,7 +15,7 @@
 	rel="stylesheet" />
 <link rel="stylesheet"
 	href="<?php echo WWW_ROOT; ?>static/js/sco/css/sco.message.css">
-<title>嘻咕嘻咕 - 分类管理</title>
+<title>嘻咕嘻咕 - 小店通</title>
 <?php include('view/Public/jsconfig.html'); ?>
 </head>
 <body class="index_bg">
@@ -56,7 +56,6 @@
 								</div>
 								<div class="stream-container">
 									<div class="stream">
-										<?php if(empty($this->cates)){ ?>
 										<ol class="stream-items">
 											<li class="stream-item">
 												<div
@@ -64,17 +63,37 @@
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
 															<a href="javascript:void(0);" class="f-cst"><strong
-																class="">分类列表</strong></a>
+																class="">小店通是什么？</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
-														<li class="supplement f-ib"><small>还没添加分类，你可以在下方#添加新分类#</small>
+														<li class="supplement f-ib"><small>还没加入圈子，你可以或在下方#加入新的圈子#</small>
 														</li>
 													</ol>
 												</div>
 											</li>
 										</ol>
-										<?php }else{ ?>
+										<ol class="stream-items">
+											<li class="stream-item">
+												<div
+													class="clearfix stream-item-activity stream-item-activity-network">
+													<div class="stream-item-activity-header">
+														<div class="stream-item-activity-line">
+															<a href="javascript:void(0);" class="f-cst"><strong
+																class="">小店二维码名片（点击或扫描二维码名片查看小店通主页） </strong></a>
+														</div>
+													</div>
+													<ol class="activity-supplement  follow-more-than-two">
+														<li class="supplement">&nbsp;<a target="_blank"
+															href="<?php show($this->urlroot); ?>page/show"> <img
+																src="<?php show(WWW_ROOT.$this->filename); ?>"
+																class="img-polaroid" width="200" height="200">
+														</a>&nbsp;
+														</li>
+													</ol>
+												</div>
+											</li>
+										</ol>
 										<ol class="stream-items">
 											<li class="stream-item">
 												<div
@@ -82,7 +101,7 @@
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
 															<a href="javascript:void(0);" class=""><strong
-																class="">分类列表</strong></a>
+																class="">我加入的圈子</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
@@ -90,35 +109,29 @@
 															<table class="table product-cart product-cart-big">
 																<thead>
 																	<tr>
-																		<th><small>名称</small></th>
-																		<th><small>描述</small></th>
+																		<th><small>我在圈子里的位置</small></th>
+																		<th><small>圈子名称</small></th>
 																		<th><small>操作</small></th>
 																	</tr>
 																</thead>
 																<tbody>
-																	<?php foreach($this->cates as $item){ ?>
-																	<tr data-cid="<?php show($item['id']); ?>">
-																		<td class="f-wth150"><span class=""> <small>
-																					<?php show(htmlentities($item['name'],ENT_QUOTES,'utf-8')); ?>
+																	<tr data-gid="<?php show($item['group_id']); ?>">
+																		<td class="js-group-detail f-wth150"><span
+																			class="js-addr-desc-text"> <small> <?php show(htmlentities($item['detail'],ENT_QUOTES,'utf-8')); ?>
 																			</small>
-																		</span> <!-- <span class=""><input class="input-small "
-																				type="text" placeholder="如：冷饮/热饮"
-																				value="<?php show(htmlentities($item['name'],ENT_QUOTES,'utf-8')); ?>"></span> --></td>
-																		<td class="f-wth150"><span><small>
-																					<?php show(htmlentities($item['desc'],ENT_QUOTES,'utf-8')); ?>
-																			</small></span> <!-- <span class=" "><input class="input-small "
-																				type="text" placeholder="分类说明"
-																				value="<?php show(htmlentities($item['desc'],ENT_QUOTES,'utf-8')); ?>"></span> --></td>
-																		<td class="f-wth150">
-																			<!-- <small><a
-																				href="javascript:void(0);" class="js-mod-cate"
-																				data-cid="<?php show($item['id']); ?>">修改</a></small>&nbsp;|&nbsp; -->
-																			<small><a href="javascript:void(0);"
-																				class="js-del-cate"
-																				data-cid="<?php show($item['id']); ?>">删除</a></small>
-																		</td>
+																		</span><span class="f-dn js-addr-desc-input"><input
+																				class="input-large js-addr-desc" type="text"
+																				placeholder="如：B座3号楼4层"
+																				value="<?php show($item['detail']); ?>"></span></td>
+																		<td class="f-wth150"><small> <?php show($item['name']); ?>
+																		</small></td>
+
+																		<td class="f-wth150"><small><a
+																				href="javascript:void(0);" class="js-mod-detail"
+																				data-gid="<?php show($item['group_id']); ?>">修改位置</a></small>&nbsp;|&nbsp;<small><a
+																				href="javascript:void(0);" class="js-quit-group"
+																				data-gid="<?php show($item['group_id']); ?>">退出圈子</a></small></td>
 																	</tr>
-																	<?php } ?>
 																</tbody>
 															</table>
 														</li>
@@ -126,7 +139,6 @@
 												</div>
 											</li>
 										</ol>
-										<?php } ?>
 										<ol class="stream-items">
 											<li class="stream-item">
 												<div
@@ -134,48 +146,70 @@
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
 															<a href="javascript:void(0);" class=""><strong
-																class="">添加新分类</strong></a>
+																class="">定制名片</strong></a>
 														</div>
 													</div>
+													<ol class="activity-supplement  follow-more-than-two"
+														style="border-radius: 0; border-style: none solid none;">
+														<li class="supplement"><small>定制说明：</small></li>
+													</ol>
 													<ol class="activity-supplement  follow-more-than-two">
 														<li class="supplement">
 															<div>
 																<form
-																	action="<?php show($this->urlroot); ?>shop/addCate"
-																	class="form-horizontal" id="addCateform" method="post">
+																	action="<?php show($this->urlroot); ?>my/joingroup"
+																	class="form-horizontal" id="joingroupform"
+																	method="post">
 																	<div class="control-group">
 																		<div class="control-label"></div>
 																		<div class="controls"></div>
 																	</div>
 																	<div class="control-group">
-																		<div class="control-label"></div>
-																		<div class="controls"></div>
+																		<label class="control-label" for="mobile">定制份数</label>
+																		<div class="controls">
+																			<input id="mobile" name="mobile" type="text"
+																				placeholder="定制的名片份数如：100" /> <span
+																				class="help-block f-fs1">你在此圈子里的常用手机号</span>
+																		</div>
 																	</div>
 																	<div class="control-group">
-																		<label class="control-label" for="name">分类名</label>
+																		<label class="control-label" for="mobile">收件人姓名</label>
+																		<div class="controls">
+																			<input id="mobile" name="mobile" type="text"
+																				placeholder="常用手机号" /> <span
+																				class="help-block f-fs1">你在此圈子里的常用手机号</span>
+																		</div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="mobile">手机</label>
+																		<div class="controls">
+																			<input id="mobile" name="mobile" type="text"
+																				placeholder="常用手机号" /> <span
+																				class="help-block f-fs1">你在此圈子里的常用手机号</span>
+																		</div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="name">地址</label>
 																		<div class="controls">
 																			<input id="name" name="name" type="text"
-																				placeholder="输入新分类名" />
+																				placeholder="常用名" /> <span class="help-block f-fs1">可为真实姓名或你想用的任何代号</span>
 																		</div>
 																	</div>
-																	<!-- <div class="control-group">
-																		<label class="control-label" for="desc">说明</label>
-																		<div class="controls">
-																			<input id="desc" name="desc" type="text"
-																				placeholder="输入分类说明" />
-																		</div>
-																	</div> -->
 																	<div class="control-group">
-																		<label class="control-label" for="desc">说明</label>
+																		<label class="control-label" for="captcha">验证码</label>
 																		<div class="controls">
-																			<textarea id="desc" name="desc" rows="3"
-																				style="padding: 5px;" placeholder="输入分类说明"></textarea>
+																			<input id="captcha" name="captcha" type="text"
+																				class="input-small border1" placeholder="输入验证码" />
+																			<img title="点击换一换" id="captcha_img"
+																				onclick="javascript:captchachg();"
+																				src="<?php echo $this->urlroot; ?>acc/captcha" /> <a
+																				onclick="javascript:captchachg();" class="f-fs1"
+																				href="javascript:void(0);">&nbsp;换一张?</a>
 																		</div>
 																	</div>
-																	<?php include('view/Public/captcha.html'); ?>
 																	<div class="control-group">
 																		<div class="controls">
-																			<button type="submit" class="btn btn-primary">保存</button>
+																			<button type="submit" class="btn btn-primary">提交定制</button>
 																		</div>
 																	</div>
 																</form>
@@ -208,6 +242,6 @@
 		src="<?php echo WWW_ROOT; ?>static/js/artDialog/artDialog.min.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/funcs.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/common.js"></script>
-	<script src="<?php echo WWW_ROOT; ?>static/js/shop.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/my.js"></script>
 </body>
 </html>

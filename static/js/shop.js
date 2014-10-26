@@ -2,6 +2,42 @@ $(function() {
 	var $uroot = $CONFIG['uroot'];
 	var $wroot = $CONFIG['wroot'];
 	var $tmot = $CONFIG['tmot'];
+	
+	// 创建分类
+	var editStoreformOptions = {
+		dataType : 'json',
+		success : function(data) {
+			if (data.status == 100000) {
+				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
+				setTimeout(function() {
+					window.location.reload(true);
+				}, $tmot);
+			} else {
+				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
+				captchachg();
+				$("input#captcha").val("");
+			}
+		},
+		beforeSubmit : function() {
+			var desc = $('textarea#desc').val();
+			var announce = $('textarea#announce').val();
+			var captcha = $('input#captcha').val();
+			if (desc.length > 200) {
+				$.scojs_message('店铺介绍最多200位', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if (desc.length > 200) {
+				$.scojs_message('店铺公告最多200位', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if (!captcha) {
+				$.scojs_message('请输入验证码', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+		}
+	};
+	$('#editStoreform').ajaxForm(editStoreformOptions);
+	
 	// 密码设置
 	var passOptions = {
 		dataType : 'json',
@@ -140,10 +176,14 @@ $(function() {
 		},
 		beforeSubmit : function() {
 			var name = $('input#name').val();
-			var desc = $('input#desc').val();
+			var desc = $('textarea#desc').val();
 			var captcha = $('input#captcha').val();
 			if (name.length < 1 || name.length > 16) {
 				$.scojs_message('分类名1-16位', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if (desc.length > 200) {
+				$.scojs_message('分类说明最多200位', $.scojs_message.TYPE_ERROR);
 				return false;
 			}
 			if (!captcha) {
@@ -193,7 +233,7 @@ $(function() {
 		});
 	});
 	
-	//删除分组
+	//删除分类
 	$("table.product-cart-big a.js-del-cate").die().live('click',function(){
 		var cid = $(this).attr('data-cid');
 		var trObj = $("table.product-cart-big").find("tr[data-cid='"+cid+"']");
@@ -230,5 +270,123 @@ $(function() {
 		});
 	});
 	
+	// 添加商品
+	var addGoodformOptions = {
+		dataType : 'json',
+		success : function(data) {
+			if (data.status == 100000) {
+				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
+				setTimeout(function() {
+					window.location.reload(true);
+				}, $tmot);
+			} else {
+				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
+				captchachg();
+				$("input#captcha").val("");
+			}
+		},
+		beforeSubmit : function() {
+			var name = $('input#name').val();
+			var price = $('input#price').val();
+			var desc = $('textarea#desc').val();
+			var captcha = $('input#captcha').val();
+			if (name.length < 1 || name.length > 30) {
+				$.scojs_message('商品名称1-30字', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if (price.length < 1 || price.length > 30) {
+				$.scojs_message('价格1-30字', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if (desc.length > 100) {
+				$.scojs_message('商品说明最多100字', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			
+			if (!captcha) {
+				$.scojs_message('请输入验证码', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+		}
+	};
+	$('#addGoodform').ajaxForm(addGoodformOptions);
 	
+	//删除商品
+	$("table.product-cart-big a.js-del-good").die().live('click',function(){
+		var gid = $(this).attr('data-gid');
+		var trObj = $("table.product-cart-big").find("tr[data-gid='"+gid+"']");
+		art.dialog({
+			title : '删除商品',
+			lock: true,
+			content : '<div style="color:#666666;font-size:12px;">确定退出此商品吗？</div>',
+			okValue : '确定',
+			cancelValue : '取消',
+			width : '15em',
+			ok : function() {
+				$.ajax({
+					async : false,
+					type : "POST",
+					url : $uroot + 'shop/delGood',
+					data : {"gid":gid},
+					success : function(data) {
+						var data = $.parseJSON(data);
+						if (data.status == 100000) {
+							$.scojs_message(data.info, $.scojs_message.TYPE_OK);
+							setTimeout(function() {
+								window.location.reload(true);
+							}, $tmot);
+						}else{
+							$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
+							return false;
+						}
+					}
+				});
+			},
+			cancel:function(){
+				
+			}
+		});
+	});
+	
+	// 编辑商品
+	var editGoodformOptions = {
+		dataType : 'json',
+		success : function(data) {
+			if (data.status == 100000) {
+				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
+				setTimeout(function() {
+					//window.location.reload(true);
+					window.location.href = data.data;
+				}, $tmot);
+			} else {
+				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
+				captchachg();
+				$("input#captcha").val("");
+			}
+		},
+		beforeSubmit : function() {
+			var name = $('input#name').val();
+			var price = $('input#price').val();
+			var desc = $('textarea#desc').val();
+			var captcha = $('input#captcha').val();
+			if (name.length < 1 || name.length > 30) {
+				$.scojs_message('商品名称1-30字', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if (price.length < 1 || price.length > 30) {
+				$.scojs_message('价格1-30字', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if (desc.length > 100) {
+				$.scojs_message('商品说明最多100字', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			
+			if (!captcha) {
+				$.scojs_message('请输入验证码', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+		}
+	};
+	$('#editGoodform').ajaxForm(editGoodformOptions);
 });

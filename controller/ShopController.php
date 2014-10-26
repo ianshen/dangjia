@@ -48,10 +48,32 @@ class ShopController extends BaseController {
      * 
      */
     public function indexAction() {
-        $currUser = $this->refreshCurrentUser ();
-        $this->assign ( 'currUser', $currUser );
-        $this->display ();
-    }
+		$currUser = $this->refreshCurrentUser ();
+		$this->assign ( 'currUser', $currUser );
+		$this->display ();
+	}
+	
+	public function editStoreAction() {
+		$currUser = $this->refreshCurrentUser ();
+		if (ComTool::isAjax ()) {
+			if (isset ( $_POST ['captcha'] )) {
+				$captcha = trim ( $this->post ( 'captcha' ) );
+				if (! ComTool::checkCaptcha ( $captcha )) {
+					ComTool::ajax ( 100001, '验证码错误' );
+				}
+			}
+			$desc = trim ( $this->post ( 'desc' ) );
+			ComTool::checkMaxLen ( $desc, 200, '店铺介绍最多200位' );
+			$announce = trim ( $this->post ( 'announce' ) );
+			ComTool::checkMaxLen ( $announce, 200, '店铺公告最多200位' );
+			$sql = "UPDATE `store` SET `desc`='{$desc}',`announce`='{$announce}' WHERE id='{$currUser['id']}' limit 1";
+			$res = BaseData::sql ( $sql );
+			if ($res === false) {
+				ComTool::ajax ( 100001, '服务器忙，请刷新重试' );
+			}
+			ComTool::ajax ( 100000, '保存成功' );
+		}
+	}
     
     public function passwordAction() {
         $currUser = $this->refreshCurrentUser ();
@@ -64,11 +86,11 @@ class ShopController extends BaseController {
             }
             $curpass = trim ( $this->post ( 'curpass' ) );
             ComTool::checkEmpty ( $curpass, '请输入当前密码' );
-            ComTool::checkMinMaxLen ( $curpass, 6, 16, '密码6-16位' );
+            ComTool::checkMinMaxLen ( $curpass, 6, 16, '密码6-16字' );
             ComTool::checkEqual ( md5 ( $curpass ), $currUser ['passwd'], '当前登录密码错误，请检查' );
             $passwd = trim ( $this->post ( 'passwd' ) );
             ComTool::checkEmpty ( $passwd, '请输入新登录密码' );
-            ComTool::checkMinMaxLen ( $passwd, 6, 16, '密码6-16位' );
+            ComTool::checkMinMaxLen ( $passwd, 6, 16, '密码6-16字' );
             $cpasswd = trim ( $this->post ( 'cpasswd' ) );
             ComTool::checkEqual ( $passwd, $cpasswd, '两次输入的新密码不同' );
             $passwd = md5 ( $passwd );
@@ -176,10 +198,9 @@ class ShopController extends BaseController {
      */
     public function cateAction() {
         $currUser = $this->getCurrentUser ();
-        $sql = "SELECT * FROM `store_category` WHERE store_id='{$currUser['id']}' AND `status`='1';";
-        $cates = BaseData::sql ( $sql );
-        $this->assign ( 'cates', $cates );
-        $this->display ();
+		$cates = ShopData::getStoreCates ( $currUser ['id'] );
+		$this->assign ( 'cates', $cates );
+		$this->display ();
     }
     
     /**
@@ -195,9 +216,9 @@ class ShopController extends BaseController {
                 }
             }
             $name = trim ( $this->post ( 'name' ) );
-            ComTool::checkMinMaxLen ( $name, 1, 16, '分类名1-16位' );
+            ComTool::checkMinMaxLen ( $name, 1, 16, '分类名1-16字' );
             $desc = $this->post ( 'desc' );
-            ComTool::checkMaxLen ( $desc, 200, '分类描述最多200位' );
+            ComTool::checkMaxLen ( $desc, 200, '分类描述最多200字' );
             $res = ShopData::addStoreCate ( array (
                 'store_id' => $currUser ['id'], 
                 'name' => $name, 
@@ -234,26 +255,41 @@ class ShopController extends BaseController {
      */
     public function goodsAction() {
         $currUser = $this->getCurrentUser ();
-        $sql = "SELECT * FROM `store_goods` WHERE store_id='' and `status`='1';";
-        $goods = BaseData::sql ( $sql );
-        $sql = "SELECT * FROM `store_category` WHERE store_id='{$currUser['id']}' AND `status`='1';";
-        $cates = BaseData::sql ( $sql );
-        $this->assign ( 'goods', $goods );
-        $this->assign ( 'cates', $cates );
-        $this->display ();
+		$editId = intval ( $this->param ( 'edit', 0 ) );
+		if ($editId) {
+			$good = ShopData::getStoreGood ( $editId );
+			$this->assign ( 'good', $good );
+			$tpl = "Shop/edit_good.html";
+		} else {
+			$goods = ShopData::getStoreGoods ( $currUser ['id'] );
+			$this->assign ( 'goods', $goods );
+			$tpl = "Shop/goods.html";
+		}
+		$cates = ShopData::getStoreCates ( $currUser ['id'] );
+		$this->assign ( 'cates', $cates );
+		$this->display ( $tpl );
     }
     
+    /**
+     * 添加商品
+     */
     public function addGoodAction() {
         $currUser = $this->getCurrentUser ();
         if (ComTool::isAjax ()) {
+        	if (isset ( $_POST ['captcha'] )) {
+        		$captcha = trim ( $this->post ( 'captcha' ) );
+        		if (! ComTool::checkCaptcha ( $captcha )) {
+        			ComTool::ajax ( 100001, '验证码错误' );
+        		}
+        	}
             $name = trim ( $this->post ( 'name' ) );
-            ComTool::checkMinMaxLen ( $name, 1, 30, '商品名称1-30位' );
-            $desc = trim ( $this->post ( 'desc' ) );
-            ComTool::checkMaxLen ( $desc, 100, '商品描述最多100位' );
+            ComTool::checkMinMaxLen ( $name, 1, 30, '商品名称1-30字' );
             $cate = intval ( $this->post ( 'cate', 0 ) );
             $price = trim ( $this->post ( 'price' ) );
-            ComTool::checkMinMaxLen ( $name, 1, 30, '价格1-30位' );
-            $res = ShopData::addGood ( array (
+            ComTool::checkMinMaxLen ( $price, 1, 30, '价格1-30字' );
+            $desc = trim ( $this->post ( 'desc' ) );
+            ComTool::checkMaxLen ( $desc, 100, '商品说明最多100字' );
+            $res = ShopData::addStoreGood ( array (
                 'store_id' => $currUser ['id'], 
                 'name' => $name, 
                 'desc' => $desc, 
@@ -271,11 +307,76 @@ class ShopController extends BaseController {
     }
     
     /**
-     * 互联网名片
+     * 编辑商品
      */
-    public function qrAction() {
-        $this->display ();
+    public function editGoodAction() {
+    	$currUser = $this->getCurrentUser ();
+		if (ComTool::isAjax ()) {
+			if (isset ( $_POST ['captcha'] )) {
+				$captcha = trim ( $this->post ( 'captcha' ) );
+				if (! ComTool::checkCaptcha ( $captcha )) {
+					ComTool::ajax ( 100001, '验证码错误' );
+				}
+			}
+			$id = intval ( $this->post ( 'gid' ) );
+			$name = trim ( $this->post ( 'name' ) );
+			ComTool::checkMinMaxLen ( $name, 1, 30, '商品名称1-30字' );
+			$cate = intval ( $this->post ( 'cate', 0 ) );
+			$price = trim ( $this->post ( 'price' ) );
+			ComTool::checkMinMaxLen ( $price, 1, 30, '价格1-30字' );
+			$desc = trim ( $this->post ( 'desc' ) );
+			ComTool::checkMaxLen ( $desc, 100, '商品说明最多100字' );
+			$data = array (
+				'id' => $id, 
+				'store_id' => $currUser['id'], 
+				'name' => $name, 
+				'desc' => $desc, 
+				'store_cate_id' => $cate, 
+				'price' => $price, 
+				'update_time' => time (), 
+			);
+			$res = ShopData::editStoreGood ( $data );
+			if ($res === false) {
+				ComTool::ajax ( 100001, '服务器忙，请刷新重试' );
+			}
+			ComTool::ajax ( 100000, '操作成功', $this->urlroot . 'shop/goods' );
+		}
     }
+	
+	/**
+	 * 删除商品
+	 */
+	public function delGoodAction() {
+		$currUser = $this->getCurrentUser ();
+		if (ComTool::isAjax ()) {
+			$gid = intval ( $this->post ( 'gid', 0 ) );
+			$sql = "DELETE FROM `store_goods` WHERE id='{$gid}' and store_id='{$currUser ['id']}';";
+			$res = BaseData::sql ( $sql );
+			if ($res === false) {
+				ComTool::ajax ( 100001, '服务器忙，请刷新重试' );
+			}
+			ComTool::ajax ( 100000, '操作成功' );
+		}
+	}
+	
+	/**
+	 * 小店通
+	 */
+	public function infoAction() {
+		$currUser = $this->getCurrentUser ();
+		include "tool/phpqrcode/qrlib.php";
+		$dir = 'static/u/s/' . md5 ( $currUser ['id'] ) . '/';
+		if (! file_exists ( $dir )) {
+			@mkdir ( $dir );
+		}
+		$filename = $dir . "qr_{$currUser['id']}.png";
+		if (! file_exists ( $filename )) {
+			$url = $this->urlroot . 'page/show/t/1/s/1';
+			QRcode::png ( $url, $filename, 'H', 7, 2 );
+		}
+		$this->assign ( 'filename', $filename );
+		$this->display ();
+	}
     
     /**
      * 用户指南

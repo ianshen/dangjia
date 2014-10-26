@@ -59,30 +59,40 @@
 													class="clearfix stream-item-activity stream-item-activity-network">
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
+															<a href="javascript:void(0);" class="f-cst"><strong
+																class="">管理后台</strong></a>
+														</div>
+													</div>
+													<ol class="activity-supplement  follow-more-than-two">
+														<li class="supplement"><small>访问地址（请记录此地址）：</small></li>
+														<li class="supplement"><small> <?php show($this->urlroot); ?>acc/manage_login?token=<?php show($this->currUser['secret']); ?>
+														</small></li>
+														<li class="supplement">&nbsp;</li>
+														<li class="supplement"><small>登录用户名（请记录此用户名）：<?php show(htmlentities($this->currUser['ename'],ENT_QUOTES,'utf-8')); ?>
+														</small></li>
+													</ol>
+												</div>
+											</li>
+										</ol>
+										<ol class="stream-items">
+											<li class="stream-item">
+												<div
+													class="clearfix stream-item-activity stream-item-activity-network">
+													<div class="stream-item-activity-header">
+														<div class="stream-item-activity-line">
 															<a href="javascript:void(0);" class=""><strong
-																class="">帐号信息</strong></a>
+																class="">店铺信息（您的店铺信息未变动时请谨慎修改）</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
 														<li class="supplement">
 															<div>
-																<form class="form-horizontal" id="accountform"
+																<form class="form-horizontal" id="editStoreform"
+																action="<?php show($this->urlroot); ?>shop/editStore"
 																	method="post">
 																	<div class="control-group">
 																		<div class="control-label"></div>
 																		<div class="controls"></div>
-																	</div>
-																	<div class="control-group">
-																		<label class="control-label" for="">管理后台地址</label>
-																		<div class="controls">
-																			<span class="input-large"> <?php show($this->urlroot); ?>acc/manage_login?token=<?php show($this->currUser['secret']); ?></span>
-																		</div>
-																	</div>
-																	<div class="control-group">
-																		<label class="control-label" for="">管理后台用户名</label>
-																		<div class="controls">
-																			<span class="input-medium uneditable-input"> <?php show(htmlentities($this->currUser['ename'],ENT_QUOTES,'utf-8')); ?></span>
-																		</div>
 																	</div>
 																	<div class="control-group">
 																		<label class="control-label" for="">店铺名</label>
@@ -104,18 +114,91 @@
 																		</div>
 																	</div>
 																	<div class="control-group">
-																		<label class="control-label" for="">描述</label>
+																		<label class="control-label" for="">店铺地址</label>
 																		<div class="controls">
-																			<span class="input-large uneditable-input"> <?php show(htmlentities($this->currUser['desc'],ENT_QUOTES,'utf-8')); ?></span>
+																			<span class="input-medium uneditable-input"> <?php show(htmlentities($this->currUser['addr'],ENT_QUOTES,'utf-8')); ?></span>
+																		</div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="desc">店铺介绍</label>
+																		<div class="controls">
+																			<textarea id="desc" name="desc" rows="6" style="padding:5px;"
+																				placeholder="你的店铺介绍、服务介绍等"><?php show(htmlentities($this->currUser['desc'],ENT_QUOTES,'utf-8')); ?></textarea>
+																		</div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="announce">店铺公告</label>
+																		<div class="controls">
+																			<textarea id="announce" name="announce" rows="6" style="padding:5px;"
+																				placeholder="你的店铺介绍、服务介绍等"><?php show(htmlentities($this->currUser['announce'],ENT_QUOTES,'utf-8')); ?></textarea>
+																		</div>
+																	</div>
+																	<?php include('view/Public/captcha.html'); ?>
+																	<div class="control-group">
+																		<div class="controls">
+																			<button type="submit" class="btn btn-primary">修改</button>
+																		</div>
+																	</div>
+																</form>
+																<!-- 
+																<form class="form-horizontal" id="editStoreform"
+																	method="post">
+																	<div class="control-group">
+																		<div class="control-label"></div>
+																		<div class="controls"></div>
+																	</div>
+																	<div class="control-group">
+																		<div class="control-label"></div>
+																		<div class="controls"></div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="name">店铺名称</label>
+																		<div class="controls">
+																			<input id="name" name="name" type="text"
+																				value="<?php show(htmlentities($this->currUser['name'],ENT_QUOTES,'utf-8')); ?>"
+																				placeholder="输入店铺名称" />
+																		</div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="">联系人</label>
+																		<div class="controls">
+																			<input id="contact" name="contact" type="text"
+																				value="<?php show(htmlentities($this->currUser['contact'],ENT_QUOTES,'utf-8')); ?>"
+																				placeholder="输入联系人姓名" />
+																		</div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="">联系电话</label>
+																		<div class="controls">
+																			<input id="tel" name="tel" type="text"
+																				value="<?php show(htmlentities($this->currUser['tel'],ENT_QUOTES,'utf-8')); ?>"
+																				placeholder="输入联系电话" />
 																		</div>
 																	</div>
 																	<div class="control-group">
 																		<label class="control-label" for="">地址</label>
 																		<div class="controls">
-																			<span class="input-medium uneditable-input"> <?php show(htmlentities($this->currUser['addr'],ENT_QUOTES,'utf-8')); ?></span>
+																			<input id="addr" name="addr" type="text"
+																				value="<?php show(htmlentities($this->currUser['addr'],ENT_QUOTES,'utf-8')); ?>"
+																				placeholder="输入店铺地址" />
 																		</div>
 																	</div>
-																</form>
+																	<div class="control-group">
+																		<label class="control-label" for="desc">描述</label>
+																		<div class="controls">
+																			<textarea id="desc" name="desc" rows="6"
+																				placeholder="输入店铺说明">
+																				<?php show(htmlentities($this->currUser['desc'],ENT_QUOTES,'utf-8')); ?>
+																			</textarea>
+																		</div>
+																	</div>
+																	<?php include('view/Public/captcha.html'); ?>
+																	<div class="control-group">
+																		<div class="controls">
+																			<button type="submit" class="btn btn-primary">修改</button>
+																		</div>
+																	</div>
+																</form> -->
 															</div>
 														</li>
 													</ol>
