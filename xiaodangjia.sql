@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 10 月 24 日 08:57
+-- 生成日期: 2014 年 10 月 27 日 09:35
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -227,6 +227,7 @@ CREATE TABLE IF NOT EXISTS `store` (
   `tel` varchar(32) NOT NULL DEFAULT '' COMMENT '联系电话',
   `addr` varchar(64) NOT NULL DEFAULT '' COMMENT '店铺详细地址',
   `desc` varchar(256) NOT NULL DEFAULT '' COMMENT '店铺描述',
+  `announce` varchar(256) NOT NULL DEFAULT '' COMMENT '店铺公告',
   `city` int(10) NOT NULL DEFAULT '0' COMMENT '所属城市',
   `area` int(10) NOT NULL DEFAULT '0' COMMENT '所属地区',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '入驻时间',
@@ -241,10 +242,10 @@ CREATE TABLE IF NOT EXISTS `store` (
 -- 转存表中的数据 `store`
 --
 
-INSERT INTO `store` (`id`, `name`, `ename`, `passwd`, `secret`, `contact`, `tel`, `addr`, `desc`, `city`, `area`, `create_time`, `update_time`, `create_date`, `status`) VALUES
-(5, '店铺1', 'dian1', '55dcfd7f49dbc71b5fe90d199851ee89', '0e6915b9-43c3-11e4-aa07-206a8a319380', '联系人1', '联系电话1', '明天第一城', '明天第', 1, 1, 1395232865, 1414049008, '2014-03-19', 1),
-(6, '店铺2', 'dian2', '55dcfd7f49dbc71b5fe90d199851ee89', '1743259e-43c3-11e4-aa07-206a8a319380', '联系人2', '联系电话2', '明天第一城', '明天第', 1, 2, 1395236063, 0, '2014-03-19', 1),
-(7, '店铺3', 'dian3', '55dcfd7f49dbc71b5fe90d199851ee89', '1e1fd431-43c3-11e4-aa07-206a8a319380', '联系人3', '联系电话3', '明天第一城', '明天第', 1, 2, 1395236084, 0, '2014-03-19', 1);
+INSERT INTO `store` (`id`, `name`, `ename`, `passwd`, `secret`, `contact`, `tel`, `addr`, `desc`, `announce`, `city`, `area`, `create_time`, `update_time`, `create_date`, `status`) VALUES
+(5, '店铺1', 'dian1', '55dcfd7f49dbc71b5fe90d199851ee89', '0e6915b9-43c3-11e4-aa07-206a8a319380', '联系人1', '联系电话1', '明天第一城', '明天第', '', 1, 1, 1395232865, 1414049008, '2014-03-19', 1),
+(6, '店铺2', 'dian2', '55dcfd7f49dbc71b5fe90d199851ee89', '1743259e-43c3-11e4-aa07-206a8a319380', '联系人2', '联系电话2', '明天第一城', '明天第', '', 1, 2, 1395236063, 0, '2014-03-19', 1),
+(7, '店铺3', 'dian3', '55dcfd7f49dbc71b5fe90d199851ee89', '1e1fd431-43c3-11e4-aa07-206a8a319380', '联系人3', '联系电话3', '明天第一城', '明天第', '', 1, 2, 1395236084, 0, '2014-03-19', 1);
 
 -- --------------------------------------------------------
 
@@ -264,7 +265,15 @@ CREATE TABLE IF NOT EXISTS `store_category` (
   `order` tinyint(1) NOT NULL DEFAULT '0' COMMENT '排序',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+--
+-- 转存表中的数据 `store_category`
+--
+
+INSERT INTO `store_category` (`id`, `store_id`, `name`, `pid`, `path`, `desc`, `create_time`, `update_time`, `order`, `status`) VALUES
+(7, 5, 'aa', 0, '0', 'bb', 1414145731, 1414145731, 0, 1),
+(8, 5, 'asg', 0, '0', 'asfd', 1414145742, 1414145742, 0, 1);
 
 -- --------------------------------------------------------
 
