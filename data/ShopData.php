@@ -40,6 +40,15 @@ class ShopData extends BaseData {
 		return $good [0];
 	}
 	
+	static function getStore($sid) {
+		$sql = "SELECT * FROM `store` WHERE id='{$sid}'";
+		$store = BaseData::sql ( $sql );
+		if (! $store) {
+			return false;
+		}
+		return $store [0];
+	}
+	
 	static function editStoreGood($data) {
 		$sql = "UPDATE `store_goods` SET `name`='{$data['name']}',store_cate_id='{$data['store_cate_id']}',`price`='{$data['price']}',`desc`='{$data['desc']}',update_time='{$data['update_time']}' WHERE id='{$data['id']}' AND store_id='{$data['store_id']}'";
 		$res = BaseData::sql ( $sql );

@@ -377,6 +377,22 @@ class ShopController extends BaseController {
 		$this->assign ( 'filename', $filename );
 		$this->display ();
 	}
+	
+	/**
+	 * 定制名片
+	 */
+	public function orderCardAction(){
+		$currUser = $this->getCurrentUser ();
+		if (ComTool::isAjax ()) {
+			$num = intval ( $this->post ( 'num', 0 ) );
+			ComTool::checkEmpty ( $num, '请填写要定制的名片数量' );
+			$name = trim ( $this->post ( 'name' ) );
+			ComTool::checkMinMaxLen ( $name, 1, 16, '收件人姓名1-16字' );
+			$mobile=trim($this->post('mobile'));
+			ComTool::checkEmpty($mobile, '请填写手机号');
+			
+		}
+	}
     
     /**
      * 用户指南
