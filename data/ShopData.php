@@ -19,6 +19,15 @@ class ShopData extends BaseData {
 		return $result;
 	}
 	
+	static function orderCard($data) {
+        if (! $data) {
+            return false;
+        }
+        $model = new ShopModel ();
+        $result = $model->orderCard ( $data );
+        return $result;
+    }
+	
 	static function getStoreCates($storeId) {
 		$sql = "SELECT * FROM `store_category` WHERE store_id='{$storeId}' AND `status`='1';";
 		$cates = BaseData::sql ( $sql );

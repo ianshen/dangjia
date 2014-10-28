@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 10 月 27 日 09:35
+-- 生成日期: 2014 年 10 月 28 日 10:18
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -150,6 +150,37 @@ INSERT INTO `order` (`id`, `user_id`, `category_id`, `user_name`, `user_tel`, `u
 (14101361046264430, 11, 5, '哈哈', '13436951431', '北辰泰岳大厦 ', 'aaaaaaaa', 1413190646, 1413190646, '2014-10-14', 35, 1),
 (14101361087385527, 13, 5, 'alert(''x'')', '13436951433', '北辰泰岳大厦 1塔15层', 'bbbbbbb', 1413190687, 1413190687, '2014-10-14', 55, 1),
 (14101361100117550, 13, 5, 'alert(''x'')', '13436951433', '北辰泰岳大厦 1塔15层', 'cccccccc', 1413190700, 1413190700, '2014-10-14', 55, 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `order_card`
+--
+
+CREATE TABLE IF NOT EXISTS `order_card` (
+  `id` bigint(20) NOT NULL DEFAULT '0' COMMENT '订单号',
+  `store_id` int(11) NOT NULL DEFAULT '0' COMMENT '定制店铺id',
+  `user_name` varchar(32) NOT NULL DEFAULT '' COMMENT '用户名',
+  `user_tel` varchar(32) NOT NULL DEFAULT '' COMMENT '用户电话',
+  `user_addr` varchar(64) NOT NULL DEFAULT '' COMMENT '地址',
+  `nums` int(11) NOT NULL DEFAULT '0' COMMENT '定制份数',
+  `message` varchar(128) NOT NULL DEFAULT '' COMMENT '订单留言',
+  `total_cost` int(11) NOT NULL DEFAULT '0' COMMENT '总价',
+  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '订单创建时间',
+  `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`store_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `order_card`
+--
+
+INSERT INTO `order_card` (`id`, `store_id`, `user_name`, `user_tel`, `user_addr`, `nums`, `message`, `total_cost`, `create_time`, `update_time`, `status`) VALUES
+(14101361046264430, 11, '哈哈', '13436951431', '北辰泰岳大厦 ', 35, 'aaaaaaaa', 0, 1413190646, 1413190646, 1),
+(14101361087385527, 13, 'alert(''x'')', '13436951433', '北辰泰岳大厦 1塔15层', 55, 'bbbbbbb', 0, 1413190687, 1413190687, 1),
+(14101361100117550, 13, 'alert(''x'')', '13436951433', '北辰泰岳大厦 1塔15层', 55, 'cccccccc', 0, 1413190700, 1413190700, 1);
 
 -- --------------------------------------------------------
 

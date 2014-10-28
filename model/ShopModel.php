@@ -12,4 +12,9 @@ class ShopModel extends BaseModel {
 		$this->_table = 'store_goods';
 		return $this->add ( $data );
 	}
+	
+	public function orderCard($data) {
+        $this->_table = 'order_card';
+        return $this->add ( $data );
+    }
 }
