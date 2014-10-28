@@ -11,7 +11,10 @@
 	href="<?php echo WWW_ROOT; ?>static/css/bootstrap-responsive.css">
 <link rel="stylesheet"
 	href="<?php echo WWW_ROOT; ?>static/css/common.css">
-<title>叶问的小店 - 小店通 - 嘻咕嘻咕</title>
+<title>
+	<?php show(htmlentities($this->info['name'],ENT_QUOTES,'utf-8')); ?> -
+	小店通 - 嘻咕嘻咕
+</title>
 <?php include('view/Public/jsconfig.html'); ?>
 <style>
 .show_bg {
@@ -47,7 +50,8 @@
 
 						<div class="page-header">
 							<h4>
-								<small>叶问的小店 </small>
+								<small> <?php show(htmlentities($this->info['name'],ENT_QUOTES,'utf-8')); ?>
+								</small>
 							</h4>
 						</div>
 						<!-- <div class="alert">
@@ -55,7 +59,98 @@
 							<h4>提示!</h4>
 							<strong>公告!</strong> 请注意你的个人隐私安全.
 						</div> -->
-						<div class="tabbable" id="tabs-899479">
+						<div class="tabbable" id="tabs-646039">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#panel-800422"
+									data-toggle="tab">嘻咕秀</a></li>
+								<li><a href="#panel-148851" data-toggle="tab">服务单</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="panel-800422">
+									<div>
+										<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名称</h6>
+										<p>
+											<small> &nbsp;&nbsp;&nbsp;<?php show(htmlentities($this->info['name'],ENT_QUOTES,'utf-8')); ?>
+											</small>
+										</p>
+									</div>
+									<div>
+										<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电话</h6>
+										<p>
+											<small> &nbsp;&nbsp;&nbsp;<?php show($this->info['tel']); ?>
+											</small>
+										</p>
+									</div>
+									<div>
+										<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;公告</h6>
+										<p>
+											<small> &nbsp;&nbsp;&nbsp;<?php show(htmlentities($this->info['announce'],ENT_QUOTES,'utf-8'),'未设置店铺公告哦！'); ?>
+											</small>
+										</p>
+									</div>
+									<div>
+										<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地址</h6>
+										<p>
+											<small> &nbsp;&nbsp;&nbsp;<?php show(htmlentities($this->info['addr'],ENT_QUOTES,'utf-8')); ?>
+											</small>
+										</p>
+									</div>
+									<div>
+										<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;介绍</h6>
+										<p>
+											<small> &nbsp;&nbsp;&nbsp;<?php show(htmlentities($this->info['desc'],ENT_QUOTES,'utf-8')); ?>
+											</small>
+										</p>
+									</div>
+									<div>
+										<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;互联网名片</h6>
+										<p>
+											&nbsp;&nbsp;&nbsp;<img
+												src="<?php show(WWW_ROOT.$this->filename); ?>"
+												class="img-polaroid" width="100" height="100">
+										</p>
+									</div>
+								</div>
+								<div class="tab-pane" id="panel-148851">
+									<div class="accordion" id="accordion-878106">
+										<div class="accordion-group">
+											<div class="accordion-heading">
+												<a class="accordion-toggle collapsed" data-toggle="collapse"
+													data-parent="#accordion-878106"
+													href="#accordion-element-983408">选项卡 #1</a>
+											</div>
+											<div id="accordion-element-983408"
+												class="accordion-body collapse">
+												<div class="accordion-inner">
+													<p>&nbsp;第一部分内容.</p>
+													<p>&nbsp;第一部分内容.</p>
+													<p>&nbsp;第一部分内容.</p>
+													<p>&nbsp;第一部分内容.</p>
+												</div>
+											</div>
+										</div>
+										<div class="accordion-group">
+											<div class="accordion-heading">
+												<a class="accordion-toggle" data-toggle="collapse"
+													data-parent="#accordion-878106"
+													href="#accordion-element-669190">选项卡 #2</a>
+											</div>
+											<div id="accordion-element-669190"
+												class="accordion-body collapse">
+												<div class="accordion-inner">
+													<p>&nbsp;第一部分内容.</p>
+													<p>&nbsp;第一部分内容.</p>
+													<p>&nbsp;第一部分内容.</p>
+													<p>&nbsp;第一部分内容.</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<p>第二部分内容.</p>
+								</div>
+							</div>
+						</div>
+						<!-- <div class="tabbable" id="tabs-899479">
 							<ul class="nav nav-tabs">
 								<li class="active"><a data-toggle="tab"
 									href="#panel-473358">服务单</a></li>
@@ -102,35 +197,49 @@
 								<div class="tab-pane f-pl10" id="panel-430276">
 									<div>
 										<h6>&nbsp;&nbsp;&nbsp;名称</h6>
-										<p><?php show(htmlentities($info['name'],ENT_QUOTES,'utf-8')); ?></p>
+										<p>
+											<small> <?php show(htmlentities($this->info['name'],ENT_QUOTES,'utf-8')); ?>
+											</small>
+										</p>
 									</div>
 									<div>
 										<h6>&nbsp;&nbsp;&nbsp;电话</h6>
-										<p>13436951433</p>
+										<p>
+											<small> <?php show($this->info['tel']); ?>
+											</small>
+										</p>
 									</div>
 									<div>
 										<h6>&nbsp;&nbsp;&nbsp;公告</h6>
-										<p>公告公告公告公告公告公告</p>
+										<p>
+											<small> <?php show(htmlentities($this->info['announce'],ENT_QUOTES,'utf-8'),'未设置店铺公告哦！'); ?>
+											</small>
+										</p>
 									</div>
 									<div>
 										<h6>&nbsp;&nbsp;&nbsp;地址</h6>
-										<p>本可视化布局程序在HTML5浏览器上运行更加完美,
-											能实现自动本地化保存,即使关闭了网页,下一次打开仍然能恢复上一次的操作.</p>
+										<p>
+											<small> <?php show(htmlentities($this->info['addr'],ENT_QUOTES,'utf-8')); ?>
+											</small>
+										</p>
 									</div>
 									<div>
 										<h6>&nbsp;&nbsp;&nbsp;介绍</h6>
-										<p>可视化布局程序在HTML5浏览器上运行更加完美, 能实现自动本地化保存,
-											即使关闭了网页,下一次打开仍然能恢复上一次的操作.</p>
+										<p>
+											<small> <?php show(htmlentities($this->info['desc'],ENT_QUOTES,'utf-8')); ?>
+											</small>
+										</p>
 									</div>
 									<div>
 										<h6>&nbsp;&nbsp;&nbsp;互联网名片</h6>
 										<p>
-											<img src="..." class="img-polaroid">
+											<img src="<?php show(WWW_ROOT.$this->filename); ?>"
+												class="img-polaroid" width="100" height="100">
 										</p>
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<div class="span4"></div>
 				</div>

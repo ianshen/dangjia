@@ -371,10 +371,11 @@ class ShopController extends BaseController {
 		}
 		$filename = $dir . "qr_{$currUser['id']}.png";
 		if (! file_exists ( $filename )) {
-			$url = $this->urlroot . 'page/show/t/1/s/1';
+			$url = $this->urlroot . 'page/show/t/1/s/7';
 			QRcode::png ( $url, $filename, 'H', 7, 2 );
 		}
 		$this->assign ( 'filename', $filename );
+		$this->assign ( 'user', $currUser );
 		$this->display ();
 	}
 	
@@ -384,14 +385,42 @@ class ShopController extends BaseController {
 	public function orderCardAction(){
 		$currUser = $this->getCurrentUser ();
         if (ComTool::isAjax ()) {
-            $num = intval ( $this->post ( 'num', 0 ) );
-            ComTool::checkEmpty ( $num, '请填写要定制的名片数量' );
-            $name = trim ( $this->post ( 'name' ) );
-            ComTool::checkMinMaxLen ( $name, 1, 16, '收件人姓名1-16字' );
-            $mobile = trim ( $this->post ( 'mobile' ) );
-            ComTool::checkEmpty ( $mobile, '请填写手机号' );
-            $data=array('');
-            $res = ShopData::orderCard ( $data );
+        	if (isset ( $_POST ['captcha'] )) {
+        		$captcha = trim ( $this->post ( 'captcha' ) );
+        		if (! ComTool::checkCaptcha ( $captcha )) {
+        			ComTool::ajax ( 100001, '验证码错误' );
+        		}
+        	}
+            $nums = intval ( $this->post ( 'nums', 0 ) );
+			ComTool::checkEmpty ( $nums, '请填写您要定制的名片数量' );
+			$name = trim ( $this->post ( 'name' ) );
+			ComTool::checkMinMaxLen ( $name, 1, 16, '收件人姓名1-16字' );
+			$mobile = trim ( $this->post ( 'mobile' ) );
+			ComTool::checkEmpty ( $mobile, '请填写手机号' );
+			if (! ComTool::isMobile ( $mobile )) {
+				ComTool::ajax ( 100001, '请填写正确的手机号' );
+			}
+			$addr = trim ( $this->post ( 'addr' ) );
+			ComTool::checkMinMaxLen ( $addr, 1, 64, '收件地址1-64字' );
+			$message = trim ( $this->post ( 'message' ) );
+			ComTool::checkMaxLen ( $message, 100, '留言最多100字' );
+			$data = array (
+				'store_id' => $currUser ['id'], 
+				'user_name' => $name, 
+				'user_tel' => $mobile, 
+				'user_addr' => $addr, 
+				'nums' => $nums, 
+				'message' => $message, 
+				'total_cost' => '0', 
+				'update_time' => time (), 
+				'create_time' => time (), 
+				'status' => '1' 
+			);
+			$res = ShopData::orderCard ( $data );
+			if ($res === false) {
+				ComTool::ajax ( 100001, '服务器忙，请刷新重试' );
+			}
+			ComTool::ajax ( 100000, '操作成功' );
         }
 	}
     

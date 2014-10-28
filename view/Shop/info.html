@@ -63,11 +63,11 @@
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
 															<a href="javascript:void(0);" class="f-cst"><strong
-																class="">小店通是什么？</strong></a>
+																class="">小店通，让街坊发现你！</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
-														<li class="supplement"><small>1、</small>
+														<li class="supplement"><small>1、嘻咕嘻咕小店通，让街坊发现你！</small>
 														<li class="supplement"><small>2、</small>
 														<li class="supplement"><small>3、</small>
 														</li>
@@ -87,7 +87,7 @@
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
 														<li class="supplement">&nbsp;<a target="_blank"
-															href="<?php show($this->urlroot); ?>page/show"> <img
+															href="<?php show($this->urlroot); ?>page/show/t/1/s/<?php show($this->user['id']); ?>"> <img
 																src="<?php show(WWW_ROOT.$this->filename); ?>"
 																class="img-polaroid" width="200" height="200">
 														</a>&nbsp;
@@ -103,52 +103,7 @@
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
 															<a href="javascript:void(0);" class=""><strong
-																class="">我加入的圈子</strong></a>
-														</div>
-													</div>
-													<ol class="activity-supplement  follow-more-than-two">
-														<li class="supplement">
-															<table class="table product-cart product-cart-big">
-																<thead>
-																	<tr>
-																		<th><small>我在圈子里的位置</small></th>
-																		<th><small>圈子名称</small></th>
-																		<th><small>操作</small></th>
-																	</tr>
-																</thead>
-																<tbody>
-																	<tr data-gid="<?php show($item['group_id']); ?>">
-																		<td class="js-group-detail f-wth150"><span
-																			class="js-addr-desc-text"> <small> <?php show(htmlentities($item['detail'],ENT_QUOTES,'utf-8')); ?>
-																			</small>
-																		</span><span class="f-dn js-addr-desc-input"><input
-																				class="input-large js-addr-desc" type="text"
-																				placeholder="如：B座3号楼4层"
-																				value="<?php show($item['detail']); ?>"></span></td>
-																		<td class="f-wth150"><small> <?php show($item['name']); ?>
-																		</small></td>
-
-																		<td class="f-wth150"><small><a
-																				href="javascript:void(0);" class="js-mod-detail"
-																				data-gid="<?php show($item['group_id']); ?>">修改位置</a></small>&nbsp;|&nbsp;<small><a
-																				href="javascript:void(0);" class="js-quit-group"
-																				data-gid="<?php show($item['group_id']); ?>">退出圈子</a></small></td>
-																	</tr>
-																</tbody>
-															</table>
-														</li>
-													</ol>
-												</div>
-											</li>
-										</ol>
-										<ol class="stream-items">
-											<li class="stream-item">
-												<div
-													class="clearfix stream-item-activity stream-item-activity-network">
-													<div class="stream-item-activity-header">
-														<div class="stream-item-activity-line">
-															<a href="javascript:void(0);" class=""><strong
-																class="">定制名片</strong></a>
+																class="">定制店铺名片</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two"
@@ -160,24 +115,24 @@
 														<li class="supplement">
 															<div>
 																<form
-																	action="<?php show($this->urlroot); ?>my/joingroup"
-																	class="form-horizontal" id="joingroupform"
+																	action="<?php show($this->urlroot); ?>shop/orderCard"
+																	class="form-horizontal" id="ordercardform"
 																	method="post">
 																	<div class="control-group">
 																		<div class="control-label"></div>
 																		<div class="controls"></div>
 																	</div>
 																	<div class="control-group">
-																		<label class="control-label" for="mobile">定制份数</label>
+																		<label class="control-label" for="mobile">定制数</label>
 																		<div class="controls">
-																			<input id="mobile" name="mobile" type="text"
+																			<input id="nums" name="nums" type="text"
 																				placeholder="定制的名片份数如：100" />
 																		</div>
 																	</div>
 																	<div class="control-group">
-																		<label class="control-label" for="mobile">收件人</label>
+																		<label class="control-label" for="name">收件人</label>
 																		<div class="controls">
-																			<input id="mobile" name="mobile" type="text"
+																			<input id="name" name="name" type="text"
 																				placeholder="收件人姓名" />
 																		</div>
 																	</div>
@@ -189,10 +144,17 @@
 																		</div>
 																	</div>
 																	<div class="control-group">
-																		<label class="control-label" for="announce">地址</label>
+																		<label class="control-label" for="addr">地址</label>
 																		<div class="controls">
-																			<textarea id="announce" name="announce" rows="3"
+																			<textarea id="addr" name="addr" rows="3"
 																				style="padding: 5px;" placeholder="收件地址"></textarea>
+																		</div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="message">留言</label>
+																		<div class="controls">
+																			<textarea id="message" name="message" rows="3"
+																				style="padding: 5px;" placeholder="给名片定制人留言"></textarea>
 																		</div>
 																	</div>
 																	<div class="control-group">
@@ -242,6 +204,6 @@
 		src="<?php echo WWW_ROOT; ?>static/js/artDialog/artDialog.min.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/funcs.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/common.js"></script>
-	<script src="<?php echo WWW_ROOT; ?>static/js/my.js"></script>
+	<script src="<?php echo WWW_ROOT; ?>static/js/shop.js"></script>
 </body>
 </html>

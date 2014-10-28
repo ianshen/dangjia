@@ -28,7 +28,7 @@ class PageController extends BaseController {
 				if (! $store) {
 					exit ( '小店通主页不存在' );
 				}
-				print_r($store);
+				//print_r($store);
 				$this->assign ( 'info', $store );
 				$tpl = 'Page/store.html';
 				break;

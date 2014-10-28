@@ -389,4 +389,54 @@ $(function() {
 		}
 	};
 	$('#editGoodform').ajaxForm(editGoodformOptions);
+	
+	// 定制名片
+	var ordercardformOptions = {
+		dataType : 'json',
+		success : function(data) {
+			if (data.status == 100000) {
+				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
+				setTimeout(function() {
+					window.location.reload(true);
+				}, $tmot);
+			} else {
+				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
+				captchachg();
+				$("input#captcha").val("");
+			}
+		},
+		beforeSubmit : function() {
+			var nums = parseInt($('input#nums').val());
+			var name = $('input#name').val();
+			var mobile = $('input#mobile').val();
+			var addr = $('textarea#addr').val();
+			var message = $('textarea#message').val();
+			var captcha = $('input#captcha').val();
+			if (!nums) {
+				$.scojs_message('请填写您要定制的名片数量', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if (name.length < 1 || name.length > 16) {
+				$.scojs_message('收件人姓名1-16字', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if (!isMobile(mobile)) {
+				$.scojs_message('请填写正确的手机号', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if (addr.length < 1 || addr.length > 64) {
+				$.scojs_message('收件地址1-64字', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if (message.length > 100) {
+				$.scojs_message('留言最多100字', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if (!captcha) {
+				$.scojs_message('请输入验证码', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+		}
+	};
+	$('#ordercardform').ajaxForm(ordercardformOptions);
 });
