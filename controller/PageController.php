@@ -24,11 +24,25 @@ class PageController extends BaseController {
 		switch ($type) {
 			case '1' :
 				$sid = intval ( $this->param ( 's', 0 ) );
-				$store = ShopData::getStore ( $sid );
-				if (! $store) {
-					exit ( '小店通主页不存在' );
-				}
-				//print_r($store);
+                $store = ShopData::getStore ( $sid );
+                if (! $store) {
+                    exit ( '小店通主页不存在' );
+                }
+                //print_r($store);
+                $cates = ShopData::getStoreCates ( $store ['id'] );
+                if ($cates) {
+                    foreach ( $cates as $cate ) {
+                        $tmp [$cate ['id']] = $cate;
+                    }
+                    $cates = $tmp;
+                }
+                $goods = ShopData::getStoreGoods ( $store ['id'] );
+                if ($goods) {
+                    foreach ( $goods as $good ) {
+                        $cates [$good ['store_cate_id']] ['goods'] [] = $good;
+                    }
+                }
+				$this->assign ( 'cates', $cates );
 				$this->assign ( 'info', $store );
 				$tpl = 'Page/store.html';
 				break;
