@@ -364,17 +364,8 @@ class ShopController extends BaseController {
 	 */
 	public function infoAction() {
 		$currUser = $this->getCurrentUser ();
-		include "tool/phpqrcode/qrlib.php";
-		$dir = 'static/u/s/' . md5 ( $currUser ['id'] ) . '/';
-		if (! file_exists ( $dir )) {
-			@mkdir ( $dir );
-		}
-		$filename = $dir . "qr_{$currUser['id']}.png";
-		if (! file_exists ( $filename )) {
-			$url = $this->urlroot . 'page/show/t/1/s/7';
-			QRcode::png ( $url, $filename, 'H', 7, 2 );
-		}
-		$this->assign ( 'filename', $filename );
+		$qr = $this->qrCode ( $currUser, 's' );
+		$this->assign ( 'qr', $qr );
 		$this->assign ( 'user', $currUser );
 		$this->display ();
 	}

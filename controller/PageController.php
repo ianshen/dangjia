@@ -38,10 +38,12 @@ class PageController extends BaseController {
                 }
                 $goods = ShopData::getStoreGoods ( $store ['id'] );
                 if ($goods) {
-                    foreach ( $goods as $good ) {
-                        $cates [$good ['store_cate_id']] ['goods'] [] = $good;
-                    }
-                }
+					foreach ( $goods as $good ) {
+						$cates [$good ['store_cate_id']] ['goods'] [] = $good;
+					}
+				}
+				$qr = $this->qrCode ( $store, 's' );
+				$this->assign ( 'qr', $qr );
 				$this->assign ( 'cates', $cates );
 				$this->assign ( 'info', $store );
 				$tpl = 'Page/store.html';

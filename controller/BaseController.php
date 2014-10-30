@@ -91,4 +91,19 @@ class BaseController extends Cola_Controller {
             }
         }
     }
+    
+    protected function qrCode($user, $type = 's') {
+		include "tool/phpqrcode/qrlib.php";
+		$dir = "static/u/{$type}/" . md5 ( $user ['id'] ) . '/';
+		if (! file_exists ( $dir )) {
+			@mkdir ( $dir );
+		}
+		$qr = $dir . "qr_{$type}_{$user['id']}.png";
+		if (! file_exists ( $qr )) {
+			$url = $this->urlroot . "page/show/t/{$type}/s/{$user ['id']}";
+			QRcode::png ( $url, $qr, 'H', 7, 2 );
+		}
+		return $qr;
+	}
+    
 }
