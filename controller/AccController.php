@@ -289,27 +289,27 @@ class AccController extends BaseController {
             //登录可使用邮箱和手机，系统自动判断登录号类型
             $acc = trim ( $this->post ( 'user' ) );
             $passwd = trim ( $this->post ( 'passwd' ) );
-            $token = trim ( $this->post ( 'token' ) );
+            /* $token = trim ( $this->post ( 'token' ) );
             //合法性检查
             if (! $acc || ! $passwd || ! $token) {
                 ComTool::ajax ( 100001, '参数错误6' );
-            }
-            ComTool::checkMaxLen ( $acc, 32, '参数错误5' );
-            ComTool::checkMinMaxLen ( $passwd, 6, 16, '参数错误4' );
+            } */
+            ComTool::checkMaxLen ( $acc, 32, '用户名最多32位' );
+            ComTool::checkMinMaxLen ( $passwd, 6, 16, '密码6-16位' );
             $acc = ComTool::escape ( $acc );
             $sql = "SELECT * FROM `store` WHERE `ename`='{$acc}' limit 1";
             $user = BaseData::sql ( $sql );
             if (empty ( $user )) {
-                ComTool::ajax ( 100001, '参数错误3' );
+                ComTool::ajax ( 100001, '帐号或密码错误' );
             }
             $user = $user [0];
-            $token = base64_decode ( $token );
+            /* $token = base64_decode ( $token ); */
             if (md5 ( $passwd ) != $user ['passwd']) {
-                ComTool::ajax ( 100001, '参数错误2' );
+                ComTool::ajax ( 100001, '帐号或密码错误' );
             }
-            if ($token != $user ['secret']) {
+            /* if ($token != $user ['secret']) {
                 ComTool::ajax ( 100001, '参数错误1' );
-            }
+            } */
             //上次登录帐号与本次登录帐号不同重新记录COOKIE，3600*24*30
             Cola_Ext_Cookie::set ( $cookieName, $acc, 2592000 );
             //成功则写session
@@ -318,14 +318,14 @@ class AccController extends BaseController {
             $returnUrl = $this->urlroot . 'shop';
             ComTool::ajax ( 100000, '登录成功，即将跳转', $returnUrl );
         }
-        $token = $this->get ( 'token', '' );
+        /* $token = $this->get ( 'token', '' );
         if (! $token) {
             ComTool::redirect ( ComTool::url ( 'acc/login' ) );
-        }
+        } */
         $returnUrl = urldecode ( $this->get ( 'returnUrl', '' ) );
         $this->assign ( 'lastLoginAcc', $lastLoginManageAcc );
         $this->assign ( 'returnUrl', $returnUrl );
-        $this->assign ( 'token', base64_encode ( $token ) );
+        //$this->assign ( 'token', base64_encode ( $token ) );
         $this->display ();
     }
 }

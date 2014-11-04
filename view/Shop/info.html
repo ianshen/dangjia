@@ -10,19 +10,16 @@
 	href="<?php echo WWW_ROOT; ?>static/css/common.css">
 <link rel="stylesheet"
 	href="<?php echo WWW_ROOT; ?>static/css/group.css">
-<link
-	href="<?php echo WWW_ROOT; ?>static/js/artDialog/skins/default.css"
-	rel="stylesheet" />
 <link rel="stylesheet"
 	href="<?php echo WWW_ROOT; ?>static/js/sco/css/sco.message.css">
-<title>嘻咕嘻咕 - 小店通</title>
+<title>嘻咕嘻咕 - 小店信息</title>
 <?php include('view/Public/jsconfig.html'); ?>
 </head>
 <body class="index_bg">
 	<div class="container-fluid top_nav">
 		<div class="row-fluid">
 			<div class="span12">
-				<?php include('view/Public/topnav.html'); ?>
+				<?php include('view/Shop/managetopnav.html'); ?>
 			</div>
 		</div>
 	</div>
@@ -63,34 +60,50 @@
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
 															<a href="javascript:void(0);" class="f-cst"><strong
-																class="">小店通，让街坊发现你！</strong></a>
+																class="">基本信息</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
-														<li class="supplement"><small>1、嘻咕嘻咕小店通，让街坊发现你的美！</small>
-														<li class="supplement"><small>2、店再小，也要互联</small>
-														<li class="supplement"><small>3、</small></li>
-														<li class="supplement"><small>查看小店通DEMO</small></li>
-													</ol>
-												</div>
-											</li>
-										</ol>
-										<ol class="stream-items">
-											<li class="stream-item">
-												<div
-													class="clearfix stream-item-activity stream-item-activity-network">
-													<div class="stream-item-activity-header">
-														<div class="stream-item-activity-line">
-															<a href="javascript:void(0);" class="f-cst"><strong
-																class="">小店二维码名片（点击或扫描二维码名片查看小店通主页） </strong></a>
-														</div>
-													</div>
-													<ol class="activity-supplement  follow-more-than-two">
-														<li class="supplement">&nbsp;<a target="_blank"
-															href="<?php show($this->urlroot); ?>page/show/t/1/s/<?php show($this->user['id']); ?>">
-																<img src="<?php show(WWW_ROOT.$this->qr); ?>"
-																class="img-polaroid" width="200" height="200">
-														</a>&nbsp;
+														<li class="supplement">
+															<div>
+																<form class="form-horizontal">
+																	<div class="control-group">
+																		<div class="control-label"></div>
+																		<div class="controls"></div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="">用户名</label>
+																		<div class="controls">
+																			<span class="input-medium uneditable-input"> <?php show(htmlentities($this->currUser['ename'],ENT_QUOTES,'utf-8')); ?></span>
+																		</div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="">小店名</label>
+																		<div class="controls">
+																			<span class="input-medium uneditable-input"> <?php show(htmlentities($this->currUser['name'],ENT_QUOTES,'utf-8')); ?></span>
+																		</div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="">联系人</label>
+																		<div class="controls">
+																			<span class="input-medium uneditable-input"> <?php show(htmlentities($this->currUser['contact'],ENT_QUOTES,'utf-8')); ?>
+																			</span>
+																		</div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="">联系电话</label>
+																		<div class="controls">
+																			<span class="input-medium uneditable-input"> <?php show(htmlentities($this->currUser['tel'],ENT_QUOTES,'utf-8')); ?></span>
+																		</div>
+																	</div>
+																	<div class="control-group">
+																		<label class="control-label" for="">小店地址</label>
+																		<div class="controls">
+																			<span class="input-medium uneditable-input"> <?php show(htmlentities($this->currUser['addr'],ENT_QUOTES,'utf-8')); ?></span>
+																		</div>
+																	</div>
+																</form>
+															</div>
 														</li>
 													</ol>
 												</div>
@@ -103,75 +116,37 @@
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
 															<a href="javascript:void(0);" class=""><strong
-																class="">定制店铺名片</strong></a>
+																class="">扩展信息（您的小店信息未变动时请谨慎修改）</strong></a>
 														</div>
 													</div>
-													<ol class="activity-supplement  follow-more-than-two"
-														style="border-radius: 0; border-style: none solid none;">
-														<li class="supplement"><small>小嘻说：</small></li>
-														<li class="supplement"><small>1、</small></li>
-													</ol>
 													<ol class="activity-supplement  follow-more-than-two">
 														<li class="supplement">
 															<div>
-																<form
-																	action="<?php show($this->urlroot); ?>shop/orderCard"
-																	class="form-horizontal" id="ordercardform"
+																<form class="form-horizontal" id="editStoreform"
+																	action="<?php show($this->urlroot); ?>shop/editStore"
 																	method="post">
 																	<div class="control-group">
 																		<div class="control-label"></div>
 																		<div class="controls"></div>
 																	</div>
 																	<div class="control-group">
-																		<label class="control-label" for="mobile">定制数</label>
+																		<label class="control-label" for="desc">小店介绍</label>
 																		<div class="controls">
-																			<input id="nums" name="nums" type="text"
-																				placeholder="定制的名片份数如：100" />
+																			<textarea id="desc" name="desc" rows="6"
+																				style="padding: 5px;" placeholder="你的小店介绍、服务介绍等"><?php show(htmlentities($this->currUser['desc'],ENT_QUOTES,'utf-8')); ?></textarea>
 																		</div>
 																	</div>
 																	<div class="control-group">
-																		<label class="control-label" for="name">收件人</label>
+																		<label class="control-label" for="announce">小店公告</label>
 																		<div class="controls">
-																			<input id="name" name="name" type="text"
-																				placeholder="收件人姓名" />
+																			<textarea id="announce" name="announce" rows="6"
+																				style="padding: 5px;" placeholder="你的小店介绍、服务介绍等"><?php show(htmlentities($this->currUser['announce'],ENT_QUOTES,'utf-8')); ?></textarea>
 																		</div>
 																	</div>
-																	<div class="control-group">
-																		<label class="control-label" for="mobile">手机</label>
-																		<div class="controls">
-																			<input id="mobile" name="mobile" type="text"
-																				placeholder="收件人手机号" />
-																		</div>
-																	</div>
-																	<div class="control-group">
-																		<label class="control-label" for="addr">地址</label>
-																		<div class="controls">
-																			<textarea id="addr" name="addr" rows="3"
-																				style="padding: 5px;" placeholder="收件地址"></textarea>
-																		</div>
-																	</div>
-																	<div class="control-group">
-																		<label class="control-label" for="message">留言</label>
-																		<div class="controls">
-																			<textarea id="message" name="message" rows="3"
-																				style="padding: 5px;" placeholder="给名片定制人留言"></textarea>
-																		</div>
-																	</div>
-																	<div class="control-group">
-																		<label class="control-label" for="captcha">验证码</label>
-																		<div class="controls">
-																			<input id="captcha" name="captcha" type="text"
-																				class="input-small border1" placeholder="输入验证码" />
-																			<img title="点击换一换" id="captcha_img"
-																				onclick="javascript:captchachg();"
-																				src="<?php echo $this->urlroot; ?>acc/captcha" /> <a
-																				onclick="javascript:captchachg();" class="f-fs1"
-																				href="javascript:void(0);">&nbsp;换一张?</a>
-																		</div>
-																	</div>
+																	<?php include('view/Public/captcha.html'); ?>
 																	<div class="control-group">
 																		<div class="controls">
-																			<button type="submit" class="btn btn-primary">提交定制</button>
+																			<button type="submit" class="btn btn-primary">修改</button>
 																		</div>
 																	</div>
 																</form>
@@ -200,10 +175,7 @@
 	<script src="<?php echo WWW_ROOT; ?>static/js/bootstrap.min.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/jquery.form.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/sco/js/sco.message.js"></script>
-	<script
-		src="<?php echo WWW_ROOT; ?>static/js/artDialog/artDialog.min.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/funcs.js"></script>
-	<script src="<?php echo WWW_ROOT; ?>static/js/common.js"></script>
 	<script src="<?php echo WWW_ROOT; ?>static/js/shop.js"></script>
 </body>
 </html>

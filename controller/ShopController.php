@@ -37,8 +37,7 @@ class ShopController extends BaseController {
                 if (ComTool::isAjax ()) {
                     exit ( 'not login' );
                 } else {
-                    $token = trim ( $this->get ( 'token', '' ) );
-                    Cola_Response::redirect ( ComTool::url ( "acc/manage_login?token={$token}" ) );
+                    Cola_Response::redirect ( ComTool::url ( "acc/manage_login" ) );
                 }
             }
         }
@@ -47,7 +46,7 @@ class ShopController extends BaseController {
     /**
      * 
      */
-    public function indexAction() {
+    public function infoAction() {
 		$currUser = $this->refreshCurrentUser ();
 		$this->assign ( 'currUser', $currUser );
 		$this->display ();
@@ -362,7 +361,7 @@ class ShopController extends BaseController {
 	/**
 	 * 小店通
 	 */
-	public function infoAction() {
+	public function indexAction() {
 		$currUser = $this->getCurrentUser ();
 		$qr = $this->qrCode ( $currUser, 's' );
 		$this->assign ( 'qr', $qr );
