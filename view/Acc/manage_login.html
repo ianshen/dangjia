@@ -12,7 +12,7 @@
 	href="<?php echo WWW_ROOT; ?>static/css/group.css">
 <link rel="stylesheet"
 	href="<?php echo WWW_ROOT; ?>static/js/sco/css/sco.message.css">
-<title>嘻咕嘻咕 - 登录</title>
+<title>嘻咕嘻咕 - 登录小店</title>
 <?php include('view/Public/jsconfig.html'); ?>
 </head>
 <body class="index_bg">
@@ -49,7 +49,7 @@
 													class="clearfix stream-item-activity stream-item-activity-network">
 													<div class="stream-item-activity-header">
 														<div class="stream-item-activity-line">
-															<a href="#" class=""><strong class="">会员登录</strong></a>
+															<a href="javascript:void(0);" class=""><strong class="">登录小店</strong></a>
 														</div>
 													</div>
 													<ol class="activity-supplement  follow-more-than-two">
@@ -95,6 +95,8 @@
 																				id="returnUrl" name="returnUrl" type="hidden"
 																				value="<?php show($this->returnUrl,''); ?>" />
 																			<button type="submit" class="btn btn-primary">登录</button>
+																			&nbsp;&nbsp;&nbsp;<a
+																				href="<?php show($this->urlroot); ?>acc/sreg">申请入驻&gt;&gt;</a>
 																		</div>
 																	</div>
 																</form>

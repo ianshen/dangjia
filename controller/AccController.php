@@ -328,4 +328,74 @@ class AccController extends BaseController {
         //$this->assign ( 'token', base64_encode ( $token ) );
         $this->display ();
     }
+    
+    /**
+     * 小店注册
+     */
+    public function sregAction() {
+            //注册时必填邮箱和手机
+        if (ComTool::isAjax ()) {
+            if (isset ( $_POST ['captcha'] )) {
+                $captcha = trim ( $this->post ( 'captcha' ) );
+                if (! ComTool::checkCaptcha ( $captcha )) {
+                    ComTool::ajax ( 100001, '验证码错误' );
+                }
+            }
+            $email = trim ( $this->post ( 'email' ) );
+            ComTool::checkEmpty ( $email, '请填写常用邮箱' );
+            ComTool::checkMaxLen ( $email, 32, '邮箱最多32位' );
+            if (! ComTool::isEmail ( $email )) {
+                ComTool::ajax ( 100001, '请填写正确的邮箱' );
+            }
+            //检查邮箱唯一性
+            $user = UserData::getByEmail ( $email );
+            if ($user) {
+                ComTool::ajax ( 100001, '邮箱已被注册' );
+            }
+            $mobile = '';
+            $mobile = trim ( $this->post ( 'mobile' ) );
+            ComTool::checkEmpty ( $mobile, '请填写常用手机号' );
+            if (! ComTool::isMobile ( $mobile )) {
+                ComTool::ajax ( 100001, '请填写正确的手机号' );
+            }
+            //检查手机唯一性
+            $user = UserData::getByMobile ( $mobile );
+            if ($user) {
+                ComTool::ajax ( 100001, '手机号已被注册' );
+            }
+            $city = trim ( $this->post ( 'city' ) );
+            ComTool::checkEmpty ( $city, '请选择城市' );
+            $area = trim ( $this->post ( 'area' ) );
+            ComTool::checkEmpty ( $area, '请选择区域' );
+            $group = trim ( $this->post ( 'group' ) );
+            ComTool::checkEmpty ( $group, '请选择圈子' );
+            $addr_desc = trim ( $this->post ( 'addr_desc' ) );
+            ComTool::checkEmpty ( $addr_desc, '请填写详细位置' );
+            ComTool::checkMaxLen ( $addr_desc, 32, '详细位置最多32位' );
+            $passwd = trim ( $this->post ( 'passwd' ) );
+            ComTool::checkEmpty ( $passwd, '请输入密码' );
+            ComTool::checkMinMaxLen ( $passwd, 6, 16, '密码6-16位' );
+            $cpasswd = trim ( $this->post ( 'cpasswd' ) );
+            ComTool::checkEqual ( $passwd, $cpasswd, '两次输入的密码不同' );
+            $res = UserData::add ( array (
+                'email' => $email, 
+                'mobile' => $mobile, 
+                'passwd' => md5 ( $passwd ), 
+                'create_time' => time (), 
+                'update_time' => time (), 
+                'status' => 1 
+            ) );
+            /* if ($res === false) {
+             ComTool::ajax ( 100001, '服务器忙，请重试' );
+            }
+            $res = UserGroupData::add ( array (
+                    'user_id' => $res,
+                    'group_id' => $group,
+                    'detail' => $addr_desc,
+                    'status' => 1
+            ) ); */
+            ComTool::result ( $res, '服务器忙，请重试', '注册成功，即将跳转' );
+        }
+        $this->display ();
+    }
 }
