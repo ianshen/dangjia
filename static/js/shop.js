@@ -390,6 +390,42 @@ $(function() {
 	};
 	$('#editGoodform').ajaxForm(editGoodformOptions);
 	
+	// 编辑分类
+	var editCateformOptions = {
+		dataType : 'json',
+		success : function(data) {
+			if (data.status == 100000) {
+				$.scojs_message(data.info, $.scojs_message.TYPE_OK);
+				setTimeout(function() {
+					//window.location.reload(true);
+					window.location.href = data.data;
+				}, $tmot);
+			} else {
+				$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
+				captchachg();
+				$("input#captcha").val("");
+			}
+		},
+		beforeSubmit : function() {
+			var name = $('input#name').val();
+			var desc = $('textarea#desc').val();
+			var captcha = $('input#captcha').val();
+			if (name.length < 1 || name.length > 16) {
+				$.scojs_message('分类名1-16字', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if (desc.length > 200) {
+				$.scojs_message('分类描述最多200字', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if (!captcha) {
+				$.scojs_message('请输入验证码', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+		}
+	};
+	$('#editCateform').ajaxForm(editCateformOptions);
+	
 	// 定制名片
 	var ordercardformOptions = {
 		dataType : 'json',

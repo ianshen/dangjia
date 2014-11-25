@@ -96,7 +96,7 @@ class BaseController extends Cola_Controller {
 		include "tool/phpqrcode/qrlib.php";
 		$dir = "static/u/{$type}/" . md5 ( $user ['id'] ) . '/';
 		if (! file_exists ( $dir )) {
-			@mkdir ( $dir );
+			ComTool::mkDir ( $dir );
 		}
 		$qr = $dir . "qr_{$type}_{$user['id']}.png";
 		if (! file_exists ( $qr )) {

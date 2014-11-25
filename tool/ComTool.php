@@ -290,4 +290,19 @@ class ComTool {
     static function escape($str) {
         return addslashes ( $str );
     }
+    
+    /**
+     * 创建目录
+     * @param unknown_type $dir
+     * @param unknown_type $mode
+     * @return boolean
+     */
+    static function mkDir($dir, $mode = 0777) {
+        if (is_dir ( $dir ) || @mkdir ( $dir, $mode ))
+            return true;
+        if (! self::mkDir ( dirname ( $dir ), $mode ))
+            return false;
+        return @mkdir ( $dir, $mode );
+    }
+    
 }

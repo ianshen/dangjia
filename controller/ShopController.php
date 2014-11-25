@@ -44,7 +44,18 @@ class ShopController extends BaseController {
     }
     
     /**
-     * 
+     * 小店通
+     */
+    public function indexAction() {
+        $currUser = $this->getCurrentUser ();
+        $qr = $this->qrCode ( $currUser, 's' );
+        $this->assign ( 'qr', $qr );
+        $this->assign ( 'user', $currUser );
+        $this->display ();
+    }
+    
+    /**
+     * 小店信息
      */
     public function infoAction() {
 		$currUser = $this->refreshCurrentUser ();
@@ -196,10 +207,21 @@ class ShopController extends BaseController {
      * 分类管理
      */
     public function cateAction() {
-        $currUser = $this->getCurrentUser ();
-		$cates = ShopData::getStoreCates ( $currUser ['id'] );
-		$this->assign ( 'cates', $cates );
-		$this->display ();
+		$currUser = $this->getCurrentUser ();
+		$editId = intval ( $this->param ( 'edit', 0 ) );
+		if ($editId) {
+            $cate = ShopData::getStoreCate ( $currUser ['id'], $editId );
+            if (! $cate) {
+                exit ( 'not found cate' );
+            }
+            $this->assign ( 'cate', $cate [0] );
+            $tpl = "Shop/edit_cate.html";
+        } else {
+            $cates = ShopData::getStoreCates ( $currUser ['id'] );
+            $this->assign ( 'cates', $cates );
+            $tpl = "Shop/cate.html";
+        }
+		$this->display ( $tpl );
     }
     
     /**
@@ -230,6 +252,38 @@ class ShopController extends BaseController {
                 ComTool::ajax ( 100001, '服务器忙，请刷新重试' );
             }
             ComTool::ajax ( 100000, '操作成功' );
+        }
+    }
+    
+    /**
+     * 修改分类
+     */
+    public function editCateAction(){
+        $currUser = $this->getCurrentUser ();
+        if (ComTool::isAjax ()) {
+            if (isset ( $_POST ['captcha'] )) {
+                $captcha = trim ( $this->post ( 'captcha' ) );
+                if (! ComTool::checkCaptcha ( $captcha )) {
+                    ComTool::ajax ( 100001, '验证码错误' );
+                }
+            }
+            $id = intval ( $this->post ( 'cid' ) );
+            $name = trim ( $this->post ( 'name' ) );
+            ComTool::checkMinMaxLen ( $name, 1, 16, '分类名1-16字' );
+            $desc = $this->post ( 'desc' );
+            ComTool::checkMaxLen ( $desc, 200, '分类描述最多200字' );
+            $data = array (
+                'id' => $id, 
+                'store_id' => $currUser ['id'], 
+                'name' => $name, 
+                'desc' => $desc, 
+                'update_time' => time () 
+            );
+            $res = ShopData::editStoreCate ( $data );
+            if ($res === false) {
+                ComTool::ajax ( 100001, '服务器忙，请刷新重试' );
+            }
+            ComTool::ajax ( 100000, '操作成功', $this->urlroot . 'shop/cate' );
         }
     }
     
@@ -356,17 +410,6 @@ class ShopController extends BaseController {
 			}
 			ComTool::ajax ( 100000, '操作成功' );
 		}
-	}
-	
-	/**
-	 * 小店通
-	 */
-	public function indexAction() {
-		$currUser = $this->getCurrentUser ();
-		$qr = $this->qrCode ( $currUser, 's' );
-		$this->assign ( 'qr', $qr );
-		$this->assign ( 'user', $currUser );
-		$this->display ();
 	}
 	
 	/**

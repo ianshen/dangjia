@@ -34,6 +34,12 @@ class ShopData extends BaseData {
 		return $cates;
 	}
 	
+	static function getStoreCate($storeId, $id) {
+        $sql = "SELECT * FROM `store_category` WHERE store_id='{$storeId}' AND id='{$id}' AND `status`='1';";
+        $cates = BaseData::sql ( $sql );
+        return $cates;
+    }
+	
 	static function getStoreGoods($storeId) {
 		$sql = "SELECT * FROM `store_goods` WHERE store_id='{$storeId}' and `status`='1';";
 		$goods = BaseData::sql ( $sql );
@@ -62,5 +68,11 @@ class ShopData extends BaseData {
 		$sql = "UPDATE `store_goods` SET `name`='{$data['name']}',store_cate_id='{$data['store_cate_id']}',`price`='{$data['price']}',`desc`='{$data['desc']}',update_time='{$data['update_time']}' WHERE id='{$data['id']}' AND store_id='{$data['store_id']}'";
 		$res = BaseData::sql ( $sql );
 		return $res;
+	}
+	
+	static function editStoreCate($data){
+	    $sql = "UPDATE `store_category` SET `name`='{$data['name']}',`desc`='{$data['desc']}',update_time='{$data['update_time']}' WHERE id='{$data['id']}' AND store_id='{$data['store_id']}'";
+	    $res = BaseData::sql ( $sql );
+	    return $res;
 	}
 }

@@ -243,6 +243,9 @@ class AccController extends BaseController {
         $captcha->display ();
     }
     
+    /**
+     * 超级管理员登录
+     */
     public function super_loginAction() {
         if (ComTool::isAjax ()) {
             if (isset ( $_POST ['captcha'] )) {
@@ -275,6 +278,9 @@ class AccController extends BaseController {
         $this->display ();
     }
     
+    /**
+     * 小店登录
+     */
     public function manage_loginAction() {
         $cookieName = "last_login_manage_acc";
         $lastLoginManageAcc = ''; //上次登录帐号
